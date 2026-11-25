@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.0 (2026-11-25)
+
 ### Added
 
 - The draft of Volume 0, "Guide", in five chapters: how to read the handbook, the program in one chapter, notation and normalizations, what it means to formalize a statement, and the map and the reading list, with exercises and notes.
