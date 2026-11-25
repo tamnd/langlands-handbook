@@ -1,0 +1,5 @@
+tag: LG0000000B
+kind: conjecture
+title: The local Langlands correspondence
+lean:
+  statement: Langlands.LocalLanglands

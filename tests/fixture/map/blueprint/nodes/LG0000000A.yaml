@@ -1,0 +1,6 @@
+tag: LG0000000A
+kind: theorem
+title: The reciprocity map on a uniformizer
+lean:
+  statement: Langlands.localReciprocityGL1_unramified
+  proof: Langlands.localReciprocityGL1_unramified
