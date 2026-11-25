@@ -17,7 +17,7 @@ A formal group is a group law given by a power series. It is the analogue of a L
 
 Lean: not stated yet
 
-The composites in property 2 make sense, because $F$ has no constant term. From the axioms one can show that $F(X, 0) = X$, and that there is a unique $i(X) \in X A[[X]]$ with $F(X, i(X)) = 0$. These are Exercises 1 and 2. Thus $F$ behaves like the addition of a group.
+The composites in property 2 make sense, because $F$ has no constant term. From the axioms one can show that $F(X, 0) = X$, and that there is a unique $i(X) \in X A[[X]]$ with $F(X, i(X)) = 0$. These are Exercises 2 and 1. Thus $F$ behaves like the addition of a group.
 
 **Example 3.1.2.** The *additive formal group* is $\mathbb{G}_a(X, Y) = X + Y$. The *multiplicative formal group* is $\mathbb{G}_m(X, Y) = X + Y + XY$. The second one comes from the multiplication of the group of units: $(1 + X)(1 + Y) = 1 + \mathbb{G}_m(X, Y)$.
 
