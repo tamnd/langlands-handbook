@@ -6,6 +6,7 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 1, "Number fields, local fields and adeles": Chapter 1 on number fields (integers, ideals, the geometry of numbers, primes, cyclotomic and quadratic fields), Chapter 2 on local fields (absolute values, completions, the structure of local fields, extensions, ramification, the different), and Chapter 3 on adeles (restricted products, adeles, Haar measures, ideles, the compactness of the idele classes of norm one). Each chapter has exercises and notes. The volume follows Neukirch and Chapter II of Cassels and Frohlich.
 - Volume 3, Chapter 2, "Local class field theory": the statement of local reciprocity, the unramified case, the form with the Weil group, functoriality, examples, eleven exercises and the notes.
 - Volume 3, Chapter 3, "Lubin-Tate theory": formal groups, Lubin-Tate groups, the torsion points, the reciprocity map of Lubin-Tate, the main theorems, ten exercises and the notes.
 - Volume 3, Chapter 4, "Characters of the Weil group": characters, the correspondence for GL(1), local factors, twists, tori, ten exercises and the notes.

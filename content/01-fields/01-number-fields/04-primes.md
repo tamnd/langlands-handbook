@@ -1,0 +1,105 @@
+---
+title: Primes in extensions
+nodes: []
+sources: [Ser79]
+status: drafted
+drafted_by: writer
+reviewed_by: []
+---
+## Primes in extensions
+
+Let $L / F$ be an extension of number fields of degree $n$. A prime $\mathfrak{p}$ of $F$ generates an ideal $\mathfrak{p} \mathcal{O}_L$ of $\mathcal{O}_L$, and this ideal is a product of primes of $L$. This section studies the factorization. When $L / F$ is Galois, it defines the decomposition group, the inertia group and the Frobenius element of a prime. We follow [Neu99], Chapter I, Sections 8 and 9.
+
+### Ramification index and residue degree
+
+The ring $\mathcal{O}_L$ is the integral closure of $\mathcal{O}_F$ in $L$, by the transitivity in Proposition 1.1.1. A prime $\mathfrak{P}$ of $L$ *lies over* $\mathfrak{p}$, written $\mathfrak{P} \mid \mathfrak{p}$, if $\mathfrak{P} \cap \mathcal{O}_F = \mathfrak{p}$, or equivalently if $\mathfrak{P}$ divides $\mathfrak{p}\mathcal{O}_L$. Each prime of $L$ lies over exactly one prime of $F$, namely $\mathfrak{P} \cap \mathcal{O}_F$. Write
+$$\mathfrak{p} \mathcal{O}_L = \mathfrak{P}_1^{e_1} \cdots \mathfrak{P}_g^{e_g}$$
+with distinct primes $\mathfrak{P}_i$. The integer $e_i = e(\mathfrak{P}_i / \mathfrak{p})$ is the *ramification index*, and the degree $f_i = f(\mathfrak{P}_i / \mathfrak{p}) = [\kappa(\mathfrak{P}_i) : \kappa(\mathfrak{p})]$ of the residue field extension is the *residue degree*.
+
+**Theorem 1.4.1 (the fundamental identity).** In this situation
+$$\sum_{i=1}^g e_i f_i = n.$$
+
+Lean: `Ideal.sum_ramification_inertia`, from Mathlib
+
+*Proof.* By Proposition 1.2.5,
+$$\mathcal{O}_L / \mathfrak{p}\mathcal{O}_L \cong \prod_{i=1}^g \mathcal{O}_L / \mathfrak{P}_i^{e_i}.$$
+Both sides are vector spaces over $\kappa = \kappa(\mathfrak{p})$. The proof of Proposition 1.2.9 shows that $\mathcal{O}_L / \mathfrak{P}_i^{e_i}$ has a filtration with $e_i$ quotients $\mathfrak{P}_i^k / \mathfrak{P}_i^{k+1}$, each of dimension 1 over $\kappa(\mathfrak{P}_i)$. Thus its dimension over $\kappa$ is $e_i f_i$. It remains to show that $\dim_\kappa \mathcal{O}_L / \mathfrak{p}\mathcal{O}_L = n$.
+
+If $F = \mathbb{Q}$, this holds because $\mathcal{O}_L \cong \mathbb{Z}^n$ by Theorem 1.1.5. In general, let $S = \mathcal{O}_F \setminus \mathfrak{p}$. The localization $S^{-1}\mathcal{O}_F$ is a Dedekind domain with one prime, so it is a principal ideal domain (Exercise 4 of Section 1.6). The module $S^{-1}\mathcal{O}_L$ is finitely generated and torsion free over it, because $\mathcal{O}_L$ is contained in a finitely generated $\mathcal{O}_F$-module by the proof of Theorem 1.1.5. Thus $S^{-1}\mathcal{O}_L$ is free, of rank $n$ because it spans $L$. Finally $\mathcal{O}_L / \mathfrak{p}\mathcal{O}_L \cong S^{-1}\mathcal{O}_L / \mathfrak{p} S^{-1}\mathcal{O}_L \cong \kappa^n$. $\square$
+
+The prime $\mathfrak{p}$ is *unramified* in $L$ if all $e_i = 1$, and *ramified* otherwise. It is *totally ramified* if $g = 1$ and $e_1 = n$. It is *split completely* if $g = n$, so that all $e_i$ and $f_i$ are 1. It is *inert* if $g = 1$ and $f_1 = n$. The norm is compatible with the factorization: if $N_{L/F}(\mathfrak{P})$ denotes the ideal $\mathfrak{p}^{f(\mathfrak{P}/\mathfrak{p})}$ for $\mathfrak{P} \mid \mathfrak{p}$, then $N(N_{L/F} \mathfrak{P}) = N(\mathfrak{P})$, and $N_{L/F}(\mathfrak{p} \mathcal{O}_L) = \mathfrak{p}^n$ by the fundamental identity.
+
+### The theorem of Kummer and Dedekind
+
+The next theorem computes the factorization in most cases. Let $\theta \in \mathcal{O}_L$ with $L = F(\theta)$, and let $f \in \mathcal{O}_F[X]$ be the minimal polynomial of $\theta$. The *conductor* of $\mathcal{O}_F[\theta]$ is the largest ideal of $\mathcal{O}_L$ that is contained in $\mathcal{O}_F[\theta]$.
+
+**Theorem 1.4.2 (Kummer and Dedekind).** Let $\mathfrak{p}$ be a prime of $F$ that is coprime to the conductor of $\mathcal{O}_F[\theta]$. This holds for all $\mathfrak{p}$ if $\mathcal{O}_L = \mathcal{O}_F[\theta]$. Let
+$$\bar f = \bar g_1^{e_1} \cdots \bar g_g^{e_g}$$
+be the factorization of the reduction $\bar f \in \kappa(\mathfrak{p})[X]$, with distinct monic irreducible $\bar g_i$, and let $g_i \in \mathcal{O}_F[X]$ be monic lifts. Then the ideals $\mathfrak{P}_i = \mathfrak{p}\mathcal{O}_L + g_i(\theta) \mathcal{O}_L$ are the distinct primes of $L$ above $\mathfrak{p}$, $f(\mathfrak{P}_i / \mathfrak{p}) = \deg \bar g_i$, and $\mathfrak{p}\mathcal{O}_L = \mathfrak{P}_1^{e_1} \cdots \mathfrak{P}_g^{e_g}$.
+
+Lean: `KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk`, from Mathlib
+
+*Proof sketch.* The hypothesis on the conductor implies that $\mathcal{O}_F[\theta] \to \mathcal{O}_L / \mathfrak{p}\mathcal{O}_L$ is surjective, with kernel $\mathfrak{p}\mathcal{O}_F[\theta]$. Thus
+$$\mathcal{O}_L / \mathfrak{p}\mathcal{O}_L \cong \mathcal{O}_F[X] / (\mathfrak{p}, f) \cong \kappa[X] / (\bar f) \cong \prod_i \kappa[X] / (\bar g_i^{e_i}).$$
+The maximal ideals of the right side are the ideals generated by the $\bar g_i$, and their residue fields have degree $\deg \bar g_i$ over $\kappa$. They correspond to the primes $\mathfrak{P}_i$. The ideal $\prod \mathfrak{P}_i^{e_i}$ maps to zero, so it is contained in $\mathfrak{p}\mathcal{O}_L$. The fundamental identity and the equality $\sum e_i \deg \bar g_i = \deg f = n$ show that the two ideals are equal. See [Neu99], Chapter I, Proposition 8.3. $\square$
+
+### Ramification and the discriminant
+
+**Theorem 1.4.3 (ramified primes divide the discriminant).** A prime number $p$ is ramified in $F$ if and only if $p$ divides $d_F$. In particular only finitely many primes ramify in $F$.
+
+Lean: `NumberField.not_dvd_discr_iff_isUnramifiedIn`, from Mathlib
+
+*Proof.* Let $A = \mathcal{O}_F / p\mathcal{O}_F$. This is an $\mathbb{F}_p$-algebra of dimension $n$. The images of an integral basis form a basis of $A$, and the discriminant of the trace form of $A$ in this basis is $d_F \bmod p$. Thus $p \mid d_F$ if and only if the trace form of $A$ is degenerate. By Proposition 1.2.5, $A \cong \prod_i \mathcal{O}_F / \mathfrak{P}_i^{e_i}$, and the trace form of a product is the orthogonal sum of the trace forms of the factors.
+
+If some $e_i > 1$, then the factor $\mathcal{O}_F / \mathfrak{P}_i^{e_i}$ contains a nonzero nilpotent element $x$. For each $y$, the element $xy$ is nilpotent, so multiplication by $xy$ is a nilpotent map and has trace 0. Thus $x$ is in the kernel of the trace form, and the form is degenerate. If all $e_i = 1$, then $A$ is a product of finite fields $\kappa(\mathfrak{P}_i)$. The trace form of a finite extension of finite fields is nondegenerate, because the extension is separable. Thus the form of $A$ is nondegenerate. $\square$
+
+The same proof shows that a prime $\mathfrak{p}$ of $F$ is ramified in $L$ if and only if $\mathfrak{p}$ divides the *relative discriminant* $\mathfrak{d}_{L/F}$, the ideal of $\mathcal{O}_F$ generated by the discriminants of the bases of $L/F$ that lie in $\mathcal{O}_L$. Section 2.5 refines this with the different.
+
+### Galois extensions
+
+From now on let $L / F$ be Galois with group $G$. For $\sigma \in G$ and a prime $\mathfrak{P}$ above $\mathfrak{p}$, the ideal $\sigma \mathfrak{P}$ is again a prime above $\mathfrak{p}$.
+
+**Theorem 1.4.4 (the Galois group acts transitively).** The group $G$ acts transitively on the primes of $L$ above $\mathfrak{p}$. Thus all the $e_i$ are equal to one integer $e$, all the $f_i$ are equal to one integer $f$, and $n = efg$.
+
+Lean: `Ideal.exists_smul_eq_of_isGaloisGroup`, from Mathlib
+
+*Proof.* Let $\mathfrak{P}$ and $\mathfrak{P}'$ lie above $\mathfrak{p}$, and assume that $\mathfrak{P}' \ne \sigma \mathfrak{P}$ for all $\sigma \in G$. By Proposition 1.2.5 there is $x \in \mathcal{O}_L$ with $x \equiv 0 \pmod{\mathfrak{P}'}$ and $x \equiv 1 \pmod{\sigma \mathfrak{P}}$ for all $\sigma \in G$. Then $N_{L/F}(x) = \prod_{\sigma} \sigma(x)$ lies in $\mathfrak{P}' \cap \mathcal{O}_F = \mathfrak{p} \subset \mathfrak{P}$. As $\mathfrak{P}$ is prime, $\sigma(x) \in \mathfrak{P}$ for some $\sigma$, that is, $x \in \sigma^{-1}\mathfrak{P}$. This contradicts the choice of $x$. The automorphism $\sigma$ maps $\mathfrak{p}\mathcal{O}_L$ to itself, so it preserves the exponents in the factorization, and it induces an isomorphism $\kappa(\mathfrak{P}) \cong \kappa(\sigma\mathfrak{P})$. Thus $e$ and $f$ are constant, and the fundamental identity reads $efg = n$. $\square$
+
+**Definition 1.4.5 (decomposition and inertia groups).** Let $\mathfrak{P}$ be a prime of $L$ above $\mathfrak{p}$. The *decomposition group* of $\mathfrak{P}$ is $D_\mathfrak{P} = \{\sigma \in G : \sigma \mathfrak{P} = \mathfrak{P}\}$. Each $\sigma \in D_\mathfrak{P}$ induces an automorphism $\bar\sigma$ of $\kappa(\mathfrak{P})$ over $\kappa(\mathfrak{p})$. The *inertia group* $I_\mathfrak{P}$ is the kernel of $\sigma \mapsto \bar\sigma$, that is, the set of $\sigma \in D_\mathfrak{P}$ with $\sigma(x) \equiv x \pmod{\mathfrak{P}}$ for all $x \in \mathcal{O}_L$.
+
+Lean: `MulAction.stabilizer`, from Mathlib, for $D_\mathfrak{P}$
+
+The decomposition group has order $n / g = ef$, because $G$ acts transitively on a set with $g$ elements. For $\tau \in G$ one has $D_{\tau\mathfrak{P}} = \tau D_\mathfrak{P} \tau^{-1}$ and $I_{\tau\mathfrak{P}} = \tau I_\mathfrak{P} \tau^{-1}$.
+
+**Theorem 1.4.6 (the decomposition group and the residue field).** The extension $\kappa(\mathfrak{P}) / \kappa(\mathfrak{p})$ is Galois, and the map $D_\mathfrak{P} \to \mathrm{Gal}(\kappa(\mathfrak{P}) / \kappa(\mathfrak{p}))$ is surjective. Thus there is an exact sequence
+$$1 \to I_\mathfrak{P} \to D_\mathfrak{P} \to \mathrm{Gal}(\kappa(\mathfrak{P}) / \kappa(\mathfrak{p})) \to 1,$$
+and $|I_\mathfrak{P}| = e$.
+
+Lean: `Ideal.Quotient.stabilizerHom_surjective`, from Mathlib
+
+*Proof.* An extension of finite fields is Galois. Choose $\theta \in \mathcal{O}_L$ whose image $\bar\theta$ generates $\kappa(\mathfrak{P})$ over $\kappa(\mathfrak{p})$, and with $\theta \in \sigma^{-1}\mathfrak{P}$ for all $\sigma \notin D_\mathfrak{P}$. This is possible by Proposition 1.2.5, because the primes $\sigma^{-1}\mathfrak{P}$ for $\sigma \notin D_\mathfrak{P}$ are different from $\mathfrak{P}$. Let $h(X) = \prod_{\sigma \in G} (X - \sigma(\theta))$. It has coefficients in $\mathcal{O}_F$, and $\bar\theta$ is a root of $\bar h$. Let $\bar\tau \in \mathrm{Gal}(\kappa(\mathfrak{P}) / \kappa(\mathfrak{p}))$. Then $\bar\tau(\bar\theta)$ is also a root of $\bar h$, so $\bar\tau(\bar\theta) = \overline{\sigma(\theta)}$ for some $\sigma \in G$. If $\sigma \notin D_\mathfrak{P}$, then $\sigma(\theta) \in \mathfrak{P}$, and $\bar\tau(\bar\theta) = 0$, which is impossible since $\bar\theta \ne 0$. Thus $\sigma \in D_\mathfrak{P}$, and $\bar\sigma = \bar\tau$ because both agree on the generator $\bar\theta$. The order of $I_\mathfrak{P}$ is $|D_\mathfrak{P}| / f = e$. $\square$
+
+The fixed fields $Z = L^{D_\mathfrak{P}}$ and $T = L^{I_\mathfrak{P}}$ are the *decomposition field* and the *inertia field* of $\mathfrak{P}$. Hilbert's theory shows that the prime $\mathfrak{P} \cap Z$ has $e = f = 1$ over $\mathfrak{p}$, that $\mathfrak{P} \cap T$ is unramified of degree $f$ over $\mathfrak{P} \cap Z$, and that $\mathfrak{P}$ is totally ramified of degree $e$ over $\mathfrak{P} \cap T$ ([Neu99], Chapter I, Proposition 9.6). Chapter 2 shows that $D_\mathfrak{P}$ is the Galois group of the extension of completions $L_\mathfrak{P} / F_\mathfrak{p}$, and that $I_\mathfrak{P}$ is its inertia group.
+
+### Frobenius elements
+
+Assume now that $\mathfrak{p}$ is unramified in $L$. Then $I_\mathfrak{P} = 1$, and $D_\mathfrak{P} \cong \mathrm{Gal}(\kappa(\mathfrak{P}) / \kappa(\mathfrak{p}))$. Let $q = N(\mathfrak{p})$. The Galois group of the finite field $\kappa(\mathfrak{P})$ over $\kappa(\mathfrak{p})$ is cyclic of order $f$, generated by $x \mapsto x^q$.
+
+**Definition 1.4.7 (Frobenius element).** Let $\mathfrak{p}$ be unramified in $L$ and $\mathfrak{P} \mid \mathfrak{p}$. The *Frobenius element* $\mathrm{Frob}_\mathfrak{P} \in D_\mathfrak{P}$ is the unique element of $G$ with
+$$\mathrm{Frob}_\mathfrak{P}(x) \equiv x^{N(\mathfrak{p})} \pmod{\mathfrak{P}} \quad \text{for all } x \in \mathcal{O}_L.$$
+It is an arithmetic Frobenius. The *geometric Frobenius* is $\Phi_\mathfrak{P} = \mathrm{Frob}_\mathfrak{P}^{-1}$.
+
+Lean: `arithFrobAt`, from Mathlib
+
+The element is unique in $G$, not only in $D_\mathfrak{P}$. Indeed, if $\sigma(x) \equiv x^q \pmod{\mathfrak{P}}$ for all $x$, then $\sigma(x) \in \mathfrak{P}$ for all $x \in \mathfrak{P}$, so $\sigma^{-1}\mathfrak{P}$ contains $\mathfrak{P}$ and is equal to it, and $\sigma \in D_\mathfrak{P}$.
+
+**Proposition 1.4.8 (properties of the Frobenius).** Let $\mathfrak{p}$ be unramified in $L$, and $\mathfrak{P} \mid \mathfrak{p}$.
+1. The order of $\mathrm{Frob}_\mathfrak{P}$ is $f = f(\mathfrak{P}/\mathfrak{p})$. In particular $\mathfrak{p}$ splits completely in $L$ if and only if $\mathrm{Frob}_\mathfrak{P} = 1$.
+2. For $\tau \in G$, $\mathrm{Frob}_{\tau\mathfrak{P}} = \tau \, \mathrm{Frob}_\mathfrak{P} \, \tau^{-1}$. Thus the conjugacy class of $\mathrm{Frob}_\mathfrak{P}$ depends only on $\mathfrak{p}$. If $G$ is abelian, $\mathrm{Frob}_\mathfrak{P}$ depends only on $\mathfrak{p}$, and we write it $\mathrm{Frob}_\mathfrak{p}$.
+3. Let $L' \subset L$ be a subfield that is Galois over $F$, and $\mathfrak{P}' = \mathfrak{P} \cap L'$. Then $\mathrm{Frob}_{\mathfrak{P}'}$ is the restriction of $\mathrm{Frob}_\mathfrak{P}$ to $L'$.
+
+Lean: not stated yet
+
+*Proof.* Part 1 holds because $D_\mathfrak{P}$ is cyclic of order $f$, generated by $\mathrm{Frob}_\mathfrak{P}$, and $f = 1$ and $e = 1$ mean $g = n$. For part 2, apply $\tau$ to the congruence $\mathrm{Frob}_\mathfrak{P}(\tau^{-1}x) \equiv (\tau^{-1}x)^q \pmod{\mathfrak{P}}$. This gives $\tau \mathrm{Frob}_\mathfrak{P} \tau^{-1}(x) \equiv x^q \pmod{\tau\mathfrak{P}}$, and uniqueness gives the claim. For part 3, the restriction of $\mathrm{Frob}_\mathfrak{P}$ satisfies the defining congruence for $\mathfrak{P}'$, because $\mathfrak{P}' = \mathfrak{P} \cap \mathcal{O}_{L'}$, and $N(\mathfrak{p})$ is the same. $\square$
+
+**Remark 1.4.9 (the density theorem).** Each element of $G$ is a Frobenius element for infinitely many primes. More precisely, for each conjugacy class $C$ of $G$, the set of unramified primes $\mathfrak{p}$ with $\mathrm{Frob}_\mathfrak{P} \in C$ has Dirichlet density $|C| / |G|$. This is the density theorem of Chebotarev. Its proof uses the L-functions of Hecke and Artin, see [Neu99], Chapter VII, Section 13. A consequence is used often in the handbook: a continuous representation of $\mathrm{Gal}(\bar{\mathbb{Q}} / \mathbb{Q})$ that is unramified outside a finite set is determined, up to semisimplification, by the characteristic polynomials of its Frobenius elements.

@@ -1,0 +1,9 @@
+# Adeles and ideles
+
+A number field $F$ has one completion $F_v$ for each place $v$. The adele ring $\mathbb{A}_F$ puts all the completions together. An adele is a family $(x_v)_v$ with $x_v \in F_v$ for all $v$ and $x_v \in \mathcal{O}_v$ for almost all $v$. The field $F$ sits in $\mathbb{A}_F$ as a discrete subring, and the quotient $\mathbb{A}_F / F$ is compact. The idele group $\mathbb{A}_F^\times$ is the group of units of $\mathbb{A}_F$, with a topology that is finer than the topology of a subspace of $\mathbb{A}_F$. The quotient $C_F = \mathbb{A}_F^\times / F^\times$ is the idele class group. Its subgroup of norm one is compact, and this one fact contains both finiteness theorems of Chapter 1.
+
+The adeles are the natural home of the objects of the Langlands program. The idele class group is the object of global class field theory, in Volume 3. A Hecke character is a character of $C_F$, and Tate's thesis studies its L-function with a Fourier analysis on $\mathbb{A}_F$. An automorphic form for $GL_n$ is a function on $GL_n(F) \backslash GL_n(\mathbb{A}_F)$, and the case $n = 1$ is the case of this chapter.
+
+Section 3.1 defines restricted products of locally compact groups. Section 3.2 defines the adeles and proves that $F$ is discrete and cocompact in $\mathbb{A}_F$. Section 3.3 treats the Haar measures on local fields and on $\mathbb{A}_F$, computes the volume of $\mathbb{A}_F / F$, and gives Artin's proof of the product formula. Section 3.4 defines the ideles and the idele class group, and relates them to the class group and the units. Section 3.5 proves the compactness of the norm one idele classes, and it deduces the finiteness of the class number and the unit theorem again.
+
+The chapter follows the chapter "Global fields" of Cassels in [CF67], Sections 12 to 18, and [Neu99], Chapter VI, Section 1. The reader needs Chapters 1 and 2 and the basic facts on Haar measures on locally compact groups.
