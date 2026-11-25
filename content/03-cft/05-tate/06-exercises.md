@@ -1,0 +1,31 @@
+---
+title: Exercises and notes
+nodes: []
+sources: [CF67, Neu99, Tat79]
+status: drafted
+drafted_by: writer
+reviewed_by: []
+---
+## Exercises
+
+1. Let $p$ be odd and $K = \mathbb{Q}_p(\sqrt p)$. Show that $d(\psi_K) = 1$, that $\psi_K$ is trivial on $\mathfrak{p}^{-1}$ and not on $\mathfrak{p}^{-2}$, and that the self-dual measure and Tate's measure give $\mathcal{O}_K$ and $\mathcal{O}_K^\times$ the volume $p^{-1/2}$.
+2. Show that $\prod_v \psi_v$ is trivial on $\mathbb{Q}$, for the standard characters of Section 5.1. Use that $x - \sum_p \{x\}_p$ is an integer for $x \in \mathbb{Q}$. Show that the product is not trivial on $\mathbb{Q}$ if $\psi_\mathbb{R}$ is replaced by $x \mapsto e^{2\pi i x}$.
+3. Let $K$ be nonarchimedean and let $\chi$ be ramified with $a(\chi) = n$. Show that $\varepsilon(\chi, s, \psi) = \int_{\varpi^{-n-d} \mathcal{O}_K^\times} \chi^{-1}(x) |x|^{-s} \psi(x) \, dx$ with $d = d(\psi)$ and the self-dual measure $dx$. Deduce that the right side of Proposition 5.2.4 does not depend on the choice of $\varpi$.
+4. Let $K$ be nonarchimedean, $\chi$ unramified and $m \in \mathbb{Z}$. Compute $Z(1_{\mathfrak{p}^m}, \chi, s)$ and the transform of $1_{\mathfrak{p}^m}$. Check part 2 of Theorem 5.2.7 for $f = 1_{\mathfrak{p}^m}$ directly.
+5. Prove $\Gamma_\mathbb{C}(s) = \Gamma_\mathbb{R}(s) \Gamma_\mathbb{R}(s + 1)$ with the duplication formula $\Gamma(s/2) \Gamma((s+1)/2) = 2^{1-s} \sqrt\pi \, \Gamma(s)$. Let $\chi$ be a character of $\mathbb{R}^\times$, and let $\chi_\mathbb{C} = \chi \circ N_{\mathbb{C}/\mathbb{R}}$. Show that $L(\chi_\mathbb{C}, s) = L(\chi, s) L(\chi \, \mathrm{sgn}, s)$.
+6. Let $\theta$ be as in Example 5.3.6. Show that $\Lambda(s) = \pi^{-s/2} \Gamma(s/2) \zeta(s) = \frac12 \int_0^\infty (\theta(y) - 1) y^{s/2} \, dy/y$ for $\mathrm{Re}(s) > 1$. Split the integral at $y = 1$ and use $\theta(1/y) = y^{1/2} \theta(y)$ to show that $\Lambda(s) + \frac1s + \frac1{1-s}$ is entire and invariant under $s \mapsto 1 - s$. Compare the result with (5.4.1).
+7. Show that $\zeta_F$ has a zero of order $r_1 + r_2 - 1$ at $s = 0$, and that $\zeta_F(s) = -\frac{hR}{w} s^{r_1 + r_2 - 1} + O(s^{r_1 + r_2})$. Use Corollary 5.4.8, the residue $-\kappa$ of $Z(f, 1, s)$ at $s = 0$, and $\Gamma_\mathbb{R}(s) \sim 2/s$, $\Gamma_\mathbb{C}(s) \sim 2/s$. Deduce $\zeta(0) = -1/2$.
+8. Show that every Hecke character of $\mathbb{Q}$ is $\chi |\cdot|_\mathbb{A}^{s_0}$, where $s_0 \in \mathbb{C}$ and $\chi$ is the character of Example 5.5.6 for a primitive Dirichlet character $\eta$, with $\eta = 1$ for $N = 1$. Use that a continuous character of $\hat{\mathbb{Z}}^\times$ is trivial on an open subgroup.
+9. Let $\eta_1$ and $\eta_2$ be Dirichlet characters modulo coprime integers $N_1$ and $N_2$. Show that $\tau(\eta_1 \eta_2) = \eta_1(N_2) \eta_2(N_1) \tau(\eta_1) \tau(\eta_2)$. Deduce the factorization of $\tau(\eta)$ used in Example 5.5.6.
+10. Let $\chi$ be a unitary character of a local field $K$. Show that $\overline{\varepsilon(\chi, 1/2, \psi)} = \varepsilon(\bar\chi, 1/2, \bar\psi)$ and $\bar\psi = \psi_{-1}$, and deduce $\overline{\varepsilon(\chi, 1/2, \psi)} = \chi(-1) \varepsilon(\bar\chi, 1/2, \psi)$. For a unitary Hecke character $\chi$, deduce $W(\bar\chi) = \overline{W(\chi)}$, and show that $W(\chi) = \pm 1$ if $\chi^2 = 1$.
+11. Let $F$ be a quadratic field with discriminant $D$. Assume that there is a primitive Dirichlet character $\eta$ modulo some $N$ with $\zeta_F(s) = \zeta(s) L(s, \eta)$, and that $\eta(-1) = 1$ exactly when $F$ is real. Show that $\Lambda_F(s) = \Lambda(s) \Lambda(s, \chi)$, with $\chi$ as in Example 5.5.6. Compare the functional equations of Corollary 5.4.8 and Theorem 5.5.3, and show that $N = |D|$ and $W(\chi) = 1$. Deduce $\tau(\eta) = i^a \sqrt{|D|}$, where $a = 0$ for real $F$ and $a = 1$ for imaginary $F$.
+
+## Notes and history
+
+Hecke proved the continuation and the functional equation of his $L$-functions in two papers in the Mathematische Zeitschrift, "Eine neue Art von Zetafunktionen und ihre Beziehungen zur Verteilung der Primzahlen" (1918 and 1920). His method generalizes the theta function method of Riemann. It uses theta series of the lattice $\mathcal{O}_F$ and of its ideals in $F_\infty$, and a Poisson summation in $F_\infty$. A modern account of this method is in [Neu99], Chapter VII, Sections 6 to 8. The form of the theorem for a unitary character after Theorem 5.5.3 is [Neu99], Chapter VII, Theorem 8.5.
+
+Tate wrote his thesis, "Fourier analysis in number fields and Hecke's zeta-functions", at Princeton in 1950 under the direction of Artin. It was printed as Chapter XV of [CF67] in 1967. Iwasawa found the same method independently at about the same time, and announced it at the International Congress of Mathematicians in 1950. The method replaces the theta series by the Poisson summation formula on $\mathbb{A}_F / F$, and it separates the local and the global parts of the proof. We follow the normalizations of [CF67], Chapter XV, with two changes. We write the local factors as $L(\chi, s)$ and $\varepsilon(\chi, s, \psi)$, and we use the gamma factor $\gamma$ of Theorem 5.2.7 in place of Tate's $\rho$, see Remark 5.2.8.
+
+The local $\varepsilon$-factors of Tate's thesis are the case of dimension one of the local constants of Langlands and Deligne, see Chapter 4 and [Tat79], Section 3. [Tat79] also gives the formulas of Section 5.2 for the change of $\psi$ and for twists. The method of Tate became the model for the theory of zeta integrals of Godement and Jacquet for $GL_n$, which gives the functional equation of the standard $L$-functions of automorphic representations. Exercise 11 gives the sign of the quadratic Gauss sum, which Gauss determined after several years of work.
+
+The Lean statement of Theorem 5.5.3 is `Langlands.HeckeFunctionalEquation`, with node LG6NN4B43V. It is stated and not proved. Remark 5.5.4 gives its differences from the theorem. The existence of the archimedean parameters is `Langlands.ArchimedeanParametersExist`, which is also stated and not proved. The other statements of this chapter are not stated in the Lean project yet.
