@@ -4,6 +4,12 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Chapter 2, "Local class field theory": the statement of local reciprocity, the unramified case, the form with the Weil group, functoriality, examples, eleven exercises and the notes.
+- Volume 3, Chapter 3, "Lubin-Tate theory": formal groups, Lubin-Tate groups, the torsion points, the reciprocity map of Lubin-Tate, the main theorems, ten exercises and the notes.
+- Volume 3, Chapter 4, "Characters of the Weil group": characters, the correspondence for GL(1), local factors, twists, tori, ten exercises and the notes.
+
 ## v0.1.0 (2026-11-25)
 
 ### Added
