@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.1 (2026-11-25)
+
 ### Added
 
 - Volume 3, Chapter 5, "Tate's thesis": additive characters and self-dual measures, the local zeta integrals and the local functional equation, Poisson summation and the Riemann-Roch theorem of Tate, the global zeta integral, and Hecke's theorem for the completed L-function of a Hecke character, with eleven exercises and the notes.
