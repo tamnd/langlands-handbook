@@ -1,6 +1,6 @@
 ---
 title: Tori
-nodes: [LG5YHMSJZM]
+nodes: [LG5YHMSJZM, LG4S7A4G1F]
 sources: [Tat79, Mil20]
 status: drafted
 drafted_by: writer
@@ -55,9 +55,13 @@ So $z$ is a cocycle, and $S(z)(h) = c(h) - c(1) = \chi(h)$. The cosets $W_L s_i$
 $$H^1(W_K, \hat T) \cong H^1(W_K, \mathrm{Ind}_{W_L}^{W_K} \mathbb{C}^\times) \cong \mathrm{Hom}(W_L, \mathbb{C}^\times) \cong \mathrm{Hom}(L^\times, \mathbb{C}^\times),$$
 of the isomorphism $a \mapsto F_a$, Lemma 4.5.3, and Theorem 4.2.3 for $L$.
 
-Lean: not stated yet
+Node: LG4S7A4G1F · Lean: `Langlands.LocalLanglandsTorusInduced`
 
-*Proof.* Each map is a bijection. $\square$
+*Proof.* The first map is induced by the isomorphism of $W_K$-modules $a \mapsto F_a$, so it is a bijection on cocycles and on coboundaries. The second map is Lemma 4.5.3. For the third map, Theorem 4.2.3 for $L$ gives an isomorphism of topological groups $\mathrm{rec}_L : L^\times \to W_L^{ab}$, and a continuous character of $W_L$ factors through $W_L^{ab}$ because $\mathbb{C}^\times$ is commutative and Hausdorff. Thus $\psi \mapsto \psi \circ \mathrm{rec}_L$ is a bijection from $\mathrm{Hom}(W_L, \mathbb{C}^\times)$ to $\mathrm{Hom}(L^\times, \mathbb{C}^\times)$.
+
+One point needs care. In Lemma 4.5.3 the group $W_L$ is the subgroup $W_K \cap G_L$ of $W_K$ with the subspace topology. In Theorem 4.2.3 for $L$ the group $W_L$ has its own topology, in which the inertia subgroup $I_L$ is open. The two topologies are equal. The inclusion $W_L \to W_K$ is continuous and injective. Its restriction to $I_L$ is a homeomorphism onto its image, because $I_L$ is compact and $W_K$ is Hausdorff. An element of $W_L$ has degree $0$ over $L$ if and only if it has degree $0$ over $K$, because the degree over $K$ is $f$ times the degree over $L$, where $f$ is the residue degree of $L/K$. Thus the image of $I_L$ is $I_K \cap W_L$, which is open in $W_K$. A homomorphism of topological groups that is a homeomorphism near the identity onto an open subset is a homeomorphism onto its image. $\square$
+
+*Remark.* The Lean statement fixes the bijection in the same way as Theorem 4.5.2. A class $c$ corresponds to $\chi$ if the homomorphism $S(c)$ on $W_L$ takes the value $\chi(x)$ at each $w \in W_L$ whose image in $W_L^{ab}$ is $\mathrm{rec}_L(x)$. As Lemma 4.5.3 is injective, the relation determines $c$. The proof in Lean is the argument above, and the equality of the two topologies on $W_L$ is `Langlands.WeilGroup.weilEquiv`.
 
 The content of the theorem is in its compatibility with maps of tori. The norm $N : T \to \mathbb{G}_m$ is a map of tori over $K$, and on $K$-points it is $N_{L/K} : L^\times \to K^\times$. On characters it is $1 \mapsto \sum_\tau e_\tau$. On dual tori it gives the map $\mathbb{C}^\times \to \hat T$ that sends $c$ to the constant function $c$.
 
