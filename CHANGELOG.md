@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.24 (2026-11-27)
+
 ### Added
 
 - Section 5.5 gives the Lean status after the proof for any signs at the complex places.
