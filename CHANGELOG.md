@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 2, Chapter 5, The dual group and the L-group. The chapter covers the dual root datum, the dual group, the dual groups of the classical groups, the L-group of a quasi-split group, the Satake isomorphism and L-parameters, with 11 exercises.
+
 - Volume 2, Chapter 4, Representations of reductive groups. The chapter covers weights, the theorem of the highest weight, the Weyl character formula, the representations of SL_2 and GL_n, compact groups and the theorem of Peter and Weyl, and compact forms, with 12 exercises.
 
 - Volume 3, Section 5.5: the subsection on Hecke characters of class group type, items 5.5.25 to 5.5.35, with the example of Q(sqrt(-5)) and Exercises 14 and 15 of Chapter 5. It follows Langlands/Tate/HeckeUnramified.lean.
