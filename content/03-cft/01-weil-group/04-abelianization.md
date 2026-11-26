@@ -2,8 +2,9 @@
 title: The abelianization and the finite abelian extensions
 nodes: []
 sources: [Tat79, Ser67]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The abelianization and the finite abelian extensions

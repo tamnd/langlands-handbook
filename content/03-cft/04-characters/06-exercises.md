@@ -2,8 +2,9 @@
 title: Exercises and notes
 nodes: []
 sources: [Tat79, Ser79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
@@ -27,4 +28,4 @@ Langlands found the existence of the local constants of Theorem 4.3.8 in a long 
 
 Exercise 4 is a standard complement to Lubin-Tate theory. Every finite abelian extension of $K$ lies in a field $K_{\varpi,m} K_r$ by Theorem 3.5.4, and the upper numbering is compatible with quotients, so the exercise gives a second proof of Theorem 4.2.2. Exercise 10 is the simplest torus that is not induced and not split. Its characters appear in the theory of the dihedral representations of $GL_2$.
 
-The Lean statement of Theorem 4.2.3 is `Langlands.LocalReciprocityGL1`, as in Chapter 2. It is stated and not proved. The other statements of this chapter are not stated in the Lean project yet.
+Theorem 4.2.3 follows from Theorem 2.3.3. The Lean statement of Theorem 2.3.3 is `Langlands.LocalReciprocityGL1`, and the theorem `Langlands.localReciprocityGL1` proves it, as Chapter 2 says. Theorems 4.5.2 and 4.5.4 are stated as `Langlands.LocalLanglandsTorusSplit` and `Langlands.LocalLanglandsTorusInduced`, and the theorems `Langlands.localLanglandsTorusSplit` and `Langlands.localLanglandsTorusInduced` prove them. The other statements of this chapter are not stated in the Lean project yet.

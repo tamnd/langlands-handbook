@@ -2,8 +2,9 @@
 title: Examples over the p-adic numbers
 nodes: []
 sources: [Ser79, Ser67, Mil20]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Examples over the $p$-adic numbers

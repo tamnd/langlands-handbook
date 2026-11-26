@@ -2,8 +2,9 @@
 title: The unramified case
 nodes: []
 sources: [Ser79, Ser67, Mil20]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The unramified case
@@ -28,7 +29,7 @@ As $2i \ge i + 1$, this gives $N_{L/K}(y) \equiv 1 + \varpi^i \mathrm{Tr}_{L/K}(
 
 Now let $u \in U^{(i)}$. We build units $y_j \in U_L^{(j)}$ for $j \ge i$ such that $u \, N_{L/K}(y_i y_{i+1} \cdots y_j)^{-1} \in U^{(j+1)}$. For $j = i$, choose $y_i$ such that $N_{L/K}(y_i)$ and $u$ have the same image in $U^{(i)}/U^{(i+1)}$. For $j > i$, the element $u_j = u \, N_{L/K}(y_i \cdots y_{j-1})^{-1}$ is in $U^{(j)}$, and we choose $y_j \in U_L^{(j)}$ with $N_{L/K}(y_j) \equiv u_j$ modulo $U^{(j+1)}$. The product $y = \prod_{j \ge i} y_j$ converges in $U_L^{(i)}$, because $y_j \to 1$. The norm is continuous, so $N_{L/K}(y) = u$. Thus $U^{(i)} \subset N_{L/K}(U_L^{(i)})$, and the other inclusion was shown above. $\square$
 
-The proof uses only that $L / K$ is unramified. For a ramified extension the induced maps on the graded pieces are not all surjective, and the units are not all norms. Corollary 2.1.9 says exactly this.
+The proof uses only that $L / K$ is unramified. For a ramified abelian extension the induced maps on the graded pieces are not all surjective, and the units are not all norms. Corollary 2.1.9 says exactly this.
 
 **Theorem 2.2.3 (reciprocity for unramified extensions).** Let $L = K_n$. Then
 $$N_{L/K}(L^\times) = \{x \in K^\times : n \mid v(x)\} = \langle \varpi^n \rangle \times \mathcal{O}_K^\times.$$

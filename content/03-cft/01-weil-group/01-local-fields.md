@@ -2,8 +2,9 @@
 title: Local fields and unramified extensions
 nodes: []
 sources: [Ser79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Local fields and unramified extensions
@@ -26,7 +27,7 @@ Because $k$ is finite, the second condition is always true here. The next theore
 
 Lean: not stated yet, planned for milestone S1
 
-*Proof.* Let $k_n$ be the extension of $k$ of degree $n$, and let $\bar\alpha$ be a generator of the cyclic group $k_n^\times$. Its minimal polynomial $\bar g$ over $k$ has degree $n$ and divides $X^{q^n - 1} - 1$. By Hensel's lemma the root $\bar\alpha$ of $X^{q^n-1} - 1$ lifts to a root $\zeta \in \bar K$ of order $q^n - 1$, and a monic lift $g$ of $\bar g$ is irreducible because its reduction is irreducible. Thus $[K(\zeta) : K] = n$ and the residue field of $K(\zeta)$ contains $k_n$. As $n = ef$, it follows that $f = n$ and $e = 1$.
+*Proof.* Let $k_n$ be the extension of $k$ of degree $n$, and let $\bar\alpha$ be a generator of the cyclic group $k_n^\times$. Its minimal polynomial $\bar g$ over $k$ has degree $n$ and divides $X^{q^n - 1} - 1$. The polynomial $X^{q^n-1} - 1$ has no repeated root in $\bar k$, because $q^n - 1$ is prime to the characteristic of $k$. Thus $\bar g$ is prime to the cofactor, and by Hensel's lemma $X^{q^n-1} - 1$ has a monic factor $g$ in $\mathcal{O}_K[X]$ that reduces to $\bar g$. The polynomial $g$ is irreducible because $\bar g$ is irreducible. Let $\zeta \in \bar K$ be a root of $g$. Its reduction is a root of $\bar g$, thus a generator of $k_n^\times$, and so $\zeta$ has order $q^n - 1$. Thus $[K(\zeta) : K] = n$ and the residue field of $K(\zeta)$ contains $k_n$. As $n = ef$, it follows that $f = n$ and $e = 1$.
 
 The extension $K(\zeta) / K$ is the splitting field of $X^{q^n - 1} - 1$, because the powers of $\zeta$ are all the roots of this polynomial. Thus it is Galois. An automorphism that is trivial on $k_n$ fixes $\zeta$, because the roots of $X^{q^n-1} - 1$ have distinct reductions. Thus the map to $\mathrm{Gal}(k_n / k)$ is injective, and both groups have order $n$.
 

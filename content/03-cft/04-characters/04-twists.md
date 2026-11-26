@@ -2,8 +2,9 @@
 title: Unramified twists
 nodes: []
 sources: [Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Unramified twists

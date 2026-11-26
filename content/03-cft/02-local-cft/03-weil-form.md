@@ -2,8 +2,9 @@
 title: Reciprocity for the Weil group
 nodes: [LG875TDM3B, LGAV7YV6K6]
 sources: [Tat79, Ser67, Mil20]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Reciprocity for the Weil group
@@ -68,4 +69,4 @@ Lean: not stated yet
 
 *Proof.* The map $\mathrm{rec}_K$ is an isomorphism of topological groups, so composition with it is a bijection on characters. By the proof of Theorem 2.3.3, $\mathrm{rec}_K(\mathcal{O}_K^\times)$ is the image of $I_K$. This gives the statement on unramified characters. The last claim is the formula $\|\mathrm{rec}_K(x)\| = |x|$. $\square$
 
-This is the first case of the local Langlands correspondence. The characters of $K^\times$ are the irreducible smooth representations of $GL_1(K)$, and the characters of $W_K$ are its representations of dimension 1. Chapter 4 studies the correspondence in detail. It shows that the bijection preserves conductors, $L$-factors and $\varepsilon$-factors, and it extends the bijection to tori.
+This is the first case of the local Langlands correspondence. The characters of $K^\times$ are the irreducible smooth representations of $GL_1(K)$, and the characters of $W_K$ are the representations of $W_K$ of dimension 1. Chapter 4 studies the correspondence in detail. It shows that the bijection preserves conductors, $L$-factors and $\varepsilon$-factors, and it extends the bijection to tori.

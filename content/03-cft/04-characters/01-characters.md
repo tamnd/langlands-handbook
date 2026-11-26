@@ -2,8 +2,9 @@
 title: Characters of the multiplicative group
 nodes: []
 sources: [Tat79, Ser79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Characters of the multiplicative group

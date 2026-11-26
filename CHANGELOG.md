@@ -6,6 +6,7 @@ Each release has a section. The newest release is first.
 
 ### Changed
 
+- Volume 3, Chapters 1 to 4 have the status `checked`. The second pass fixed the proof of Theorem 1.1.3, the topology of the Weil group in Section 1.3, some citations of [Ser79], [Ser67] and [Tat79], and the notes on the Lean status of Theorems 2.3.3, 4.2.3, 4.5.2 and 4.5.4.
 - Volume 3, Chapter 5 has the status `checked`. The second pass fixed a sign in the proof of Lemma 5.2.1, two statements in the Notes of Section 5.6 and the source of `unitThetaFEPair` in Remark 5.3.37.
 
 ## v0.1.13 (2026-11-26)

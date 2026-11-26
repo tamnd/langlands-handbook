@@ -2,8 +2,9 @@
 title: Exercises and notes
 nodes: []
 sources: [Ser67, Ser79, Mil20, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
@@ -22,10 +23,10 @@ reviewed_by: []
 
 ## Notes and history
 
-Local class field theory was first obtained by Hasse in 1930 as a consequence of global class field theory. Chevalley gave the first purely local proof in 1933, and he introduced the idele group shortly after. The cohomological proof of Remark 2.1.4 is due to Hochschild, Nakayama, Weil, Artin and Tate in the years around 1950, and Tate proved the theorem of Remark 2.1.4 in 1952, in a form that Nakayama later extended. The standard expositions are Serre's book [Ser79], Chapters XI to XIII, his chapter [Ser67] in the volume of Cassels and Frohlich, and Milne's notes [Mil20], Chapters I to III. These sources use the arithmetic normalization. Lubin and Tate gave the explicit construction of Chapter 3 in 1965. Hazewinkel and Neukirch later gave proofs of the reciprocity law without cohomology, and Neukirch's book "Class field theory" follows this route.
+Local class field theory was first obtained by Hasse in 1930 as a consequence of global class field theory. Chevalley gave the first purely local proof in 1933, and he introduced the idele group shortly after. The cohomological proof of Remark 2.1.4 is due to Hochschild, Nakayama, Weil, Artin and Tate in the years around 1950, and Tate proved the theorem of Remark 2.1.4 in 1952, in a form that Nakayama later extended. The standard expositions are Serre's book [Ser79], Chapters XII to XV, his chapter [Ser67] in the volume of Cassels and Frohlich, and Milne's notes [Mil20], Chapters I to III. These sources use the arithmetic normalization. Lubin and Tate gave the explicit construction of Chapter 3 in 1965. Hazewinkel and Neukirch later gave proofs of the reciprocity law without cohomology, and Neukirch's book "Class field theory" follows this route.
 
 The Weil group form of Theorem 2.3.3 and the geometric normalization follow Tate's article [Tat79] and Deligne's article on local constants of 1973. The proof of Section 2.3 shows that the Weil group form adds nothing to the classical theorem and the existence theorem, except the bookkeeping of the topology. The uniqueness argument of Theorem 2.1.3 is from [Mil20], Chapter I.
 
 Exercise 6 is the norm limitation theorem. The theorem is also true in characteristic $p$, but the hint fails there, because $(K^\times)^p$ is not open. Exercise 9 is the classical computation of the Hilbert symbol at 2.
 
-In the Lean project tamnd/langlands-lean, Theorem 2.1.2 is the theorem `Langlands.Bridge.finiteAbelianLocalReciprocity`, and the existence theorem is `Langlands.Bridge.localExistence`. Both come from the port of n-yamaguchi-0729/ClassFieldTheory in the folder `Langlands/Ported/NYLL`, which proves finite abelian local reciprocity and the existence theorem through Lubin-Tate theory. Theorem 2.3.3 is stated as `Langlands.LocalReciprocityGL1` and is not proved yet. The steps that remain are those of Section 2.3: the passage to the limit over all finite abelian extensions, the uniqueness with the normalization at uniformizers, and the passage from $\mathrm{Gal}(K^{ab}/K)$ to $W_K^{ab}$. The fidelity check `Langlands.Fidelity.finiteAbelian_of_localReciprocityGL1` proves that the Lean statement of Theorem 2.3.3 implies the finite form.
+In the Lean project tamnd/langlands-lean, Theorem 2.1.2 is the theorem `Langlands.Bridge.finiteAbelianLocalReciprocity`, and the existence theorem is `Langlands.Bridge.localExistence`. Both come from the port of n-yamaguchi-0729/ClassFieldTheory in the folder `Langlands/Ported/NYLL`, which proves finite abelian local reciprocity and the existence theorem through Lubin-Tate theory. Theorem 2.3.3 is stated as `Langlands.LocalReciprocityGL1` and proved as `Langlands.localReciprocityGL1` in the file `Langlands/Reciprocity/GL1.lean`. The proof follows Section 2.3. For existence, it composes the absolute local Artin map of the port with the inverse of the injection $W_K^{ab} \to \mathrm{Gal}(K^{ab}/K)$ of Proposition 2.3.1. For uniqueness, it uses the uniqueness of coherent families of finite Artin maps in the port. The fidelity check `Langlands.Fidelity.finiteAbelian_of_localReciprocityGL1` proves that the Lean statement of Theorem 2.3.3 implies the finite form.
