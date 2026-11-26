@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Section 1.5 of Volume 6 now follows the Lean proofs of the irreducibility criterion, Jacquet's lemma and the classification for GL(2).
+
 - Volume 6, Section 1.5 and the Chapter 1 exercises are checked. The Steinberg coefficient in Proposition 1.5.4 is corrected.
 
 - Volume 0 and Volume 2 name the Lean shapes of the local Langlands conjecture and of functoriality, and Volume 0 names `LocalLanglandsGL`.
