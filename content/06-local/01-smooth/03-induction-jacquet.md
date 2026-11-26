@@ -2,9 +2,8 @@
 title: Parabolic induction and Jacquet modules
 nodes: []
 sources: [BH06]
-status: checked
+status: drafted
 drafted_by: writer
-checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Parabolic induction and Jacquet modules
@@ -106,15 +105,33 @@ The factor $\delta_P^{1/2}$ is exactly what makes part 3 and part 4 true. Withou
 
 ### Exactness of the Jacquet functor
 
-**Proposition 1.3.5 (Jacquet modules are exact).** Let $N$ be the unipotent radical of a parabolic subgroup.
-1. A vector $v \in V$ lies in $V(N)$ if and only if $\int_{N_0} \pi(n) v \, dn = 0$ for some compact open subgroup $N_0$ of $N$.
-2. The functor $V \mapsto V_N$ is exact.
+Over a $p$-adic field the space $V(N)$ has a second description, by averages over compact open subgroups of $N$, and this description makes the Jacquet functor exact. We first define the averages without measure theory. Let $(\pi, V)$ be a smooth representation of a topological group, let $N_0$ be a compact subgroup and let $v \in V$. The stabilizer $S_v = \{ n \in N_0 : \pi(n) v = v \}$ is open in $N_0$, since $v$ is smooth, so it has finite index in $N_0$. Put
+$$A_{N_0}(v) = \frac{1}{[N_0 : S_v]} \sum_{n \in N_0 / S_v} \pi(n) v.$$
+The sum runs over a set of representatives of the left cosets $n S_v$. It does not depend on the choice, because $S_v$ fixes $v$. If $dn$ is the Haar measure on $N_0$ of total mass $1$, then $A_{N_0}(v) = \int_{N_0} \pi(n) v \, dn$, since $n \mapsto \pi(n) v$ is constant on each coset $n S_v$ and each coset has measure $[N_0 : S_v]^{-1}$. Three elementary facts about $A_{N_0}$ are used below.
 
-Lean: `Langlands.SmoothRep.jacquetMap_surjective`, `Langlands.SmoothRep.jacquetMap_exact`. Lean has right exactness only for now: for an exact sequence $V' \to V \to V'' \to 0$ of smooth representations, the sequence $V'_N \to V_N \to V''_N \to 0$ is exact. This holds for any two subgroups $N$ and $M$ with $M$ in the normalizer of $N$. Part 1 and the injectivity of $U_N \to V_N$, which use that $N$ is a union of compact open subgroups, are not stated in Lean.
+(a) If $S \subseteq S_v$ is a subgroup of finite index in $N_0$, then $\sum_{n \in N_0 / S} \pi(n) v = [S_v : S] \sum_{n \in N_0 / S_v} \pi(n) v$. Indeed each coset of $S_v$ is the union of $[S_v : S]$ cosets of $S$, and $\pi(n) v$ is constant on it. So $A_{N_0}(v)$ is also the average over $N_0 / S$, and $A_{N_0}$ is linear: for $u, v \in V$ take $S = S_u \cap S_v$.
 
-*Proof.* The group $N$ is the union of an increasing sequence of compact open subgroups $N_0 \subset N_1 \subset \dots$, for example $N_k = d^k N_0 d^{-k}$ with $N_0 = N \cap GL_n(\mathcal{O}_K)$ and $d = \mathrm{diag}(\varpi^{-(n-1)}, \dots, \varpi^{-1}, 1)$. The group $N_k$ is the set of the matrices in $N$ whose entry $(i, j)$ lies in $\mathfrak{p}^{-k(j - i)}$. The set of the matrices in $N$ with all entries in $\mathfrak{p}^{-k}$ is not a group in general, for example for the Borel subgroup of $GL_3$. If $\int_{N_k} \pi(n) v \, dn = 0$, then $v \in V(N_k) \subseteq V(N)$ by Proposition 1.1.4 for the compact group $N_k$. Conversely, $V(N)$ is spanned by the vectors $\pi(n) v - v$, and each such vector lies in $V(N_k)$ for $k$ with $n \in N_k$. Then $\int_{N_k} \pi(n') (\pi(n) v - v) \, dn' = 0$. This proves part 1. For part 2, the functor of coinvariants is right exact for every group, since a surjection $V \to V''$ maps $V(N)$ onto $V''(N)$. Let $U \subseteq V$ be a subrepresentation and $u \in U$ with $u \in V(N)$. By part 1, $\int_{N_k} \pi(n) u \, dn = 0$ for some $k$, and the same integral shows $u \in U(N)$. So $U_N \to V_N$ is injective. $\square$
+(b) If $n_1 \in N_0$, then $A_{N_0}(\pi(n_1) v) = A_{N_0}(v)$. Let $S$ be the normal core of $S_v$ in $N_0$, the intersection of the conjugates $m S_v m^{-1}$ for $m \in N_0$. It is a finite intersection, since $m S_v m^{-1}$ depends only on the coset $m S_v$, so $S$ is a normal subgroup of finite index that fixes $v$. As $n$ runs over representatives of $N_0 / S$, so does $n n_1$, because $n S n_1 = n n_1 S$. So $\sum_{n \in N_0 / S} \pi(n) \pi(n_1) v = \sum_{n \in N_0 / S} \pi(n) v$, and (a) gives the claim.
 
-The exactness is special to $p$-adic groups. It holds because $N$ is a union of compact subgroups, and it fails for real groups.
+(c) The vector $v - A_{N_0}(v) = [N_0 : S_v]^{-1} \sum_{n \in N_0 / S_v} (v - \pi(n) v)$ lies in the span of the vectors $\pi(n) v - v$ with $n \in N_0$.
+
+**Proposition 1.3.5 (Jacquet modules are exact).** Let $N$ be the unipotent radical of a parabolic subgroup of $G$, and let $(\pi, V)$ be a smooth representation of $G$.
+1. A vector $v \in V$ lies in $V(N)$ if and only if $\int_{N_0} \pi(n) v \, dn = 0$ for some compact open subgroup $N_0$ of $N$. If this holds for $N_0$, it holds for each compact open subgroup $N_1 \supseteq N_0$ of $N$.
+2. For each short exact sequence $0 \to V' \to V \to V'' \to 0$ of smooth representations of $G$, the sequence $0 \to V'_N \to V_N \to V''_N \to 0$ is exact. So the functor $V \mapsto V_N$ is exact, and so is $r_P$.
+
+Lean: `Langlands.SmoothRep.mem_jacquetKer_iff`, `Langlands.SmoothRep.exists_forall_nAverage_eq_zero`, `Langlands.SmoothRep.jacquetMap_injective`, `Langlands.SmoothRep.jacquetMap_shortExact`, `Langlands.SmoothRep.jacquetMap_unipotent_shortExact`. Lean proves the proposition for a subgroup $N$ of any topological group $G$ such that each finite subset of $N$ lies in a compact open subgroup of $N$ (`Langlands.SmoothRep.HasCompactOpenExhaustion`), and for any subgroup $M$ in the normalizer of $N$. The average is `Langlands.SmoothRep.nAverage`, the finite sum above over $N_0 / (N_0 \cap \mathrm{Stab}(v))$ divided by the number of cosets, so Lean uses no Haar measure. The first two theorems are part 1, the third is the injectivity of $V'_N \to V_N$, and the fourth is part 2. `Langlands.GL2.hasCompactOpenExhaustion_unipotent` proves the hypothesis for the unipotent radical $N$ of $GL_2(K)$, and `Langlands.SmoothRep.mem_jacquetKer_unipotent_iff`, `Langlands.SmoothRep.jacquetMap_unipotent_injective` and the fifth theorem are the results for this $N$. The unipotent radicals of $GL_n$ for $n > 2$ are not defined in Lean.
+
+*Proof.* The group $N$ is the union of an increasing sequence of compact open subgroups $N_0 \subset N_1 \subset \dots$, for example $N_k = d^k N_0 d^{-k}$ with $N_0 = N \cap GL_n(\mathcal{O}_K)$ and $d = \mathrm{diag}(\varpi^{-(n-1)}, \dots, \varpi^{-1}, 1)$. The group $N_k$ is the set of the matrices in $N$ whose entry $(i, j)$ lies in $\mathfrak{p}^{-k(j - i)}$. The set of the matrices in $N$ with all entries in $\mathfrak{p}^{-k}$ is not a group in general, for example for the Borel subgroup of $GL_3$. So each finite subset of $N$ lies in some $N_k$, and each compact open subgroup of $N$ lies in some $N_k$.
+
+For part 1, suppose first that $A_{N_0}(v) = 0$. By (c), $v = v - A_{N_0}(v)$ lies in $V(N)$. Conversely, let $v \in V(N)$, say $v = \sum_{i=1}^r c_i (\pi(n_i) v_i - v_i)$ with $n_i \in N$. Choose a compact open subgroup $N_0$ of $N$ that contains $n_1, \dots, n_r$. By (a) and (b), $A_{N_0}(v) = \sum_i c_i (A_{N_0}(\pi(n_i) v_i) - A_{N_0}(v_i)) = 0$. For the second statement, let $N_1 \supseteq N_0$ be a compact open subgroup of $N$. Then $N_0$ has finite index in $N_1$, and $S = N_0 \cap S_v$ has finite index in $N_1$. Grouping the cosets of $S$ in $N_1$ by the cosets of $N_0$, we get
+$$\sum_{n \in N_1 / S} \pi(n) v = \sum_{m \in N_1 / N_0} \pi(m) \sum_{n \in N_0 / S} \pi(n) v,$$
+and the inner sum is a multiple of $A_{N_0}(v)$ by (a). So $A_{N_0}(v) = 0$ implies $A_{N_1}(v) = 0$.
+
+For part 2, let $\iota : V' \to V$ and $p : V \to V''$ be the maps of the sequence. They are $G$-maps, so they map $V'(N)$ into $V(N)$ and $V(N)$ into $V''(N)$, and they induce maps of the Jacquet modules. The image $p(V(N))$ is spanned by the vectors $\pi''(n) p(v) - p(v)$. Since $p$ is onto, these are all the generators of $V''(N)$, so $p(V(N)) = V''(N)$. Thus $V_N \to V''_N$ is onto. Let $v \in V$ with $p(v) \in V''(N)$. Then $p(v) = p(y)$ for some $y \in V(N)$, so $v - y = \iota(u)$ with $u \in V'$, and the class of $v$ in $V_N$ is the image of the class of $u$. This is the exactness in the middle. For the injectivity, let $u \in V'$ with $\iota(u) \in V(N)$. By part 1, $A_{N_0}(\iota(u)) = 0$ for some $N_0$. Since $\iota$ is injective, $u$ and $\iota(u)$ have the same stabilizer, so $A_{N_0}(\iota(u)) = \iota(A_{N_0}(u))$. Hence $A_{N_0}(u) = 0$, and $u \in V'(N)$ by part 1 for $V'$. $\square$
+
+The proof uses only two properties of $N$: each finite subset of $N$ lies in a compact open subgroup of $N$, and $M$ normalizes $N$. So part 2 holds for smooth representations of every group that contains such an $N$, for instance for the representations of $B$ in the last subsection of this section. The exactness is special to $p$-adic groups. It holds because $N$ is a union of compact subgroups, and it fails for real groups.
+
+Part 1 is often called Jacquet's lemma, and the Lean project uses this name for it. In this book the name belongs to Theorem 1.3.6, which is the form used in the proof of the admissibility of Jacquet modules. Both results are in the paper of Bernstein and Zelevinsky of 1976 on the representations of $GL(n, F)$, and [BH06] proves the exactness for $GL_2$ in Chapter 3.
 
 ### Jacquet's lemma
 
@@ -157,6 +174,72 @@ Lean: not stated yet
 
 For $GL_2$ and $\chi = \chi_1 \otimes \chi_2$, the lemma says that there is an exact sequence of representations of $T$
 $$0 \to \chi_2 \otimes \chi_1 \to r_B(\chi_1 \times \chi_2) \to \chi_1 \otimes \chi_2 \to 0.$$
-The quotient comes from the closed orbit $B$, through evaluation at $1$, and the subspace from the open orbit $B w B$. The evaluation map is onto. Indeed, choose a compact open subgroup $U$ such that $\chi \delta_B^{1/2}$ is trivial on $B \cap U$. Then the function $f$ with support $BU$ and $f(bu) = \chi \delta_B^{1/2}(b)$ is well defined, it lies in $\chi_1 \times \chi_2$, and $f(1) = 1$. Section 1.5 uses this sequence to find the reducible principal series of $GL_2$.
+The quotient comes from the closed orbit $B$, through evaluation at $1$, and the subspace from the open orbit $B w B$. We prove this case in full in the next subsection, as Theorem 1.3.11. Section 1.5 uses the sequence to find the reducible principal series of $GL_2$.
 
-Lean: `Langlands.principalSeriesJacquet`, `Langlands.principalSeriesJacquetEval`, `Langlands.principalSeriesJacquetEval_surjective`. The first is the Jacquet module, for `Langlands.GL2.unipotent` and as a representation of `Langlands.GL2.torus`, of the unnormalized `Langlands.principalSeriesInd`. The second is the map from it to the character $\chi_1 \otimes \chi_2$ of $T$ that evaluation at $1$ gives, and the third says that this map is onto. The vector with $f(1) = 1$ is the function above, for a congruence subgroup $U$ (`Langlands.principalSeriesInd_exists_eq_one`). Both modules are unnormalized, so by `normPrincipalSeries_eq` the Lean statement is the surjection $r_B(\chi_1 \times \chi_2) \to \chi$ of the sequence above. The subspace $\chi_2 \otimes \chi_1$ and the exactness on the left are not stated in Lean.
+### The Bruhat decomposition of GL(2) and the principal series
+
+In this subsection $G = GL_2(K)$, $B = TN$ is the upper triangular Borel subgroup, and
+$$w = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad n(x) = \begin{pmatrix} 1 & x \\ 0 & 1 \end{pmatrix}, \qquad \bar n(y) = \begin{pmatrix} 1 & 0 \\ y & 1 \end{pmatrix}.$$
+The group $N$ is the group of the $n(x)$, and $x \mapsto n(x)$ is an isomorphism of topological groups $K \cong N$. We prove the geometric lemma for $GL_2$ in three steps: the decomposition of $G$ into two $B$-orbits, the resulting filtration of the principal series, and the computation of the Jacquet module of each piece. This is the argument of [BH06], Chapter 3. The same decomposition over a finite field organizes the representations of $GL_2(\mathbb{F}_q)$ in [BH06], Chapter 2, and the general case is in the paper of Bernstein and Zelevinsky of 1976.
+
+**Proposition 1.3.9 (the Bruhat decomposition of $GL_2$).** Let $K$ be a field and let $g = \left(\begin{smallmatrix} \alpha & \beta \\ \gamma & \delta \end{smallmatrix}\right) \in GL_2(K)$.
+1. The element $g$ lies in $BwN = \{ b w n : b \in B, n \in N \}$ if and only if $\gamma \ne 0$. So $G$ is the disjoint union $G = B \sqcup BwN$, and $BwN$ is the complement of $B$.
+2. If $b w n = b' w n'$ with $b, b' \in B$ and $n, n' \in N$, then $b = b'$ and $n = n'$.
+3. If $K$ is a nonarchimedean local field, then $B$ is closed in $G$, the big cell $BwN$ is open and dense, and the map $B \times K \to BwN$, $(b, x) \mapsto b w n(x)$, is a homeomorphism.
+
+Lean: `Langlands.GL2.bruhat`, `Langlands.GL2.disjoint_borel_bigCell`, `Langlands.GL2.bigCell_eq_compl`, `Langlands.GL2.mem_bigCell_iff`, `Langlands.GL2.bigCell_unique`. Lean proves parts 1 and 2 for every field $K$. The big cell is `Langlands.GL2.bigCell`, with $w$ as `Langlands.GL2.weyl` and $n(x)$ as `Langlands.GL2.unip`. Part 3 is not stated in Lean.
+
+*Proof.* Let $b = \left(\begin{smallmatrix} a & y \\ 0 & d \end{smallmatrix}\right) \in B$. Then
+$$b w n(x) = \begin{pmatrix} y & a \\ d & 0 \end{pmatrix} \begin{pmatrix} 1 & x \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} y & yx + a \\ d & dx \end{pmatrix}. \tag{2}$$
+The lower left entry is $d \ne 0$. So $BwN$ lies in the set $\{\gamma \ne 0\}$, and it does not meet $B = \{\gamma = 0\}$. Conversely, let $\gamma \ne 0$ and put $x = \delta / \gamma$. Then
+$$g \, n(-x) \, w = \begin{pmatrix} \alpha & \beta - \alpha \delta / \gamma \\ \gamma & 0 \end{pmatrix} w = \begin{pmatrix} \beta - \alpha \delta / \gamma & \alpha \\ 0 & \gamma \end{pmatrix}. \tag{3}$$
+This matrix $b$ lies in $B$, and $g = b w^{-1} n(x) = b w n(x)$ since $w^2 = 1$. This proves part 1.
+
+For part 2, put $m = n' n^{-1} = n(t)$. From $b w n = b' w n'$ we get $b'^{-1} b = w m w^{-1} = w m w$. The right side is $\bar n(t)$, which lies in $B$ only if $t = 0$. So $n = n'$, and then $b = b'$.
+
+For part 3, the set $B = \{\gamma = 0\}$ is closed, so $BwN$ is open. Each $g \in B$ is the limit of $g \bar n(y) \in BwN$ as $y \to 0$, since the lower left entry of $g \bar n(y)$ is $\delta y \ne 0$ for $y \ne 0$. So $BwN$ is dense. The map $(b, x) \mapsto b w n(x)$ is continuous, and by part 1 and part 2 it is a bijection onto $BwN$. Its inverse is $g \mapsto (g n(-\delta/\gamma) w, \delta / \gamma)$ by (3), which is continuous on $\{\gamma \ne 0\}$. $\square$
+
+For each $t \in T$ we have $w t w = t^w$, with $t^w$ the diagonal matrix with the entries of $t$ in the other order. So $BwB = BwTN = Bt^w wN = BwN$, and part 1 is the decomposition of $G$ into the two double cosets $B$ and $BwB$ of Theorem 1.3.8. The map $Bg \mapsto$ the line of the lower row of $g$ is a bijection $B \backslash G \cong \mathbb{P}^1(K)$, since $B$ is the stabilizer of the line $K(0, 1)$ in the action of $G$ on row vectors from the right. By (2) the lower row of $b w n(x)$ is $d (1, x)$. So $B$ is the point $(0 : 1)$, the big cell is the affine line $\{(1 : x)\}$, and part 2 says that $x$ is a coordinate on it.
+
+A direct computation gives the identity
+$$w n(x) = \begin{pmatrix} -x^{-1} & 1 \\ 0 & x \end{pmatrix} \bar n(x^{-1}), \qquad x \ne 0, \tag{4}$$
+which one checks by multiplying out.
+
+Now let $\chi_1, \chi_2$ be smooth characters of $K^\times$, let $\chi(b) = \chi_1(a) \chi_2(d)$ for $b = \left(\begin{smallmatrix} a & y \\ 0 & d \end{smallmatrix}\right)$, and let $V = \chi_1 \times \chi_2$, so that $f(bg) = \chi \delta_B^{1/2}(b) f(g)$ for $f \in V$.
+
+**Proposition 1.3.10 (the big cell filtration of the principal series).** Let $V_w = \{ f \in V : f(1) = 0 \}$.
+1. A function $f \in V$ lies in $V_w$ if and only if $f$ vanishes on $B$, that is, if and only if its support lies in the big cell $BwN$. The subspace $V_w$ is stable under $B$.
+2. The sequence of representations of $B$
+$$0 \to V_w \to V \xrightarrow{\ f \mapsto f(1)\ } \chi \delta_B^{1/2} \to 0$$
+is exact.
+3. For $f \in V_w$ put $\phi_f(x) = f(w n(x))$. The map $f \mapsto \phi_f$ is a linear isomorphism of $V_w$ onto the space $C_c^\infty(K)$ of the locally constant functions with compact support on $K$. Its inverse sends $\phi$ to the function $f$ with $f(b w n(x)) = \chi \delta_B^{1/2}(b) \phi(x)$ on $BwN$ and $f = 0$ on $B$. In this model, $n(y)$ acts by $\phi \mapsto \phi(\cdot + y)$, and $t = \mathrm{diag}(t_1, t_2)$ acts by
+$$(t \cdot \phi)(x) = \chi_1(t_2) \chi_2(t_1) \left| \frac{t_2}{t_1} \right|^{1/2} \phi\left( \frac{t_2}{t_1} x \right). \tag{5}$$
+
+Lean: `Langlands.principalSeriesBigCell`, `Langlands.mem_principalSeriesBigCell_iff`, `Langlands.principalSeriesBigCell_stable`, `Langlands.principalSeriesEvalOne`, `Langlands.principalSeriesJacquetEval_surjective`. Lean works with the unnormalized `Langlands.principalSeriesInd`, where $\chi$ replaces $\chi \delta_B^{1/2}$, and by `Langlands.normPrincipalSeries_eq` this is the same statement. Lean defines $V_w$ as the kernel of the evaluation `Langlands.principalSeriesEvalOne`, proves part 1, and proves that the evaluation is onto. It does not state part 2 as a sequence of representations of $B$, and it does not state part 3.
+
+*Proof.* For $b \in B$ we have $f(b) = \chi \delta_B^{1/2}(b) f(1)$. So $f(1) = 0$ if and only if $f$ vanishes on $B$, which is the complement of $BwN$ by Proposition 1.3.9. The same formula gives $(b \cdot f)(1) = f(b) = \chi \delta_B^{1/2}(b) f(1)$. So $V_w$ is stable under $B$, and the evaluation at $1$ is a map of representations of $B$ onto the character $\chi \delta_B^{1/2}$. This proves part 1 and all of part 2 except the surjectivity. For it, choose a compact open subgroup $U$ of $G$ such that $\chi \delta_B^{1/2}$ is trivial on $B \cap U$. Define $f(bu) = \chi \delta_B^{1/2}(b)$ on $BU$ and $f = 0$ outside $BU$. It is well defined, since $bu = b'u'$ implies $b'^{-1} b = u' u^{-1} \in B \cap U$. The set $BU$ and its complement are unions of cosets $gU$, so $f$ is right invariant under $U$. So $f \in V$ and $f(1) = 1$.
+
+For part 3, let $f \in V_w$ and let $J$ be a compact open subgroup with $f(gj) = f(g)$ for $j \in J$. The function $\phi_f$ is locally constant, since $x \mapsto w n(x)$ is continuous. For $|x|$ large, $\bar n(x^{-1}) \in J$, and (4) gives $\phi_f(x) = \chi \delta_B^{1/2}(b_x) f(\bar n(x^{-1})) = \chi \delta_B^{1/2}(b_x) f(1) = 0$, where $b_x$ is the upper triangular factor of (4). So $\phi_f$ has compact support. The map is injective: $f$ vanishes on $B$, and on $BwN$ it is given by $f(b w n(x)) = \chi \delta_B^{1/2}(b) \phi_f(x)$. For the surjectivity, let $\phi \in C_c^\infty(K)$, say with $\phi(x) = 0$ for $|x| > R$, and define $f$ by the formula of part 3. By part 2 of Proposition 1.3.9 it is well defined, and it satisfies $f(bg) = \chi \delta_B^{1/2}(b) f(g)$. By part 3 of Proposition 1.3.9 it is locally constant on $BwN$. It is also locally constant near each point $b_0 \in B$. Indeed, let $h = \left(\begin{smallmatrix} \alpha & \beta \\ \gamma & \delta \end{smallmatrix}\right)$ be close enough to $1$ that $|\delta| = 1$ and $|\gamma| < R^{-1}$. If $\gamma = 0$, then $f(h) = 0$. If $\gamma \neq 0$, then $h = b w n(\delta / \gamma)$ by (3), and $|\delta / \gamma| > R$, so $f(h) = 0$ again. So $f$ vanishes near $1$, and then near $b_0$, since $f(b_0 h) = \chi \delta_B^{1/2}(b_0) f(h)$. A locally constant function on the compact set $K_0$ is right invariant under one open subgroup $J$ of $K_0$: cover $K_0$ by finitely many sets $k_i J_i$ on which $f$ is constant, and take $J = \bigcap_i J_i$. With $G = B K_0$ and $f(bkj) = \chi \delta_B^{1/2}(b) f(kj)$, the function $f$ is right invariant under $J$. So $f \in V_w$, and $\phi_f = \phi$.
+
+The actions follow from the definitions. First, $(n(y) \cdot f)(w n(x)) = f(w n(x) n(y)) = f(w n(x + y))$. Next, $n(x) t = t \, n(t_2 x / t_1)$ and $w t = t^w w$, so $w n(x) t = t^w w n(t_2 x / t_1)$, and $\chi \delta_B^{1/2}(t^w) = \chi_1(t_2) \chi_2(t_1) |t_2 / t_1|^{1/2}$. This gives (5). $\square$
+
+**Theorem 1.3.11 (the Jacquet module of the principal series of $GL_2$).** The Jacquet module $r_B(\chi_1 \times \chi_2)$ has dimension $2$. The image of $V_w$ in it is the character $\chi^w = \chi_2 \otimes \chi_1$ of $T$, and the evaluation at $1$ induces an isomorphism of the quotient by this image onto $\chi = \chi_1 \otimes \chi_2$. So there is an exact sequence of representations of $T$
+$$0 \to \chi_2 \otimes \chi_1 \to r_B(\chi_1 \times \chi_2) \to \chi_1 \otimes \chi_2 \to 0.$$
+
+Lean: `Langlands.principalSeriesJacquetEval_surjective`, `Langlands.SmoothRep.jacquetMap_shortExact`. These are the surjection onto $\chi$ and the exactness of the Jacquet functor, which Lean proves for any topological group, so also for $B$. Lean does not make $V_w$ a representation of $B$ and does not compute $(V_w)_N$, so the theorem is not stated in Lean.
+
+*Proof.* The Jacquet module of $V$ depends only on the restriction of $V$ to $B$. Apply the Jacquet functor of $N$ to the sequence of part 2 of Proposition 1.3.10. By Proposition 1.3.5 and the remark after it, the result is an exact sequence
+$$0 \to (V_w)_N \to V_N \to (\chi \delta_B^{1/2})_N \to 0$$
+of representations of $T$. The group $N$ acts trivially on the character $\chi \delta_B^{1/2}$, so its Jacquet module is the same character, and the normalization by $\delta_B^{-1/2}$ turns it into $\chi$.
+
+By part 3 of Proposition 1.3.10, $(V_w)_N$ is the space of coinvariants of $C_c^\infty(K)$ under translations. Let $dx$ be a Haar measure on $K$ and $\lambda(\phi) = \int_K \phi(x) \, dx$. We claim that $\lambda$ induces an isomorphism $C_c^\infty(K)_K \cong \mathbb{C}$. The form $\lambda$ is invariant under translation and is not zero, so it factors through the coinvariants and is onto. Let $\phi$ have integral $0$. There is $m$ such that $\phi$ is constant on the cosets of $\mathfrak{p}^m$, and $\phi$ vanishes outside a finite union of these cosets. So $\phi = \sum_i c_i 1_{a_i + \mathfrak{p}^m}$ with finitely many $a_i$. Each difference $1_{a_i + \mathfrak{p}^m} - 1_{\mathfrak{p}^m}$ is a translate of $1_{\mathfrak{p}^m}$ minus $1_{\mathfrak{p}^m}$, so it lies in the span of the vectors $n(y) \phi' - \phi'$. Hence $\phi \equiv c \, 1_{\mathfrak{p}^m}$ modulo this span, with $c = \sum_i c_i$, and $0 = \lambda(\phi) = c \, \mathrm{vol}(\mathfrak{p}^m)$ gives $c = 0$. This proves the claim.
+
+It remains to find the action of $T$ on the line $(V_w)_N$. By (5) and the change of variables $x \mapsto (t_1 / t_2) x$, which multiplies $dx$ by $|t_1 / t_2|$,
+$$\lambda(t \cdot \phi) = \chi_1(t_2) \chi_2(t_1) \left| \frac{t_2}{t_1} \right|^{1/2} \left| \frac{t_1}{t_2} \right| \lambda(\phi) = \chi_2(t_1) \chi_1(t_2) \left| \frac{t_1}{t_2} \right|^{1/2} \lambda(\phi) = \chi^w \delta_B^{1/2}(t) \, \lambda(\phi).$$
+After the normalization by $\delta_B^{-1/2}$, the torus acts on $(V_w)_N$ by $\chi^w$. $\square$
+
+The closed orbit $B$ contributes $\chi$ through the evaluation at $1$, and the open orbit contributes $\chi^w$ through the integral over $N$. The factor $|t_1 / t_2|$ of the change of variables is exactly what turns $\delta_B^{1/2}(t^w) = \delta_B^{-1/2}(t)$ into $\delta_B^{1/2}(t)$. This matches the general statement of Theorem 1.3.8, with $(w\chi)_1 = \chi_2$ and $(w\chi)_2 = \chi_1$. If $\chi \ne \chi^w$, the sequence splits, since $T$ acts on the two lines by different characters (see the proof of Proposition 1.5.2).
+
+**Example 1.3.12 (an explicit vector of the big cell).** Take $\phi = 1_{\mathcal{O}_K}$ in part 3 of Proposition 1.3.10, and let $f \in V_w$ be the corresponding function. For $g = \left(\begin{smallmatrix} \alpha & \beta \\ \gamma & \delta \end{smallmatrix}\right)$ with $\gamma \ne 0$, formula (3) gives $g = b w n(\delta / \gamma)$ with $b$ of diagonal $(a, d) = (-\det g / \gamma, \gamma)$. So
+$$f(g) = \chi_1\left( -\frac{\det g}{\gamma} \right) \chi_2(\gamma) \left| \frac{\det g}{\gamma^2} \right|^{1/2} 1_{\mathcal{O}_K}\left( \frac{\delta}{\gamma} \right),$$
+and $f(g) = 0$ if $\gamma = 0$. The function vanishes on the set $|\delta| > |\gamma|$, which contains a neighbourhood of $B$, as the proof predicts. With $dx$ normalized by $\mathrm{vol}(\mathcal{O}_K) = 1$, we have $\lambda(\phi) = 1$. So the image of $f$ spans the line $\chi^w$ in $r_B(\chi_1 \times \chi_2)$, while $f(1) = 0$. A vector $f'$ with $f'(1) = 1$, as in the proof of part 2, together with $f$ gives a basis of the Jacquet module.
