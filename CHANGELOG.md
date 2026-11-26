@@ -4,6 +4,14 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Chapter 5, Section 5: a new subsection on the characters |x|^s_0 in Lean, with Lemma 5.5.12 (the norm of a local idele), Lemma 5.5.13 (the data of |x|^s_0), Theorem 5.5.14 (Hecke's theorem for |x|^s_0), Remark 5.5.15 on the root number and Remark 5.5.16 on the Lean proof in `Langlands/Tate/HeckeNormPower.lean`.
+
+### Changed
+
+- Remarks 5.5.4 and 5.5.11 now refer to Theorem 5.5.14.
+
 ## v0.1.10 (2026-11-26)
 
 ### Added
