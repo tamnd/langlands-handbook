@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.21 (2026-11-26)
+
 ### Added
 
 - A checking pass over the new text of Volume 6, Section 3.2, with a correction to Exercise 14 and the regularity hypothesis of the Lean theorems.
