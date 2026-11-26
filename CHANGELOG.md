@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.4 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 5, Section 3: the Epstein zeta function of a lattice, its continuation, its residue and its functional equation with the dual lattice, with the proof by the theta formula and the Mellin transform. Two examples derive the functional equations of the Riemann zeta function and of the Dedekind zeta function of Q(i). A remark explains why this method works only for Q and the imaginary quadratic fields. Exercise 12 treats Q(sqrt(-2)) and Q(sqrt(2)). The Lean names are from the export of langlands-lean at d9630f7.
