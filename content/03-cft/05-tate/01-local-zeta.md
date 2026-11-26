@@ -2,8 +2,9 @@
 title: Local zeta integrals
 nodes: []
 sources: [CF67]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Local zeta integrals

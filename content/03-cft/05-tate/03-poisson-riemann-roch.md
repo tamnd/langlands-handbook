@@ -2,8 +2,9 @@
 title: Poisson summation and the Riemann-Roch theorem
 nodes: []
 sources: [CF67]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Poisson summation and the Riemann-Roch theorem
@@ -353,4 +354,4 @@ With part (2) of Theorem 5.3.34 we can compute the residue of $\zeta_F$ at $u = 
 $$\mathrm{Res}_{u = 1} \zeta_F(u) = \frac{2 c_F h_F}{n} \cdot \frac{(2\pi)^{r_2}}{|d_F|^{1/2}} = \frac{2^{r_1} (2\pi)^{r_2} \, h_F R_F}{w_F \, |d_F|^{1/2}},$$
 since $r - r_2 + 1 = r_1$. This is the analytic class number formula of Corollary 5.4.8, now with the methods of Hecke.
 
-**Remark 5.3.37 (the Lean proof).** The file `Langlands/Tate/HeckeTrivial.lean` proves Proposition 5.3.36 for each number field, but only the order of the poles and not the value of the residues. The function $\Lambda_0(\Theta_\mathfrak{a}, s)$ is the function `Λ₀` of the `WeakFEPair` `Langlands.Tate.unitThetaFEPair` of Mathlib, and (5.3.2) is `Langlands.Tate.Λ_unitThetaFEPair_eq`. The function $g_\mathfrak{a}$ is `Langlands.Tate.classFactor`, and the decomposition of $\varphi_\mathfrak{a}$ is `Langlands.Tate.classXi_eq_poleShape`. The functions $E$, $F_0$ and $F_1$ are `Langlands.Tate.xiE`, `Langlands.Tate.xiF₀` and `Langlands.Tate.xiF₁`. The general step is the section `PoleShape` of the file: if $E$, $F_0$ and $F_1$ are entire and $F_1(1) \ne 0$, then $E(u) + F_0(u)/u + F_1(u)/(u - 1)$ has the order $-1$ at $u = 1$, in the sense of `meromorphicOrderAt` of Mathlib. The same holds at $u = 0$ if $F_0(0) \ne 0$. The proof writes the function near $u = 1$ as $(u - 1)^{-1}$ times a function that is analytic at $u = 1$ and not zero there.
+**Remark 5.3.37 (the Lean proof).** The file `Langlands/Tate/HeckeTrivial.lean` proves Proposition 5.3.36 for each number field, but only the order of the poles and not the value of the residues. The function $\Lambda_0(\Theta_\mathfrak{a}, s)$ is the function `Λ₀` of the pair `Langlands.Tate.unitThetaFEPair`, which is a `WeakFEPair` of Mathlib, and (5.3.2) is `Langlands.Tate.Λ_unitThetaFEPair_eq`. The function $g_\mathfrak{a}$ is `Langlands.Tate.classFactor`, and the decomposition of $\varphi_\mathfrak{a}$ is `Langlands.Tate.classXi_eq_poleShape`. The functions $E$, $F_0$ and $F_1$ are `Langlands.Tate.xiE`, `Langlands.Tate.xiF₀` and `Langlands.Tate.xiF₁`. The general step is the section `PoleShape` of the file: if $E$, $F_0$ and $F_1$ are entire and $F_1(1) \ne 0$, then $E(u) + F_0(u)/u + F_1(u)/(u - 1)$ has the order $-1$ at $u = 1$, in the sense of `meromorphicOrderAt` of Mathlib. The same holds at $u = 0$ if $F_0(0) \ne 0$. The proof writes the function near $u = 1$ as $(u - 1)^{-1}$ times a function that is analytic at $u = 1$ and not zero there.

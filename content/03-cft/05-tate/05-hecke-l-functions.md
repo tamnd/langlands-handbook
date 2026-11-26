@@ -2,8 +2,9 @@
 title: Hecke L-functions
 nodes: [LG6NN4B43V]
 sources: [CF67, Neu99, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Hecke L-functions

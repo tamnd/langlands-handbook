@@ -2,8 +2,9 @@
 title: The global zeta integral
 nodes: []
 sources: [CF67, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The global zeta integral

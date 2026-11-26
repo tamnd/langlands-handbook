@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Changed
+
+- Volume 3, Chapter 5 has the status `checked`. The second pass fixed a sign in the proof of Lemma 5.2.1, two statements in the Notes of Section 5.6 and the source of `unitThetaFEPair` in Remark 5.3.37.
+
 ## v0.1.13 (2026-11-26)
 
 ### Added
