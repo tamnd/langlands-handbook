@@ -4,6 +4,15 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Chapter 5, Section 3: a new subsection on the poles of the function xi_F, with Proposition 5.3.36 (simple poles at 0 and 1 and their residues), the analytic class number formula by the methods of Hecke, and Remark 5.3.37 on the Lean proof in `Langlands/Tate/HeckeTrivial.lean`.
+- Volume 3, Chapter 5, Section 5: a new subsection on the trivial character in Lean, with Lemma 5.5.8 (the data of the trivial character), Proposition 5.5.9 (the Euler product of the Dedekind zeta function), Theorem 5.5.10 (Hecke's theorem for the trivial character) and Remark 5.5.11 on the Lean proof.
+
+### Changed
+
+- Volume 3, Chapter 5: Corollary 5.4.8, Remark 5.3.35 and Remark 5.5.4 now give the new Lean theorems.
+
 ## v0.1.9 (2026-11-26)
 
 ### Added
