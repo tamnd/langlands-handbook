@@ -2,8 +2,9 @@
 title: Ray class fields and the Hilbert class field
 nodes: []
 sources: [CF67, Mil20, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Ray class fields and the Hilbert class field

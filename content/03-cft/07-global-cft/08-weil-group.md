@@ -2,8 +2,9 @@
 title: The global Weil group
 nodes: []
 sources: [Tat79, CF67]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The global Weil group
@@ -34,7 +35,7 @@ Lean: not stated yet
 
 *Proof.* A continuous character of $W_F$ is trivial on $W_F^c$, so it is a character of $W_F^{ab} \cong C_F$. For the second claim, a character that factors through $\varphi$ has finite image, because $G_F$ is profinite. Conversely, a Hecke character of finite order is $\phi \circ \mathrm{art}_F$ by Theorem 7.7.1, and $\phi \circ \varphi$ is the character of $W_F$ that corresponds to it by condition 1. $\square$
 
-This is the global Langlands correspondence for $GL_1$: the automorphic representations of $GL_1(\mathbb{A}_F)$ are the Hecke characters, and the Langlands parameters are the characters of $W_F$. With the Weil groups of tori of Theorem 4.5.6, Langlands extended this to all tori over $F$.
+This is the global Langlands correspondence for $GL_1$: the automorphic representations of $GL_1(\mathbb{A}_F)$ are the Hecke characters, and the Langlands parameters are the characters of $W_F$. Theorem 4.5.6 is the local form of this correspondence for tori. Langlands also proved the global form for all tori over $F$.
 
 **Remark 7.8.4 (local and global Weil groups).** For each place $v$ of $F$ there is a continuous homomorphism $\theta_v : W_{F_v} \to W_F$ from the local Weil group of Chapter 1, or the group $W_\mathbb{R}$ or $W_\mathbb{C} = \mathbb{C}^\times$ at an infinite place. It is unique up to conjugation by an element of $W_F$. It is compatible with the inclusion $F_v^\times \to C_F$ and the isomorphisms $r_{F_v}$ and $r_F$ on abelianizations, and with the map $\mathrm{Gal}(\bar F_v/F_v) \to G_F$ of a choice of a place of $\bar F$ above $v$. Thus a representation $\rho$ of $W_F$ gives a representation $\rho \circ \theta_v$ of each $W_{F_v}$, defined up to isomorphism. The $L$-function of $\rho$ is the product of the local $L$-factors of these local representations. For a character this is the $L$-function of the Hecke character, and the local and global correspondences are compatible.
 

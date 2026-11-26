@@ -2,8 +2,9 @@
 title: The theorem of Kronecker and Weber
 nodes: [LG06WS8A1Y]
 sources: [CF67, Mil20, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The theorem of Kronecker and Weber
@@ -18,7 +19,7 @@ For a prime $p \nmid N$, the class of the idele $\varpi_p = p$ at $p$ is the cla
 
 Lean: not stated yet
 
-*Proof.* The first formula was shown after Proposition 7.2.6. For the second, the idele with $p$ at $p$ and $1$ elsewhere equals $p \cdot x$ in $J_\mathbb{Q}$, where $p \in \mathbb{Q}^\times$ is principal and $x$ has component $1$ at $p$, $p^{-1}$ at every other finite prime, and $p^{-1}$ at $\infty$. The class of $x$ in $\mathbb{R}_{>0} \times \hat{\mathbb{Z}}^\times$ is $(p^{-1}, u_p)$. Its image acts on $\mu_N$ as $\zeta \mapsto \zeta^{p^{-1}}$, since $p \nmid N$. The Frobenius of $p$ is $\zeta \mapsto \zeta^p$ (Volume 1, Theorem 1.5.3). $\square$
+*Proof.* The first formula was shown after Proposition 7.2.6. For the second, the idele with $p$ at $p$ and $1$ elsewhere equals $p \cdot x$ in $J_\mathbb{Q}$, where $p \in \mathbb{Q}^\times$ is principal and $x$ has component $1$ at $p$, $p^{-1}$ at every other finite prime, and $p^{-1}$ at $\infty$. The class of $x$ in $\mathbb{R}_{>0} \times \hat{\mathbb{Z}}^\times$ is $(p^{-1}, u_p)$. Its image acts on $\mu_N$ as $\zeta \mapsto \zeta^{p^{-1}}$, since $p \nmid N$. The Frobenius of $p$ is $\zeta \mapsto \zeta^p$ (Volume 1, Theorem 1.5.5). $\square$
 
 The port has this computation at each finite level, in the files `RationalRayClassFieldCyclotomic` and `RationalCyclotomicArithmeticReciprocity` of its `KroneckerWeber` folder. There the arithmetic Frobenius at $q \nmid m$ acts on the cyclotomic field of level $m$ by $\zeta \mapsto \zeta^q$, as it should.
 
@@ -41,7 +42,7 @@ Node: LG06WS8A1Y · Lean: `Langlands.KroneckerWeber`
 
 The Lean statement says: for each intermediate field $L$ of an algebraic closure of $\mathbb{Q}$, finite and abelian over $\mathbb{Q}$, there are $n > 0$ and a primitive $n$-th root of unity $\zeta$ in the same algebraic closure with $L \subset \mathbb{Q}(\zeta)$. This is the textbook statement. The theorem `Langlands.Bridge.kroneckerWeber` proves it from the theorem `ClassFieldTheory.kroneckerWeber` of the port. The port gives an embedding of $L$ into the concrete model `CyclotomicField n ℚ` of $\mathbb{Q}(\zeta_n)$. The bridge moves the image into the algebraic closure, and uses that $L/\mathbb{Q}$ is normal to see that the image is $L$ itself.
 
-*First proof, from class field theory.* Let $L/\mathbb{Q}$ be finite abelian. Its norm group $U = N_{L/\mathbb{Q}}(C_\mathbb{Q})$ is open of finite index. By Proposition 7.1.3 it contains the image of $\mathbb{R}_{>0} \times \prod_p (1 + N\mathbb{Z}_p)^\times$ for some $N$. By Proposition 7.5.2 this is the norm group of $\mathbb{Q}(\zeta_N)$. By Corollary 7.4.4, $L \subset \mathbb{Q}(\zeta_N)$. $\square$
+*First proof, from class field theory.* Let $L/\mathbb{Q}$ be finite abelian. Its norm group $U = N_{L/\mathbb{Q}}(C_L)$ is open of finite index. By Proposition 7.1.3 it contains the image of $\mathbb{R}_{>0} \times \prod_p (1 + N\mathbb{Z}_p)^\times$ for some $N$. By Proposition 7.5.2 this is the norm group of $\mathbb{Q}(\zeta_N)$. By Corollary 7.4.4, $L \subset \mathbb{Q}(\zeta_N)$. $\square$
 
 This proof is short, but it uses all of global class field theory. Historically the theorem came first, with the proofs of Weber and Hilbert. The second proof, due to Hilbert in its global part, uses only local class field theory and the theorem of Minkowski. It is the proof of the port.
 
@@ -59,7 +60,7 @@ Step 4. Since $\mathbb{Q}(\zeta_n) \subset M$ has degree $\varphi(n)$, we get $M
 
 The port states the conclusion as `KroneckerWeber.exists_cyclotomicEmbedding`, and `ClassFieldTheory.kroneckerWeber` is a wrapper around it. The proof in the file `KroneckerWeber/Final.lean` uses local class field theory and Hilbert's ramification theory, but not global reciprocity. So the Lean proof of Theorem 7.5.3 does not depend on Theorem 7.3.1.
 
-**Example 7.5.4 (quadratic fields).** Let $F = \mathbb{Q}(\sqrt d)$ with discriminant $D$. Then $F \subset \mathbb{Q}(\zeta_{|D|})$. For an odd prime $p$ and $p^* = (-1)^{(p-1)/2} p$, the Gauss sum $g = \sum_{a \bmod p} \left(\frac{a}{p}\right) \zeta_p^a$ satisfies $g^2 = p^*$ (Volume 1, Theorem 1.5.8), so $\sqrt{p^*} \in \mathbb{Q}(\zeta_p)$. Also $i \in \mathbb{Q}(\zeta_4)$ and $\sqrt{2} = \zeta_8 + \zeta_8^{-1}$. Since $D$ is a product of the factors $p^*$, $-4$, $8$ and $-8$, the claim follows. The character of $\mathrm{Gal}(\mathbb{Q}(\zeta_{|D|})/\mathbb{Q}) \cong (\mathbb{Z}/|D|\mathbb{Z})^\times$ with kernel $\mathrm{Gal}(\mathbb{Q}(\zeta_{|D|})/F)$ is the Kronecker symbol $\left(\frac{D}{\cdot}\right)$. So for $p \nmid D$, $p$ splits in $F$ if and only if $\left(\frac{D}{p}\right) = 1$. This is quadratic reciprocity in the form "the splitting of $p$ depends only on $p$ modulo $|D|$".
+**Example 7.5.4 (quadratic fields).** Let $F = \mathbb{Q}(\sqrt d)$ with discriminant $D$. Then $F \subset \mathbb{Q}(\zeta_{|D|})$. For an odd prime $p$ and $p^* = (-1)^{(p-1)/2} p$, the Gauss sum $g = \sum_{a \bmod p} \left(\frac{a}{p}\right) \zeta_p^a$ satisfies $g^2 = p^*$, so $\sqrt{p^*} \in \mathbb{Q}(\zeta_p)$. Volume 1, Lemma 1.5.7, proves this last fact in another way. Also $i \in \mathbb{Q}(\zeta_4)$ and $\sqrt{2} = \zeta_8 + \zeta_8^{-1}$. Since $D$ is a product of the factors $p^*$, $-4$, $8$ and $-8$, the claim follows. The character of $\mathrm{Gal}(\mathbb{Q}(\zeta_{|D|})/\mathbb{Q}) \cong (\mathbb{Z}/|D|\mathbb{Z})^\times$ with kernel $\mathrm{Gal}(\mathbb{Q}(\zeta_{|D|})/F)$ is the Kronecker symbol $\left(\frac{D}{\cdot}\right)$. So for $p \nmid D$, $p$ splits in $F$ if and only if $\left(\frac{D}{p}\right) = 1$. This is quadratic reciprocity in the form "the splitting of $p$ depends only on $p$ modulo $|D|$".
 
 **Proposition 7.5.5 (the cyclotomic case over any field).** Let $F$ be a number field and $m \ge 1$. The norm group of $F(\zeta_m)$ in $C_F$ is the inverse image under $N_{F/\mathbb{Q}}$ of the norm group of $\mathbb{Q}(\zeta_m)$ in $C_\mathbb{Q}$. A prime $\mathfrak{p} \nmid m$ of $F$ splits completely in $F(\zeta_m)$ if and only if $N\mathfrak{p} \equiv 1 \bmod m$.
 
@@ -67,4 +68,4 @@ Lean: not stated yet
 
 *Proof.* By Proposition 7.2.2, part 4, $\mathrm{art}_{F(\zeta_m)/F}(x)$ restricts to $\mathrm{art}_{\mathbb{Q}(\zeta_m)/\mathbb{Q}}(N_{F/\mathbb{Q}} x)$, and restriction is injective. For the second claim, $\mathrm{Frob}_\mathfrak{p}$ acts on $\mu_m$ as $\zeta \mapsto \zeta^{N\mathfrak{p}}$. $\square$
 
-**Remark 7.5.6 (Hilbert's twelfth problem).** Theorem 7.5.3 says that the values of $e^{2\pi i x}$ at $x \in \mathbb{Q}$ generate $\mathbb{Q}^{ab}$. Kronecker's "Jugendtraum" was the analogue for an imaginary quadratic field $K$. There the theory of complex multiplication shows that $K^{ab}$ is generated by the $j$-invariants of the elliptic curves with complex multiplication by orders of $K$ and by the values of Weber functions at their torsion points. In particular the Hilbert class field of $K$ is $K(j(\mathcal{O}_K))$. Volume 4 treats this. For other fields, Hilbert's twelfth problem asks for such explicit generators. It is open in general. There is recent progress for totally real fields by Dasgupta and Kakde, with Gross-Stark units. The Lean project states none of this yet.
+**Remark 7.5.6 (Hilbert's twelfth problem).** Theorem 7.5.3 says that the values of $e^{2\pi i x}$ at $x \in \mathbb{Q}$ generate $\mathbb{Q}^{ab}$. Kronecker's "Jugendtraum" was the analogue for an imaginary quadratic field $K$. There the theory of complex multiplication shows that $K^{ab}$ is generated by the $j$-invariants of the elliptic curves with complex multiplication by orders of $K$ and by the values of Weber functions at their torsion points. In particular the Hilbert class field of $K$ is $K(j(\mathcal{O}_K))$. Volume 4 treats this. For other fields, Hilbert's twelfth problem asks for such explicit generators. It is open in general. There is recent progress for totally real fields by Dasgupta and Kakde, with Brumer-Stark units. The Lean project states none of this yet.

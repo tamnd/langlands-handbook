@@ -2,8 +2,9 @@
 title: Ideles, idele classes and ray class groups
 nodes: []
 sources: [CF67, Mil20, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Ideles, idele classes and ray class groups
@@ -55,11 +56,11 @@ Lean: not stated yet
 
 *Proof.* Part 1. Let $U \subset C_F$ be open of index $n$, and let $U'$ be its preimage in $J_F$. Then $U'$ is open, and it contains $x^n$ for every $x \in J_F$, since $J_F / U'$ has order $n$. By the definition of the topology, $U'$ contains a set $\prod_{v \in S} V_v \times \prod_{v \notin S} \mathcal{O}_v^\times$, with $S$ finite and $V_v$ a neighbourhood of $1$ in $F_v^\times$. At a finite $v \in S$ the neighbourhood $V_v$ contains $1 + \mathfrak{p}_v^{m_v}$ for some $m_v \ge 1$. At an infinite place every element of $(F_v^\times)^0$ is an $n$-th power, so $(F_v^\times)^0 \subset U'$. These subgroups generate $W_\mathfrak{m}$ for the modulus $\mathfrak{m}$ with these $m_v$ and with all the real places in $\mathfrak{m}_\infty$. So $W_\mathfrak{m} \subset U'$.
 
-Part 2. The group $\mathrm{Cl}_\mathfrak{m}$ maps onto $C_F / C_F^1 = \mathrm{Cl}_F$, which is finite (Corollary 3.5.3 of Volume 1). The kernel is a quotient of $W_1 / W_\mathfrak{m} = \prod_{v \mid \mathfrak{m}_0} \mathcal{O}_v^\times / (1 + \mathfrak{p}_v^{m_v}) \times \prod_{v \in \mathfrak{m}_\infty} \{\pm 1\}$, which is finite.
+Part 2. The group $\mathrm{Cl}_\mathfrak{m}$ maps onto $\mathrm{Cl}_1 = \mathrm{Cl}_F$, which is finite (Corollary 3.5.3 of Volume 1). The kernel is a quotient of $W_1 / W_\mathfrak{m} = \prod_{v \mid \mathfrak{m}_0} \mathcal{O}_v^\times / (1 + \mathfrak{p}_v^{m_v}) \times \prod_{v \in \mathfrak{m}_\infty} \{\pm 1\}$, which is finite.
 
 Part 3. Let $D'$ be the closure of the image of $W_\infty^0 = \prod_{v \mid \infty} (F_v^\times)^0$. Every $W_\mathfrak{m}$ contains $W_\infty^0$, and every open subgroup is closed, so $D' \subset D_F$ by part 1. The group $D'$ is connected, as the closure of the image of a connected group. The group $J_F / W_\infty^0$ is the product of the finite group $\prod_{v \mid \infty} \pi_0(F_v^\times)$ and the group of finite ideles. So it is a locally compact group with a basis of neighbourhoods of $1$ formed by compact open subgroups. The quotient $Q = C_F / D'$ is the quotient of this group by the closed image of $F^\times$. Such a quotient again has a basis of neighbourhoods of $1$ formed by open subgroups, so $Q$ is totally disconnected. It is compact, because $D'$ contains the image of $\mathbb{R}_{>0}$ under the section of Proposition 3.4.6 of Volume 1, and so $C_F^1$ maps onto $Q$. A compact totally disconnected group is profinite, so the open subgroups of finite index of $Q$ have intersection $1$. Their preimages are open subgroups of finite index of $C_F$. Thus $D_F \subset D'$. Since $D'$ is connected and $C_F / D'$ is totally disconnected, $D'$ is the connected component of $1$. $\square$
 
-For a description of $D_F$ as a group, see [CF67], Chapter IX, and [Neu99], Chapter VI. For instance $D_\mathbb{Q} = \mathbb{R}_{>0}$, and $C_\mathbb{Q} / D_\mathbb{Q} \cong \hat{\mathbb{Z}}^\times$. For an imaginary quadratic field, $D_F$ is the image of $\mathbb{C}^\times$, and the map $\mathbb{C}^\times \to D_F$ is an isomorphism. If $F$ has a unit of infinite order, $D_F$ is not the image of $W_\infty^0$: it contains solenoids, the closures of the images of the unit group.
+For a description of $D_F$ as a group, see [CF67], Chapter VII, and [Neu99], Chapter VI. For instance $D_\mathbb{Q} = \mathbb{R}_{>0}$, and $C_\mathbb{Q} / D_\mathbb{Q} \cong \hat{\mathbb{Z}}^\times$. For an imaginary quadratic field, $D_F$ is the image of $\mathbb{C}^\times$, and the map $\mathbb{C}^\times \to D_F$ is an isomorphism. If $F$ has a unit of infinite order, $D_F$ is not the image of $W_\infty^0$: it contains solenoids, the closures of the images of the unit group.
 
 ### Ray class groups as groups of ideals
 

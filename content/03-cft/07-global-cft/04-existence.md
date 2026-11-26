@@ -2,8 +2,9 @@
 title: The existence theorem
 nodes: [LGX8K4ZEGW]
 sources: [CF67, Mil20, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The existence theorem
@@ -27,7 +28,7 @@ Lean: not stated yet
 
 *Proof.* We have $N_{L/F}(C_L) = N_{E/F}(N_{L/E}(C_L)) \subset N_{E/F}(C_E)$. By Theorem 7.4.1 the index of the first group is $|G^{ab}| = [E : F]$. By Theorem 7.3.1 the index of the second group is $[E : F]$. So the two groups are equal. $\square$
 
-The theorem says that norm groups see only abelian extensions. The same holds with $L/F$ any finite extension, not necessarily Galois; see [Mil20], Chapter V, and Exercise 5. In Lean it follows at once from the equivalence of Theorem 7.4.1, but the port does not state it in this form.
+The theorem says that norm groups see only abelian extensions. The same holds with $L/F$ any finite extension, not necessarily Galois, with $E$ the maximal abelian subextension of $L/F$; see Exercise 13. In Lean, Theorem 7.4.2 follows at once from the equivalence of Theorem 7.4.1, but the port does not state it in this form.
 
 ### The existence theorem
 
@@ -37,11 +38,11 @@ Node: LGX8K4ZEGW · Lean: `Langlands.GlobalExistence`
 
 The Lean statement asks for an intermediate field $L$ of an algebraic closure of $F$, finite and abelian over $F$, and a map $\mathrm{art} : C_F \to \mathrm{Gal}(L/F)$ with the properties of `Langlands.IsArtinMap` and with kernel $U$. By Theorem 7.3.1, part 3, this map is $\mathrm{art}_{L/F}$, so its kernel is $N_{L/F}(C_L)$. The Lean statement does not include the uniqueness of $L$. The theorem `Langlands.Bridge.globalExistence` proves it. The class field of the port is `GlobalClassFieldTheory.GlobalClassFields.closedFiniteIndexClassField`, which lives in a separable closure of $F$. The bridge embeds it into the algebraic closure. Isomorphic extensions have the same norm group, so the kernel does not change.
 
-*Proof.* Uniqueness. If $N_{L/F}(C_L) = N_{L'/F}(C_{L'}) = U$, then $N_{LL'/F}(C_{LL'})$ has the same index $[C_F : U]$, since by Exercise 4 it is the intersection of the two norm groups. So $[LL' : F] = [L : F] = [L' : F]$ and $L = LL' = L'$.
+*Proof.* Uniqueness. If $N_{L/F}(C_L) = N_{L'/F}(C_{L'}) = U$, then $N_{LL'/F}(C_{LL'})$ has the same index $[C_F : U]$. Indeed, an element of $\mathrm{Gal}(LL'/F)$ is trivial if and only if its restrictions to $L$ and $L'$ are trivial, so by Proposition 7.2.2, part 3, and Theorem 7.3.1 the norm group of $LL'$ is the intersection of the two norm groups. So $[LL' : F] = [L : F] = [L' : F]$ and $L = LL' = L'$.
 
 Existence. Let $n = [C_F : U]$.
 
-Step 1. Assume that $U$ contains $N_{L/F}(C_L)$ for some finite extension $L/F$. By Theorem 7.4.2 we may take $L$ abelian. Let $M \subset L$ be the fixed field of $\mathrm{art}_{L/F}(U)$. By Proposition 7.2.2, part 3, and Theorem 7.3.1, $N_{M/F}(C_M)$ is the inverse image of $\mathrm{Gal}(L/M)$ under $\mathrm{art}_{L/F}$, and this is $U$.
+Step 1. Assume that $U$ contains $N_{L/F}(C_L)$ for some finite extension $L/F$. The Galois closure $\tilde L$ of $L/F$ satisfies $N_{\tilde L/F}(C_{\tilde L}) \subset N_{L/F}(C_L)$, so we may take $L$ Galois. By Theorem 7.4.2 we may then take $L$ abelian. Let $M \subset L$ be the fixed field of $\mathrm{art}_{L/F}(U)$. By Proposition 7.2.2, part 3, and Theorem 7.3.1, $N_{M/F}(C_M)$ is the inverse image of $\mathrm{Gal}(L/M)$ under $\mathrm{art}_{L/F}$, and this is $U$.
 
 Step 2. Let $F' = F(\mu_n)$ and $U' = N_{F'/F}^{-1}(U) \subset C_{F'}$. Then $U'$ is open of finite index. Assume that $U' \supset N_{L'/F'}(C_{L'})$ for a finite extension $L'/F'$. Then $U \supset N_{F'/F}(U') \supset N_{L'/F}(C_{L'})$, and Step 1 applies. So we may assume that $\mu_n \subset F$.
 
@@ -53,11 +54,11 @@ Its image in $C_F$ lies in $U$. We show that $F^\times E = F^\times N_{L/F}(J_L)
 
 The group $E$ lies in the kernel of $\mathrm{art}_{L/F}$. At $v \in S$, the group $\mathrm{Gal}(L/F)$ has exponent $n$, so $r_{L/F,v}$ kills $F_v^{\times n}$. At $v \notin S$, the extension is unramified, so $r_{L/F,v}$ kills $\mathcal{O}_v^\times$. By Theorem 7.3.1, $F^\times E \subset F^\times N_{L/F}(J_L)$, and the second group has index $n^s$ in $J_F$. It remains to show that $[J_F : F^\times E] \le n^s$. Since $J_F = F^\times J_{F,S}$ and $F^\times \cap J_{F,S} = \mathcal{O}_S^\times$,
 $$[J_F : F^\times E] = \frac{[J_{F,S} : E]}{[\mathcal{O}_S^\times : \mathcal{O}_S^\times \cap E]}.$$
-For each place $v$ with $\mu_n \subset F_v$, one has $[F_v^\times : F_v^{\times n}] = n^2 / |n|_v$. This is the local index formula of Chapter 2 at the finite places, and a direct check at the infinite places. By the product formula, $\prod_{v \in S} |n|_v = 1$, so $[J_{F,S} : E] = n^{2s}$.
+For each place $v$ with $\mu_n \subset F_v$, one has $[F_v^\times : F_v^{\times n}] = n^2 / |n|_v$. This is the local index formula of [Neu99], Chapter II, Section 5, at the finite places, and a direct check at the infinite places. By the product formula, $\prod_{v \in S} |n|_v = 1$, so $[J_{F,S} : E] = n^{2s}$.
 
 The last step is to show that $\mathcal{O}_S^\times \cap E = \mathcal{O}_S^{\times n}$. Let $a \in \mathcal{O}_S^\times \cap E$ and $M = F(\sqrt[n]{a})$. At each $v \in S$, $a$ is an $n$-th power in $F_v$, so $v$ splits completely in $M$ and $r_{M/F,v}$ is trivial. At each $v \notin S$, $M$ is unramified, so $r_{M/F,v}$ is trivial on $\mathcal{O}_v^\times$. So $\mathrm{art}_{M/F}$ is trivial on $J_{F,S}$, and by Theorem 7.3.1 also on $F^\times$. Thus it is trivial on $J_F = F^\times J_{F,S}$. By Proposition 7.2.4 it is surjective, so $M = F$ and $a \in F^{\times n} \cap \mathcal{O}_S^\times = \mathcal{O}_S^{\times n}$. Hence $[\mathcal{O}_S^\times : \mathcal{O}_S^\times \cap E] = n^s$ and $[J_F : F^\times E] = n^s$. $\square$
 
-This is the proof in [Mil20], Chapter V, and in [CF67], Chapter VII, Section 9, written with the reciprocity law of Theorem 7.3.1. The port follows the same plan. The files `KummerNormDescent` and `CyclotomicKummerNormDescent` of `GlobalClassFieldTheory/GlobalClassFields` do Steps 2 and 3, and `ClosedFiniteIndexClassFieldConstruction` builds the class field.
+This is the proof in [Mil20], Chapter VII, and in [CF67], Chapter VII, written with the reciprocity law of Theorem 7.3.1. The port follows the same plan. The files `KummerNormDescent` and `CyclotomicKummerNormDescent` of `GlobalClassFieldTheory/GlobalClassFields` do Steps 2 and 3, and `ClosedFiniteIndexClassFieldConstruction` builds the class field.
 
 ### The classification
 
@@ -75,7 +76,7 @@ The Lean declaration is a stronger form. It is an isomorphism of ordered sets be
 
 Lean: `ClassFieldTheory.topologicalGlobalReciprocity`
 
-*Proof.* The kernel of $\mathrm{art}_F$ is the intersection of all the open subgroups of finite index, by Corollary 7.4.4. By Proposition 7.1.3 this intersection is $D_F$, since $C_F / D_F$ is profinite. The induced map $C_F / D_F \to \mathrm{Gal}(F^{ab}/F)$ is a continuous bijection of compact groups. So it is a homeomorphism. Its image is dense by Proposition 7.2.4 and closed by compactness. $\square$
+*Proof.* The kernel of $\mathrm{art}_F$ is the intersection of all the open subgroups of finite index, by Corollary 7.4.4. By Proposition 7.1.3 this intersection is $D_F$, since $C_F / D_F$ is profinite. The induced map $C_F / D_F \to \mathrm{Gal}(F^{ab}/F)$ is continuous and injective. Its image is dense by Proposition 7.2.4, and it is closed because $C_F / D_F$ is compact. So the map is a continuous bijection of compact groups, and thus a homeomorphism. $\square$
 
 The Lean theorem says that there is an isomorphism of topological groups from the quotient of $C_F$ by its identity component to the abelianization of the absolute Galois group. It does not say in its type that the isomorphism is the norm residue map. The definition in its proof is.
 
