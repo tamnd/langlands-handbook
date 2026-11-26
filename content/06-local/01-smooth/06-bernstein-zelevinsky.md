@@ -2,8 +2,9 @@
 title: The classification of Bernstein and Zelevinsky
 nodes: []
 sources: [BH06, HT01]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The classification of Bernstein and Zelevinsky
@@ -45,7 +46,7 @@ For $k = 2$ and $\rho = |\cdot|^{-1/2}$ this is Theorem 1.5.1: $Z([\nu^{-1/2}, \
 
 Lean: not stated yet
 
-The supercuspidal representations are the $L(\Delta)$ of the segments of length one. The essentially square integrable representations of $GL_2(K)$ are the supercuspidal ones and the $L([\chi \nu^{-1/2}, \chi \nu^{1/2}]) = \chi \mathrm{St}$. This agrees with Section 1.5. An irreducible representation is *tempered* if it is a twist by a character of a representation whose matrix coefficients lie in $L^{2 + \epsilon}(G / Z)$ for each $\epsilon > 0$. For $GL_n$ the tempered representations are the products $L(\Delta_1) \times \dots \times L(\Delta_r)$ with each $L(\Delta_i)$ unitary after twisting by the same character. These products are irreducible, by Theorem 1.6.6 below. Indeed, if $L(\Delta)$ and $L(\Delta')$ are unitary, the segments are centered: $\Delta = [\rho \nu^{(1-k)/2}, \rho \nu^{(k-1)/2}]$ with $\rho$ unitary. Two centered segments with the same $\rho$ are never linked, since either one contains the other or their union is not a segment.
+The supercuspidal representations are the $L(\Delta)$ of the segments of length one. The essentially square integrable representations of $GL_2(K)$ are the supercuspidal ones and the $L([\chi \nu^{-1/2}, \chi \nu^{1/2}]) = \chi \mathrm{St}$. This agrees with Section 1.5. An irreducible representation is *tempered* if it is a twist by a character of a representation whose matrix coefficients lie in $L^{2 + \epsilon}(G / Z)$ for each $\epsilon > 0$. For $GL_n$ the tempered representations are the products $L(\Delta_1) \times \dots \times L(\Delta_r)$ with each $L(\Delta_i)$ unitary after twisting by the same character. These products are irreducible, by Theorem 1.6.6 below. Indeed, if $L(\Delta)$ and $L(\Delta')$ are unitary, the segments are centered: $\Delta = [\rho \nu^{(1-k)/2}, \rho \nu^{(k-1)/2}]$ with $\rho$ unitary. Two centered segments can be linked only if they have the same $\rho$, since $\rho \nu^x$ with $x$ real is unitary only for $x = 0$. Two centered segments with the same $\rho$ are never linked, since either one contains the other or their union is not a segment.
 
 ### The classification
 
@@ -59,7 +60,7 @@ Lean: not stated yet
 
 *Sketch of proof.* Part 2 starts from Theorem 1.4.5: an irreducible $\pi$ embeds in a product of supercuspidal representations, and by Theorem 1.4.6 the multiset of these representations is determined by $\pi$. Group this multiset into segments in the way prescribed by the Jacquet module of $\pi$. The main tool is the geometric lemma, Theorem 1.3.8, applied to products of segments. It shows that the Jacquet module of $L(\Delta_1) \times \dots \times L(\Delta_r)$ for the minimal parabolic of its supercuspidal support contains the representation $\otimes_i r(L(\Delta_i))$ with multiplicity one, as an extreme exponent. This gives the uniqueness of the quotient in part 1, and it identifies the multiset in part 3. Part 1 for $L$ is the Langlands classification, with the Langlands quotient taken for the order of decreasing real parts of the central exponents. Zelevinsky proved part 4 directly, with the representations $Z(\Delta)$. $\square$
 
-The bijections of parts 1 and 4 are related by the *Zelevinsky involution*, an involution of the set of multisegments that sends $Z(\mathbf{a})$ to $L(\mathbf{a}^t)$. Mœglin and Waldspurger computed it combinatorially. On a single segment it sends $\Delta$ to the multisegment of the singletons of $\Delta$: $Z(\Delta) = L(\{\rho\}, \{\rho \nu\}, \dots, \{\rho \nu^{k-1}\})$.
+The bijections of parts 1 and 4 are related by the *Zelevinsky involution*, an involution $\mathbf{a} \mapsto \mathbf{a}^t$ of the set of multisegments, that is, of the multisets of segments, with $Z(\mathbf{a}) = L(\mathbf{a}^t)$. Mœglin and Waldspurger computed it combinatorially. On a single segment it sends $\Delta$ to the multisegment of the singletons of $\Delta$: $Z(\Delta) = L(\{\rho\}, \{\rho \nu\}, \dots, \{\rho \nu^{k-1}\})$.
 
 **Theorem 1.6.6 (Zelevinsky's irreducibility criterion).** Let $\Delta_1, \dots, \Delta_r$ be segments. The representation $L(\Delta_1) \times \dots \times L(\Delta_r)$ is irreducible if and only if no two of the segments $\Delta_i$ are linked. The same holds for $Z(\Delta_1) \times \dots \times Z(\Delta_r)$.
 

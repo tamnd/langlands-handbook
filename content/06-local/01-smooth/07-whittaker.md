@@ -2,8 +2,9 @@
 title: Whittaker models
 nodes: []
 sources: [BH06, JL70]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Whittaker models
@@ -30,7 +31,7 @@ Let $V(N_n, \psi)$ be the span of the vectors $\pi(u) v - \psi_N(u) v$, and $V_{
 
 Lean: not stated yet
 
-*Sketch of proof.* This is the method of Gelfand and Kazhdan. Let $\sigma(g) = w_0 \, {}^t g^{-1} w_0^{-1}$, where $w_0$ is the antidiagonal permutation matrix. It is an automorphism of $G$ with $\sigma(N_n) = N_n$ and $\psi_N \circ \sigma = \psi_N^{-1}$ on $N_n$, up to a sign that can be absorbed. The main step is a statement on distributions: each distribution $D$ on $G$ with $D(\lambda(u_1) \rho(u_2) f) = \psi_N(u_1) \psi_N(u_2)^{-1} D(f)$, for left and right translations by $u_1, u_2 \in N_n$, is invariant under $f \mapsto f \circ \sigma \circ \iota$, where $\iota(g) = g^{-1}$. The proof uses the Bruhat decomposition and Bernstein's localization principle, which reduces it to each double coset $N_n \, w t \, N_n$. On the cosets that do not support such a distribution, the character $\psi_N$ forces it to vanish. On the remaining cosets, the monomial matrices $w t$ are fixed by $\sigma \circ \iota$.
+*Sketch of proof.* This is the method of Gelfand and Kazhdan. Let $\sigma(g) = w_0 \, {}^t g^{-1} w_0^{-1}$, where $w_0$ is the antidiagonal permutation matrix. It is an automorphism of $G$ with $\sigma(N_n) = N_n$ and $\psi_N \circ \sigma = \psi_N^{-1}$ on $N_n$. The main step is a statement on distributions: each distribution $D$ on $G$ with $D(\lambda(u_1) \rho(u_2) f) = \psi_N(u_1) \psi_N(u_2)^{-1} D(f)$, for left and right translations by $u_1, u_2 \in N_n$, is invariant under $f \mapsto f \circ \sigma \circ \iota$, where $\iota(g) = g^{-1}$. The proof uses the Bruhat decomposition and Bernstein's localization principle, which reduces it to each double coset $N_n \, w t \, N_n$. On the cosets that do not support such a distribution, the character $\psi_N$ forces it to vanish. On the remaining cosets, the monomial matrices $w t$ are fixed by $\sigma \circ \iota$.
 
 The distribution statement implies, by a formal argument with the Bessel distributions $f \mapsto \mu(\pi(f) v)$, that $\dim \mathrm{Hom}_{N_n}(\pi, \psi_N) \cdot \dim \mathrm{Hom}_{N_n}(\pi^\vee, \psi_N^{-1}) \le 1$. The same method, applied to the distributions on $G$ that are invariant under conjugation, gives the theorem of Gelfand and Kazhdan that $\pi^\vee \cong \pi \circ \sigma$. The representation $\pi \circ \sigma$ has as many Whittaker functionals for $\psi_N^{-1}$ as $\pi$ has for $\psi_N$. So the two dimensions are equal, and each is at most one. $\square$
 
@@ -85,4 +86,4 @@ So the generic irreducible representations of $GL_2(K)$ are the infinite-dimensi
 
 **Remark 1.7.7 (Whittaker models and the local factors of pairs).** Let $\pi$ and $\pi'$ be generic irreducible representations of $GL_n(K)$ and $GL_m(K)$ with $m < n$. Jacquet, Piatetski-Shapiro and Shalika defined the zeta integrals
 $$Z(s, W, W') = \int_{N_m \backslash GL_m(K)} W\begin{pmatrix} g & 0 \\ 0 & 1_{n - m} \end{pmatrix} W'(g) |\det g|^{s - (n - m)/2} \, dg,$$
-for $W \in \mathcal{W}(\pi, \psi)$ and $W' \in \mathcal{W}(\pi', \psi^{-1})$. For $m = n$ a Schwartz-Bruhat function on $K^n$ is added. They proved that these integrals span a fractional ideal $L(s, \pi \times \pi') \mathbb{C}[q^{s}, q^{-s}]$, and that a functional equation relates $Z$ to the integral for $\tilde W(g) = W(w_n {}^t g^{-1})$ through a factor $\varepsilon(s, \pi \times \pi', \psi)$. This defines the $L$-factors and $\varepsilon$-factors of pairs. By the theorem of Bernstein and Zelevinsky and the inductivity of the factors, they extend to all irreducible representations. The local Langlands correspondence of Chapter 3 is characterized by these factors. The Lean project has no Whittaker models and no factors of pairs. Its file `GodementJacquet.lean` has the factors of Godement and Jacquet for $m = 0$, which do not need a Whittaker model, see Section 2.5.
+for $W \in \mathcal{W}(\pi, \psi)$ and $W' \in \mathcal{W}(\pi', \psi^{-1})$. For $m = n$ a Schwartz-Bruhat function on $K^n$ is added. They proved that these integrals span a fractional ideal $L(s, \pi \times \pi') \mathbb{C}[q^{s}, q^{-s}]$, and that a functional equation relates $Z$ to the integral for $\tilde W(g) = W(w_n {}^t g^{-1})$ through a factor $\varepsilon(s, \pi \times \pi', \psi)$. This defines the $L$-factors and $\varepsilon$-factors of pairs. By the theorem of Bernstein and Zelevinsky and the inductivity of the factors, they extend to all irreducible representations. The local Langlands correspondence of Chapter 3 is characterized by these factors. The Lean project has no Whittaker models and no factors of pairs. Its file `GodementJacquet.lean` has the factors of Godement and Jacquet, which do not need a Whittaker model, see Section 2.5. For generic $\pi$ they are the factors of pairs for $m = 1$ and $\pi'$ trivial.
