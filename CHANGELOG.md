@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.14 (2026-11-26)
+
 ### Changed
 
 - Git ignores the folder `solutions/`. The solutions of the exercises are private (spec 11.3), so they stay out of the public repository.
