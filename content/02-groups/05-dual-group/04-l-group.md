@@ -24,7 +24,7 @@ Let $F$ be a local field or a global field, and let $W_F$ be its Weil group, as 
 $${}^L G = G^\vee \rtimes W_F,$$
 where $w \in W_F$ acts on $G^\vee$ by $\mu^\vee$ of its image in $\Gamma_F$. The multiplication is $(g_1, w_1)(g_2, w_2) = (g_1 \, \mu^\vee(w_1)(g_2), w_1 w_2)$. The *Galois form* of the L-group is $G^\vee \rtimes \mathrm{Gal}(E/F)$, for a finite Galois extension $E/F$ such that $\mu^\vee$ factors through $\mathrm{Gal}(E/F)$. We give ${}^L G$ the product topology, with the complex topology on $G^\vee(\mathbb{C})$.
 
-Lean: `SemidirectProduct`, from Mathlib, for the underlying abstract group
+Lean: `Langlands.Groups.QuasiSplitDatum` and `Langlands.Groups.QuasiSplitDatum.dual`, for the datum of the L-group, `Langlands.Groups.QuasiSplitDatum.dual_split` for a split group, `Langlands.Groups.QuasiSplitDatum.dual_split_sl2` for $SL_2$, and `SemidirectProduct`, from Mathlib, for the underlying abstract group
 
 Borel uses the Galois form in [Bor79], Section 2, and the Weil form for the parameters. The Galois form is a complex algebraic group whose identity component is $G^\vee$. The Weil form is not algebraic, but the parameters of representations of $G(F)$ take values in it. For many statements the choice does not matter, because the Weil form maps onto the Galois form with kernel $W_E$. If $G$ is split, $\mu^\vee$ is trivial, and ${}^L G = G^\vee \times W_F$. In that case one often uses $G^\vee$ alone.
 
@@ -53,6 +53,8 @@ $${}^L T = T^\vee \rtimes W_F, \qquad T^\vee = X^*(T) \otimes \mathbb{C}^\times,
 and $T^\vee$ is the dual torus of Volume 3, Definition 4.5.1.
 
 **Example 5.4.4 (the norm-one torus).** Let $E/F$ be a separable quadratic extension with Galois group $\{1, \sigma\}$, and let $T = U(1) = \ker(N : R_{E/F} \mathbb{G}_m \to \mathbb{G}_m)$, so that $T(F) = \{ z \in E^\times : z \bar z = 1 \}$. Over $E$, $T$ becomes $\mathbb{G}_m$, and $X^*(T) = \mathbb{Z}$ with $\sigma$ acting by $-1$, as in Example 1.4.11 for $\mathbb{R}$. So $T^\vee = \mathbb{C}^\times$, and $W_F$ acts through $\mathrm{Gal}(E/F)$ by $\sigma(z) = z^{-1}$. The L-group is ${}^L U(1) = \mathbb{C}^\times \rtimes W_F$. Its Galois form is $\mathbb{C}^\times \rtimes \mathbb{Z}/2 \cong O_2(\mathbb{C})$. For the induced torus $R_{E/F} \mathbb{G}_m$, the character group is $\mathbb{Z}^2$ with $\sigma$ exchanging the coordinates, so the dual torus is $(\mathbb{C}^\times)^2$ with $\sigma$ exchanging the factors.
+
+Lean: `Langlands.Groups.QuasiSplitDatum.torus` and `Langlands.Groups.QuasiSplitDatum.torus_dual_action_weightMap`, for the action on $X^*(T^\vee)$
 
 ### Unitary groups
 
@@ -94,3 +96,5 @@ The principle of functoriality, stated in Volume 0, Conjecture 2.3.3, says that 
 3. *Classical groups.* $SO_{2n+1}^\vee = Sp_{2n}(\mathbb{C}) \subset GL_{2n}(\mathbb{C})$ and $Sp_{2n}^\vee = SO_{2n+1}(\mathbb{C}) \subset GL_{2n+1}(\mathbb{C})$. These inclusions give L-homomorphisms ${}^L SO_{2n+1} \to {}^L GL_{2n}$ and ${}^L Sp_{2n} \to {}^L GL_{2n+1}$. The transfers along them are the basis of Arthur's classification of the representations of the quasi-split classical groups.
 4. *Base change.* For a finite separable extension $E/F$, the diagonal map $G^\vee \to \prod_\tau G^\vee$ gives an L-homomorphism ${}^L G \to {}^L R_{E/F} G_E$. By Shapiro's lemma it corresponds to the restriction of parameters from $W_F$ to $W_E$.
 5. *Central isogenies.* A central isogeny $G_1 \to G_2$ defined over $F$ gives a dual isogeny $G_2^\vee \to G_1^\vee$ by Proposition 5.2.7, and it commutes with the Galois actions. So it gives an L-homomorphism ${}^L G_2 \to {}^L G_1$. For $SL_2 \to PGL_2$, this is ${}^L PGL_2 = SL_2(\mathbb{C}) \times W_F \to PGL_2(\mathbb{C}) \times W_F = {}^L SL_2$. It corresponds to the restriction of representations from $PGL_2(F)$, or from $GL_2(F)$, to the image of $SL_2(F)$.
+
+**Remark 5.4.8 (the L-group in Lean).** The Lean file `Langlands/Groups/RootDatum.lean` gives the datum of the L-group as `Langlands.Groups.QuasiSplitDatum.dual`. This is the dual based root datum, with the action $\gamma \mapsto \mu_G(\gamma)^\vee = (\mu_G(\gamma)^{-1})^t$ of Proposition 5.1.12. The datum is formal and combinatorial. The complex group $G^\vee$ and the semidirect product ${}^L G$ need the existence part of Theorem 5.2.1 over $\mathbb{C}$, and Mathlib does not have it.

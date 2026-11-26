@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Section 5.5: the subsection on twists by a power of the norm, items 5.5.36 to 5.5.44. Volume 2, Chapter 5: the Lean lines for the results of Langlands/Groups/RootDatum.lean, and Remark 5.4.8.
+
 ## v0.1.16 (2026-11-26)
 
 ### Added
