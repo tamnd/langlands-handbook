@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Section 5.2 of Volume 3 now follows the Lean proof of the local functional equation for a ramified character and each Schwartz-Bruhat function.
+
 - Section 5.5 of Volume 3 now follows the Lean proof of Hecke's functional equation for imaginary quadratic fields, with the Gauss sums and the weighted theta series.
 
 - Section 1.5 of Volume 6 now follows the Lean proofs of the irreducibility criterion, Jacquet's lemma and the classification for GL(2).
