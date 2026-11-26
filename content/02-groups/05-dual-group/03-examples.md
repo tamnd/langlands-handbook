@@ -16,6 +16,8 @@ Let $G = GL_n$ and let $T$ be the diagonal torus. The character $e_i$ sends $\ma
 
 **Example 5.3.1 (the dual of GL_n).** The map $e_i \mapsto e_i^\vee$ is an isomorphism of based root data $\Psi_0(GL_n) \to \Psi_0(GL_n)^\vee$. So $GL_n^\vee = GL_n(\mathbb{C})$, with its standard pinning. The dual torus $T^\vee$ is the diagonal torus of $GL_n(\mathbb{C})$, and the identification $T^\vee = X^*(T) \otimes \mathbb{C}^\times$ sends $e_i \otimes z$ to the diagonal matrix with $z$ in place $i$.
 
+Lean: `Langlands.Groups.RootDatum.gl`, `Langlands.Groups.RootDatum.glBase`, `Langlands.Groups.RootDatum.dual_gl` and `Langlands.Groups.RootDatum.glDualEquiv`
+
 The isomorphism $\Psi_0(GL_n) \cong \Psi_0(GL_n)^\vee$ is not canonical in a strong sense. The map $e_i \mapsto -e_{n+1-i}^\vee$ is another isomorphism, and it differs from the first by the automorphism $x \mapsto -w_0 x$ of $\Psi_0$, which is not the identity for $n \ge 2$. On the group side, this automorphism is $g \mapsto J \, {}^t g^{-1} J^{-1}$, and it sends a representation of $GL_n(\mathbb{C})$ to its contragredient. Any statement that uses $GL_n^\vee = GL_n(\mathbb{C})$ must fix the isomorphism. The convention of this handbook is the first one, $e_i \mapsto e_i^\vee$. With this convention the local Langlands correspondence for $GL_1$ is local class field theory, normalized as in Volume 0, Chapter 3.
 
 ### The special and projective linear groups
@@ -28,7 +30,7 @@ with roots $e_i - e_j$ and coroots the images of $e_i^\vee - e_j^\vee$.
 
 **Proposition 5.3.2 (SL_n and PGL_n).** The map $e_i \mapsto e_i^\vee$ induces an isomorphism $\Psi_0(SL_n)^\vee \cong \Psi_0(PGL_n)$. So $SL_n^\vee = PGL_n(\mathbb{C})$ and $PGL_n^\vee = SL_n(\mathbb{C})$. The centre of $SL_n$ is $\mu_n$, and $\pi_1(SL_n) = 0$. The centre of $PGL_n$ is trivial, and $\pi_1(PGL_n) = \mathbb{Z}/n$.
 
-Lean: not stated yet
+Lean: `Langlands.Groups.RootDatum.dual_sl2` and `Langlands.Groups.RootDatum.dual_pgl2`, for the root data with $n = 2$
 
 *Proof.* The dual of $\Psi(SL_n)$ is $(\{a : \sum a_i = 0\}, \{e_i^\vee - e_j^\vee\}, \mathbb{Z}^n/\mathbb{Z}(\sum e_i), \{e_i - e_j\})$. Under $e_i^\vee \mapsto e_i$ this is $\Psi(PGL_n)$, and the base $\{\alpha_i^\vee\}$ goes to $\{\alpha_i\}$. For the centre, $X/Q$ for $SL_n$ is $\mathbb{Z}^n / (\mathbb{Z}(\sum e_i) + \{a : \sum a_i = 0\})$, and $a \mapsto \sum a_i \bmod n$ identifies it with $\mathbb{Z}/n$. A finite diagonalizable group with character group $\mathbb{Z}/n$ is $\mu_n$, by Corollary 1.4.6. For $SL_n$, the coroots $e_i^\vee - e_{i+1}^\vee$ span the lattice $X^\vee$, so $\pi_1(SL_n) = 0$. The statements for $PGL_n$ follow from Proposition 5.1.9 by duality. $\square$
 

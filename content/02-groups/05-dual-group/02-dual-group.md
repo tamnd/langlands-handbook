@@ -80,7 +80,7 @@ The roots of $T^\vee$ in $G^\vee$ are the coroots $\alpha^\vee$ of $G$, and the 
 5. $G$ is semisimple if and only if $G^\vee$ is semisimple, and then $G$ is simply connected if and only if $G^\vee$ is adjoint.
 6. If $G$ is simple of type $B_n$, then $G^\vee$ is simple of type $C_n$, and the reverse holds. The other types do not change.
 
-Lean: `RootPairing.flipEquiv`, from Mathlib, for the involution on root pairings
+Lean: `Langlands.Groups.RootDatum.dual_dual` for the root data in (1), and `Langlands.Groups.RootDatum.torusDualEquiv` for (2)
 
 *Proof.* Part 1 is Proposition 5.1.5 part 1 with Theorem 5.2.1. Part 2 holds because a torus has no roots. Part 3 is Proposition 5.1.5 part 3, with the identification $W(G, T) = N(T)/T$ of Chapter 3. Part 4 is the computation of the centre after Proposition 5.1.9, applied to $G^\vee$. Part 5 follows from Proposition 5.1.7 and Proposition 5.1.9. Part 6 follows from Proposition 5.1.13. $\square$
 
