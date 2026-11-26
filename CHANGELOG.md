@@ -7,6 +7,7 @@ Each release has a section. The newest release is first.
 ### Added
 
 - Volume 3, Chapter 6, "Artin L-functions": the local factors with the inertia invariants and the arithmetic Frobenius, the Euler product and its convergence, additivity, inflation and induction, the Artin conductor and the gamma factors, the abelian case through global reciprocity, the induction theorems of Artin and Brauer with the meromorphic continuation and the functional equation, the theorem of Aramata and Brauer, and Artin's conjecture with the theorems of Langlands and Tunnell, of Khare, Wintenberger and Kisin, and of Deligne and Serre, with eleven exercises and the notes.
+- Volume 4, "Modular forms and elliptic curves", Chapters 1 and 2: Chapter 1 on modular forms and Hecke operators (the upper half-plane, modular forms and cusp forms, dimensions, the Petersson inner product, Hecke operators and their adjoints), and Chapter 2 on eigenforms, L-functions and Galois representations (normalized eigenforms and newforms, the Euler product and the functional equation, modularity of elliptic curves, the Ramanujan-Petersson and Sato-Tate theorems, Eichler-Shimura and Deligne, Serre's conjecture and the Artin conjecture for odd representations, and Maass forms with the conjectures of Selberg and Ramanujan). Each chapter has exercises and notes, and each statement on the map has its node and its Lean name.
 
 ## v0.1.1 (2026-11-25)
 
