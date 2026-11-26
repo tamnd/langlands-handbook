@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- A checking pass over the new text of Volume 6, Chapter 1, with the Lean lines for JacquetPrincipal.lean and a fix to the numbering of Section 1.3.
+
 - Volume 6, Section 3.2: Tate's local computation of the zeta integral and the local Langlands correspondence for GL(1) with the L-factors, with Exercises 13 and 14.
 
 - Volume 6, Chapter 1: the Bruhat decomposition of GL(2), Jacquet's lemma, the exactness of the Jacquet functor and the big cell filtration of the principal series, with Exercises 18 to 20.
