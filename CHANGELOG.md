@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.20 (2026-11-26)
+
 ### Added
 
 - A checking pass over Volume 6, Chapter 2. All six section files are at status checked, with corrections to Example 2.1.14, Lemma 2.2.2, Theorem 2.3.4 and Proposition 2.4.3.
