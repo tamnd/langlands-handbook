@@ -2,8 +2,9 @@
 title: Exercises and notes
 nodes: []
 sources: [CF67, Mil20, Neu99, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
@@ -20,6 +21,7 @@ reviewed_by: []
 10. Let $E/F$ be a quadratic extension and let $\chi_{E/F}$ be the Hecke character of order 2 with kernel $F^\times N_{E/F}(J_E)$. Show that $\chi_{E/F, v}(\varpi_v) = 1$ if $v$ splits in $E$ and $-1$ if $v$ is inert. Deduce that $\zeta_E(s) = \zeta_F(s) L(s, \chi_{E/F})$. For $F = \mathbb{Q}$, show that $\chi_{E/\mathbb{Q}}$ is the Hecke character of the Kronecker symbol $\left(\frac{D}{\cdot}\right)$ of Example 5.5.6.
 11. Let $E/F$ be a quadratic extension with $\mathrm{Gal}(E/F) = \{1, \sigma\}$, and let $j \in W_{E/F}$ map to $\sigma$. Show that $j^2 \in C_E$ is fixed by $\sigma$, so that $j^2 \in C_F$. Show that the class of $j^2$ in $C_F / N_{E/F}(C_E)$ does not depend on the choice of $j$. Use $H^2(\mathrm{Gal}(E/F), C_E) \cong \hat H^0(\mathrm{Gal}(E/F), C_E)$ and Theorem 7.8.2 to show that this class generates the group $C_F / N_{E/F}(C_E)$ of order 2. Compare with the local group $W_\mathbb{R}$, where $j^2 = -1$.
 12. The Lean structure `Langlands.IsArtinMap` asks for three properties of a homomorphism $\mathrm{art} : C_K \to \mathrm{Gal}(L/K)$: it is continuous, it is surjective, and $\mathrm{art}(\varpi_v)^{-1}$ is the arithmetic Frobenius at each finite place $v$ that is unramified in $L$, for every uniformizer $\varpi_v$ of $K_v$. Show that the third property makes $\mathrm{art}$ trivial on $\mathcal{O}_v^\times$ at these places. Use the weak approximation theorem to show that a homomorphism with the first and third properties is unique. So the statement `Langlands.GlobalReciprocity` determines the map of Definition 7.2.1.
+13. Let $L/F$ be a finite extension, not necessarily Galois, and let $E$ be the maximal abelian subextension of $L/F$. Show that $N_{L/F}(C_L)$ is open of finite index in $C_F$. (Hint: use the Galois closure of $L/F$.) By Theorem 7.4.3, $N_{L/F}(C_L) = N_{M/F}(C_M)$ for a finite abelian extension $M/F$. Use Proposition 7.2.2, part 4, with the field $L$ in the place of $E$, to show that $\mathrm{art}_{M/F}(N_{L/F}(C_L)) = \mathrm{Gal}(M/M \cap L)$. Deduce that $M \subset E$ and that $N_{L/F}(C_L) = N_{E/F}(C_E)$.
 
 ## Notes and history
 

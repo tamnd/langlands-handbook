@@ -4,8 +4,13 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Section 7.9: Exercise 13 on norm limitation for an extension that need not be Galois.
+
 ### Changed
 
+- Volume 3, Chapter 7 has the status `checked`. The second pass fixed citations, cross-references, a sign in the remark after Theorem 7.2.5, the form of Neukirch's axioms in Section 7.3 and the uniqueness proof in Section 7.4.
 - Volume 3, Chapter 6 has the status `checked`. The second pass fixed Remarks 6.2.5 and 6.7.9 to match the Lean statements, and Exercises 1 and 3 of Section 6.8.
 
 ## v0.1.12 (2026-11-26)

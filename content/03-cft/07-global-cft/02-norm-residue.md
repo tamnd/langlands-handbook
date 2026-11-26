@@ -2,8 +2,9 @@
 title: The global norm residue map
 nodes: []
 sources: [CF67, Mil20, Neu99, Ser79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The global norm residue map
@@ -60,7 +61,7 @@ Thus $\mathrm{art}_{L/F}$ factors through $C_F$, and $\mathrm{art}_F$ induces a 
 
 Lean: `GlobalClassFieldTheory.Reciprocity.chosenLocalArtin_product_principalIdele`
 
-The formula is a multiplicative analogue of the product formula $\prod_v |a|_v = 1$ (Volume 1, Theorem 3.3.4). The analogy is exact for the maximal unramified quotients. Let $v$ be finite. The image of $r_v(a)$ in $\mathrm{Gal}(F_v^{ur}/F_v) \cong \hat{\mathbb{Z}}$ is $-v(a)$, and $|a|_v = N\mathfrak{p}_v^{-v(a)}$. So the absolute value is the unramified part of the local reciprocity map, read through $\Phi \mapsto N\mathfrak{p}_v$. The product formula says that the "unramified parts" multiply to 1, and the reciprocity law says the same for the full local symbols. Section 7.8 makes this precise. There the idelic absolute value $|\cdot| : C_F \to \mathbb{R}_{>0}$ becomes the norm map of the global Weil group.
+The formula is a multiplicative analogue of the product formula $\prod_v |a|_v = 1$ (Volume 1, Theorem 3.3.4). The analogy is exact for the maximal unramified quotients. Let $v$ be finite. The image of $r_v(a)$ in $\mathrm{Gal}(F_v^{ur}/F_v) \cong \hat{\mathbb{Z}}$ is $-v(a)$, and $|a|_v = N\mathfrak{p}_v^{-v(a)}$. So the absolute value is the unramified part of the local reciprocity map, read through $\Phi \mapsto N\mathfrak{p}_v^{-1}$. The product formula says that the "unramified parts" multiply to 1, and the reciprocity law says the same for the full local symbols. Section 7.8 makes this precise. There the idelic absolute value $|\cdot| : C_F \to \mathbb{R}_{>0}$ becomes the norm map of the global Weil group.
 
 Section 7.3 proves the theorem. The proof reduces it to cyclotomic extensions, where it is a computation.
 
@@ -93,6 +94,6 @@ Lean: not stated yet
 
 *Proof.* The first claim was shown above. Let $\beta^n = b$ with $\beta \in \bar F$, and $L = F(\beta)$, which is abelian over $F$. For each $v$ fix an embedding of $L$ in $\bar F_v$. Then $r_{L/F, v}(a)$ is the restriction of $r_v(a)$ to $L$, so $r_{L/F,v}(a)(\beta) = (a, b)_v \beta$. The elements $r_{L/F,v}(a)$ commute and fix $\mu_n$. So $\big(\prod_v r_{L/F,v}(a)\big)(\beta) = \big(\prod_v (a,b)_v\big) \beta$. By Theorem 7.2.5 the left side is $\beta$. $\square$
 
-**Example 7.2.8 (quadratic reciprocity).** Let $F = \mathbb{Q}$, $n = 2$, and let $p \ne q$ be odd primes. We compute $(p, q)_v$. At $v = \infty$ it is $1$, since $p > 0$ is a norm from $\mathbb{C}$. At a prime $\ell \nmid 2pq$ it is 1, since $p$ and $q$ are units. At $v = p$ the field $\mathbb{Q}_p(\sqrt q)$ is unramified or trivial, so $(p, q)_p = 1$ if and only if $q$ is a square modulo $p$, that is, $(p, q)_p = \left(\frac{q}{p}\right)$. At $v = q$ the field $\mathbb{Q}_q(\sqrt q)$ is ramified, and its norm character on the units is the Legendre symbol modulo $q$ by Example 2.5.5 and Example 3.5.6. So $(p, q)_q = \left(\frac{p}{q}\right)$. At $v = 2$ both are units, and $(u, u')_2 = (-1)^{(u-1)(u'-1)/4}$ for odd $u, u'$, see Exercise 9 of Chapter 2 and [Ser79], Chapter XIV. Corollary 7.2.7 gives
+**Example 7.2.8 (quadratic reciprocity).** Let $F = \mathbb{Q}$, $n = 2$, and let $p \ne q$ be odd primes. We compute $(p, q)_v$. At $v = \infty$ it is $1$, since $p > 0$ is a norm from $\mathbb{C}$. At a prime $\ell \nmid 2pq$ it is 1, since $p$ and $q$ are units. At $v = p$ the field $\mathbb{Q}_p(\sqrt q)$ is unramified or trivial, so $(p, q)_p = 1$ if and only if $q$ is a square modulo $p$, that is, $(p, q)_p = \left(\frac{q}{p}\right)$. At $v = q$ the field $\mathbb{Q}_q(\sqrt q)$ is ramified, and its norm character on the units is the Legendre symbol modulo $q$ by Example 2.5.5 and Example 3.5.6. So $(p, q)_q = \left(\frac{p}{q}\right)$. At $v = 2$ both are units, and $(u, u')_2 = (-1)^{(u-1)(u'-1)/4}$ for odd $u, u'$, see Exercise 9 of Chapter 2 and Serre, *A course in arithmetic*, Chapter III, Theorem 1. Corollary 7.2.7 gives
 $$\left(\frac{p}{q}\right) \left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2} \frac{q-1}{2}}.$$
-The supplementary laws come from $(-1, p)_v$ and $(2, p)_v$ in the same way. The law of quadratic reciprocity is thus a product formula, and Theorem 1.5.8 of Volume 1 is its classical proof with Gauss sums. In this form it extends to the $n$-th power reciprocity laws of Hilbert, Furtwängler and Artin.
+The supplementary laws come from $(-1, p)_v$ and $(2, p)_v$ in the same way. The law of quadratic reciprocity is thus a product formula, and Theorem 1.5.8 of Volume 1 is its classical proof through the Frobenius elements of a cyclotomic field. In this form it extends to the $n$-th power reciprocity laws of Hilbert, Furtwängler and Artin.
