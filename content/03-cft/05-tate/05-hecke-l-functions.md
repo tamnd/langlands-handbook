@@ -2,9 +2,8 @@
 title: Hecke L-functions
 nodes: [LG6NN4B43V]
 sources: [CF67, Neu99, Tat79]
-status: checked
+status: drafted
 drafted_by: writer
-checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Hecke L-functions
@@ -556,6 +555,124 @@ Lean: `Langlands.Tate.heckeFunctionalEquation_of_unramified`
 
 **Remark 5.5.44 (what remains).** With Theorem 5.5.42, the Lean project proves the conclusion of `Langlands.HeckeFunctionalEquationAt` for each Hecke character that is unramified at each finite place and has the parameters $n_v = 0$ and $t_v = s_0$ at each infinite place $v$, with one $s_0$. Two classes of Hecke characters remain.
 1. *Other infinite types.* These characters can be unramified at each finite place, but they have $n_v \ne 0$ at some infinite place, or parameters $t_v$ that are not all equal. A character of the narrow class group with $\mathrm{sgn}$ at a real place has $n_v = 1$ there, as in Remark 5.5.23. For $F = \mathbb{Q}(i)$ the units are the fourth roots of unity and $\mathcal{O}_F$ is a principal ideal domain. So $(\alpha) \mapsto (\alpha / |\alpha|)^4$ is well defined on the nonzero ideals, and it gives an unramified Hecke character with $|n_v| = 4$ at the complex place. The Hecke characters of an imaginary quadratic field that come from elliptic curves with complex multiplication are of this kind. For the curve $E : y^2 = x^3 - x$, which has complex multiplication by $\mathbb{Z}[i]$, Deuring proved that $L(E, s)$ is the $L$-function of a Hecke character $\psi_E$ of $\mathbb{Q}(i)$. This character has $|n_v| = 1$ at the complex place. The proof of Theorem 5.5.3 treats these characters with the local functions of Propositions 5.2.5 and 5.2.6, which contain the factors $x^a$, $\bar z^n$ and $z^{|n|}$. A proof in Lean needs these functions, or Hecke's theta series with a harmonic polynomial.
-2. *Ramified characters.* The Dirichlet characters of Example 5.5.6 with $N > 1$ are ramified, and so is $\psi_E$, whose conductor is $(1 + i)^3$. A proof needs the local theory of Proposition 5.2.4 at the ramified places, or a theta function with a character of a ray class group, and the identification of the root number with a product of Gauss sums.
+2. *Ramified characters.* The Dirichlet characters of Example 5.5.6 with $N > 1$ are ramified, and so is $\psi_E$, whose conductor is $(1 + i)^3$. A proof needs the local theory of Proposition 5.2.4 at the ramified places, or a theta function with a character of a ray class group, and the identification of the root number with a product of Gauss sums. The subsection below proves in Lean the results on the characters of ray class type that do not need the functional equation, and it states the functional equation without a Lean proof.
 
 The other open questions of Remark 5.5.35 also remain. These are the construction of the Hecke character of a class group character and the identification of the root number with the product of the local root numbers.
+
+### Hecke characters of ray class type
+
+This subsection treats the ramified characters of item 2 of Remark 5.5.44 in the simplest case: characters that are trivial at each infinite place. They are the characters of the ray class groups of $F$. The file `Langlands/Tate/HeckeRamified.lean` proves in Lean all the results of this subsection before Theorem 5.5.50. It does not prove the functional equation. For a finite place $v$ we write $a_v = a(\chi_v)$ for the conductor exponent of Definition 4.1.3, which exists by Proposition 5.2.13, and $U_v^{(m)} = 1 + \mathfrak{p}_v^m$, with $U_v^{(0)} = \mathcal{O}_v^\times$.
+
+**Definition 5.5.45 (characters of ray class type).** Let $F$ be a number field. A Hecke character $\chi$ of $F$ is *of ray class type* if, at each infinite place $v$, the local component $\chi_v$ is trivial on $F_v^\times$.
+
+Lean: `Langlands.Tate.IsRayClassType`, `Langlands.Tate.IsClassType.isRayClassType`, `Langlands.Tate.IsRayClassType.isClassType`, `Langlands.Tate.IsRayClassType.inv`
+
+So a character of class group type, in the sense of Definition 5.5.25, is a character of ray class type that is unramified at every finite place. If $\chi$ is of ray class type, then so is $\chi^{-1}$. In Example 5.5.6 the component at the real place is $\mathrm{sgn}^a$, with $\eta(-1) = (-1)^a$. So the character of an even Dirichlet character is of ray class type, and the character of an odd one is not. The odd characters belong to the narrow ray class groups, which we leave aside, as in item 1 of Remark 5.5.44.
+
+**Proposition 5.5.46 (the ramified places and the conductor).** Let $\chi$ be a Hecke character of $F$, and let $R(\chi)$ be the set of the finite places at which $\chi$ is ramified.
+1. The set $R(\chi)$ is finite.
+2. For each finite place $v$, $a_v = 0$ if and only if $\chi$ is unramified at $v$. So $a_v \ge 1$ for $v \in R(\chi)$.
+3. The conductor is $\mathfrak{f}_\chi = \prod_{v \in R(\chi)} \mathfrak{p}_v^{a_v}$.
+4. For each finite place $v$, $a(\chi_v^{-1}) = a_v$. So $\mathfrak{f}_{\chi^{-1}} = \mathfrak{f}_\chi$.
+5. For each finite place $v$ and each $u \in \mathcal{O}_v^\times$, $\chi_v(u)$ is a root of unity, and $|\chi_v(u)| = 1$.
+
+Lean: `Langlands.Tate.finite_setOf_not_isUnramifiedAt`, `Langlands.Tate.ramifiedSet`, `Langlands.Tate.conductorExponent_eq_zero_iff`, `Langlands.Tate.conductor_eq_prod`, `Langlands.Tate.conductorExponent_inv`, `Langlands.Tate.conductor_inv`, `Langlands.Tate.norm_finiteComponent_of_valued_eq_one`
+
+The proposition holds for every Hecke character, not only for those of ray class type. Part 1 comes directly from the continuity of $\chi$, through Lemma 5.5.26.
+
+*Proof.* (1) Let $T$ be as in part 1 of Lemma 5.5.26, let $v \notin T$ be finite and let $u \in \mathcal{O}_v^\times$. The idele $u^{(v)}$ has the properties of part 1 of Lemma 5.5.26, so $\chi_v(u) = \chi(u^{(v)}) = 1$. Thus $R(\chi) \subset T$.
+
+(2) By definition, $a_v$ is the smallest $m \ge 0$ such that $\chi_v$ is trivial on $U_v^{(m)}$. Since $U_v^{(0)} = \mathcal{O}_v^\times$, we have $a_v = 0$ exactly when $\chi_v$ is trivial on $\mathcal{O}_v^\times$, which is the definition of an unramified place.
+
+(3) In the product of part 1 of Definition 5.5.1, the factor at $v$ is $\mathfrak{p}_v^0 = \mathcal{O}_F$ for each $v \notin R(\chi)$, by part 2. We remove these factors.
+
+(4) The local component of $\chi^{-1}$ at $v$ is $\chi_v^{-1}$. It is trivial on a subgroup exactly when $\chi_v$ is.
+
+(5) Let $m = a_v$. If $m = 0$, then $\chi_v(u) = 1$. Let $m \ge 1$. By Lemma 5.2.14 the group $(\mathcal{O}_v / \mathfrak{p}_v^m)^\times$ is finite. Let $N$ be its order. Then $u^N \equiv 1$ modulo $\mathfrak{p}_v^m$, so $u^N \in U_v^{(m)}$, and $\chi_v(u)^N = \chi_v(u^N) = 1$. $\square$
+
+**Lemma 5.5.47 (the values of a character of ray class type).** Let $\chi$ be a Hecke character of $F$ of ray class type.
+1. Let $S$ be a finite set of finite places with $R(\chi) \subset S$, and let $x$ be an idele with $x_v \in \mathcal{O}_v^\times$ for each finite place $v \notin S$. Then $\chi(x) = \prod_{v \in S} \chi_v(x_v)$.
+2. For each idele $x$, $|\chi(x)| = 1$. So $\chi$ is unitary, its exponent in Proposition 5.4.2 is $\sigma = 0$, and $\chi^{-1} = \bar\chi$.
+3. Let $v$ be an infinite place. The only pair of parameters of $\chi$ at $v$, in the sense of item 1 of Remark 5.5.4, is $(0, 0)$.
+
+Lean: `Langlands.Tate.IsRayClassType.ideleChar_eq_prod`, `Langlands.Tate.IsRayClassType.norm_apply`, `Langlands.Tate.IsRayClassType.norm_eq_ideleNorm_rpow`, `Langlands.Tate.IsRayClassType.isArchimedeanParameter`
+
+*Proof.* (1) Let $T$ and $k$ be as in part 1 of Lemma 5.5.26, and put $U = S \cup T$. Let $x_\infty$ be the idele with the components of $x$ at the infinite places and $1$ at the finite places. Let $z$ be the idele with the component $1$ at the infinite places and at the places of $U$, and the component $x_v$ at each other finite place $v$. Then
+$$x = x_\infty \, z \prod_{v \in U} x_v^{(v)}.$$
+Here $\chi(x_\infty) = 1$ because $\chi$ is trivial at the infinite places, and $\chi(z) = 1$ by part 1 of Lemma 5.5.26. For $v \in U \smallsetminus S$, $x_v$ is a unit and $\chi$ is unramified at $v$, so $\chi(x_v^{(v)}) = 1$. The factors at the places of $S$ remain.
+
+(2) The map $|\chi| : x \mapsto |\chi(x)|$ is a Hecke character. Its local components $|\chi_v|$ are trivial at the infinite places, and trivial on $\mathcal{O}_v^\times$ at the finite places by part 5 of Proposition 5.5.46. So $|\chi|$ is of class group type, and part 2 of Theorem 5.5.29 gives $\big| |\chi(x)| \big| = 1$. Since $|\chi(x)| > 0$, it is $1$.
+
+(3) The character $\chi_v$ is trivial, and the proof of part 1 of Proposition 5.5.30 applies without change. $\square$
+
+**Theorem 5.5.48 (reciprocity on principal ideals).** Let $\chi$ be a Hecke character of $F$ of ray class type, with conductor $\mathfrak{f} = \prod_{v \in R(\chi)} \mathfrak{p}_v^{a_v}$, and let $\lambda_\chi$ be its ideal character, as in Definition 5.5.27. Let $x \in F^\times$, and assume that $x \in U_v^{(a_v)}$, that is $v(x - 1) \ge a_v$, at each place $v \in R(\chi)$. Then $\lambda_\chi((x)) = 1$.
+
+Lean: `Langlands.Tate.IsRayClassType.idealChar_toPrincipalIdeal`
+
+*Proof.* Let $v \in R(\chi)$. Then $a_v \ge 1$, so $v(x - 1) > 0 = v(1)$, and the strict triangle inequality gives $v(x) = 0$. Let $S$ be the union of $R(\chi)$ and the finite set of the finite places $v$ with $v(x) \ne 0$. The principal idele $x$ has unit components outside $S$. Since $\chi$ is trivial on $F^\times$, part 1 of Lemma 5.5.47 gives
+$$1 = \chi(x) = \prod_{v \in S} \chi_v(x) = \prod_{v \in S \smallsetminus R(\chi)} \chi_v(x) = \prod_{v \in S \smallsetminus R(\chi)} \chi_v(\varpi_v)^{v(x)} = \lambda_\chi((x)).$$
+In the third step we use that $\chi_v$ is trivial on $U_v^{(a_v)}$ for $v \in R(\chi)$. In the fourth step we use that $x \varpi_v^{-v(x)}$ is a unit at the unramified places, as in part 4 of Lemma 5.5.26. In the last step we use that $v(x) = 0$ for $v \notin S$ and for $v \in R(\chi)$. $\square$
+
+We put the theorem in the classical language. Let $I^{\mathfrak{f}}$ be the group of the fractional ideals prime to $\mathfrak{f}$, and let $P^{\mathfrak{f}}_1$ be its subgroup of the ideals $(x)$ with $x \in U_v^{(a_v)}$ for each $v \mid \mathfrak{f}$. The quotient $\mathrm{Cl}_\mathfrak{f} = I^{\mathfrak{f}} / P^{\mathfrak{f}}_1$ is the ray class group modulo $\mathfrak{f}$, see [Neu99], Chapter VI, Section 1. On $I^{\mathfrak{f}}$ the character $\lambda_\chi$ uses only the unramified places, so it is the character $\chi^*$ of Definition 5.5.1. Theorem 5.5.48 says that $\chi^*$ is trivial on $P^{\mathfrak{f}}_1$, so it is a character of the finite group $\mathrm{Cl}_\mathfrak{f}$, see Exercise 21. Conversely, each character of $\mathrm{Cl}_\mathfrak{f}$ is $\chi^*$ for a unique Hecke character $\chi$ of ray class type with $\mathfrak{f}_\chi \mid \mathfrak{f}$, by the isomorphism $J_F / F^\times W_\mathfrak{f} \cong \mathrm{Cl}_\mathfrak{f}$ of Exercise 21. The Lean project does not construct $\chi$ from a character of $\mathrm{Cl}_\mathfrak{f}$.
+
+The proof of Theorem 5.5.48 gives more. Let $x \in F^\times$ with $v(x) = 0$ for each $v \in R(\chi)$, so that $(x) \in I^{\mathfrak{f}}$, but with no congruence condition. The same computation, without the third step, gives
+$$\chi^*((x)) = \prod_{v \in R(\chi)} \chi_v(x)^{-1}. \tag{5.5.2}$$
+So the values of $\chi^*$ on the principal ideals are fixed by the restrictions of the $\chi_v$ to $\mathcal{O}_v^\times$ at the ramified places. Example 5.5.6 shows the inverse in (5.5.2): there $\chi_\ell = \eta_\ell^{-1}$ on $\mathbb{Z}_\ell^\times$, while $\chi^*((p)) = \eta(p)$.
+
+**Proposition 5.5.49 (the Dirichlet series).** Let $\chi$ be a Hecke character of $F$ of ray class type, with conductor $\mathfrak{f}$, and let $\mathrm{Re}(s) > 1$. For a nonzero ideal $I$ of $\mathcal{O}_F$, put $w_s(I) = \lambda_\chi(I) N(I)^{-s}$ if $I$ is prime to $\mathfrak{f}$, and $w_s(I) = 0$ otherwise.
+1. We have $w_s(IJ) = w_s(I) w_s(J)$, $w_s(\mathcal{O}_F) = 1$ and $|w_s(I)| \le N(I)^{-\mathrm{Re}(s)}$.
+2. The product of the local factors of $\chi$ over the finite places converges unconditionally, and
+$$L(s, \chi) = \prod_{\mathfrak{p} \nmid \mathfrak{f}} \big(1 - \chi^*(\mathfrak{p}) N(\mathfrak{p})^{-s}\big)^{-1} = \sum_{(I, \mathfrak{f}) = 1} \chi^*(I) N(I)^{-s},$$
+where $I$ runs over the nonzero ideals of $\mathcal{O}_F$ prime to $\mathfrak{f}$.
+
+Lean: `Langlands.Tate.rayWeight`, `Langlands.Tate.IsRayClassType.norm_rayWeight_le`, `Langlands.Tate.IsRayClassType.hasProd_localFactor`, `Langlands.Tate.IsRayClassType.finiteLFunction_eq`
+
+*Proof.* (1) The product $IJ$ is prime to $\mathfrak{f}$ if and only if both $I$ and $J$ are, and $\lambda_\chi$ and $N$ are multiplicative. For the bound, $\lambda_\chi(I)$ is a product of powers of the numbers $\chi_v(\varpi_v) = \chi(\varpi_v^{(v)})$, which have absolute value $1$ by Lemma 5.5.47.
+
+(2) The proof of part 1 of Proposition 5.5.31 uses only the properties of part 1, and it works with the inequality in place of an equality. So the product of the factors $(1 - w_s(\mathfrak{p}))^{-1}$ converges unconditionally to $\sum_I w_s(I)$. Let $\mathfrak{p} = \mathfrak{p}_v$. If $v \in R(\chi)$, then $w_s(\mathfrak{p}) = 0$, and the factor is $1$, which is the local factor of $\chi$ at $v$ by Corollary 5.2.21. If $v \notin R(\chi)$, the factor is the local factor of Remark 5.5.4. $\square$
+
+The ideals that are not prime to $\mathfrak{f}$ get the weight $0$, because at a ramified place the value $\chi_v(\varpi_v)$ depends on the choice of $\varpi_v$. In Lean the indicator function `Langlands.Tate.coprimeIndicator` removes these ideals.
+
+### The functional equation for ramified characters
+
+For a character of ray class type the new feature of the functional equation is the root number. At a ramified place the local $\varepsilon$-factor is a normalized Gauss sum, by Theorem 5.2.22. For a finite place $v$ let $\psi_v$ be the standard character and $d_v = d(\psi_v)$, so that $\mathfrak{D} = \prod_v \mathfrak{p}_v^{d_v}$ is the different and $N(\mathfrak{D}) = |d_F|$. Let $\mathfrak{D}^{(\mathfrak{f})} = \prod_{v \notin R(\chi)} \mathfrak{p}_v^{d_v}$ be the part of $\mathfrak{D}$ prime to $\mathfrak{f}$, and let $\tau$ be the finite Gauss sum of Definition 5.2.16.
+
+**Theorem 5.5.50 (Hecke's theorem for characters of ray class type).** Let $\chi$ be a Hecke character of $F$ of ray class type, with conductor $\mathfrak{f} = \prod_{v \in R(\chi)} \mathfrak{p}_v^{a_v}$. For each $v \in R(\chi)$ choose $c_v \in F_v$ with $|c_v|_v = q_v^{a_v + d_v}$, and put
+$$W(\chi) = \chi^*\big(\mathfrak{D}^{(\mathfrak{f})}\big) \prod_{v \in R(\chi)} \chi_v(c_v)^{-1} \, \frac{\tau(\chi_v^{-1}, \psi_v, c_v)}{q_v^{a_v/2}}.$$
+1. The function $\Lambda(s, \chi) = L_\infty(s, \chi) L(s, \chi)$, with $L_\infty(s, \chi) = \Gamma_\mathbb{R}(s)^{r_1} \Gamma_\mathbb{C}(s)^{r_2}$, extends to a meromorphic function on $\mathbb{C}$. If $\chi \ne 1$, it is entire.
+2. As meromorphic functions, $\Lambda(s, \chi) = W(\chi) \big(|d_F| \, N(\mathfrak{f})\big)^{1/2 - s} \Lambda(1 - s, \bar\chi)$.
+3. Each factor of the product in $W(\chi)$ has absolute value $1$ and does not depend on the choice of $c_v$. So $|W(\chi)| = 1$, and $W(\chi)$ is the root number $\prod_v \varepsilon(\chi_v, 1/2, \psi_v)$ of Definition 5.5.1.
+4. If $\mathfrak{f} = \mathcal{O}_F$, then $W(\chi) = \psi_\chi([\mathfrak{D}])$, the root number of Theorem 5.5.33.
+
+Lean: not yet formalized
+
+*Proof.* By Lemma 5.5.47, $\chi$ is unitary, $\sigma = 0$, $\chi^{-1} = \bar\chi$, and the parameters at the infinite places are $n_v = t_v = 0$. So parts 1 and 2 of Theorem 5.5.3 give the continuation and the functional equation with the root number $\prod_v \varepsilon(\chi_v, 1/2, \psi_v)$. If $\chi = |\cdot|_\mathbb{A}^{s_0}$, then $\chi_v$ is trivial at an infinite place only for $s_0 = 0$, so $\chi = 1$. Thus part 3 of Theorem 5.5.3 shows that $\Lambda(s, \chi)$ is entire for $\chi \ne 1$.
+
+It remains to compute the local root numbers. At an infinite place $\chi_v$ is trivial, and Propositions 5.2.5 and 5.2.6 with $a = 0$ or $n = 0$ give $\varepsilon(\chi_v, 1/2, \psi_v) = 1$. At a finite place $v \notin R(\chi)$, Proposition 5.2.3 gives $\varepsilon(\chi_v, 1/2, \psi_v) = \chi_v(\varpi_v)^{d_v}$. The product of these numbers is $\lambda_\chi(\mathfrak{D}^{(\mathfrak{f})}) = \chi^*(\mathfrak{D}^{(\mathfrak{f})})$, a finite product since $d_v = 0$ for almost all $v$. At $v \in R(\chi)$, part 3 of Theorem 5.2.22 at $s = 1/2$ gives
+$$\varepsilon(\chi_v, 1/2, \psi_v) = \chi_v(c_v)^{-1} \, \frac{\tau(\chi_v^{-1}, \psi_v, c_v)}{q_v^{a_v/2}},$$
+and it says that this number does not depend on $c_v$. By Theorem 5.2.19 for $\chi_v^{-1}$, which has conductor exponent $a_v$ by part 4 of Proposition 5.5.46, the quotient $\tau / q_v^{a_v/2}$ has absolute value $1$. Also $|\chi_v(c_v)| = |\chi(c_v^{(v)})| = 1$ by part 2 of Lemma 5.5.47. This proves part 3. For part 4, $R(\chi)$ is empty and $\chi$ is of class group type, so $W(\chi) = \lambda_\chi(\mathfrak{D}) = \psi_\chi([\mathfrak{D}])$ by Proposition 5.5.28. $\square$
+
+We now give the outline of Tate's proof in this case, from [CF67], Chapter XV, Section 4.4 for the global part and Section 2.5 for the local computations. Tate writes the local factors with his function $\rho$ of Remark 5.2.8, but the steps are the same.
+1. *The test function.* Put $f = \otimes_v f_v$ with $f_v = 1_{U_v^{(a_v)}}$ at $v \in R(\chi)$, $f_v = 1_{\mathcal{O}_v}$ at the other finite places and the Gaussian at the infinite places. At $v \in R(\chi)$, $Z(f_v, \chi_v, s) = \mathrm{vol}(U_v^{(a_v)}, d^\times x)$ is a nonzero constant, which matches $L(\chi_v, s) = 1$. So $Z(f, \chi, s) = c \, \Lambda(s, \chi)$ with $c \ne 0$, by Proposition 5.4.6.
+2. *The global functional equation.* Theorem 5.4.7, Tate's Main Theorem in Section 4.4, gives $Z(f, \chi, s) = Z(\hat f, \bar\chi, 1 - s)$ and shows that $Z(f, \chi, s)$ is entire for $\chi \ne 1$. Its only input is the Riemann-Roch theorem of Section 5.3. The global step does not see the ramification.
+3. *The local computation at a ramified place.* By part 1 of Theorem 5.2.22, $\hat f_v$ is a multiple of $\psi_v \, 1_{\mathfrak{p}_v^{-a_v - d_v}}$. In $Z(\hat f_v, \chi_v^{-1}, 1 - s)$ the shells with $|y|_v < q_v^{a_v + d_v}$ give $0$, by Lemma 5.2.18 and Exercise 16. The outer shell gives the Gauss integral, which is a multiple of $\tau(\chi_v^{-1}, \psi_v, c_v)$ by Proposition 5.2.17. This is the factor of part 3 of Theorem 5.2.22. Tate's own test function at a ramified place is, up to a constant, the transform of ours, so his computation runs in the other direction and gives the same factor.
+4. *Assembly.* Multiply the local functional equations (5.2.2) over all places. The powers of $q_v$ multiply to $\prod_v q_v^{(a_v + d_v)(1/2 - s)} = (|d_F| N(\mathfrak{f}))^{1/2 - s}$, and the values at $s = 1/2$ multiply to $W(\chi)$. With step 2 this gives part 2 of Theorem 5.5.50.
+
+The proof in [Neu99], Chapter VII, Sections 6 to 8, follows Hecke. There $\Lambda(s, \chi)$ is a finite sum over $\mathrm{Cl}_\mathfrak{f}$ of Mellin transforms of theta series, each twisted by the values of $\chi$ on $(\mathcal{O}_F / \mathfrak{f})^\times$. Poisson summation turns the twist by $\chi$ into a twist by $\bar\chi$ times a global Gauss sum of $\chi$ modulo $\mathfrak{f}$. The Chinese remainder theorem splits this sum into the local sums $\tau(\chi_v^{-1}, \psi_v, c_v)$, as in Exercise 9. In Tate's proof this factorization is automatic.
+
+The Lean library does not yet prove Theorem 5.5.50, nor the functional equation of any ramified Hecke character. It has the local functional equation at a ramified place, `Langlands.Tate.NonArchimedean.localFunctionalEquation_ramified_gaussSumFinite`, and the global results 5.5.46 to 5.5.49. The global analytic step is missing. It needs either Theorem 5.4.7 in Lean for a Schwartz function with the local components $1_{U_v^{(a_v)}}$, or the theta series of the ray classes, twisted by a character of $(\mathcal{O}_F / \mathfrak{f})^\times$.
+
+**Example 5.5.51 (a ray class character of $\mathbb{Q}(i)$ modulo $3$).** Let $F = \mathbb{Q}(i)$, so $\mathcal{O}_F = \mathbb{Z}[i]$, $d_F = -4$, $r_2 = 1$ and $h_F = 1$. The prime $3$ is inert, and $\mathcal{O}_F / (3) = \mathbb{F}_9$. Let $\eta$ be the character of order $2$ of the cyclic group $\mathbb{F}_9^\times$. The units $\pm 1, \pm i$ map onto the subgroup of order $4$, which is the subgroup of the squares, so $\eta$ is trivial on them. The norm $\mathbb{F}_9^\times \to \mathbb{F}_3^\times$ is onto with kernel the squares, so $\eta(u)$ is the Legendre symbol of $N(u)$ modulo $3$.
+
+We construct $\chi$. Let $v_3$ be the place of $3$ and let $U_F = \mathbb{C}^\times \times \prod_v \mathcal{O}_v^\times$. Since $h_F = 1$, each idele is $\alpha u$ with $\alpha \in F^\times$ and $u \in U_F$. Put $\chi(\alpha u) = \eta(u_{v_3} \bmod 3)$. This is well defined, because $F^\times \cap U_F = \mathcal{O}_F^\times$ and $\eta$ is trivial on the units. It is a Hecke character of ray class type, with $R(\chi) = \{v_3\}$ and $a_{v_3} = 1$. So $\mathfrak{f} = (3)$ and $N(\mathfrak{f}) = 9$. By (5.5.2), for $\alpha \in \mathcal{O}_F$ prime to $3$,
+$$\chi^*((\alpha)) = \eta(\alpha \bmod 3)^{-1} = \eta(\alpha \bmod 3) = \Big(\frac{N(\alpha)}{3}\Big).$$
+Each ideal is principal, so $\chi^*(I) = (N(I)/3)$ for each ideal $I$ prime to $3$. The ideals of small norm prime to $3$ are $(1)$, $(1 + i)$ of norm $2$, $(2)$ of norm $4$, $(2 \pm i)$ of norm $5$, $(1 + i)^3$ of norm $8$, $(1 + i)(2 \pm i)$ of norm $10$ and $(3 \pm 2i)$ of norm $13$. Proposition 5.5.49 gives
+$$L(s, \chi) = 1 - 2^{-s} + 4^{-s} - 2 \cdot 5^{-s} - 8^{-s} + 2 \cdot 10^{-s} + 2 \cdot 13^{-s} + \cdots.$$
+
+Now the root number. The place $v_3$ is unramified over $3$, so $d_{v_3} = 0$, $q_{v_3} = 9$, and $\psi_{v_3}(x) = \psi_{\mathbb{Q}_3}(\mathrm{Tr}\, x)$. Take $c = 1/3$. For $u = x + yi$ with $x, y \in \mathbb{F}_3$ we have $\mathrm{Tr}(u) = 2x$, so $\psi_{v_3}(u/3) = \zeta^{2x}$ with $\zeta = e^{2\pi i/3}$. The squares are $\pm 1, \pm i$, with the values $\zeta^2, \zeta, 1, 1$, and the sum $1$. The nonsquares are $\pm 1 \pm i$, with the values $\zeta^2, \zeta^2, \zeta, \zeta$, and the sum $-2$. Since $\eta^{-1} = \eta$,
+$$\tau(\chi_{v_3}^{-1}, \psi_{v_3}, 1/3) = 1 - (-2) = 3,$$
+which agrees with Theorem 5.2.19. Next, $\chi_{v_3}(1/3)^{-1} = \chi_{v_3}(3) = \chi(3) = 1$, by part 1 of Lemma 5.5.47 with $S = \{v_3\}$. The different of $\mathbb{Z}[i]$ is $(2)$, so $\chi^*(\mathfrak{D}^{(\mathfrak{f})}) = (4/3) = 1$. Theorem 5.5.50 gives $W(\chi) = 3/3 = 1$. Since $\bar\chi = \chi$ and $|d_F| N(\mathfrak{f}) = 36$, the function $\Lambda(s, \chi) = \Gamma_\mathbb{C}(s) L(s, \chi)$ is entire and satisfies
+$$\Lambda(s, \chi) = 36^{1/2 - s} \Lambda(1 - s, \chi).$$
+Exercise 19 checks this against Dirichlet $L$-functions.
+
+**Remark 5.5.52 (the Lean proof).** The file `Langlands/Tate/HeckeRamified.lean` proves Propositions 5.5.46 and 5.5.49, Lemma 5.5.47 and Theorem 5.5.48, with the local results of `Langlands/Tate/LocalRamified.lean`. The conductor is a `finprod` over all finite places, and `conductor_eq_prod` writes it over the `Finset` `Langlands.Tate.ramifiedSet χ`. Part 2 of Lemma 5.5.47 uses the character `Langlands.Tate.normChar χ`, which is $|\chi|$. In Theorem 5.5.48 the hypothesis is $\|x - 1\|_v \le \exp(-a_v)$, with the multiplicative valuation of Mathlib. The Euler product is `Langlands.Tate.hasProd_of_norm_le`, the form of `Langlands.Tate.hasProd_of_norm` of Remark 5.5.35 with an inequality. The group $\mathrm{Cl}_\mathfrak{f}$, formula (5.5.2) and Theorem 5.5.50 are not in Lean. All these theorems use only the standard axioms of Lean.

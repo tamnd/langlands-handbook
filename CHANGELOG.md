@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Section 5.5: Hecke characters of ray class type, the ray class group and the functional equation for ramified characters, with Exercises 19 to 21.
+
 ## v0.1.21 (2026-11-26)
 
 ### Added
