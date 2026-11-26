@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 6, Chapter 1: the Bruhat decomposition of GL(2), Jacquet's lemma, the exactness of the Jacquet functor and the big cell filtration of the principal series, with Exercises 18 to 20.
+
 ## v0.1.20 (2026-11-26)
 
 ### Added
