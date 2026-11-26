@@ -10,7 +10,7 @@ reviewed_by: []
 
 The Galois group of a finite field extension $k_n / k$ is cyclic of order $n$, with the generator $x \mapsto x^q$. This generator is natural: it does not depend on a choice. Its limit over all $n$ is the following automorphism.
 
-**Definition (arithmetic Frobenius).** The *arithmetic Frobenius* of $\bar k / k$ is the automorphism $\mathrm{Frob}_k(x) = x^q$. The *geometric Frobenius* is its inverse.
+**Definition 1.2.1 (arithmetic Frobenius).** The *arithmetic Frobenius* of $\bar k / k$ is the automorphism $\mathrm{Frob}_k(x) = x^q$. The *geometric Frobenius* is its inverse.
 
 Lean: `Langlands.LocalField.frobenius`
 
@@ -22,11 +22,11 @@ Lean: `Langlands.LocalField.prime`
 
 Each $\sigma \in G_K$ maps $\bar{\mathcal{O}}$ to itself. If $\sigma(\bar{\mathfrak{m}}) = \bar{\mathfrak{m}}$, then $\sigma$ induces an automorphism $\bar\sigma$ of $\bar k$ over $k$. In fact every $\sigma$ fixes $\bar{\mathfrak{m}}$: the valuation of $K$ extends uniquely to $\bar K$, and $\bar{\mathfrak{m}}$ is the set of elements of $\bar{\mathcal{O}}$ of positive valuation. The definitions of this chapter do not use this fact. They use the stabilizer $D$ of $\bar{\mathfrak{m}}$ in $G_K$, which is all of $G_K$.
 
-**Definition (residue map and inertia).** The *residue map* is the homomorphism $D \to \mathrm{Gal}(\bar k / k)$, $\sigma \mapsto \bar\sigma$. Its kernel $I_K$ is the *inertia group*.
+**Definition 1.2.2 (residue map and inertia).** The *residue map* is the homomorphism $D \to \mathrm{Gal}(\bar k / k)$, $\sigma \mapsto \bar\sigma$. Its kernel $I_K$ is the *inertia group*.
 
 Lean: `Langlands.LocalField.residueHom`
 
-**Proposition.** The residue map is surjective, and its kernel $I_K$ is the closed subgroup $\mathrm{Gal}(\bar K / K^{ur})$.
+**Proposition 1.2.3.** The residue map is surjective, and its kernel $I_K$ is the closed subgroup $\mathrm{Gal}(\bar K / K^{ur})$.
 
 Lean: not stated yet, planned for milestone S1
 

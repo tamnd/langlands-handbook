@@ -10,19 +10,19 @@ reviewed_by: []
 
 For a topological group $W$, the closure $\overline{[W, W]}$ of the commutator subgroup is a closed normal subgroup. The quotient $W^{ab} = W / \overline{[W, W]}$ is the *topological abelianization*. Each continuous homomorphism from $W$ to a Hausdorff abelian group factors through $W^{ab}$.
 
-**Definition.** The group $W_K^{ab}$ is the topological abelianization of the Weil group.
+**Definition 1.4.1.** The group $W_K^{ab}$ is the topological abelianization of the Weil group.
 
 Lean: `Langlands.WeilGroup.Ab`
 
 Let $L$ be a finite Galois extension of $K$ in $\bar K$. The restriction $\sigma \mapsto \sigma|_L$ is a homomorphism $W_K \to \mathrm{Gal}(L / K)$. Its kernel is $W_K \cap \mathrm{Gal}(\bar K / L)$.
 
-**Lemma.** The kernel of the restriction $W_K \to \mathrm{Gal}(L / K)$ is closed in $W_K$.
+**Lemma 1.4.2.** The kernel of the restriction $W_K \to \mathrm{Gal}(L / K)$ is closed in $W_K$.
 
 Lean: `Langlands.WeilGroup.isClosed_ker_restrict`
 
 *Proof.* The subgroup $\mathrm{Gal}(\bar K / L)$ is closed in $G_K$, because $L / K$ is finite. The kernel is its inverse image under the inclusion $W_K \to G_K$, which is continuous. $\square$
 
-**Proposition.** Let $L / K$ be a finite abelian extension in $\bar K$. The restriction factors through a homomorphism $W_K^{ab} \to \mathrm{Gal}(L / K)$.
+**Proposition 1.4.3.** Let $L / K$ be a finite abelian extension in $\bar K$. The restriction factors through a homomorphism $W_K^{ab} \to \mathrm{Gal}(L / K)$.
 
 Lean: `Langlands.WeilGroup.Ab.restrict`
 
@@ -30,7 +30,7 @@ Lean: `Langlands.WeilGroup.Ab.restrict`
 
 These maps are the link between the Weil group and the field extensions of $K$. The main theorem of local class field theory, in the form of the Langlands program, is the following statement. Chapter 2 proves it.
 
-**Theorem (local reciprocity).** There is a unique isomorphism of topological groups $\mathrm{rec}_K : K^\times \to W_K^{ab}$ with these two properties. First, $\mathrm{rec}_K(\varpi)$ is the class of a geometric Frobenius for each uniformizer $\varpi$. Second, for each finite abelian extension $L$ of $K$, the composite of $\mathrm{rec}_K$ with the restriction to $\mathrm{Gal}(L/K)$ is surjective with kernel $N_{L/K}(L^\times)$.
+**Theorem 1.4.4 (local reciprocity).** There is a unique isomorphism of topological groups $\mathrm{rec}_K : K^\times \to W_K^{ab}$ with these two properties. First, $\mathrm{rec}_K(\varpi)$ is the class of a geometric Frobenius for each uniformizer $\varpi$. Second, for each finite abelian extension $L$ of $K$, the composite of $\mathrm{rec}_K$ with the restriction to $\mathrm{Gal}(L/K)$ is surjective with kernel $N_{L/K}(L^\times)$.
 
 Lean: `Langlands.LocalReciprocityGL1` (stated in milestone S0, proved in milestone S1)
 

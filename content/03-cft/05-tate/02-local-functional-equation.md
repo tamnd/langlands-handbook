@@ -41,7 +41,7 @@ The first identity holds for $\mathrm{Re}(s) > -\sigma$ and the second for $\mat
 **Proposition 5.2.3 (unramified characters).** Let $K$ be nonarchimedean, $d = d(\psi)$, and let $\chi$ be unramified. Let $f_\chi = 1_{\mathcal{O}_K}$ and $c_\chi = q^{-d/2}$. Then (5.2.1) holds with
 $$\varepsilon(\chi, s, \psi) = \chi(\varpi)^d q^{d(1/2 - s)}.$$
 
-Lean: not stated yet
+Lean: `Langlands.Tate.NonArchimedean.localFunctionalEquation_unramified`
 
 *Proof.* The first identity is the example after Proposition 5.1.9. By the formula for $\hat 1_{b + \mathfrak{p}^m}$ in Section 5.1, $\hat f_\chi = q^{-d/2} 1_{\mathfrak{p}^{-d}}$. The set $\mathfrak{p}^{-d} \smallsetminus \{0\}$ is the union of the shells $\varpi^k \mathcal{O}_K^\times$ with $k \ge -d$, each of volume $q^{-d/2}$. So
 $$Z(\hat f_\chi, \chi^{-1}, 1 - s) = q^{-d/2} \cdot q^{-d/2} \sum_{k \ge -d} \chi(\varpi)^{-k} q^{-k(1-s)} = q^{-d} \chi(\varpi)^d q^{d(1-s)} L(\chi^{-1}, 1 - s).$$
@@ -54,7 +54,7 @@ Each term depends only on $u$ modulo $\mathfrak{p}^n$, because $\chi$ is trivial
 **Proposition 5.2.4 (ramified characters).** Let $K$ be nonarchimedean, $d = d(\psi)$, and let $\chi$ be ramified with $a(\chi) = n \ge 1$. Let $f_\chi = 1_{U^{(n)}}$ and $c_\chi = \mathrm{vol}(U^{(n)}, d^\times x) = q^{-d/2} / ((q-1) q^{n-1})$. Then (5.2.1) holds with
 $$\varepsilon(\chi, s, \psi) = \chi(\varpi)^{n+d} q^{d/2 - (n+d)s} \, G(\chi^{-1}, \psi).$$
 
-Lean: not stated yet
+Lean: `Langlands.Tate.NonArchimedean.localFunctionalEquation_ramified`
 
 *Proof.* On $U^{(n)}$ the function $\chi(x) |x|^s$ is 1, so $Z(f_\chi, \chi, s) = c_\chi$. Both $L$-factors are 1. By the formula of Section 5.1 with $b = 1$ and $m = n$,
 $$\hat f_\chi(y) = \psi(y) \, q^{-n-d/2} \, 1_{\mathfrak{p}^{-n-d}}(y).$$
@@ -71,7 +71,7 @@ which does not use a choice of $\varpi$, see Exercise 3.
 **Proposition 5.2.5 (the real place).** Let $K = \mathbb{R}$, $\psi = \psi_\mathbb{R}$ and $\chi = \mathrm{sgn}^a |\cdot|^t$ with $a \in \{0, 1\}$. Let $f_\chi(x) = x^a e^{-\pi x^2}$ and $c_\chi = 1$. Then (5.2.1) holds with
 $$\varepsilon(\chi, s, \psi_\mathbb{R}) = (-i)^a.$$
 
-Lean: not stated yet
+Lean: `Langlands.Tate.real_local_functional_equation`
 
 *Proof.* The function $e^{-\pi x^2}$ is its own transform. Differentiate the identity $\int e^{-\pi x^2} e^{-2\pi i x y} dx = e^{-\pi y^2}$ with respect to $y$. This gives the transform of $x e^{-\pi x^2}$: it is $\frac{1}{-2\pi i} (-2\pi y) e^{-\pi y^2} = -i y e^{-\pi y^2}$. So $\hat f_\chi = (-i)^a f_\chi$. Next, $f_\chi(x) \chi(x) = |x|^{a+t} e^{-\pi x^2}$, and
 $$Z(f_\chi, \chi, s) = 2 \int_0^\infty x^{s + t + a} e^{-\pi x^2} \frac{dx}{x} = \pi^{-(s+t+a)/2} \Gamma\Big(\frac{s+t+a}{2}\Big) = L(\chi, s).$$
@@ -80,7 +80,7 @@ The character $\chi^{-1} = \mathrm{sgn}^a |\cdot|^{-t}$ has the same sign expone
 **Proposition 5.2.6 (the complex place).** Let $K = \mathbb{C}$, $\psi = \psi_\mathbb{C}$ and $\chi(z) = (z / \sqrt{z \bar z})^n |z|_\mathbb{C}^t$. Let $f_\chi(z) = \bar z^n e^{-2\pi z \bar z}$ if $n \ge 0$, and $f_\chi(z) = z^{|n|} e^{-2\pi z \bar z}$ if $n < 0$. Let $c_\chi = \pi$. Then (5.2.1) holds with
 $$\varepsilon(\chi, s, \psi_\mathbb{C}) = (-i)^{|n|}.$$
 
-Lean: not stated yet
+Lean: `Langlands.Tate.complex_local_functional_equation`
 
 *Proof.* Let $n \ge 0$; the case $n < 0$ is the same with $z$ and $\bar z$ exchanged. Let $g_0(z) = e^{-2\pi z \bar z}$, which is its own transform by Section 5.1. We show by induction that the transform of $\bar z^n g_0$ is $(-i)^n w^n g_0(w)$. We have $\psi_\mathbb{C}(zw) = e^{-2\pi i (zw + \bar z \bar w)}$, so $\partial_{\bar w} \psi_\mathbb{C}(zw) = -2\pi i \bar z \, \psi_\mathbb{C}(zw)$. Differentiation under the integral gives
 $$\partial_{\bar w} \big( (\bar z^n g_0)^\wedge \big) = -2\pi i \, (\bar z^{n+1} g_0)^\wedge.$$
@@ -150,3 +150,12 @@ This proves Remark 4.3.5. It also defines $\varepsilon(\chi, s, \psi)$ for every
 **Example 5.2.11 (the sign at a real place).** Let $K = \mathbb{R}$ and $\psi(x) = e^{2\pi i x}$. Many texts use this character. It is $(\psi_\mathbb{R})_{-1}$, so Proposition 5.2.10 gives
 $$\varepsilon(\mathrm{sgn}^a |\cdot|^t, s, \psi) = \mathrm{sgn}(-1)^a (-i)^a = i^a.$$
 For $a = 1$ part 4 of Theorem 5.2.7 reads $i \cdot i = -1 = \mathrm{sgn}(-1)$. The sign of a local $\varepsilon$-factor thus depends on the choice of $\psi$. For the global character, a change from $\psi$ to $\psi_{-1}$ changes the sign at all places at once. Proposition 5.5.2 shows that the global $\varepsilon$-factor does not change.
+
+**Remark 5.2.12 (the Lean proof and its limits).** The Lean project tamnd/langlands-lean proves Propositions 5.2.3 to 5.2.6 in the folder `Langlands/Tate`. The nonarchimedean theorems are in the files `NonArchimedeanLocalEquation.lean` and `NonArchimedeanGauss.lean`, and the archimedean theorems are in `ArchimedeanFourier.lean`. These theorems are not on the map, so their lines have no `Node:`. They are weaker than the propositions in the following ways.
+1. The nonarchimedean field is the completion $K_v$ of a number field at a finite place $v$, not an arbitrary nonarchimedean local field. So the Lean theorems do not cover the fields $\mathbb{F}_q((t))$.
+2. The additive character is an abstract character $\psi$ of $K_v$ with conductor exponent $d$: it is trivial on the ball $\{|x|_v \le q^d\} = \mathfrak{p}^{-d}$ and not trivial on $\mathfrak{p}^{-d-1}$. So $d$ is the exponent $d(\psi)$ of Definition 5.1.1. The proofs use only these two properties, and they do not use the standard character of Section 5.1.
+3. The additive measure is the Haar measure $dx$ with $\mathrm{vol}(\mathcal{O}_v) = 1$, not the self-dual measure, and $d^\times x = (1 - q^{-1})^{-1} |x|_v^{-1} dx$. The multiplicative measure cancels in the ratio of the two zeta integrals, but the additive measure enters the transform $\hat f$. Our $dx$ is $q^{d/2}$ times the self-dual measure, so the Lean $\varepsilon$-factors are $q^{d/2}$ times the factors of Propositions 5.2.3 and 5.2.4. For an unramified $\chi$, `Langlands.Tate.NonArchimedean.epsilonUnramified_eq` gives $\varepsilon = \chi(\varpi)^d q^{d(1/2 - s)} \cdot q^{d/2}$. For a ramified $\chi$ with $a(\chi) = n$, the Lean factor is $\chi(c)^{-1} |c|_v^{1-s} G(\chi^{-1}, \psi, c)$ with $|c|_v = q^{n+d}$ and the Gauss integral $G(\chi^{-1}, \psi, c) = \int_{\mathcal{O}_v^\times} \chi^{-1}(u) \psi(cu) \, du$. For $c = \varpi^{-n-d}$ this integral is $q^{-n} G(\chi^{-1}, \psi)$, and the Lean factor is again $q^{d/2}$ times the factor of Proposition 5.2.4.
+4. The theorem `Langlands.Tate.NonArchimedean.norm_gaussSum_sq` gives $|G(\chi, \psi, c)|^2 = q^{-a(\chi)}$ for $|c|_v = q^{a(\chi) + d}$, and `Langlands.Tate.NonArchimedean.gaussSum_mul_gaussSum_inv` gives $G(\chi, \psi, c) \, G(\chi^{-1}, \psi, -c) = q^{-a(\chi)}$. For the finite sum the first identity is $|G(\chi^{-1}, \psi)|^2 = q^n$. For a unitary ramified $\chi$ it is the equality $|\varepsilon(\chi, 1/2, \psi)| = 1$ of Corollary 5.2.9, and the second identity is part 4 of Theorem 5.2.7 for a ramified $\chi$. In both cases the Lean form carries the extra factor of item 3: $|\varepsilon| = q^{d/2}$, and the product of the two factors is $\chi(-1) q^d$. The theorem `Langlands.Tate.NonArchimedean.epsilonRamified_ne_zero` says that the ramified factor is not zero.
+5. The test functions are only the standard functions $1_{\mathcal{O}_v}$, $1_{U^{(n)}}$, $x^a e^{-\pi x^2}$ and $\bar z^n e^{-2\pi z \bar z}$ or $z^{|n|} e^{-2\pi z \bar z}$. Tate's lemma 5.2.1 is not in Lean. So the Lean project does not prove the functional equation for a general $f \in \mathcal{S}(K)$, and it does not prove that $\varepsilon$ is independent of $f$. Parts 1 and 4 of Theorem 5.2.7, and the meromorphic continuation, are not in Lean either.
+6. The Lean identities hold only in a region of convergence. For an unramified $\chi$ the hypotheses are $|\chi(\varpi)| < q^{\mathrm{Re}(s)}$ and $|\chi^{-1}(\varpi)| < q^{\mathrm{Re}(1-s)}$, that is $s$ in the strip $-\sigma < \mathrm{Re}(s) < 1 - \sigma$, and the equation is multiplied out: $Z(\hat f, \chi^{-1}, 1 - s) L(\chi, s) = \varepsilon \, L(\chi^{-1}, 1 - s) \, Z(f, \chi, s)$. For a ramified $\chi$ the hypothesis is $|\chi^{-1}(\varpi)| < q^{\mathrm{Re}(1-s)}$. Outside this region the Lean integral is the Bochner integral of a function that is not integrable. By convention it is $0$, and the formula is false as stated there. At the real and the complex places the hypothesis is $0 < \mathrm{Re}(s + t) < 1$, the same strip.
+7. At the archimedean places the Lean conventions are those of this section: $\psi_\mathbb{R}(x) = e^{-2\pi i x}$, $\psi_\mathbb{C} = \psi_\mathbb{R} \circ \mathrm{Tr}_{\mathbb{C}/\mathbb{R}}$, and the self-dual measures $dx$ and $2 \, dx \, dy$. So the root numbers `Langlands.Tate.realRootNumber` and `Langlands.Tate.complexRootNumber` are exactly $(-i)^a$ and $(-i)^{|n|}$. The Lean theorems treat only these standard characters, not the characters $(\psi_\mathbb{R})_a$ of Proposition 5.2.10.
