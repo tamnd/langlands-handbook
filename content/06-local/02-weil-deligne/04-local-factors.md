@@ -2,8 +2,9 @@
 title: L-factors, conductors and epsilon-factors
 nodes: []
 sources: [Tat79, Ser79, BH06]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## L-factors, conductors and epsilon-factors
@@ -35,7 +36,7 @@ So $L(s, V) = P(q^{-s})^{-1}$ for a polynomial $P$ with $P(0) = 1$ and $\deg P =
 
 Lean: not stated yet
 
-*Proof.* Parts 1 and 3 are clear. For part 2, the subspace $V^I_N$ is the same for $r$ and $r^{ss}$, since $r^{ss} = r$ on $I_K$, and $r^{ss}(\Phi) = s$ has the same characteristic polynomial as $r(\Phi)$ on each subspace stable under both. For part 4, both sides are additive in $V'$, so we may assume that $V'$ is irreducible. By Proposition 2.1.12, $V' = V'_0 \otimes \omega_t$ with $V'_0$ of finite image, and $\mathrm{Ind}(V'_0 \otimes \omega_t) = (\mathrm{Ind}\, V'_0) \otimes \omega_t$, since $\omega_t$ restricts to $\omega_t$ on $W_L$ (Proposition 2.1.5). By part 3 we may assume that $t = 0$. Then both sides are Artin $L$-factors of the duals, since induction commutes with duals, and the claim is Artin's inductivity, Volume 3, Theorem 6.3.3. $\square$
+*Proof.* Parts 1 and 3 are clear. For part 2, the subspace $V^I_N$ is the same for $r$ and $r^{ss}$, since $r^{ss} = r$ on $I_K$, and $r^{ss}(\Phi) = s$ has the same characteristic polynomial as $r(\Phi)$ on each subspace stable under both. For part 4, both sides are additive in $V'$, so we may assume that $V'$ is irreducible. By Proposition 2.1.12, $V' = V'_0 \otimes \omega_t$ with $V'_0$ of finite image, and $\mathrm{Ind}(V'_0 \otimes \omega_t) = (\mathrm{Ind}\, V'_0) \otimes \omega_t$, since $\omega_t$ restricts to $\omega_t$ on $W_L$ (Proposition 2.1.5). By part 3 we may assume that $t = 0$. Then $V'$ and $\mathrm{Ind}\, V'$ factor through $\mathrm{Gal}(M / K)$ for a finite Galois extension $M / K$ that contains $L$. The claim is Volume 3, Lemma 6.3.2, with $D = \mathrm{Gal}(M / K)$, $D' = \mathrm{Gal}(M / L)$, $\varphi$ the image of $\Phi$, $\varphi'$ the image of a geometric Frobenius of $L$ and $T = q^{-s}$, since $q_L^{-s} = T^f$. $\square$
 
 The $L$-factor is not additive in short exact sequences. This is the first difference between $L$-factors of Weil-Deligne representations and of representations of $W_K$.
 

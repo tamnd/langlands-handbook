@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- A checking pass over Volume 6, Chapter 2. All six section files are at status checked, with corrections to Example 2.1.14, Lemma 2.2.2, Theorem 2.3.4 and Proposition 2.4.3.
+
 - A checking pass over Volume 6, Chapter 3. All seven section files are at status checked, with a correction to the history after Theorem 3.1.4 and to two Lean lines of Section 3.2.
 
 ## v0.1.19 (2026-11-26)
