@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.5 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 5, Section 3: the zeta function of a fractional ideal and its functional equation with the dual ideal (Proposition 5.3.20), the class invariance for an imaginary quadratic field by the identity theorem (Lemma 5.3.21), and the class zeta function of an imaginary quadratic field with its functional equation and its relation to the Dedekind zeta function (Theorem 5.3.22). A remark derives the residue of the Dedekind zeta function from the residues of the terms. Exercise 13 treats Q(sqrt(-5)). The Lean names are from langlands-lean at the merge of the imaginary quadratic file.
