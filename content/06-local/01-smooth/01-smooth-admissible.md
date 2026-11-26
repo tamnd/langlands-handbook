@@ -2,8 +2,9 @@
 title: Smooth and admissible representations
 nodes: []
 sources: [BH06]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Smooth and admissible representations
@@ -14,9 +15,9 @@ The groups of this chapter are the groups $G = \mathbf{G}(K)$ of points of a con
 
 An *$\ell$-group* is a Hausdorff topological group in which the compact open subgroups form a basis of neighbourhoods of the identity. The term is that of Bernstein and Zelevinsky. For $G = GL_n(K)$ the groups $K_0 = GL_n(\mathcal{O}_K)$ and
 $$K_r = 1 + \varpi^r M_n(\mathcal{O}_K) \quad (r \ge 1)$$
-are compact open subgroups, and they form a basis of neighbourhoods of $1$. Each $K_r$ is normal in $K_0$. The group $K_0$ is a maximal compact subgroup of $G$, and every compact subgroup of $G$ is conjugate to a subgroup of $K_0$. The quotient $G / K_0$ is countable, because $G = \bigsqcup K_0 \varpi^{\lambda} K_0$ (the Cartan decomposition) with $\lambda$ in the countable set of decreasing sequences of integers, and each double coset is a finite union of cosets $g K_0$. So $G$ is countable at infinity. The same holds for each reductive group over $K$.
+are compact open subgroups, and they form a basis of neighbourhoods of $1$. Each $K_r$ is normal in $K_0$. The group $K_0$ is a maximal compact subgroup of $G$, and every compact subgroup of $G$ is conjugate to a subgroup of $K_0$. The quotient $G / K_0$ is countable, because $G = \bigsqcup K_0 \varpi^{\lambda} K_0$ (the Cartan decomposition) with $\lambda$ in the countable set of non-increasing sequences of integers, and each double coset is a finite union of cosets $g K_0$. So $G$ is countable at infinity. The same holds for each reductive group over $K$.
 
-Each $\ell$-group has a left Haar measure, unique up to a positive scalar. If $J' \subseteq J$ are compact open subgroups, then $\mathrm{vol}(J) = [J : J'] \, \mathrm{vol}(J')$. A reductive group is unimodular: its left and right Haar measures are equal. A parabolic subgroup $P$ is not unimodular, and its modulus character is used in Section 1.3.
+Each $\ell$-group has a left Haar measure, unique up to a positive scalar. If $J' \subseteq J$ are compact open subgroups, then $\mathrm{vol}(J) = [J : J'] \, \mathrm{vol}(J')$. A reductive group is unimodular: its left and right Haar measures are equal. A proper parabolic subgroup $P$ is not unimodular, and its modulus character is used in Section 1.3.
 
 ### Smooth representations
 

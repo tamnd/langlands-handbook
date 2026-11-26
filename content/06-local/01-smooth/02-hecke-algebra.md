@@ -2,8 +2,9 @@
 title: The Hecke algebra
 nodes: []
 sources: [BH06]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The Hecke algebra
@@ -30,7 +31,7 @@ The integrand is locally constant with compact support, so the integral is a fin
 
 Lean: not stated yet
 
-*Proof.* Let $M$ be a nondegenerate module. Each $m \in M$ is a finite sum $\sum f_i m_i$, and each $f_i$ is invariant on the left under some compact open subgroup. So $m = e_J m$ for some $J$. For $g \in G$ define $g \cdot m = (\lambda_g e_J) m$, where $\lambda_g e_J$ is the left translate $x \mapsto e_J(g^{-1} x)$. This does not depend on $J$ with $e_J m = m$, since $\lambda_g e_J * e_{J'} = \lambda_g e_J$ for $J' \subseteq J$. One checks that this defines a smooth representation, that the two functors are inverse to each other, and that morphisms correspond. The last claim follows from the formula for $g \cdot m$ and from the definition of $\pi(f)$. $\square$
+*Proof.* Let $M$ be a nondegenerate module. Each $m \in M$ is a finite sum $\sum f_i m_i$, and each $f_i$ is invariant on the left under some compact open subgroup. So $m = e_J m$ for some $J$. For $g \in G$ define $g \cdot m = (\lambda_g e_J) m$, where $\lambda_g e_J$ is the left translate $x \mapsto e_J(g^{-1} x)$. This does not depend on $J$ with $e_J m = m$. Indeed, if $J' \subseteq J$ and $e_J m = m$, then $(\lambda_g e_{J'}) m = (\lambda_g e_{J'} * e_J) m = (\lambda_g e_J) m$, since $e_{J'} * e_J = e_J$. Two such groups contain a third one, so the claim follows. One checks that this defines a smooth representation, that the two functors are inverse to each other, and that morphisms correspond. The last claim follows from the formula for $g \cdot m$ and from the definition of $\pi(f)$. $\square$
 
 ### Representations with fixed vectors
 
@@ -52,7 +53,7 @@ The proposition reduces the study of the irreducible representations with a $J$-
 
 Let $G = GL_n(K)$ and $K_0 = GL_n(\mathcal{O}_K)$. Give $K_0$ the volume $1$. The algebra $\mathcal{H}(G, K_0)$ is the *spherical Hecke algebra*. A smooth representation $V$ is *unramified*, or *spherical*, if $V^{K_0} \ne 0$.
 
-By the theory of elementary divisors, $G$ is the disjoint union of the double cosets $K_0 \varpi^\lambda K_0$, where $\lambda = (\lambda_1 \ge \dots \ge \lambda_n)$ runs over the decreasing sequences of integers and $\varpi^\lambda = \mathrm{diag}(\varpi^{\lambda_1}, \dots, \varpi^{\lambda_n})$. So the functions $1_{K_0 \varpi^\lambda K_0}$ form a basis of $\mathcal{H}(G, K_0)$.
+By the theory of elementary divisors, $G$ is the disjoint union of the double cosets $K_0 \varpi^\lambda K_0$, where $\lambda = (\lambda_1 \ge \dots \ge \lambda_n)$ runs over the non-increasing sequences of integers and $\varpi^\lambda = \mathrm{diag}(\varpi^{\lambda_1}, \dots, \varpi^{\lambda_n})$. So the functions $1_{K_0 \varpi^\lambda K_0}$ form a basis of $\mathcal{H}(G, K_0)$.
 
 **Proposition 1.2.4 (Gelfand's trick).** The spherical Hecke algebra $\mathcal{H}(G, K_0)$ is commutative.
 

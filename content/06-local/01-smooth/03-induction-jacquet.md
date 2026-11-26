@@ -2,8 +2,9 @@
 title: Parabolic induction and Jacquet modules
 nodes: []
 sources: [BH06]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Parabolic induction and Jacquet modules
@@ -16,7 +17,7 @@ Let $n = n_1 + \dots + n_r$ be a composition of $n$. The *standard parabolic sub
 
 Lean: `Langlands.GL2.borel`, `Langlands.GL2.unipotent`, `Langlands.GL2.torus`. Lean has these subgroups only for $GL_2$, defined by conditions on the entries of the matrix, and `Langlands.GL2.borel_le_normalizer_unipotent` proves that $B$ normalizes $N$.
 
-The group $P$ is not unimodular. Its *modulus character* is $\delta_P(m n) = |\det \mathrm{Ad}(m)|_{\mathrm{Lie}\, N}|$. For $m = (m_1, \dots, m_r)$ it is
+If $P \ne G$, the group $P$ is not unimodular. Its *modulus character* is $\delta_P(m n) = |\det \mathrm{Ad}(m)|_{\mathrm{Lie}\, N}|$. For $m = (m_1, \dots, m_r)$ it is
 $$\delta_P(m) = \prod_{i < j} |\det m_i|^{n_j} |\det m_j|^{-n_i}.$$
 For the Borel subgroup of $GL_2$, $\delta_B \left(\begin{smallmatrix} a & x \\ 0 & d \end{smallmatrix}\right) = |a / d|$.
 
@@ -119,7 +120,7 @@ The exactness is special to $p$-adic groups. It holds because $N$ is a union of 
 
 The following lemma connects the Jacquet module with the fixed vectors of small compact open subgroups. Let $P = MN$ be standard and let $J$ be a compact open subgroup with an *Iwahori decomposition*
 $$J = (J \cap \bar N)(J \cap M)(J \cap N).$$
-The groups $K_r$ with $r \ge 1$ have such a decomposition for each standard parabolic subgroup. Let $z$ be an element of the center of $M$ that contracts $N$, that is, $z^k n z^{-k} \to 1$ for $n \in N$ as $k \to \infty$. For the Borel subgroup of $GL_2$ we can take $z = \mathrm{diag}(\varpi, 1)$. Then $z$ also expands $\bar N$, and $z^{-1} (J \cap \bar N) z \subseteq J \cap \bar N$.
+The groups $K_r$ with $r \ge 1$ have such a decomposition for each standard parabolic subgroup. Let $z$ be an element of the center of $M$ that contracts $N$, that is, $z^k n z^{-k} \to 1$ for $n \in N$ as $k \to \infty$. For the Borel subgroup of $GL_2$ we can take $z = \mathrm{diag}(\varpi, 1)$. Then $z$ also expands $\bar N$. We also ask that $z^{-1} (J \cap \bar N) z \subseteq J \cap \bar N$. This holds for the groups $K_r$.
 
 **Theorem 1.3.6 (Jacquet's lemma).** Let $J$ be as above, and let $(\pi, V)$ be an admissible representation of $G$.
 1. The projection $p : V^J \to (V_N)^{J \cap M}$ is surjective.

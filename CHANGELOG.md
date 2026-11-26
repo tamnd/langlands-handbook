@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- A checking pass over Volume 6, Chapter 1. All eight section files are at status checked, with corrections to Propositions 1.2.2, Theorems 1.4.5, 1.4.6 and 1.5.1, Jacquet's lemma and Exercises 4, 10 and 16.
+
 - Volume 6, Section 3.2: the subsection on the case n = 1 in full, items 3.2.9 to 3.2.15, and Exercise 12 of Chapter 3. It follows Langlands/Local/GL1.lean.
 
 - Volume 6, Chapter 1: the Iwasawa decomposition for GL2, a new proof of Proposition 1.3.4, Exercise 17 and Lean lines from Langlands/Smooth/PrincipalSeries.lean.
