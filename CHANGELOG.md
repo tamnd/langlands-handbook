@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.18 (2026-11-26)
+
 ### Added
 
 - A checking pass over Volume 3, Section 5.2, items 5.2.13 to 5.2.23, and Exercises 16 to 18 of Chapter 5. Both files are at status checked again.
