@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.2 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 6, "Artin L-functions": the local factors with the inertia invariants and the arithmetic Frobenius, the Euler product and its convergence, additivity, inflation and induction, the Artin conductor and the gamma factors, the abelian case through global reciprocity, the induction theorems of Artin and Brauer with the meromorphic continuation and the functional equation, the theorem of Aramata and Brauer, and Artin's conjecture with the theorems of Langlands and Tunnell, of Khare, Wintenberger and Kisin, and of Deligne and Serre, with eleven exercises and the notes.
