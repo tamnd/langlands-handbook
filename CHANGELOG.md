@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.19 (2026-11-26)
+
 ### Added
 
 - A checking pass over Volume 6, Chapter 1. All eight section files are at status checked, with corrections to Propositions 1.2.2, Theorems 1.4.5, 1.4.6 and 1.5.1, Jacquet's lemma and Exercises 4, 10 and 16.
