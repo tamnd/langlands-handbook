@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.10 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 5, Section 3: a new subsection on the poles of the function xi_F, with Proposition 5.3.36 (simple poles at 0 and 1 and their residues), the analytic class number formula by the methods of Hecke, and Remark 5.3.37 on the Lean proof in `Langlands/Tate/HeckeTrivial.lean`.
