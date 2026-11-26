@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.17 (2026-11-26)
+
 ### Added
 
 - Volume 6, Chapter 3, The local Langlands correspondence. The chapter covers the statement for GL_n, the cases n = 1 and n = 2, the L-packets of SL_2, the local Jacquet-Langlands correspondence and the correspondence for GSp_4, with 11 exercises.
