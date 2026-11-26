@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- A checking pass over the new text of Volume 6, Section 3.2, with a correction to Exercise 14 and the regularity hypothesis of the Lean theorems.
+
 - A checking pass over the new text of Volume 6, Chapter 1, with the Lean lines for JacquetPrincipal.lean and a fix to the numbering of Section 1.3.
 
 - Volume 6, Section 3.2: Tate's local computation of the zeta integral and the local Langlands correspondence for GL(1) with the L-factors, with Exercises 13 and 14.
