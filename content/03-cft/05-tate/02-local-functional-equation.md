@@ -2,8 +2,9 @@
 title: The local functional equation
 nodes: []
 sources: [CF67, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The local functional equation
@@ -17,7 +18,7 @@ $$Z(f, \chi, s) \, Z(\hat g, \chi^{-1}, 1 - s) = Z(\hat f, \chi^{-1}, 1 - s) \, 
 
 Lean: not stated yet
 
-*Proof.* In the strip all four integrals converge absolutely, by Proposition 5.1.9. For $Z(\hat g, \chi^{-1}, 1-s)$ the condition is $\mathrm{Re}(1 - s) > \sigma(\chi^{-1}) = -\sigma$. The left side is the absolutely convergent double integral
+*Proof.* In the strip all four integrals converge absolutely, by Proposition 5.1.9. For $Z(\hat g, \chi^{-1}, 1-s)$ the condition is $\mathrm{Re}(1 - s) > -\sigma(\chi^{-1}) = \sigma$. The left side is the absolutely convergent double integral
 $$\int_{K^\times} \int_{K^\times} f(x) \hat g(y) \chi(x y^{-1}) |x|^s |y|^{1-s} \, d^\times x \, d^\times y.$$
 For fixed $x$ substitute $y = xt$. The measure $d^\times y$ is invariant, so the double integral is
 $$\int_{K^\times} \chi(t)^{-1} |t|^{1-s} \Big( \int_{K^\times} f(x) \hat g(xt) |x| \, d^\times x \Big) d^\times t.$$
