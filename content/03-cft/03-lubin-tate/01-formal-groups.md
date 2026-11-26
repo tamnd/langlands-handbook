@@ -2,8 +2,9 @@
 title: Formal groups
 nodes: []
 sources: [Ser67, Mil20]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Formal groups

@@ -2,8 +2,9 @@
 title: Exercises and notes
 nodes: []
 sources: [Ser67, Mil20]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
@@ -25,7 +26,7 @@ Check that its coefficients lie in $\mathcal{O}_K$.
 
 Lubin and Tate introduced their formal groups in "Formal complex multiplication in local fields", Annals of Mathematics 81 (1965). The title refers to the analogy with the theory of complex multiplication, in which the torsion points of an elliptic curve with complex multiplication generate the abelian extensions of an imaginary quadratic field. The analogy is exact for $\mathbb{Q}_p$, where the formal group is $\mathbb{G}_m$ and the torsion points are the roots of unity. Lazard and Frohlich developed the general theory of formal groups of dimension 1 in the same period.
 
-The exposition of this chapter follows Serre's chapter [Ser67], Section 3, and Milne's notes [Mil20], Chapter I. Both use the arithmetic normalization, so their formula has $[u^{-1}]_f$ where Theorem 3.5.5 has $[u]_f$. The proof of Theorem 3.4.3 with the completion of $K^{ur}$ is the one of Lubin and Tate. Iwasawa gave a different account of the explicit reciprocity law in his book "Local class field theory" (1986), and Neukirch's book gives a third. Theorem 3.5.5 says that the Lubin-Tate character, read through $\mathrm{rec}_K$, is the projection $K^\times \to \mathcal{O}_K^\times$ attached to $\varpi$. This fact generalizes the classical formula for the cyclotomic character in Exercise 9.
+The exposition of this chapter follows Serre's chapter [Ser67] and Milne's notes [Mil20], Chapter I. Both use the arithmetic normalization, so their formula has $[u^{-1}]_f$ where Theorem 3.5.5 has $[u]_f$. The proof of Theorem 3.4.3 with the completion of $K^{ur}$ is the one of Lubin and Tate. Iwasawa gave a different account of the explicit reciprocity law in his book "Local class field theory" (1986), and Neukirch's book gives a third. Theorem 3.5.5 says that the Lubin-Tate character, read through $\mathrm{rec}_K$, is the projection $K^\times \to \mathcal{O}_K^\times$ attached to $\varpi$. This fact generalizes the classical formula for the cyclotomic character in Exercise 9.
 
 Lubin-Tate formal groups have uses far beyond class field theory. Their deformations give the Lubin-Tate tower, whose cohomology realizes the local Langlands correspondence for $GL_n$ in the proof of Harris and Taylor. The case $n = 1$ of that picture is the content of this chapter.
 

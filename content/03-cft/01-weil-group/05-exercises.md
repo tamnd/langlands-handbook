@@ -2,8 +2,9 @@
 title: Exercises and notes
 nodes: []
 sources: [Tat79, Ser67, Ser79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
@@ -11,7 +12,7 @@ reviewed_by: []
 1. Show that $\mathbb{Q}_p$ has exactly three quadratic extensions if $p$ is odd. Which of them is unramified? Find a generator of each one.
 2. Let $K = \mathbb{Q}_p$ and let $L = \mathbb{Q}_p(\zeta_{p^n - 1})$. Show that $\mathcal{O}_L = \mathbb{Z}_p[\zeta_{p^n-1}]$.
 3. Show that the map $\mathbb{Z} \to \mathrm{Gal}(\bar k / k)$, $n \mapsto \mathrm{Frob}_k^n$, is injective and that its image is dense. Show that it is not surjective.
-4. Show that a subset $U$ of $W_K$ is open if and only if $U \cap d^{-1}(n)$ is open in the subspace topology of $G_K$ for each $n$.
+4. Show that a subset $U$ of $W_K$ is open if and only if $U \cap d^{-1}(n)$ is open in $d^{-1}(n)$, with the topology of a subspace of $G_K$, for each $n$.
 5. Show that the Weil group, with the subspace topology of $G_K$, is not locally compact.
 6. Let $\Phi$ be a geometric Frobenius. Show that the map $I_K \rtimes \mathbb{Z} \to W_K$, $(\sigma, n) \mapsto \sigma \Phi^n$, is an isomorphism of topological groups, where $\mathbb{Z}$ acts on $I_K$ by conjugation with $\Phi$.
 7. Let $L$ be a finite extension of $K$ in $\bar K$. Show that $W_L = W_K \cap G_L$, and that $W_L$ is an open subgroup of $W_K$ of finite index $[L : K]$.

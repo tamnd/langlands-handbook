@@ -2,8 +2,9 @@
 title: Tori
 nodes: [LG5YHMSJZM, LG4S7A4G1F]
 sources: [Tat79, Mil20]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Tori

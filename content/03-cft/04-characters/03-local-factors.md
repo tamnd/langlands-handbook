@@ -2,8 +2,9 @@
 title: Tate's local factors
 nodes: []
 sources: [Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Tate's local factors
@@ -29,7 +30,7 @@ $$Z(\hat f, \chi^{-1}, 1 - s) = \gamma(\chi, s, \psi) Z(f, \chi, s), \qquad \gam
 
 Lean: not stated yet
 
-The proof is in Tate's thesis and in [Tat79], Section 3. Its key step is the identity $Z(f, \chi, s) Z(\hat g, \chi^{-1}, 1-s) = Z(\hat f, \chi^{-1}, 1-s) Z(g, \chi, s)$ for all $f$ and $g$, which follows from Fubini's theorem. Thus $\gamma$ does not depend on $f$. The factor $\varepsilon$ is then found by a computation with one good $f$ for each $\chi$, as in the next two propositions.
+The proof is in Tate's thesis, and Chapter 5 gives it in full. [Tat79], Section 3, states the result in the normalization used here. Its key step is the identity $Z(f, \chi, s) Z(\hat g, \chi^{-1}, 1-s) = Z(\hat f, \chi^{-1}, 1-s) Z(g, \chi, s)$ for all $f$ and $g$, which follows from Fubini's theorem. Thus $\gamma$ does not depend on $f$. The factor $\varepsilon$ is then found by a computation with one good $f$ for each $\chi$, as in the next two propositions.
 
 **Proposition 4.3.2 (unramified characters).** If $\chi$ is unramified, then $\varepsilon(\chi, s, \psi) = 1$.
 
@@ -69,7 +70,7 @@ For a unitary $\chi$, the conjugate of $\varepsilon(\chi, 1/2, \psi)$ is $\chi(-
 
 **Remark 4.3.5 (change of $\psi$).** For $a \in K^\times$ the factor for $\psi_a$ is
 $$\varepsilon(\chi, s, \psi_a) = \chi(a) |a|^{s - 1/2} \varepsilon(\chi, s, \psi),$$
-where for $\psi_a$ one uses its self-dual measure $|a|^{1/2} dx$. It follows from the formulas of [Tat79], Section 3.2, for a change of $\psi$ and of the measure. The $L$-factor does not depend on $\psi$.
+where for $\psi_a$ one uses its self-dual measure $|a|^{1/2} dx$. It follows from the formulas of [Tat79], Section 3, for a change of $\psi$ and of the measure. The $L$-factor does not depend on $\psi$.
 
 **Example 4.3.6 (a quadratic character).** Let $p$ be odd, $K = \mathbb{Q}_p$ and $\psi(x) = e^{2\pi i\{x\}_p}$. Let $\chi = \chi_{p^*}$ with $p^* = (-1)^{(p-1)/2} p$. By Example 3.5.6, $\chi(p) = 1$ and $\chi(u)$ is the Legendre symbol of $u$, so $a(\chi) = 1$. Proposition 4.3.3 gives
 $$\varepsilon(\chi, 1/2, \psi) = p^{-1/2} \sum_{u = 1}^{p-1} \left(\frac{u}{p}\right) e^{2\pi i u/p}.$$

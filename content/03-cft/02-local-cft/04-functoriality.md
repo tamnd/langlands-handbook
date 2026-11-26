@@ -2,8 +2,9 @@
 title: Functoriality
 nodes: []
 sources: [Ser67, Mil20, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Functoriality
@@ -12,7 +13,7 @@ Let $L$ be a finite separable extension of $K$ in $\bar K$. Then $L$ is a local 
 
 **Definition 2.4.1 (transfer).** Let $G$ be a group and $H$ a subgroup of finite index $n$. Choose representatives $s_1, \dots, s_n$ of the left cosets $G / H$. For $g \in G$ and each $i$ there is a unique $j$ with $g s_i = s_j h_i(g)$ and $h_i(g) \in H$. The *transfer* is the map $\mathrm{Ver} : G^{ab} \to H^{ab}$ that sends the class of $g$ to the class of $h_1(g) h_2(g) \cdots h_n(g)$.
 
-The transfer is a homomorphism, and it does not depend on the choice of the representatives. A proof is in [Ser79], Chapter VII, Section 8, or in any text on group theory. For the Weil groups, $\mathrm{Ver}$ is continuous and defines a homomorphism $W_K^{ab} \to W_L^{ab}$ of topological groups. The composite of the transfer with the map $H^{ab} \to G^{ab}$ induced by the inclusion is the map $g \mapsto g^n$.
+The transfer is a homomorphism, and it does not depend on the choice of the representatives. A proof is in [Ser79], Chapter VII, or in any text on group theory. For the Weil groups, $\mathrm{Ver}$ is continuous and defines a homomorphism $W_K^{ab} \to W_L^{ab}$ of topological groups. The composite of the transfer with the map $H^{ab} \to G^{ab}$ induced by the inclusion is the map $g \mapsto g^n$.
 
 **Theorem 2.4.2 (functoriality).** Let $L$ be a finite separable extension of $K$. Let $j : W_L^{ab} \to W_K^{ab}$ be induced by the inclusion, and let $\mathrm{Ver} : W_K^{ab} \to W_L^{ab}$ be the transfer.
 1. For all $y \in L^\times$ one has $\mathrm{rec}_K(N_{L/K}(y)) = j(\mathrm{rec}_L(y))$.
