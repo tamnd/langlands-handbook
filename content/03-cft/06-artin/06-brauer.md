@@ -2,8 +2,9 @@
 title: Brauer's theorem and the continuation
 nodes: []
 sources: [CF67, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Brauer's theorem and the continuation

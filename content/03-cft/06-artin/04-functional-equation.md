@@ -2,8 +2,9 @@
 title: The conductor and the functional equation
 nodes: []
 sources: [Neu99, Ser79, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The conductor and the functional equation

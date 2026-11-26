@@ -2,15 +2,16 @@
 title: Exercises and notes
 nodes: []
 sources: [CF67, DS74, KW09, Kis09, Neu99, Ser79, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
 
-1. Let $r_G$ be the regular representation of $G = \mathrm{Gal}(L/F)$, and let $\mathfrak{p}$ be a prime of $F$, possibly ramified, with $e$, $f$ and $g$ as usual. Show directly from Definition 6.1.3 that $V^{I_\mathfrak{P}}$ is the space of functions on $G/I_\mathfrak{P}$, that $\mathrm{Frob}_\mathfrak{P}$ permutes the $g f$ cosets in $g$ cycles of length $f$, and that $L_\mathfrak{p}(s, r_G) = (1 - N(\mathfrak{p})^{-fs})^{-g} = \prod_{\mathfrak{P} \mid \mathfrak{p}} (1 - N(\mathfrak{P})^{-s})^{-1}$. Compare with Corollary 6.3.4.
+1. Let $r_G$ be the regular representation of $G = \mathrm{Gal}(L/F)$, and let $\mathfrak{p}$ be a prime of $F$, possibly ramified, with $e$, $f$ and $g$ as usual. Show directly from Definition 6.1.3 that $V^{I_\mathfrak{P}}$ is the space of functions on the set $I_\mathfrak{P} \backslash G$ of right cosets, that $\mathrm{Frob}_\mathfrak{P}$ permutes the $g f$ cosets in $g$ cycles of length $f$, and that $L_\mathfrak{p}(s, r_G) = (1 - N(\mathfrak{p})^{-fs})^{-g} = \prod_{\mathfrak{P} \mid \mathfrak{p}} (1 - N(\mathfrak{P})^{-s})^{-1}$. Compare with Corollary 6.3.4.
 2. Show that $\overline{L(\bar s, \rho)} = L(s, \rho^\vee)$ for $\mathrm{Re}(s) > 1$, and that $L(s, \rho)$ is real for real $s > 1$ if the character of $\rho$ is real. Show that $L(\sigma, \rho) > 0$ for real $\sigma > 1$ in that case.
-3. Let $\rho$ be the representation of dimension 2 of $S_3$ for $K = \mathbb{Q}(\sqrt[3]{2})$, as in Example 6.3.5. Show that the prime $2$ is tamely ramified in $L$ with $I = A_3$, and that $a_2(\rho) = 2$. Use $d_K = -108$ and Corollary 6.4.3 to show that $a_3(\rho) = 3$. Deduce from Definition 6.4.1 that, in the lower numbering at $3$, $G_0 = S_3$, $G_1 = A_3$ and $G_2 = 1$.
+3. Let $\rho$ be the representation of dimension 2 of $S_3$ for $K = \mathbb{Q}(\sqrt[3]{2})$, as in Example 6.3.5. Show that the prime $2$ is tamely ramified in $L$ with $I = A_3$, and that $f(\rho, 2) = 2$. Use $d_K = -108$ and Corollary 6.4.3 to show that $f(\rho, 3) = 3$. Deduce from Definition 6.4.1 that, in the lower numbering at $3$, $G_0 = S_3$, $G_1 = A_3$ and $G_2 = 1$.
 4. In $S_3$, let $C_3$ and $C_2$ be subgroups of order 3 and 2. Show that $2 \cdot \mathbf{1} = \mathrm{Ind}_{C_3}^{S_3} \mathbf{1} + 2 \, \mathrm{Ind}_{C_2}^{S_3} \mathbf{1} - \mathrm{Ind}_{\{1\}}^{S_3} \mathbf{1}$, and that $\mathbf{1}$ itself is not an integral combination of the characters $\mathrm{Ind}_C^{S_3} \mathbf{1}$ with $C$ cyclic. For an $S_3$-extension $L/\mathbb{Q}$ with quadratic subfield $k$ and a cubic subfield $K$, deduce the relation $\zeta(s)^2 \zeta_L(s) = \zeta_k(s) \zeta_K(s)^2$.
 5. Let $\rho$ be a representation with $\langle \rho, \mathbf{1} \rangle = 0$. Use Theorem 6.6.4 and Corollary 6.6.5 for $\rho^\vee$ to show that $\Lambda(-k, \rho) \ne 0$ for every integer $k \ge 0$. Deduce that $\mathrm{ord}_{s=0} L(s, \rho) = \sum_{v \mid \infty} \dim V^{D_w}$, where $D_w = \langle c_w \rangle$ at a real place and $D_w = 1$ at a complex place. Compute the order of $L(s, \rho)$ at $s = -k$ for $k \ge 1$, in terms of the numbers $n_v^+$, $n_v^-$ and $r_2$.
 6. Let $L/\mathbb{Q}$ be an $S_3$-extension. Compute the characters $\lambda_C$ of the proof of Theorem 6.6.6 for the cyclic subgroups $C$ of $S_3$, and check the identity $\sum_C \mathrm{Ind}_C^{S_3} \lambda_C = 6(r_G - \mathbf{1})$. Write $(\zeta_L / \zeta)^6$ as the product of Hecke $L$-functions that the proof gives. Compare with $\zeta_L / \zeta = L(s, \mathrm{sgn}) L(s, \rho)^2$.
