@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Section 5.5 gives the Lean status after the proof for any signs at the complex places.
+
 - Volume 3 Sections 5.2 and 5.5 are checked, with fixes to Lemma 5.2.25, the Lean status remarks and Exercise 21.
 
 ## v0.1.23 (2026-11-27)
