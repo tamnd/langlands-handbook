@@ -2,7 +2,7 @@
 title: The local functional equation
 nodes: []
 sources: [CF67, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
 checked_by: checker@claude-opus-5-5
 reviewed_by: []
@@ -163,7 +163,7 @@ For $a = 1$ part 4 of Theorem 5.2.7 reads $i \cdot i = -1 = \mathrm{sgn}(-1)$. T
 
 ### Ramified places and finite Gauss sums
 
-This subsection returns to a ramified character at a nonarchimedean place. Proposition 5.2.4 used a finite Gauss sum, and Remark 5.2.12 used an integral over $\mathcal{O}_K^\times$. Here we prove that the two agree, we prove $|\tau|^2 = q^{a(\chi)}$ for the finite sum, and we explain why the $L$-factor of a ramified character is 1. Then we give the $\varepsilon$-factor of the test function $1_{U^{(a)}}$ with both normalizations of the measure. The Lean proofs are in the file `Langlands/Tate/LocalRamified.lean`. In this subsection $K$ is nonarchimedean, with ring of integers $\mathcal{O}_K$, maximal ideal $\mathfrak{p}$, uniformizer $\varpi$ and residue field of order $q$. Let $U^{(0)} = \mathcal{O}_K^\times$ and $U^{(m)} = 1 + \mathfrak{p}^m$ for $m \ge 1$. We fix $\psi$ with exponent $d = d(\psi)$, so $\psi$ is trivial on $\{|x| \le q^d\} = \mathfrak{p}^{-d}$ and not on $\mathfrak{p}^{-d-1}$. Two Haar measures on $K$ occur. The measure $du$ has $\mathrm{vol}(\mathcal{O}_K, du) = 1$; the Lean project uses it. The measure $dx = q^{-d/2} du$ is self-dual for $\psi$ by Proposition 5.1.4.
+This subsection returns to a ramified character at a nonarchimedean place. Proposition 5.2.4 used a finite Gauss sum, and Remark 5.2.12 used an integral over $\mathcal{O}_K^\times$. Here we prove that the two agree, we prove $|\tau|^2 = q^{a(\chi)}$ for the finite sum, and we explain why the $L$-factor of a ramified character is 1. Then we give the $\varepsilon$-factor of the test function $1_{U^{(a)}}$ with both normalizations of the measure. The Lean proofs are in the file `Langlands/Tate/LocalRamified.lean`, which uses the Gauss integral and the test function of the files of Remark 5.2.12. In this subsection $K$ is nonarchimedean, with ring of integers $\mathcal{O}_K$, maximal ideal $\mathfrak{p}$, uniformizer $\varpi$ and residue field of order $q$. Let $U^{(0)} = \mathcal{O}_K^\times$ and $U^{(m)} = 1 + \mathfrak{p}^m$ for $m \ge 1$. We fix $\psi$ with exponent $d = d(\psi)$, so $\psi$ is trivial on $\{|x| \le q^d\} = \mathfrak{p}^{-d}$ and not on $\mathfrak{p}^{-d-1}$. Two Haar measures on $K$ occur. The measure $du$ has $\mathrm{vol}(\mathcal{O}_K, du) = 1$; the Lean project uses it. The measure $dx = q^{-d/2} du$ is self-dual for $\psi$ by Proposition 5.1.4.
 
 **Proposition 5.2.13 (the conductor exponent).** Let $\chi$ be a character of $K^\times$. Then $\chi$ is trivial on $U^{(m)}$ for some $m \ge 0$, so the conductor exponent $a(\chi)$ of Definition 4.1.3 exists. If $a = a(\chi) \ge 1$, then $\chi$ is trivial on $U^{(a)}$ and not trivial on $U^{(a-1)}$. Let $F$ be a number field, $v$ a finite place and $\chi$ a Hecke character of $F$. Then $a(\chi_v) \ge 1$ if and only if $\chi$ is ramified at $v$.
 
