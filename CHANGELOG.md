@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.22 (2026-11-26)
+
 ### Added
 
 - Volume 6, Section 1.5: an elementary proof of the irreducibility criterion that follows the Lean proof, and Exercise 21.
