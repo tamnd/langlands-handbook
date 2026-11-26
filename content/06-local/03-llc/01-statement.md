@@ -1,0 +1,88 @@
+---
+title: The statement for GL(n)
+nodes: [LG2E74SP8W]
+sources: [HT01, Hen00, BH06, JL70, Kut80, Tat79]
+status: drafted
+drafted_by: writer@claude-opus-5-5
+reviewed_by: []
+---
+## The statement for GL(n)
+
+This section states the local Langlands correspondence for $GL_n$ and the theorem of Henniart that characterizes it. The two sides are sets of isomorphism classes, and the correspondence is a family of bijections, one for each $n$, that matches the operations and the invariants of the two sides. The example to keep in mind is the Steinberg representation of the introduction: the representation $\mathrm{St}$ of $GL_2(K)$ goes to the parameter $(|\cdot|^{1/2} \oplus |\cdot|^{-1/2}, N)$ with $N \ne 0$, and the $L$-factors and $\varepsilon$-factors of the two sides agree.
+
+### The two sides
+
+**Definition 3.1.1 (the two sides).** Let $n \ge 1$.
+1. $\mathcal{A}_n(K) = \mathrm{Irr}(GL_n(K))$ is the set of isomorphism classes of irreducible smooth representations of $GL_n(K)$, as in Definition 1.1.9. Each of them is admissible by Theorem 1.1.11. We write $\mathcal{A}^0_n(K)$ for the subset of the supercuspidal classes and $\mathcal{A}^2_n(K)$ for the subset of the essentially square integrable classes, the discrete series of Theorem 1.6.4.
+2. $\mathcal{G}_n(K)$ is the set of isomorphism classes of Frobenius semisimple Weil-Deligne representations $(r, N)$ of $W_K$ of dimension $n$, as in Chapter 2. We write $\mathcal{G}^0_n(K)$ for the subset of the classes with $N = 0$ and $r$ irreducible, and $\mathcal{G}^2_n(K)$ for the subset of the indecomposable classes.
+
+Both sides have the same operations. A character $\chi$ of $K^\times$ acts on $\mathcal{A}_n(K)$ by $\pi \mapsto \pi \otimes \chi \circ \det$ and on $\mathcal{G}_n(K)$ by $(r, N) \mapsto (r \otimes \varphi_\chi, N)$. Each side has a duality: the contragredient $\pi \mapsto \pi^\vee$ of Definition 1.1.5, and the dual $(r, N) \mapsto ({}^t r^{-1}, -{}^t N)$. Each element has a determinant character: the central character $\omega_\pi$ of Corollary 1.1.8, and $\det r$. Each pair of elements has local factors. For $\pi \in \mathcal{A}_n(K)$ and $\pi' \in \mathcal{A}_{n'}(K)$, Jacquet, Piatetski-Shapiro and Shalika defined $L(s, \pi \times \pi')$ and $\varepsilon(s, \pi \times \pi', \psi)$ by the zeta integrals of Remark 1.7.7. For $n' = 1$ and $\pi' = \chi$ these are the factors of Godement and Jacquet of $\pi \otimes \chi \circ \det$, see Chapter 2. For $\sigma \in \mathcal{G}_n(K)$ and $\sigma' \in \mathcal{G}_{n'}(K)$ the factors $L(s, \sigma \otimes \sigma')$ and $\varepsilon(s, \sigma \otimes \sigma', \psi)$ are those of Langlands and Deligne for the tensor product, see Chapter 2, [Tat79], and Deligne's paper of 1973 on the constants of the functional equations. Here $\psi$ is a fixed nontrivial character of $K$. A change of $\psi$ changes both sides by the same rule, see Volume 0, Remark 3.2.1, so the statement below does not depend on $\psi$.
+
+The factors of pairs are needed for the uniqueness, and they are harder than the standard factors. On the automorphic side they need the Whittaker models of Section 1.7. On the Galois side the $\varepsilon$-factors of representations of dimension at least 2 need the theorem of Langlands and Deligne (Volume 3, Theorem 4.3.8), which builds them from the $\varepsilon$-factors of characters of the Weil groups of finite extensions of $K$ by induction in degree 0.
+
+### The theorem
+
+**Theorem 3.1.2 (the local Langlands correspondence for $GL_n$).** There is a unique family of bijections $\mathrm{rec}_n : \mathcal{A}_n(K) \to \mathcal{G}_n(K)$, for $n \ge 1$, with the following properties.
+1. $\mathrm{rec}_1(\chi) = \chi \circ \mathrm{art}_K^{-1}$ for each character $\chi$ of $K^\times = GL_1(K)$.
+2. $\det \mathrm{rec}_n(\pi) = \mathrm{rec}_1(\omega_\pi)$.
+3. $\mathrm{rec}_n(\pi \otimes \chi \circ \det) = \mathrm{rec}_n(\pi) \otimes \mathrm{rec}_1(\chi)$.
+4. $\mathrm{rec}_n(\pi^\vee) = \mathrm{rec}_n(\pi)^\vee$.
+5. $L(s, \pi \times \pi') = L(s, \mathrm{rec}_n(\pi) \otimes \mathrm{rec}_{n'}(\pi'))$ and $\varepsilon(s, \pi \times \pi', \psi) = \varepsilon(s, \mathrm{rec}_n(\pi) \otimes \mathrm{rec}_{n'}(\pi'), \psi)$ for all $\pi \in \mathcal{A}_n(K)$ and $\pi' \in \mathcal{A}_{n'}(K)$.
+
+Also $\mathrm{rec}_n(\mathcal{A}^0_n(K)) = \mathcal{G}^0_n(K)$ and $\mathrm{rec}_n(\mathcal{A}^2_n(K)) = \mathcal{G}^2_n(K)$, and the conductor of $\pi$ is the Artin conductor of $\mathrm{rec}_n(\pi)$.
+
+Node: LG2E74SP8W · Lean: `Langlands.LocalLanglandsGL`
+
+The uniqueness is the theorem of Henniart of 1993 on the $\varepsilon$-factors of pairs, Theorem 3.1.4 below. The existence for $K$ of characteristic 0 is the theorem of Harris and Taylor [HT01]. They construct $\mathrm{rec}_n$ in the cohomology of some simple Shimura varieties and the Lubin-Tate tower, and Volume 10 explains their proof. Henniart [Hen00] gave a shorter proof of the existence. It combines global results of Harris on Shimura varieties with Henniart's numerical correspondence, a count of the two sides with a fixed conductor. Scholze gave a third proof in 2013, with the cohomology of Shimura varieties and a characterization of the correspondence by identities between traces. For $K$ of positive characteristic the theorem is due to Laumon, Rapoport and Stuhler (1993), from the cohomology of the moduli spaces of $\mathcal{D}$-elliptic sheaves. For $n = 1$ the theorem is local class field theory, see Section 3.2. For $n = 2$ it is due to Kutzko [Kut80] and is treated in [BH06], see Section 3.3. Condition 1 fixes the normalization of the whole family: with the arithmetic normalization of Volume 3, Remark 2.3.4, the family $\pi \mapsto \mathrm{rec}_n(\pi^\vee)$ satisfies the conditions on central characters, twists and duals, and for $n = 1$ it matches the $L$-factors once these are defined with the arithmetic Frobenius, see Exercise 1.
+
+**Remark 3.1.3 (the conditions are consistent).** The conditions are compatible with each other on the parts that can be checked by hand. Condition 2 for $n = 1$ is condition 1, because the central character of $\chi$ is $\chi$. Condition 5 for $\pi' = 1$ and condition 3 give the factors of all the twists by characters. By condition 4 the factors of $\pi^\vee$ are those of $\mathrm{rec}_n(\pi)^\vee$. So the local functional equations on the two sides, which relate the factors of $\pi$ at $s$ to those of $\pi^\vee$ at $1 - s$, have the same shape. The two sides change in the same way under a change of $\psi$: on the automorphic side by Volume 0, Remark 3.2.1, and on the Galois side by the rule $\varepsilon(s, \sigma, \psi_a) = \det \sigma(a) |a|^{n(s - 1/2)} \varepsilon(s, \sigma, \psi)$, which agrees with it by condition 2.
+
+### Henniart's characterization
+
+A family that satisfies conditions 1 to 5 is unique. The proof rests on a converse theorem: a supercuspidal representation is determined by the factors of its twists by representations of smaller groups. For $GL_2$ this is the converse theorem of Jacquet and Langlands, which uses only the twists by characters, see [BH06], Chapter 6.
+
+**Theorem 3.1.4 (Henniart's local converse theorem).** Let $n \ge 2$, and let $\pi$ and $\pi'$ be irreducible generic representations of $GL_n(K)$ with the same central character. Suppose that $\gamma(s, \pi \times \tau, \psi) = \gamma(s, \pi' \times \tau, \psi)$ for each $r$ with $1 \le r \le n - 1$ and each irreducible supercuspidal representation $\tau$ of $GL_r(K)$, where $\gamma(s, \pi \times \tau, \psi) = \varepsilon(s, \pi \times \tau, \psi) L(1 - s, \pi^\vee \times \tau^\vee) / L(s, \pi \times \tau)$. Then $\pi \cong \pi'$.
+
+Lean: not stated yet
+
+The proof is in Henniart's paper "Caractérisation de la correspondance de Langlands locale par les facteurs $\varepsilon$ de paires" (Invent. Math. 113, 1993). It works with the restrictions of the Whittaker functions of $\pi$ and $\pi'$ to the mirabolic subgroup, as in the Kirillov model of Theorem 1.7.5 for $n = 2$, and uses the functional equations of the zeta integrals of Remark 1.7.7 for all $\tau$ to show that the two Whittaker models agree. Later work of Chen, and of Jacquet and Liu, showed that the twists with $r \le n/2$ suffice. For $n = 2$ the twists by characters suffice, and this is the classical converse theorem of [JL70].
+
+**Corollary 3.1.5 (uniqueness).** Let $(\mathrm{rec}_n)$ and $(\mathrm{rec}'_n)$ be two families of bijections that satisfy conditions 1 to 5 of Theorem 3.1.2. Then $\mathrm{rec}_n = \mathrm{rec}'_n$ for each $n$.
+
+Lean: not stated yet
+
+*Proof.* We argue by induction on $n$. For $n = 1$ both families are given by condition 1. Let $n \ge 2$ and suppose that $\mathrm{rec}_m = \mathrm{rec}'_m$ for $m < n$. Let $\sigma \in \mathcal{G}_n(K)$, and let $\pi = \mathrm{rec}_n^{-1}(\sigma)$ and $\pi' = \mathrm{rec}_n'^{-1}(\sigma)$. By condition 2 both have the central character $\det \sigma \circ \mathrm{art}_K$. For each $r < n$ and each $\tau \in \mathcal{A}_r(K)$, condition 5 and the induction hypothesis give
+$$\varepsilon(s, \pi \times \tau, \psi) = \varepsilon(s, \sigma \otimes \mathrm{rec}_r(\tau), \psi) = \varepsilon(s, \sigma \otimes \mathrm{rec}'_r(\tau), \psi) = \varepsilon(s, \pi' \times \tau, \psi),$$
+and in the same way the $L$-factors of $\pi \times \tau$ and $\pi' \times \tau$ agree, and also those of $\pi^\vee \times \tau^\vee$ and $\pi'^\vee \times \tau^\vee$, by condition 4. So $\pi$ and $\pi'$ have the same $\gamma$-factors of pairs with all $\tau$ of smaller rank. If $\pi$ and $\pi'$ are generic, Theorem 3.1.4 gives $\pi \cong \pi'$. In general one uses the Langlands classification of Theorem 1.6.5. Each $\pi$ is the Langlands quotient $L(\Delta_1, \ldots, \Delta_k)$ of a standard module $\delta_1 \times \cdots \times \delta_k$ with $\delta_i = L(\Delta_i)$ built from discrete series $\delta_i$ of smaller groups, and the factors of pairs are multiplicative in the standard module. The $L$-factors $L(s, \pi \times \tau)$ for all $\tau$ then determine the multiset of the $L$-factors of the pieces, and one shows that $\mathrm{rec}_n(\pi)$ and $\mathrm{rec}'_n(\pi)$ are the direct sums of the images of the $\delta_i$. This reduces the claim to the discrete series, and by Theorem 1.6.4 to the supercuspidal representations, which are generic by Theorem 1.7.6. $\square$
+
+The proof shows what the $\varepsilon$-factors do. Let $n \ge 2$. The standard $L$-factor of each $\sigma \in \mathcal{G}^0_n(K)$ is 1, because $V^{I_K}$ is stable under $W_K$ and is not all of $V$. The Godement-Jacquet factor of each supercuspidal $\pi$ is also 1. So condition 5 for the standard $L$-factors gives no information on the supercuspidal part. The $L$-factors of pairs give a little: for supercuspidal $\pi$ and $\pi'$, $L(s, \pi \times \pi')$ has a pole exactly when $\pi'$ is an unramified twist of $\pi^\vee$, and the same holds on the Galois side. The $\varepsilon$-factors of pairs carry the rest.
+
+### The reduction to the supercuspidal representations
+
+The correspondence respects the classification of Bernstein and Zelevinsky of Section 1.6. On the Galois side the classification is elementary. For a character $\chi$ of $W_K$ and $a \ge 1$ let $\mathrm{Sp}(a)$ be the Weil-Deligne representation on $\mathbb{C}^a$ with basis $e_0, \ldots, e_{a-1}$, with $r(w) e_i = |w|^{(a-1)/2 - i} e_i$ and $N e_i = e_{i-1}$, $N e_0 = 0$. The relation $r(w) N r(w)^{-1} = |w| N$ holds, because $N$ lowers the index by one and raises the exponent by one.
+
+**Proposition 3.1.6 (the Galois side).** Each element of $\mathcal{G}_n(K)$ is a direct sum of indecomposable ones, unique up to order. Each indecomposable element is $\mathrm{Sp}(a) \otimes \rho$ for a unique $a \ge 1$ and a unique irreducible representation $\rho$ of $W_K$, and the dimension is $a \dim \rho$.
+
+Lean: not stated yet
+
+*Proof.* We give the main steps. Let $(r, N)$ be Frobenius semisimple. The kernel of $N$ is stable under $r$, because $r(w) N v = |w| N r(w) v$. By the theorem of Jacobson and Morozov, the pair is equivalent to a representation of $W_K \times SL_2(\mathbb{C})$ whose restriction to $W_K$ is semisimple, with $N$ the image of the standard nilpotent element and $r(w)$ twisted by $\mathrm{diag}(|w|^{1/2}, |w|^{-1/2})$. A representation of $W_K \times SL_2(\mathbb{C})$ with semisimple restriction to $W_K$ is a sum of $\rho \boxtimes \mathrm{Sym}^{a-1}$ with $\rho$ irreducible, and $\rho \boxtimes \mathrm{Sym}^{a-1}$ corresponds to $\mathrm{Sp}(a) \otimes \rho$. The unique decomposition follows from the theorem of Krull and Schmidt for the semisimple category of these representations. $\square$
+
+The automorphic side has the same shape. By Theorem 1.6.4 each discrete series representation of $GL_n(K)$ is the unique irreducible quotient $L(\Delta)$ of the induced representation $\rho \times \rho\nu \times \cdots \times \rho\nu^{a-1}$ of a segment $\Delta = [\rho, \rho \nu^{a-1}]$, with $\rho$ supercuspidal of $GL_m(K)$, $n = am$ and $\nu = |\det|$. The correspondence sends this discrete series representation to $\mathrm{Sp}(a) \otimes \mathrm{rec}_m(\rho \nu^{(a-1)/2})$. With the Langlands classification of Theorem 1.6.5, the whole map is then determined by its restriction to the supercuspidal representations:
+$$\mathrm{rec}_n(L(\Delta_1, \ldots, \Delta_k)) = \bigoplus_{i=1}^k \mathrm{rec}_{n_i}(L(\Delta_i)).$$
+The theorem of Bernstein and Zelevinsky is the automorphic form of Proposition 3.1.6. This reduction is in [HT01], Introduction, and it is a consequence of conditions 1 to 5 by the argument of Corollary 3.1.5. Conversely, if a family of bijections $\mathcal{A}^0_m(K) \to \mathcal{G}^0_m(K)$ for $m \le n$ satisfies conditions 1 to 5 on the supercuspidal representations, then the formula above extends it to a family on all of $\mathcal{A}_m(K)$ that satisfies conditions 1 to 5. The case $n = 2$ of this extension is worked out in Section 3.3.
+
+**Example 3.1.7 (the parameter of the Steinberg representation of $GL_n$).** The Steinberg representation $\mathrm{St}_n$ of $GL_n(K)$ is the unique irreducible quotient of the segment $[\nu^{(1-n)/2}, \nu^{(n-1)/2}]$ of characters of $GL_1(K)$. Its parameter is $\mathrm{Sp}(n)$. Then $(\ker N)^{I_K}$ is the line of $e_0$, on which $\Phi$ acts by $|\Phi|^{(n-1)/2} = q^{-(n-1)/2}$. So
+$$L(s, \mathrm{St}_n) = (1 - q^{-s - (n-1)/2})^{-1},$$
+which is the Godement-Jacquet factor of $\mathrm{St}_n$. The trivial representation of $GL_n(K)$ is the Langlands quotient of the same induced representation in the opposite order. Its parameter is $\bigoplus_{i=0}^{n-1} |\cdot|^{(n-1)/2 - i}$ with $N = 0$, and its $L$-factor is $\prod_{i=0}^{n-1} (1 - q^{-s - (n-1)/2 + i})^{-1}$.
+
+**Example 3.1.8 (unramified representations).** Let $\pi$ be an irreducible unramified representation of $GL_n(K)$. By Corollary 1.2.6 and Theorem 1.2.5 it is the unramified constituent of a principal series $\chi_1 \times \cdots \times \chi_n$ with $\chi_i$ unramified, and its Satake parameter is the conjugacy class of $\mathrm{diag}(\chi_1(\varpi), \ldots, \chi_n(\varpi))$. In the unitary normalization of Volume 0, Section 3.2, $\mathrm{rec}_n(\pi)$ is the unramified representation $r = \chi_1 \oplus \cdots \oplus \chi_n$ with $N = 0$, so $r(\Phi)$ has the eigenvalues $\chi_i(\varpi)$. The $L$-factor is $\prod_i (1 - \chi_i(\varpi) q^{-s})^{-1}$. So on the unramified representations the correspondence is the Satake isomorphism, read through the geometric Frobenius.
+
+### What the Lean statement leaves out
+
+**Remark 3.1.9 (the Lean statement `LocalLanglandsGL`).** The proposition `Langlands.LocalLanglandsGL n` says the following. For each nonarchimedean local field $K$ and each topological isomorphism $\mathrm{art} : K^\times \to W_K^{ab}$ with the properties of `Langlands.IsLocalArtinMap` (uniformizers go to geometric Frobenius elements, and the norm groups are the kernels on the finite abelian extensions), there are bijections $\mathrm{rec}_m : \mathrm{Irr}(GL_m(K)) \to \mathcal{G}_m(K)$ for $m \le n$ with the properties of `Langlands.IsLanglandsFamily`. These are condition 1, and for each $m$ the conditions of `Langlands.IsLanglandsMap`: condition 2, condition 3, condition 4, and condition 5 for $\pi' = 1$, in the form that the $L$-factor of the Weil-Deligne representation is the Godement-Jacquet factor of `Langlands.IsGJLFactor`. The statement leaves out the following.
+1. The $\varepsilon$-factors, for all $n'$, including $n' = 1$.
+2. The $L$-factors of pairs with $n' \ge 2$. With condition 3, the statement does give the $L$-factors of the twists by characters.
+3. The uniqueness. The statement is an existence statement, and for $n \ge 2$ its conditions do not determine the family. By the remark after Corollary 3.1.5 the conditions say nothing on the supercuspidal part beyond the central characters, the twists and the duality.
+4. The links between different $m$, such as the compatibility with parabolic induction and the description of the discrete series, and the statements $\mathrm{rec}_n(\mathcal{A}^0_n) = \mathcal{G}^0_n$ and $\mathrm{rec}_n(\mathcal{A}^2_n) = \mathcal{G}^2_n$ and on conductors.
+
+The statement holds for all $K$, of any characteristic. The Artin map is a hypothesis and not a construction, but `Langlands.LocalReciprocityGL1` of Section 3.2 shows that exactly one such map exists. The theorem `Langlands.charRep_hasCentralChar` shows that the central character of the representation $\chi$ of $GL_1(K)$ is $\chi$, so for $m = 1$ condition 2 is condition 1.
