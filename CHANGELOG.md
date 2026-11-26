@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- A checking pass over Volume 6, Chapter 3. All seven section files are at status checked, with a correction to the history after Theorem 3.1.4 and to two Lean lines of Section 3.2.
+
 ## v0.1.19 (2026-11-26)
 
 ### Added

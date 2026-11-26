@@ -2,8 +2,9 @@
 title: The local Jacquet-Langlands correspondence
 nodes: [LG7NVV7NSF]
 sources: [JL70, BH06, Ser79]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The local Jacquet-Langlands correspondence

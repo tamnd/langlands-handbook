@@ -2,8 +2,9 @@
 title: The statement for GL(n)
 nodes: [LG2E74SP8W]
 sources: [HT01, Hen00, BH06, JL70, Kut80, Tat79]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The statement for GL(n)
@@ -45,7 +46,7 @@ A family that satisfies conditions 1 to 5 is unique. The proof rests on a conver
 
 Lean: not stated yet
 
-The proof is in Henniart's paper "Caractérisation de la correspondance de Langlands locale par les facteurs $\varepsilon$ de paires" (Invent. Math. 113, 1993). It works with the restrictions of the Whittaker functions of $\pi$ and $\pi'$ to the mirabolic subgroup, as in the Kirillov model of Theorem 1.7.5 for $n = 2$, and uses the functional equations of the zeta integrals of Remark 1.7.7 for all $\tau$ to show that the two Whittaker models agree. Later work of Chen, and of Jacquet and Liu, showed that the twists with $r \le n/2$ suffice. For $n = 2$ the twists by characters suffice, and this is the classical converse theorem of [JL70].
+The proof is in Henniart's paper "Caractérisation de la correspondance de Langlands locale par les facteurs $\varepsilon$ de paires" (Invent. Math. 113, 1993). It works with the restrictions of the Whittaker functions of $\pi$ and $\pi'$ to the mirabolic subgroup, as in the Kirillov model of Theorem 1.7.5 for $n = 2$, and uses the functional equations of the zeta integrals of Remark 1.7.7 for all $\tau$ to show that the two Whittaker models agree. Later work of Chen showed that the twists with $r \le n - 2$ suffice, and Chai, and Jacquet and Liu, showed that the twists with $r \le n/2$ suffice. For $n = 2$ the twists by characters suffice, and this is the classical converse theorem of [JL70].
 
 **Corollary 3.1.5 (uniqueness).** Let $(\mathrm{rec}_n)$ and $(\mathrm{rec}'_n)$ be two families of bijections that satisfy conditions 1 to 5 of Theorem 3.1.2. Then $\mathrm{rec}_n = \mathrm{rec}'_n$ for each $n$.
 
