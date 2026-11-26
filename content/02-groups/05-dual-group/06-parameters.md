@@ -79,11 +79,13 @@ It is a Klein four group. Let $\varphi : W_F \to \mathrm{Gal}(E/F) \cong V$. The
 6. One element of $\Pi_\varphi$ is tempered if and only if all are, if and only if $\varphi(W_F)$ is bounded in $G^\vee$. One element of $\Pi_\varphi$ is square-integrable modulo the centre if and only if all are, if and only if the image of $\varphi$ is not contained in a Levi subgroup of a proper parabolic subgroup of ${}^L G$.
 7. The correspondence is compatible with L-homomorphisms (Definition 5.4.6) for the cases where the transfer is defined, and it preserves the local factors attached to $r \circ \varphi$.
 
-Lean: not stated yet
+Lean: `Langlands.Shapes.LocalLanglands`, as a shape for quasi-split $G$, with property 6 and the refined form of Remark 5.6.8
 
 The conjecture is in [Bor79], with the central character and the twists of properties 4 and 5. The properties do not characterize the packets in general. For $GL_n$ the preservation of the local factors of pairs does characterize them, by Henniart's work. For other groups, the expected characterization is through the endoscopic character identities of Arthur.
 
 **Remark 5.6.8 (the refined conjecture).** Let $S_\varphi = \pi_0\big(C_{G^\vee}(\mathrm{im}\,\varphi) / Z(G^\vee)^{\Gamma_F}\big)$. For quasi-split $G$ with a fixed Whittaker datum, the refined conjecture predicts a bijection between $\Pi_\varphi$ and the set of irreducible characters of $S_\varphi$, under which the generic member corresponds to the trivial character. For inner forms, Vogan and Kottwitz replaced $G$ by all pure or extended inner forms together, and $Z(G^\vee)^{\Gamma_F}$ by a smaller group. In Example 5.6.6, $C_{PGL_2(\mathbb{C})}(V) = V$, so $S_\varphi = V$ has four characters, which matches the four elements of $\Pi_\varphi$.
+
+The Lean shape of the conjecture needs the notions of this volume for a general group, and the library does not construct them yet. Thus `Langlands.Shapes.ReductiveGroupData` takes the group $G(F)$, the set $\Phi(G)$, the groups $S_\varphi$ with their irreducible representations, and the tempered, discrete and generic conditions as data. The shape then asks for a map $L : \mathrm{Irr}(G(F)) \to \Phi(G)$ with finite and nonempty fibres and property 6, and for each $\varphi$ an injective map $\Pi_\varphi \to \mathrm{Irr}(S_\varphi)$ that sends the generic members of a tempered packet to the trivial representation. The map is only injective, because for $G$ alone the packet is in general smaller than $\mathrm{Irr}(S_\varphi)$. The bijection of Remark 5.6.8 holds for the union of the packets over the pure inner forms. Since the data are free, the shape does not fix the packets. It records the form of the conjecture, and a later construction of the data will make it a statement.
 
 ### Known cases
 

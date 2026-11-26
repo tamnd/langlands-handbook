@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 0 and Volume 2 name the Lean shapes of the local Langlands conjecture and of functoriality, and Volume 0 names `LocalLanglandsGL`.
+
 ## v0.1.22 (2026-11-26)
 
 ### Added
