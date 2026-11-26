@@ -2,8 +2,9 @@
 title: Exercises and notes
 nodes: []
 sources: [Lan70, JL70, Kut80, BH06, HT01, Hen00, LL79, GT11, Tat79]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Exercises
