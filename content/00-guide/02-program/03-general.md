@@ -19,7 +19,7 @@ Let $K$ be a nonarchimedean local field. For $n \ge 1$, let $\mathrm{Irr}_n(K)$ 
 4. For a character $\chi$ of $K^\times$, $\mathrm{rec}_n(\pi \otimes (\chi \circ \det)) = \mathrm{rec}_n(\pi) \otimes \mathrm{rec}_1(\chi)$.
 5. The map $\mathrm{rec}_n$ sends the contragredient of $\pi$ to the dual of $\mathrm{rec}_n(\pi)$.
 
-Lean: not stated yet, planned for milestone S3
+Lean: `Langlands.LocalLanglandsGL`, the existence part with properties 1, 3, 4 and 5 and the standard L-factors. The factors of pairs in property 2 are not in the statement yet.
 
 Laumon, Rapoport and Stuhler proved the theorem when $K$ has characteristic $p$ (1993). Harris and Taylor (2001) and Henniart (2000) proved it when $K$ has characteristic 0. Scholze gave a new proof in 2013. Henniart proved that the properties determine the family, so that the different constructions give the same bijections. Kutzko proved the case $n = 2$ in 1980. Under $\mathrm{rec}_n$ the supercuspidal representations correspond to the irreducible Weil-Deligne representations. Such a representation has $N = 0$, so it is an irreducible representation of $W_K$. Volume 6 proves the case $n = 2$, and Volume 10 explains the proof for general $n$.
 
@@ -43,7 +43,7 @@ Let $G$ and $H$ be connected reductive groups over a number field $F$, with $H$ 
 
 **Conjecture 2.3.3 (functoriality).** For each automorphic representation $\pi$ of $G(\mathbb{A}_F)$ there is an automorphic representation $\Pi$ of $H(\mathbb{A}_F)$ such that, for almost all places $v$ where $\pi_v$ and $\Pi_v$ are unramified, the Satake parameter of $\Pi_v$ is the image under $u$ of the Satake parameter of $\pi_v$.
 
-Lean: not stated yet
+Lean: `Langlands.Shapes.Functoriality`, as a shape. The groups, the automorphic representations, the Satake parameters and the map $u$ on the unramified parameters are fields of interface structures, because the library does not construct them yet.
 
 Langlands stated the conjecture in 1970. It is open in general. The table lists some known cases. Volumes 7, 8 and 9 prove or explain them.
 
