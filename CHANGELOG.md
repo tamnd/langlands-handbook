@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## 0.1.3 (2026-11-26)
+
 ### Added
 
 - Volume 7, "L-functions, converse theorems and functoriality for GL(n)", Chapter 1: the group GL(n) over the adeles, automorphic forms and cusp forms, Hecke operators and the Satake isomorphism, the cuspidal spectrum, Whittaker models and multiplicity one, the standard L-function, and algebraic automorphic representations, with exercises and the notes. Each Lean name that the chapter cites is in the export of langlands-lean at 9a88d56.
@@ -13,6 +15,7 @@ Each release has a section. The newest release is first.
 
 ### Changed
 
+- Volume 3, Chapter 5: Corollary 5.3.10 has its Lean name, and two new remarks give the Lean form of the theta formula of a number field and the Hecke integral, with the steps that are still missing for the functional equation of the Dedekind zeta function.
 - Volume 3, Chapter 5: the local functional equations at the finite, real and complex places have their Lean names.
 - Volume 3, Chapter 1: the definitions and theorems have numbers.
 
