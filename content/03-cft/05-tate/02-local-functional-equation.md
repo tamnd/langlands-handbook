@@ -2,8 +2,9 @@
 title: The local functional equation
 nodes: []
 sources: [BH06, CF67, Tat79]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The local functional equation
@@ -117,7 +118,7 @@ The function $A$ is holomorphic on $\mathrm{Re}(s) > -\sigma$, because $Z(f, \ch
 
 It remains to prove the last claim of part 1. Let $K$ be nonarchimedean. Choose $N$ such that $f$ is constant on $\mathfrak{p}^N$. The function $g = f - f(0) 1_{\mathfrak{p}^N}$ vanishes on $\mathfrak{p}^N$ and outside some $\mathfrak{p}^{-M}$. So $Z(g, \chi, s)$ is a finite sum over the shells $\varpi^k \mathcal{O}_K^\times$ with $-M \le k < N$. The contribution of each shell is a constant times $q^{-ks}$. Next, $Z(1_{\mathfrak{p}^N}, \chi, s) = \chi(\varpi)^N q^{-Ns} q^{-d/2} L(\chi, s)$ if $\chi$ is unramified, and it is 0 if $\chi$ is ramified, because then the integral of $\chi$ over each shell is 0. Thus $Z(f, \chi, s) = P + f(0) \, C q^{-Ns} L(\chi, s)$, where $P$ is a polynomial in $q^s$ and $q^{-s}$ and $C$ is a constant. Division by $L(\chi, s)$ gives a polynomial in $q^s$ and $q^{-s}$, because $1 / L(\chi, s)$ is one. $\square$
 
-For a nonarchimedean $K$ and $d(\psi) = 0$ the theorem is Theorem 4.3.1, with $m = a(\chi)$. Part 4 is Proposition 4.3.4. The theorem holds for every nontrivial $\psi$ on an archimedean field too, with the factor of Proposition 5.2.10 below. In summary, the $\varepsilon$-factors for the standard situation are:
+For a nonarchimedean $K$ and $d(\psi) = 0$ the theorem is Theorem 4.3.1, with $m = a(\chi)$. Part 4 is Proposition 4.3.4. Parts 1, 2 and 4 of the theorem hold for every nontrivial $\psi$ on an archimedean field too, with the factor of Proposition 5.2.10 below. In summary, the $\varepsilon$-factors for the standard situation are:
 1. $\chi(\varpi)^d q^{d(1/2 - s)}$ for unramified $\chi$ on a nonarchimedean field, with $d = d(\psi)$;
 2. $\chi(\varpi)^{n+d} q^{d/2 - (n+d)s} G(\chi^{-1}, \psi)$ for ramified $\chi$ with $a(\chi) = n$;
 3. $(-i)^a$ for $\chi = \mathrm{sgn}^a |\cdot|^t$ on $\mathbb{R}$, with $\psi_\mathbb{R}$;
@@ -145,7 +146,7 @@ Lean: not stated yet
 $$Z(\mathcal{F}_a f, \chi^{-1}, 1 - s) = |a|^{1/2} \int_{K^\times} \hat f(ay) \chi^{-1}(y) |y|^{1-s} d^\times y = |a|^{1/2} \chi(a) |a|^{s - 1} Z(\hat f, \chi^{-1}, 1 - s).$$
 So $\gamma(\chi, s, \psi_a) = \chi(a) |a|^{s - 1/2} \gamma(\chi, s, \psi)$. The $L$-factors do not depend on $\psi$. $\square$
 
-This proves Remark 4.3.5. It also defines $\varepsilon(\chi, s, \psi)$ for every nontrivial $\psi$ on $\mathbb{R}$ and $\mathbb{C}$, because each such $\psi$ is $(\psi_\mathbb{R})_a$ or $(\psi_\mathbb{C})_a$ by Proposition 5.1.2. Parts 1, 2 and 4 of Theorem 5.2.7 then hold for every $\psi$, and the form of $\varepsilon$ in part 3 holds for every $\psi$ too. For a nonarchimedean field the proposition is consistent with Propositions 5.2.3 and 5.2.4, because $d(\psi_a) = d(\psi) + v(a)$.
+This proves Remark 4.3.5. It also defines $\varepsilon(\chi, s, \psi)$ for every nontrivial $\psi$ on $\mathbb{R}$ and $\mathbb{C}$, because each such $\psi$ is $(\psi_\mathbb{R})_a$ or $(\psi_\mathbb{C})_a$ by Proposition 5.1.2. Parts 1, 2 and 4 of Theorem 5.2.7 then hold for every $\psi$. On a nonarchimedean field the form of $\varepsilon$ in part 3 holds for every $\psi$ too. On an archimedean field $\varepsilon(\chi, s, \psi_a)$ depends on $s$ through the factor $|a|^{s - 1/2}$, so the last claim of part 3 holds only for $|a| = 1$. For a nonarchimedean field the proposition is consistent with Propositions 5.2.3 and 5.2.4, because $d(\psi_a) = d(\psi) + v(a)$.
 
 **Example 5.2.11 (the sign at a real place).** Let $K = \mathbb{R}$ and $\psi(x) = e^{2\pi i x}$. Many texts use this character. It is $(\psi_\mathbb{R})_{-1}$, so Proposition 5.2.10 gives
 $$\varepsilon(\mathrm{sgn}^a |\cdot|^t, s, \psi) = \mathrm{sgn}(-1)^a (-i)^a = i^a.$$
@@ -316,7 +317,7 @@ Lean: `Langlands.LocalGL1.shellCoeff_addChar_eq_zero_of_lt`, `Langlands.LocalGL1
 
 *Proof.* Part 1 uses a translation. As $j + a \le -d - 1$, the ideal $\mathfrak{p}^{j+a}$ contains $\mathfrak{p}^{-d-1}$. So there is $t \in \mathfrak{p}^{j+a}$ with $\psi(t) \ne 1$. Let $y \in \varpi^j \mathcal{O}_K^\times$. Then $|t| < |y|$, so $y + t$ lies on the same shell. Also $(y + t)/y = 1 + y^{-1} t$ lies in $U^{(a)}$, so $\chi^{-1}(y + t) = \chi^{-1}(y)$. The map $y \mapsto y + t$ is a bijection of the shell, and it preserves $dy$. Let $I$ be the integral. Then $I = \int \chi^{-1}(y + t) \psi(y + t) \, dy = \psi(t) I$, so $I = 0$.
 
-Part 2 uses a multiplication, as in the proof of Theorem 5.2.22. The integral converges absolutely, because the absolute value of the integrand is $|y|^{\sigma - \mathrm{Re}(s)}$ and $\sigma - \mathrm{Re}(s) > -1$. By Proposition 5.2.13 there is $w \in U^{(a-1)}$ with $\chi(w) \ne 1$. Let $y \in \mathfrak{p}^L$. Then $(w - 1) y \in \mathfrak{p}^{a - 1 + L} \subseteq \mathfrak{p}^{-d}$, so $\psi(wy) = \psi(y)$. Also $|wy| = |y|$. The map $y \mapsto wy$ is a bijection of $\mathfrak{p}^L \smallsetminus \{0\}$, and it preserves $dy$ because $|w| = 1$. So the integral $J$ satisfies $J = \chi^{-1}(w) J$, and $J = 0$. $\square$
+Part 2 uses a multiplication, as in the proof of Theorem 5.2.22. The integral converges absolutely, because the absolute value of the integrand is $|y|^{-\sigma - \mathrm{Re}(s)}$ and $-\sigma - \mathrm{Re}(s) > -1$. By Proposition 5.2.13 there is $w \in U^{(a-1)}$ with $\chi(w) \ne 1$. Let $y \in \mathfrak{p}^L$. Then $(w - 1) y \in \mathfrak{p}^{a - 1 + L} \subseteq \mathfrak{p}^{-d}$, so $\psi(wy) = \psi(y)$. Also $|wy| = |y|$. The map $y \mapsto wy$ is a bijection of $\mathfrak{p}^L \smallsetminus \{0\}$, and it preserves $dy$ because $|w| = 1$. So the integral $J$ satisfies $J = \chi^{-1}(w) J$, and $J = 0$. $\square$
 
 In part 1 the shell lies below the conductor in the sense that $|y| > q^{a+d}$: there the additive character oscillates on balls on which $\chi$ is constant. In part 2 the roles change: $\psi$ is constant on the orbits of a subgroup on which $\chi$ is not trivial. Only the shell $|y| = q^{a+d}$ is left between the two.
 
