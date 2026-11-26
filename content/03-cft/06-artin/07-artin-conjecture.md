@@ -2,8 +2,9 @@
 title: Artin's conjecture
 nodes: [LGEHB4MGJK, LGX6BXWH0J]
 sources: [Del69, DS74, KW09, Kis09, Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Artin's conjecture
@@ -90,7 +91,7 @@ Before Khare and Wintenberger, the odd icosahedral case was known only in part. 
 
 **Remark 6.7.9 (the Lean forms of Conjecture 6.7.1 and Theorem 6.7.7).** Both statements are in `Langlands/Statements/Galois.lean`, with the definitions of Remark 6.2.5. Neither is proved in the project.
 1. `Langlands.ArtinConjecture` quantifies over a number field $K$, an intermediate field $L$ of `AlgebraicClosure K` that is finite and Galois over $K$, an integer $n$ and a homomorphism `ρ : Gal(L/K) →* GL (Fin n) ℂ` with `IsIrreducibleRep ρ` and `ρ ≠ 1`. It asserts that there is a function `F : ℂ → ℂ` with `Differentiable ℂ F` and `F s = artinLFunction ρ s` for $1 < \mathrm{Re}(s)$. A differentiable function on $\mathbb{C}$ is entire, and by the identity theorem it is unique. So `F` is the continuation of Conjecture 6.7.1. The condition `ρ ≠ 1` excludes only the trivial character, since an irreducible representation of dimension $n \ge 2$ is never trivial.
-2. The Lean statement is about $L(s, \rho)$ and not about $\Lambda(s, \rho)$. The docstring of `ArtinConjecture` says that the archimedean factors have no zeros, so that the completed function has the same poles. That argument shows only that the poles of $L$ are poles of $\Lambda$. Proposition 6.7.2 gives the full equivalence, with the functional equation.
+2. The Lean statement is about $L(s, \rho)$ and not about $\Lambda(s, \rho)$. The docstring of `ArtinConjecture` notes that the archimedean factors have no zeros, so that an entire $\Lambda(s, \rho)$ gives an entire $L(s, \rho)$, and that the converse needs the functional equation, because the archimedean factors have poles. Proposition 6.7.2 proves the converse.
 3. In `Langlands.ArtinOdd2Q` the base field is $\mathbb{Q}$. The condition of oddness is that $\det \rho(c) = -1$ for each $c$ with `IsComplexConjugationOf c`. This predicate says that there is a ring homomorphism `j : L →+* ℂ` with `j (c x) = conj (j x)` for all $x$. If $L$ is totally real, then $c = 1$ satisfies it, and $\det \rho(1) = 1$. So the hypothesis fails for every $\rho$ when $L$ is totally real, as it should, because such a $\rho$ is even. If $L$ is not totally real, every $c$ with this property is a complex conjugation in the sense of this section.
 4. The conclusion of `ArtinOdd2Q` asserts that $L(s, \rho)$ has an entire continuation, and that there are $N > 0$, `χ : DirichletCharacter ℂ N` and `f : CuspForm (Gamma1 N) 1` with `IsNormalizedEigenformWithCharacter f χ`, such that `artinLFunction ρ s = LSeries (qCoeffGamma1 f) s` for $1 < \mathrm{Re}(s)$. The form is a normalized eigenform, not a newform, because Mathlib has no theory of oldforms yet. Two Dirichlet series that agree on a half plane have the same coefficients. So the $q$-expansion of `f` is that of the newform of Theorem 6.7.7, and `f` is this newform, viewed at a level that is a multiple of the conductor. The statement does not say that `χ` corresponds to $\det \rho$. This follows from the equality of the coefficients at $p$ and $p^2$ for $p \nmid N$, with the Hecke relation $a_{p^2} = a_p^2 - \chi(p)$.
 

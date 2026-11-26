@@ -2,8 +2,9 @@
 title: The Artin L-function
 nodes: []
 sources: [Neu99]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The Artin L-function
@@ -52,6 +53,6 @@ The Lean theorem is an identity of the two products over the height one spectrum
 2. The Frobenius. The definition `frobeniusAbove L v` is `Classical.epsilon` applied to the property `IsArithFrobAt (𝓞 K) σ P` of Mathlib, for $P = $ `primeAbove L v`. This property says that $\sigma(x) - x^q \in P$ for all $x \in \mathcal{O}_L$, where $q = N(v)$ is the cardinality of $\mathcal{O}_K / v$. It is the arithmetic Frobenius, not the geometric one. When $L/K$ is finite and Galois such an element exists by Volume 1, Theorem 1.4.6, and by Section 6.1 the elements with this property form exactly the Frobenius coset at $P$. At a ramified prime the coset has more than one element, and the choice operator picks one. Lemma 6.1.2, part 4, shows that the factor does not depend on it.
 3. The inertia invariants. The project does not form the subspace $V^I$. It uses the matrix `inertiaProjector ρ P`, which is $(\mathrm{Nat.card}\, I)^{-1} \sum_{\tau \in I} \rho(\tau)$, with $I$ = `P.inertia Gal(L/K)`, the subgroup of the $\sigma$ with $\sigma(x) - x \in P$ for all $x$. This is the projector $e_I$ of Lemma 6.1.2. The sum is a `finsum`, which is the ordinary sum for a finite group. If $I$ were infinite, `Nat.card I` would be $0$, and the inverse of $0$ is $0$ in Lean. This value is never used, because the statements assume that $L/K$ is finite.
 4. The determinant. The local factor `artinLocalFactor ρ v s` is the inverse of the determinant of the $n \times n$ matrix $1 - N(v)^{-s} \rho(\sigma) e_I$, where $\sigma$ = `frobeniusAbove L v`. By Lemma 6.1.2, part 3, this is $\det(1 - N(v)^{-s} \rho(\sigma) \mid V^I)$. So the project does not need a basis of $V^I$. In Lean the inverse of $0$ is $0$, but the determinant is never $0$ for $\mathrm{Re}(s) > 0$. Indeed, the eigenvalues of $\rho(\sigma) e_I$ are $0$ and roots of unity, and $|N(v)^{-s}| < 1$.
-5. The product. The function `artinLFunction ρ s` is the unconditional product `∏'` over `HeightOneSpectrum (𝓞 K)`. In Mathlib this product is defined as the limit over the finite sets of primes when the product is multipliable, and as $1$ otherwise. By Theorem 6.2.2 the product is multipliable for $\mathrm{Re}(s) > 1$, with the value $L(s, \rho)$. For $\mathrm{Re}(s) \le 1$ the Lean value carries no meaning. For this reason every statement of the project about $L(s, \rho)$ compares it with another function only on the half plane $\mathrm{Re}(s) > 1$.
+5. The product. The function `artinLFunction ρ s` is the unconditional product `∏'` over `HeightOneSpectrum (𝓞 K)`. In Mathlib this product is defined as the limit over the finite sets of primes when the product is multipliable, and as $1$ otherwise. By Theorem 6.2.2 the product is multipliable for $\mathrm{Re}(s) > 1$, with the value $L(s, \rho)$. For $\mathrm{Re}(s) \le 1$ the Lean value carries no meaning. For this reason the statements `ArtinConjecture` and `ArtinOdd2Q` of Section 6.7 compare $L(s, \rho)$ with another function only on the half plane $\mathrm{Re}(s) > 1$. The identity of Proposition 6.2.3 holds for every $s$, because both sides are products of the same factors.
 
 The Lean definition contains no archimedean factors. It is the function $L(s, \rho)$ of Definition 6.2.1, not the completed function $\Lambda(s, \rho)$ of Section 6.4.

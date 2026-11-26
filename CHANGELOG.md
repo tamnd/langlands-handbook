@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Changed
+
+- Volume 3, Chapter 6 has the status `checked`. The second pass fixed Remarks 6.2.5 and 6.7.9 to match the Lean statements, and Exercises 1 and 3 of Section 6.8.
+
 ## v0.1.12 (2026-11-26)
 
 ### Added
