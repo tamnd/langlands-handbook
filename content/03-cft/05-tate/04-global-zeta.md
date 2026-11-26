@@ -107,7 +107,7 @@ $$\Lambda_F(s) = |d_F|^{1/2 - s} \Lambda_F(1 - s).$$
 The residue of $\zeta_F(s)$ at $s = 1$ is
 $$\mathrm{Res}_{s = 1} \zeta_F(s) = \frac{2^{r_1} (2\pi)^{r_2} \, h R}{w \sqrt{|d_F|}}.$$
 
-Lean: not stated yet
+Lean: `Langlands.Tate.dedekindXi_one_sub`, for the functional equation in the form of Theorem 5.3.34. The residue is not in Lean yet.
 
 *Proof.* Take $\chi = 1$, so $s_0 = 0$, and $f = \otimes_v f_v$ with $f_v = 1_{\mathcal{O}_v}$ at the finite places, $f_v(x) = e^{-\pi x^2}$ at the real places and $f_v(z) = e^{-2\pi z \bar z}$ at the complex places. By Propositions 5.2.3, 5.2.5 and 5.2.6, $Z(f_v, 1, s)$ is $q_v^{-d_v/2} (1 - q_v^{-s})^{-1}$, $\Gamma_\mathbb{R}(s)$ and $\pi \Gamma_\mathbb{C}(s)$. By Proposition 5.4.6,
 $$Z(f, 1, s) = |d_F|^{-1/2} \pi^{r_2} \Lambda_F(s).$$
