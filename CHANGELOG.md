@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.23 (2026-11-27)
+
 ### Added
 
 - Section 5.2 of Volume 3 now follows the Lean proof of the local functional equation for a ramified character and each Schwartz-Bruhat function.
