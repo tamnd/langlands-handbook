@@ -4,6 +4,15 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 3, Chapter 5, Section 5: a new subsection on class group characters in Lean, with Definition 5.5.17 (class group characters), Lemma 5.5.18 (the values of a class group character), Proposition 5.5.19 (the Dirichlet series), Theorem 5.5.20 (the functional equation), Theorem 5.5.21 (Hecke's theorem for class group characters), Remark 5.5.22 on the root number, Remark 5.5.23 on the link with Hecke characters and Remark 5.5.24 on the Lean proof in `Langlands/Tate/ClassCharacter.lean`.
+
+### Changed
+
+- Remark 5.5.16 now refers to the new subsection on class group characters.
+- Remark 5.3.35 now refers to Theorem 5.5.10, not Theorem 5.5.9.
+
 ## v0.1.11 (2026-11-26)
 
 ### Added
