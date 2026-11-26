@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.16 (2026-11-26)
+
 ### Added
 
 - Volume 2, Chapter 5, The dual group and the L-group. The chapter covers the dual root datum, the dual group, the dual groups of the classical groups, the L-group of a quasi-split group, the Satake isomorphism and L-parameters, with 11 exercises.
