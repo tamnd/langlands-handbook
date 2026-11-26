@@ -22,15 +22,21 @@ Each $\ell$-group has a left Haar measure, unique up to a positive scalar. If $J
 
 **Definition 1.1.1 (smooth representation).** Let $G$ be an $\ell$-group. A *representation* $(\pi, V)$ of $G$ is a complex vector space $V$ with a homomorphism $\pi : G \to GL(V)$. A vector $v \in V$ is *smooth* if its stabilizer $\{g \in G : \pi(g) v = v\}$ is open in $G$. The representation is *smooth* if each vector is smooth. A *morphism* of representations is a linear map that commutes with the actions of $G$.
 
-Lean: `Langlands.SmoothRep`
+Lean: `Langlands.SmoothRep`. The Lean structure bundles the space, the action and the smoothness, which asks for an open stabilizer of each vector as in the definition, and its space is in the universe of $G$, so that the isomorphism classes form a type.
 
 The definition puts no topology on $V$. The smooth vectors of any representation form a stable subspace, and on this subspace $G$ acts smoothly. A vector $v$ is smooth if and only if $v \in V^J$ for some compact open subgroup $J$, where $V^J$ is the space of $J$-fixed vectors. So $V$ is smooth if and only if $V = \bigcup_J V^J$, with $J$ running over the compact open subgroups. The smooth representations of $G$ form an abelian category. Subrepresentations, quotients, direct sums and tensor products with finite-dimensional smooth representations are smooth.
 
+Lean: `Langlands.smoothVectors`, `Langlands.isGreatest_smoothVectors`, `Langlands.SmoothRep.sub`, `Langlands.SmoothRep.quotient`, `Langlands.SmoothRep.prod`. The Lean theorem `isGreatest_smoothVectors` says a little more than the text: the smooth vectors are the largest stable subspace on which $G$ acts smoothly, and tensor products are not in Lean.
+
 **Definition 1.1.2 (admissible and irreducible representation).** A smooth representation $(\pi, V)$ of $G$ is *admissible* if $V^J$ has finite dimension for each compact open subgroup $J$. It is *irreducible* if $V \ne 0$ and the only stable subspaces of $V$ are $0$ and $V$.
 
-Lean: `Langlands.SmoothRep.IsAdmissible` and `Langlands.SmoothRep.IsIrreducible`
+Lean: `Langlands.SmoothRep.IsAdmissible` and `Langlands.SmoothRep.IsIrreducible`. Irreducibility is as in the text, and admissibility is asked for each open subgroup $U$ in place of each compact open subgroup $J$, which is the same condition by the next paragraph.
 
-The Lean definition of admissibility asks that $V^U$ has finite dimension for each open subgroup $U$. An open subgroup contains a compact open subgroup, so this is the same condition. The isomorphism classes of irreducible admissible representations are `Langlands.IrrSmooth G` in the Lean project. Theorem 1.1.11 below shows that for a reductive group the word admissible can be left out.
+The Lean definition of admissibility asks that $V^U$ has finite dimension for each open subgroup $U$. An open subgroup contains a compact open subgroup $J$, and $V^U \subseteq V^J$, so this is the same condition. A subrepresentation $W$ of an admissible representation $V$ is admissible, since $W^J = W \cap V^J$.
+
+Lean: `Langlands.SmoothRep.IsAdmissible.sub`. The Lean proof is the one of the text: it maps $W^U$ injectively into $V^U$.
+
+ The isomorphism classes of irreducible admissible representations are `Langlands.IrrSmooth G` in the Lean project. Theorem 1.1.11 below shows that for a reductive group the word admissible can be left out.
 
 **Example 1.1.3 (first examples).**
 1. A *smooth character* of $G$ is a homomorphism $\theta : G \to \mathbb{C}^\times$ with open kernel. It is an irreducible admissible representation of dimension one. For $G = K^\times$ the smooth characters are the characters of Volume 3, Chapter 4, since a continuous character of $K^\times$ has open kernel. For $G = GL_n(K)$ each smooth character has the form $\chi \circ \det$ (Exercise 1).
@@ -58,7 +64,7 @@ Part 2 fails for a group that is not compact. For example the map $C_c^\infty(K)
 
 **Definition 1.1.5 (contragredient).** Let $(\pi, V)$ be a smooth representation of $G$. The group $G$ acts on the dual space $V^*$ by $(\pi^*(g) \lambda)(v) = \lambda(\pi(g^{-1}) v)$. The *contragredient* $(\pi^\vee, V^\vee)$ is the subrepresentation of the smooth vectors of $V^*$.
 
-Lean: `Langlands.SmoothRep.contragredient`
+Lean: `Langlands.SmoothRep.contragredient`. As in the text, it is the subrepresentation of the dual representation on `Langlands.smoothVectors`.
 
 A linear form $\lambda$ is smooth if and only if it is fixed by some compact open subgroup $J$. By Proposition 1.1.4, such a form vanishes on $V(J)$, and it is determined by its restriction to $V^J$. So $(V^\vee)^J = (V^J)^*$.
 
@@ -82,11 +88,11 @@ For an admissible $\pi$ the proof is simpler. Choose $J$ with $V^J \ne 0$. The s
 
 **Corollary 1.1.8 (central character).** Let $(\pi, V)$ be an irreducible smooth representation of $G$, with $G$ countable at infinity, and let $Z$ be the center of $G$. There is a smooth character $\omega_\pi$ of $Z$ with $\pi(z) = \omega_\pi(z)$ for each $z \in Z$. It is the *central character* of $\pi$.
 
-Lean: `Langlands.SmoothRep.HasCentralChar`
+Lean: `Langlands.SmoothRep.HasCentralChar`. This is only the relation $\pi(a \cdot 1) = \omega(a)$ for $G = GL_n(K)$, so the existence of $\omega_\pi$ is not stated in Lean.
 
 *Proof.* Each $\pi(z)$ is an endomorphism of $\pi$, so it is a scalar $\omega_\pi(z)$ by Theorem 1.1.7. The kernel of $\omega_\pi$ is the stabilizer in $Z$ of any nonzero vector, so it is open. $\square$
 
-For $G = GL_n(K)$ the center is $K^\times$, embedded by $a \mapsto a \cdot 1$. The Lean project calls this embedding `Langlands.scalarGL`, and `HasCentralChar π ω` says that $\pi(a \cdot 1) = \omega(a)$ for each $a \in K^\times$. The Lean project proves that a character $\theta$ of $GL_n(K)$ has central character $a \mapsto \theta(a \cdot 1)$, in `Langlands.charRep_hasCentralChar`.
+For $G = GL_n(K)$ the center is $K^\times$, embedded by $a \mapsto a \cdot 1$. The Lean project calls this embedding `Langlands.scalarGL`, and `HasCentralChar π ω` says that $\pi(a \cdot 1) = \omega(a)$ for each $a \in K^\times$. The Lean project proves the case $n = 1$: the representation of $GL_1(K)$ given by a smooth character $\chi$ of $K^\times$ has central character $\chi$. This is `Langlands.charRep_hasCentralChar`, in the file `Langlands/Statements/LocalLanglands.lean`.
 
 ### Twists, and the Lean vocabulary
 
@@ -94,9 +100,9 @@ Let $\theta$ be a smooth character of $G$ and $\pi$ a smooth representation. The
 
 **Definition 1.1.9 (the irreducible representations).** Let $G$ be an $\ell$-group. Then $\mathrm{Irr}(G)$ is the set of isomorphism classes of irreducible admissible representations of $G$. For $\chi$ a smooth character, $[\pi] \mapsto [\pi \otimes \chi]$ and $[\pi] \mapsto [\pi^\vee]$ are well defined maps of $\mathrm{Irr}(G)$.
 
-Lean: `Langlands.IrrSmooth`
+Lean: `Langlands.IrrSmooth`. In Lean the two maps of the definition are relations on representatives, see Remark 1.1.10.
 
-**Remark 1.1.10 (the Lean vocabulary).** The file `Langlands/Statements/Smooth.lean` defines a bundled smooth representation `Langlands.SmoothRep G` of a topological group $G$. Its carrier is a complex vector space with no topology, and smoothness says that each vector has an open stabilizer, as in Definition 1.1.1. The twist is `SmoothRep.twist`, by a character with open kernel. The contragredient is `SmoothRep.contragredient`, the smooth vectors of the dual. The relations `IrrSmooth.IsTwist` and `IrrSmooth.IsContragredient` on $\mathrm{Irr}(G)$ are defined on representatives: `IsTwist y x θ` says that $y$ is the class of $\pi \otimes \theta$ for a representative $\pi$ of $x$. The file also defines matrix coefficients (`SmoothRep.coeff`), restriction along a continuous homomorphism (`SmoothRep.restrict`), subrepresentations on stable subspaces (`SmoothRep.sub`), and the relation `SmoothRep.HasHom` of a nonzero morphism. Two small facts are proved: `Langlands.SmoothRep.charRep_isIrreducible` says that the representation of a smooth character is irreducible and admissible, and `Langlands.SmoothRep.charRep_iso_iff` says that two characters give isomorphic representations only if they are equal. None of these declarations is a node of the map. They are the vocabulary of the statements of Chapter 3.
+**Remark 1.1.10 (the Lean vocabulary).** The file `Langlands/Statements/Smooth.lean` defines a bundled smooth representation `Langlands.SmoothRep G` of a topological group $G$. Its carrier is a complex vector space with no topology, and smoothness says that each vector has an open stabilizer, as in Definition 1.1.1. The twist is `SmoothRep.twist`, by a character with open kernel. The contragredient is `SmoothRep.contragredient`, the smooth vectors of the dual. The relations `IrrSmooth.IsTwist` and `IrrSmooth.IsContragredient` on $\mathrm{Irr}(G)$ are defined on representatives: `IsTwist y x θ` says that $y$ is the class of $\pi \otimes \theta$ for a representative $\pi$ of $x$. The file also defines matrix coefficients (`SmoothRep.coeff`), restriction along a continuous homomorphism (`SmoothRep.restrict`), subrepresentations on stable subspaces (`SmoothRep.sub`), and the relation `SmoothRep.HasHom` of a nonzero morphism. Two small facts are proved: `Langlands.SmoothRep.charRep_isIrreducible` says that the representation of a smooth character is irreducible and admissible, and `Langlands.SmoothRep.charRep_iso_iff` says that two characters give isomorphic representations only if they are equal. None of these declarations is a node of the map. They are the vocabulary of the statements of Chapter 3. The file `Langlands/Smooth/Induction.lean` builds on this vocabulary. It proves the facts on smooth vectors and on subrepresentations stated above, and it defines induction and Jacquet modules, see Section 1.3.
 
 **Theorem 1.1.11 (Jacquet, Bernstein).** Let $G$ be the group of points of a connected reductive group over $K$. Each irreducible smooth representation of $G$ is admissible.
 

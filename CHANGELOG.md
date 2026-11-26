@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 6, Chapter 1: Lean lines for smooth vectors, admissibility, induction, Frobenius reciprocity and the Jacquet module, from Langlands/Smooth/Induction.lean, and six corrections.
+
 ## v0.1.17 (2026-11-26)
 
 ### Added
