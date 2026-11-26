@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.9 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 5, Section 3: a new subsection on the functional equation of the Dedekind zeta function of each number field, with Lemma 5.3.33 (the function of a fractional ideal), Theorem 5.3.34 (the functional equation) and Remark 5.3.35 on the Lean proof in `Langlands/Tate/DedekindFE.lean`.
