@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6, Section 1.5: an elementary proof of the irreducibility criterion that follows the Lean proof, and Exercise 21.
+
 - A checking pass over the new ray class text of Volume 3, Section 5.5, with the Lean remarks for RayClassQuadratic.lean and RayClassFE.lean.
 
 - Volume 3, Section 5.5: Hecke characters of ray class type, the ray class group and the functional equation for ramified characters, with Exercises 19 to 21.
