@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.8 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 5, Section 3: a new subsection on the unfolding of the unit average, with Lemma 5.3.29 (the Mellin transform of one orbit of the units), Proposition 5.3.30 (the unfolding), Corollary 5.3.31 (the Mellin transform as a Dirichlet series) and Remark 5.3.32 on the Lean proof in `Langlands/Tate/UnitMellin.lean` and `Langlands/Tate/UnitUnfold.lean`. Remark 5.3.13 and Remark 5.3.28 now refer to the new subsection.
