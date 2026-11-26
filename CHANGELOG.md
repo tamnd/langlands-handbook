@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.15 (2026-11-26)
+
 ### Added
 
 - Volume 2, Algebraic groups and their duals, with its introduction and Chapter 1, Linear algebraic groups. The chapter has seven sections: affine groups and Hopf algebras, subgroups and quotients, the Jordan decomposition, diagonalizable groups and tori, unipotent and solvable groups, Borel subgroups, and the exercises with notes.
