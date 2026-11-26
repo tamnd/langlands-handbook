@@ -6,6 +6,7 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6, "Representations of p-adic groups and the local Langlands correspondence", Chapter 1, "Smooth representations": smooth and admissible representations, the Hecke algebra, parabolic induction and Jacquet modules, supercuspidal representations, the representations of GL(2), the classification of Bernstein and Zelevinsky in outline, and Whittaker models, with exercises and the notes. Each Lean definition that the chapter uses has its name.
 - Volume 3, Chapter 7, "Global class field theory": ideles in extensions and the ray class groups, the global norm residue map and the reciprocity law, the two inequalities and the abstract class field theory of Neukirch with the plan of the Lean proof, norm limitation and the existence theorem, the theorem of Kronecker and Weber, ray class fields and conductors, the Hilbert class field and the principal ideal theorem, Hecke characters of finite order as Galois characters, and the global Weil group, with twelve exercises and the notes.
 - Volume 3, Chapter 5: Poisson summation on a lattice and the theta transformation formula, with their Lean names, and a remark on the Lean form of the local functional equation and its limits.
 
