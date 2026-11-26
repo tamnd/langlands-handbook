@@ -2,8 +2,9 @@
 title: The Weil group and its representations
 nodes: [LGBPNG162F, LGQVB4Z4KN, LG3VDFDBW0, LGAV7YV6K6]
 sources: [Tat79, Ser79, BH06]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The Weil group and its representations
@@ -112,4 +113,4 @@ So the irreducible representations of $W_K$ are the Artin representations of Vol
 
 **Example 2.1.13 (induced representations of dimension 2).** Let $L / K$ be a separable quadratic extension, let $\tau \in W_K \setminus W_L$, and let $\theta$ be a character of $W_L$, that is, a character of $L^\times$. Let $\theta^\tau(w) = \theta(\tau^{-1} w \tau)$ for $w \in W_L$. By Mackey's formula the restriction of $\mathrm{Ind}_{W_L}^{W_K} \theta$ to $W_L$ is $\theta \oplus \theta^\tau$. By Frobenius reciprocity, $\mathrm{End}(\mathrm{Ind}\, \theta) \cong \mathrm{Hom}_{W_L}(\theta, \theta \oplus \theta^\tau)$. So $\mathrm{Ind}\, \theta$ is irreducible if and only if $\theta^\tau \ne \theta$. Under reciprocity for $L$, $\theta^\tau$ is the character $x \mapsto \theta(\bar x)$ of $L^\times$, where $x \mapsto \bar x$ is the nontrivial automorphism of $L / K$. So $\mathrm{Ind}\, \theta$ is irreducible if and only if $\theta$ does not factor through the norm $N_{L/K}$. In Chapter 3 these dihedral representations correspond to supercuspidal representations of $GL_2(K)$. Example 2.1.14 gives the case where $L / K$ is unramified and $\theta$ is tamely ramified.
 
-**Example 2.1.14 (characters of the tame quotient).** Let $\theta$ be a character of $k_L^\times$, where $L$ is the unramified extension of degree $n$ of $K$ and $k_L$ has $q^n$ elements. By Proposition 2.1.6 the character $t_{q^n - 1}$ maps $I_K$ onto $\mu_{q^n - 1}$, which the reduction map identifies with $k_L^\times$. So $\theta \circ t_{q^n - 1}$ is a character of $I_K$ of order dividing $q^n - 1$. It extends to a character of $W_L$ by $\Phi^n \mapsto 1$. By part 2 of Proposition 2.1.6, its conjugate by $\Phi$ is $\theta^{q}$ composed with the same map, up to the identification. So $\mathrm{Ind}_{W_L}^{W_K}$ of this character is irreducible if and only if $\theta, \theta^q, \dots, \theta^{q^{n-1}}$ are distinct. These are the tamely ramified irreducible representations of dimension $n$ with trivial wild inertia. For $n = 2$ they correspond to the supercuspidal representations of depth zero of Example 1.4.9.
+**Example 2.1.14 (characters of the tame quotient).** Let $\theta$ be a character of $k_L^\times$, where $L$ is the unramified extension of degree $n$ of $K$ and $k_L$ has $q^n$ elements. By Proposition 2.1.6 the character $t_{q^n - 1}$ maps $I_K$ onto $\mu_{q^n - 1}$, which the reduction map identifies with $k_L^\times$. So $\theta \circ t_{q^n - 1}$ is a character of $I_K$ of order dividing $q^n - 1$. It extends to a character of $W_L$ by $\Phi^n \mapsto 1$. By part 2 of Proposition 2.1.6, its conjugate by $\Phi$ is $\theta^{q}$ composed with the same map, up to the identification. So $\mathrm{Ind}_{W_L}^{W_K}$ of this character is irreducible if and only if $\theta, \theta^q, \dots, \theta^{q^{n-1}}$ are distinct. Up to an unramified twist, these are the irreducible representations of dimension $n$ that are trivial on $P_K$. For $n = 2$ they correspond to the supercuspidal representations of depth zero of Example 1.4.9.

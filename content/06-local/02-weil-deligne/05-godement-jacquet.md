@@ -2,8 +2,9 @@
 title: The standard L-factor of Godement and Jacquet
 nodes: []
 sources: [BH06, JL70, HT01, Hen00]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The standard L-factor of Godement and Jacquet

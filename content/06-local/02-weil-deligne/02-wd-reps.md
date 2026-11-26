@@ -2,8 +2,9 @@
 title: Weil-Deligne representations
 nodes: []
 sources: [Tat79, BH06]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Weil-Deligne representations
@@ -24,7 +25,7 @@ Since $\|w\| = 1$ for $w \in I_K$, the relation says that $N$ commutes with $r(I
 
 Lean: not stated yet (the structure has the field `isNilpotent`)
 
-*Proof.* The relation gives $r(\Phi) N = q^{-1} N r(\Phi)$, so $(r(\Phi) - q^{-1}\lambda)^k N = q^{-k} N (r(\Phi) - \lambda)^k$ for all $k \ge 0$. If $v \in V_\lambda$, then $(r(\Phi) - \lambda)^k v = 0$ for large $k$, so $Nv \in V_{q^{-1}\lambda}$. The operator $r(\Phi)$ has at most $n$ eigenvalues. Since $q > 1$, the sequence $\lambda, q^{-1}\lambda, q^{-2}\lambda, \dots$ has no repetition, so it leaves the set of eigenvalues after at most $n$ steps. Hence $N^n V_\lambda \subseteq V_{q^{-n}\lambda}$ is $0$ for each $\lambda$. $\square$
+*Proof.* The relation gives $r(\Phi) N = q^{-1} N r(\Phi)$, so $(r(\Phi) - q^{-1}\lambda)^k N = q^{-k} N (r(\Phi) - \lambda)^k$ for all $k \ge 0$. If $v \in V_\lambda$, then $(r(\Phi) - \lambda)^k v = 0$ for large $k$, so $Nv \in V_{q^{-1}\lambda}$. The operator $r(\Phi)$ has at most $n$ eigenvalues. Since $q > 1$, the $n + 1$ numbers $\lambda, q^{-1}\lambda, \dots, q^{-n}\lambda$ are distinct, so one of them, say $q^{-j}\lambda$, is not an eigenvalue. Then $V_{q^{-j}\lambda} = 0$, and $N^n V_\lambda \subseteq N^{n-j} V_{q^{-j}\lambda} = 0$ for each $\lambda$. $\square$
 
 **Definition 2.2.3 (operations).** Let $(r, N)$ and $(r', N')$ be Weil-Deligne representations on $V$ and $V'$.
 1. The *direct sum* is $(r \oplus r', N \oplus N')$ on $V \oplus V'$.

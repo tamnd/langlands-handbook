@@ -2,8 +2,9 @@
 title: The monodromy theorem
 nodes: []
 sources: [Tat79, Ser79]
-status: drafted
+status: checked
 drafted_by: writer@claude-opus-5-5
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The monodromy theorem
@@ -50,7 +51,7 @@ Fix a geometric Frobenius $\Phi$ and a generator of $\mathbb{Z}_\ell(1)$. Each $
 $$r(\Phi^m \sigma) = \rho(\Phi^m \sigma) \exp(-t_\ell(\sigma) N).$$
 1. The map $r$ is a homomorphism $W_K \to GL(V)$ with open kernel, and $(r, N)$ is a Weil-Deligne representation over $E$.
 2. If $\Phi$ is replaced by $\Phi' = \Phi \sigma_0$, the new representation is $r' = \exp(xN) \, r \, \exp(-xN)$ with $x = t_\ell(\sigma_0) / (q - 1)$. So $(r', N) \cong (r, N)$.
-3. If the generator of $\mathbb{Z}_\ell(1)$ is multiplied by $c^{-1}$ with $c \in \mathbb{Z}_\ell^\times$, the new pair is $(r, cN)$. It is isomorphic to $(r, N)$ over an algebraic closure of $E$.
+3. If the generator of $\mathbb{Z}_\ell(1)$ is multiplied by $c \in \mathbb{Z}_\ell^\times$, the new pair is $(r, cN)$. It is isomorphic to $(r, N)$ over an algebraic closure of $E$.
 4. The functor $\rho \mapsto (r, N)$ is an equivalence between the category of $\ell$-adic representations of $W_K$ over $E$ and the category of Weil-Deligne representations over $E$. The inverse is $(r, N) \mapsto \rho$ with $\rho(\Phi^m \sigma) = r(\Phi^m \sigma) \exp(t_\ell(\sigma) N)$.
 
 Lean: not stated yet
