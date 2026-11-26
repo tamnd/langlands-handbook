@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 6, Chapter 1: the Iwasawa decomposition for GL2, a new proof of Proposition 1.3.4, Exercise 17 and Lean lines from Langlands/Smooth/PrincipalSeries.lean.
+
 ## v0.1.18 (2026-11-26)
 
 ### Added
