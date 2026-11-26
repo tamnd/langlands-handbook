@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.6 (2026-11-26)
+
 ### Added
 
 - Volume 3, Chapter 5, Section 3: Corollary 5.3.23, the continuation, the functional equation and the residue of the Dedekind zeta function of an imaginary quadratic field, with the example Q(sqrt(-5)). Theorem 5.3.22 part (2) and Corollary 5.3.23 parts (1) and (2) now have Lean names from `Langlands/Tate/QuadraticDedekind.lean`. Remark 5.3.25 describes the Lean proof. The two remarks after the corollary are now Remark 5.3.24 and Remark 5.3.25.
