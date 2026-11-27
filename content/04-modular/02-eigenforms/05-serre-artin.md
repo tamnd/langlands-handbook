@@ -336,7 +336,7 @@ Fontaine defines $B_{\mathrm{cris}} = B_{\mathrm{cris}}^+[1/t]$. Part 2 of the n
 3. The ring $A_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$ has no $p$-torsion, and $B_{\mathrm{cris}}^+$ embeds into $B_{\mathrm{dR}}^+(\mathcal{O}_{\mathbb{C}_p})$ compatibly with $G_{\mathbb{Q}_p}$. The image of $t$ generates the maximal ideal of $B_{\mathrm{dR}}^+$. In particular $t \ne 0$ and $B_{\mathrm{cris}} \ne 0$.
 4. $B_{\mathrm{cris}}^{G_{\mathbb{Q}_p}} = \mathbb{Q}_p$, and $\dim_{\mathbb{Q}_p} D_{\mathrm{cris}}(V) \le \dim_{\mathbb{Q}_p} V$ for each $V$.
 
-Lean: not proved, see Remark 2.5.38.
+Lean: proved in part, see Theorem 2.5.56 and Remark 2.5.65.
 
 *Outline of the proof.* (1) In $\mathbb{Q}[[X, Y]]$ we have $\log((1 + X)(1 + Y)) = \log(1 + X) + \log(1 + Y)$. Put $X = [a] - 1$ and $Y = [b] - 1$, so that $[ab] - 1 = X + Y + XY$. Both sides are $p$-adically convergent series in the divided powers $X^{[i]} Y^{[j]}$, because $(X + Y)^{[n]} = \sum_i X^{[i]} Y^{[n-i]}$ and $(XY)^{[n]} = n! \, X^{[n]} Y^{[n]}$. A rearrangement of the series then gives the identity in $A_{\mathrm{cris}}$. The element $\varepsilon - 1$ is topologically nilpotent in $\mathcal{O}_{\mathbb{C}_p}^\flat$, so $\varepsilon^c = \lim \varepsilon^{c_n}$ for integers $c_n \to c$, and the formula for $\log [\varepsilon^c]$ follows by continuity. (2) Part 5 of Proposition 2.5.30 and part 1 give $\varphi(t) = \log [\varepsilon^p] = pt$. The element $g$ acts on $\varepsilon$ term by term, so $g\varepsilon = \varepsilon^{\chi(g)}$, and part 4 of Proposition 2.5.30 gives $gt = \log [\varepsilon^{\chi(g)}] = \chi(g) t$. (3) and (4) are in the paper of Fontaine cited above, and in the book of Fontaine and Ouyang. The embedding comes from the fact that the divided powers of $\xi$ converge in $B_{\mathrm{dR}}^+$. Then $\theta(t) = \log(\varepsilon^\sharp) = 0$, and the image of $t$ is $\xi$ times a unit. $\square$
 
@@ -373,7 +373,7 @@ so $c$ is a $1$-cocycle with values in $\mathbb{Z}_p(1)$. By part 1 of Theorem 2
 
 **Definition 2.5.36 (semistable representations).** Let $G_{\mathbb{Q}_p}$ act on $B_{\mathrm{st}} = B_{\mathrm{cris}}[u]$ by its action on the coefficients and by $g(u) = u + c(g) t$, and let $\varphi$ act by its action on $B_{\mathrm{cris}}$ and by $\varphi(u) = pu$. A representation $V$ of $G_{\mathbb{Q}_p}$ on a $\mathbb{Q}_p$-vector space of finite dimension is *semistable* if it is $B_{\mathrm{st}}$-admissible. We write $D_{\mathrm{st}}(V) = D_{B_{\mathrm{st}}}(V)$, with the operators $\varphi \otimes 1$ and $N \otimes 1$. A representation is *potentially semistable* if its restriction to $G_L$ is semistable for a finite extension $L$ of $\mathbb{Q}_p$, where one uses the same rings with $G_L$ in place of $G_{\mathbb{Q}_p}$.
 
-Lean: not formalized, see Remark 2.5.38.
+Lean: see Definition 2.5.62 and Remark 2.5.65.
 
 The formula is an action: $g(h(u)) = g(u + c(h)t) = u + c(g)t + c(h)\chi(g)t = u + c(gh)t$ by the cocycle relation and part 2 of Theorem 2.5.33. The operator $N$ commutes with $G_{\mathbb{Q}_p}$, since $N(g(u)) = -1 = g(N(u))$, and $N\varphi = p\varphi N$, since $N(\varphi(u)) = -p = p\varphi(N(u))$. Fontaine proved that $B_{\mathrm{st}}^{G_{\mathbb{Q}_p}} = \mathbb{Q}_p$ and that $\dim_{\mathbb{Q}_p} D_{\mathrm{st}}(V) \le \dim_{\mathbb{Q}_p} V$. By part 4 of Proposition 2.5.35, $D_{\mathrm{cris}}(V) = D_{\mathrm{st}}(V)^{N = 0}$. So a crystalline representation is semistable, and a semistable representation $V$ is crystalline if and only if $N = 0$ on $D_{\mathrm{st}}(V)$. Fontaine attached to each potentially semistable $V$ a Weil-Deligne representation $\mathrm{WD}(V)$, whose monodromy comes from $N$ and whose restriction to inertia records the extension $L$. This is the $p$-adic replacement for Grothendieck's monodromy theorem, see Volume 6, Remark 2.3.9. Each de Rham representation is potentially semistable, by the $p$-adic monodromy theorem of Berger.
 
@@ -533,3 +533,258 @@ Kisin proved the conjecture for most $\bar\rho$ with $p > 2$, with the $p$-adic 
 2. *Henniart's theorem.* `Langlands.HasHenniartTypes` is a statement for an arbitrary bijection $\mathrm{rec}$. It is not proved, and it has content only for the local Langlands correspondence, which is not in Lean. Example 2.5.49 is not in Lean.
 3. *The coefficients.* `Langlands.typeMultiplicity` moves $\sigma$ to $C$ with a ring homomorphism $\iota : \mathbb{C} \to C$. There is no such homomorphism to a finite extension $E$ of $\mathbb{Q}_p$: its image would be an algebraically closed subfield of $E$, and so $E$ would contain all the roots $p^{1/n}$, which is false since the valuation of $E$ is discrete. A homomorphism to $\bar{\mathbb{Q}}_p$ exists, by a choice of an isomorphism of fields $\mathbb{C} \cong \bar{\mathbb{Q}}_p$. But the ring of integers of $\bar{\mathbb{Q}}_p$ is not a discrete valuation ring, so Theorem 2.5.43 does not apply to it. The Lean files prove Theorem 2.5.43 over $\mathcal{O}_E$ as `Langlands.serreMultiplicityIndependent_integer`, with the maps `Langlands.coeffEmbedding` of $E$ into $\bar{\mathbb{Q}}_p$ and `Langlands.coeffRed` of $\mathbb{Z}_p$ to the residue field $k$, but they do not yet descend $\sigma(\tau)$ to $E$.
 4. *The conjecture.* Conjecture 2.5.51 is not stated with these definitions. The field `typeMultiplicity` of `Langlands.BreuilMezardData` could be defined with `Langlands.typeMultiplicity` once item 3 is resolved, and the field `deformationMultiplicity` needs the semistable conditions of Remark 2.5.38, item 3. Example 2.5.52 is not in Lean.
+
+### The functional equation of the logarithm
+
+This subsection proves part 1 of Theorem 2.5.33 for a product of two elements, and the formula $\varphi(t) = pt$ of part 2. The proof does not rearrange infinite series. It compares the partial sums of the three logarithms with a polynomial identity in one variable, and it bounds the error with divided powers. The Lean file is `Langlands/Padic/LogTeich.lean`. As before, $R$ is a ring of the kind of Definition 2.5.26, and all positive integers are units in $W(R^\flat)[1/p]$.
+
+**Lemma 2.5.54 (the truncated logarithm).** Let $A$ be a commutative ring and let $(a_j)_{j \ge 0}$ be elements of $A$ with $(j + 1) a_j = (-1)^j$ for all $j$. Let $N \ge 1$. For a polynomial $q \in A[X]$ put $\ell_N(q) = \sum_{j < N} a_j q^{j+1}$, and for $x, y \in A$ put
+$$D(X) = \ell_N\big((1 + xX)(1 + yX) - 1\big) - \ell_N(xX) - \ell_N(yX) \in A[X].$$
+1. $\ell_N(q)' = q' \sum_{j < N} (-q)^j$, and $X^N$ divides the derivative $D'$.
+2. If $1, 2, \dots, N$ are units in $A$, then the coefficient $D_d$ of $X^d$ in $D$ is $0$ for $d \le N$.
+3. For $d > N$ the coefficient is $D_d = \sum a_j \binom{j+1}{k} (xy)^k (x + y)^{j+1-k}$, where the sum runs over the pairs $(j, k)$ with $j < N$, $k \le j + 1$ and $j + 1 + k = d$.
+4. Assume that $1, 2, \dots, N$ are units in $A$. Let $J \subseteq A$ be an additive subgroup that contains each term $a_j \binom{j+1}{k} (xy)^k (x + y)^{j+1-k}$ with $j < N$, $k \le j + 1$ and $j + 1 + k > N$. Then, with $\ell_N(z) = \sum_{j < N} a_j z^{j+1}$ for $z \in A$,
+$$\ell_N\big((1 + x)(1 + y) - 1\big) - \ell_N(x) - \ell_N(y) \in J.$$
+
+Lean: `Langlands.Padic.logPoly`, `Langlands.Padic.derivative_logPoly`, `Langlands.Padic.geom_neg_mul`, `Langlands.Padic.logDefect`, `Langlands.Padic.X_pow_dvd_derivative_logDefect`, `Langlands.Padic.coeff_logDefect_eq_zero`, `Langlands.Padic.pow_eq_sum_monomial`, `Langlands.Padic.coeff_logDefect_mem`, `Langlands.Padic.eval_one_logDefect`, `Langlands.Padic.logTrunc_defect_mem`
+
+*Proof.* (1) The derivative of $a_j q^{j+1}$ is $(j + 1) a_j q^j q' = (-q)^j q'$. Put $S(z) = \sum_{j < N} (-z)^j$, so that $S(z)(1 + z) = 1 - (-z)^N$. Let $q = (1 + xX)(1 + yX) - 1$. Then $1 + q = (1 + xX)(1 + yX)$ and $q' = x(1 + yX) + y(1 + xX)$. We multiply $D' = q' S(q) - x S(xX) - y S(yX)$ by $1 + q$ and find
+$$(1 + q) D' = q'\big(1 - (-q)^N\big) - x(1 + yX)\big(1 - (-xX)^N\big) - y(1 + xX)\big(1 - (-yX)^N\big) = -q'(-q)^N + x(1 + yX)(-xX)^N + y(1 + xX)(-yX)^N.$$
+The polynomial $X$ divides $q$, so $X^N$ divides the right side. The constant term of $1 + q$ is $1$, so $1 + q$ is a unit in $A[X]/(X^N)$, and $X^N$ divides $D'$.
+
+(2) The constant term of $D$ is $0$, because $q$, $xX$ and $yX$ have constant term $0$. For $1 \le d \le N$ the coefficient of $X^{d-1}$ in $D'$ is $d D_d$. It is $0$ by part 1, since $d - 1 < N$. Since $d$ is a unit, $D_d = 0$.
+
+(3) We have $q = X\big(xyX + (x + y)\big)$, so the binomial formula gives
+$$q^n = \sum_{k=0}^{n} \binom{n}{k} (xy)^k (x + y)^{n-k} X^{n+k}.$$
+The polynomials $\ell_N(xX)$ and $\ell_N(yX)$ have degree at most $N$, so they do not contribute to $D_d$ for $d > N$. Take $n = j + 1$ and collect the terms of degree $d$.
+
+(4) The left side is $D(1) = \sum_d D_d$. By part 2 only the $D_d$ with $d > N$ contribute, and by part 3 each of them is a sum of terms in $J$. $\square$
+
+The lemma replaces the identity $\log((1 + X)(1 + Y)) = \log(1 + X) + \log(1 + Y)$ of formal power series by a finite statement about polynomials. The error of the truncation sits in the degrees above $N$, and part 3 gives it in closed form. We now take $A = W(R^\flat)[1/p]$. Let $a, b \in R^\flat$ with $a^\sharp = b^\sharp = 1$, put $x = [a] - 1$ and $y = [b] - 1$, and let $a_j = (-1)^j \, j! / (j+1)!$. Then $[ab] - 1 = (1 + x)(1 + y) - 1$. The term $\ell_j$ of Proposition 2.5.30 is $a_j ([\varepsilon] - 1)^{j+1}$, so the partial sum $s_N(\varepsilon)$ of that proposition is $\ell_N([\varepsilon] - 1)$. We write $p^m A_{\mathrm{cris}}^0(R)$ for the set of the elements $p^m c$ with $c \in A_{\mathrm{cris}}^0(R)$.
+
+**Lemma 2.5.55 (the divided power estimate).** Let $a, b, x, y$ and $a_j$ be as above, and let $j, k, m \ge 0$ with $k \le j + 1$ and $pm \le j$. Then
+$$a_j \binom{j+1}{k} (xy)^k (x + y)^{j+1-k} = (-1)^j \, j! \; x^{[k]} \, (x + y)^{[j+1-k]} \, y^k,$$
+and this element lies in $p^m A_{\mathrm{cris}}^0(R)$.
+
+Lean: `Langlands.Padic.dpowLoc`, `Langlands.Padic.factorial_mul_dpowLoc`, `Langlands.Padic.dpowLoc_mem`, `Langlands.Padic.logCoeff`, `Langlands.Padic.logCoeff_mul_factorial`, `Langlands.Padic.logCoeff_mul`, `Langlands.Padic.isUnit_succ_loc`, `Langlands.Padic.coe_logTerm`, `Langlands.Padic.pPowAcrisZero`, `Langlands.Padic.logCoeff_mul_mem`
+
+*Proof.* We have $\binom{j+1}{k} \, k! \, (j + 1 - k)! = (j + 1)!$, so $a_j \binom{j+1}{k} = (-1)^j \, j! / \big(k! \, (j + 1 - k)!\big)$. Since $x^k / k! = x^{[k]}$ and $(x + y)^{j+1-k} / (j + 1 - k)! = (x + y)^{[j+1-k]}$, this gives the identity. By part 1 of Proposition 2.5.30 the elements $x$ and $y$ lie in $\ker \theta$, and so does $x + y$. So both divided powers lie in $A_{\mathrm{cris}}^0(R)$. Since $pm \le j$, we have $j! = p^m c$ with $c \in \mathbb{Z}$, as in the proof of part 2 of Proposition 2.5.30. So the element is $p^m$ times $(-1)^j c \, x^{[k]} (x + y)^{[j+1-k]} y^k \in A_{\mathrm{cris}}^0(R)$. $\square$
+
+The coefficient $a_j \binom{j+1}{k}$ divides by $k! \, (j + 1 - k)!$, and the two divided powers absorb these two factorials. The factor $j!$ that is left is the source of the divisibility by $p^m$. The power $y^k$ needs no division.
+
+**Theorem 2.5.56 (the functional equation of the logarithm).** Let $a, b \in R^\flat$ with $a^\sharp = b^\sharp = 1$.
+1. Let $m \ge 0$ and $N > 2pm$. Then $s_N(ab) - s_N(a) - s_N(b) \in p^m A_{\mathrm{cris}}^0(R)$.
+2. $\log [ab] = \log [a] + \log [b]$ in $A_{\mathrm{cris}}(R)$.
+
+Lean: `Langlands.Padic.logPartial_mul_sub_mem`, `Langlands.Padic.logTeich_mul`
+
+*Proof.* (1) By the remark before Lemma 2.5.55, the left side is $\ell_N((1 + x)(1 + y) - 1) - \ell_N(x) - \ell_N(y)$. We apply part 4 of Lemma 2.5.54 with $J = p^m A_{\mathrm{cris}}^0(R)$, which is an additive subgroup. Take a term with $j < N$, $k \le j + 1$ and $j + 1 + k > N$. Then $2(j + 1) \ge j + 1 + k > N > 2pm$, so $j + 1 > pm$ and $pm \le j$. Lemma 2.5.55 shows that the term lies in $J$.
+
+(2) By Proposition 2.5.30 and Remark 2.5.38, $\log [\varepsilon]$ is the class in the $p$-adic completion of the sequence $(s_{pk}(\varepsilon))_{k \ge 0}$, and $s_{pk}(\varepsilon) \equiv s_{pn}(\varepsilon)$ modulo $p^n A_{\mathrm{cris}}^0(R)$ for $k \ge n$. Put $d_k = s_{pk}(ab) - s_{pk}(a) - s_{pk}(b)$. Then also $d_k \equiv d_n$ modulo $p^n A_{\mathrm{cris}}^0(R)$ for $k \ge n$. For each $n$ we have $p(2n + 1) > 2pn$, so part 1 gives $d_{2n+1} \in p^n A_{\mathrm{cris}}^0(R)$, and then $d_n \in p^n A_{\mathrm{cris}}^0(R)$. So the image of $(d_k)$ in each quotient $A_{\mathrm{cris}}^0(R) / p^n A_{\mathrm{cris}}^0(R)$ is $0$, and its class in the completion is $0$. This class is $\log [ab] - \log [a] - \log [b]$. $\square$
+
+**Corollary 2.5.57 (consequences of the functional equation).** Let $\varepsilon \in R^\flat$ with $\varepsilon^\sharp = 1$.
+1. $\log [1] = 0$, and $\log [\varepsilon^n] = n \log [\varepsilon]$ for each integer $n \ge 0$.
+2. $\varphi(\log [\varepsilon]) = p \log [\varepsilon]$. In particular $\varphi(t) = pt$.
+3. For $R = \mathcal{O}_{\mathbb{C}_p}$ and $\sigma, \tau \in G_{\mathbb{Q}_p}$, the Kummer elements of Definition 2.5.34 satisfy $\log [\eta_{\sigma\tau}] = \sigma(\log [\eta_\tau]) + \log [\eta_\sigma]$ and $\log [\eta_1] = 0$.
+
+Lean: `Langlands.Padic.logTeich_congr`, `Langlands.Padic.logTeich_one`, `Langlands.Padic.logTeich_pow`, `Langlands.Padic.acrisFrob_logTeich_eq`, `Langlands.Padic.kummerLog_mul`, `Langlands.Padic.kummerLog_one`
+
+*Proof.* (1) The untilt is multiplicative, so $(\varepsilon^n)^\sharp = 1$. Theorem 2.5.56 with $a = b = 1$ gives $\log [1] = 2 \log [1]$, so $\log [1] = 0$. This is the case $n = 0$, and Theorem 2.5.56 with $a = \varepsilon^n$ and $b = \varepsilon$ gives the step from $n$ to $n + 1$.
+
+(2) By part 5 of Proposition 2.5.30 and part 1, $\varphi(\log [\varepsilon]) = \log [\varepsilon^p] = p \log [\varepsilon]$.
+
+(3) By part 3 of Proposition 2.5.35, $\eta_{\sigma\tau} = \sigma(\eta_\tau) \, \eta_\sigma$, and $\sigma(\eta_\tau)^\sharp = \sigma(\eta_\tau^\sharp) = 1$. Theorem 2.5.56 and part 4 of Proposition 2.5.30 give $\log [\eta_{\sigma\tau}] = \log [\sigma(\eta_\tau)] + \log [\eta_\sigma] = \sigma(\log [\eta_\tau]) + \log [\eta_\sigma]$. For $\sigma = \tau = 1$ this says $\log [\eta_1] = 2 \log [\eta_1]$. $\square$
+
+In Lean the element $\log [\varepsilon]$ carries a proof of $\varepsilon^\sharp = 1$ as an argument, and `Langlands.Padic.logTeich_congr` says that it depends only on $\varepsilon$. So part 1 of Theorem 2.5.33 is now proved for products, and for the powers $\varepsilon^c$ with $c \in \mathbb{N}$. The case $c \in \mathbb{Z}_p$ needs the continuity of $\varepsilon \mapsto \log [\varepsilon]$, which is not in Lean. Of part 2, the formula $\varphi(t) = pt$ is proved. The formula $gt = \chi(g) t$ is not, because $\chi(g)$ is a $p$-adic integer and not a natural number. Part 3 of the corollary is the cocycle relation of $\sigma \mapsto \log [\eta_\sigma]$ with values in $A_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$. It holds without the formula $\log [\eta_\sigma] = c(\sigma) t$, and the next subsection shows that it is all that the action on $B_{\mathrm{st}}$ needs.
+
+### The Frobenius, the Galois action and the monodromy of $B_{\mathrm{st}}$
+
+This subsection constructs the Galois action and the Frobenius on $B_{\mathrm{st}}$ that Definition 2.5.36 uses, and it proves the relations between them and $N$. The Lean file is `Langlands/Padic/Semistable2.lean`. There are two steps. First we attach a ring $B[u]$ with an action to an arbitrary cocycle. Then we take the cocycle $\sigma \mapsto \log [\eta_\sigma]$.
+
+**Proposition 2.5.58 (the Frobenius of $B_{\mathrm{cris}}$).** Let a monoid $M$ act on $R$, let $\varepsilon \in R^\flat$ with $\varepsilon^\sharp = 1$ and $t = \log [\varepsilon]$, and let $S$ be the submonoid of $B_{\mathrm{cris}}^+(R)$ generated by the $gt$, so that $B_{\mathrm{cris}}(R) = S^{-1} B_{\mathrm{cris}}^+(R)$ as in Definition 2.5.32.
+1. $\varphi(gt) = p \cdot gt$ for $g \in M$.
+2. The Frobenius $\varphi$ of $B_{\mathrm{cris}}^+(R)$ extends to a unique ring endomorphism $\varphi$ of $B_{\mathrm{cris}}(R)$.
+3. $\varphi(gx) = g \varphi(x)$ for $g \in M$ and $x \in B_{\mathrm{cris}}(R)$.
+
+Lean: `Langlands.Padic.bcrisPlusFrob_smul_logTeich`, `Langlands.Padic.bcrisSubmonoid_le_frob`, `Langlands.Padic.bcrisFrob`, `Langlands.Padic.bcrisFrob_algebraMap`, `Langlands.Padic.bcrisFrob_smul`
+
+*Proof.* (1) By part 5 of Proposition 2.5.29 and part 2 of Corollary 2.5.57, $\varphi(gt) = g\varphi(t) = g(pt) = p \cdot gt$.
+
+(2) By the universal property of the localization, it suffices that the composite $B_{\mathrm{cris}}^+(R) \to B_{\mathrm{cris}}^+(R) \to B_{\mathrm{cris}}(R)$ of $\varphi$ and the localization map sends each $s \in S$ to a unit. The elements that it sends to units form a submonoid. It contains each generator $gt$, since $\varphi(gt) = p \cdot gt$ is a product of two units of $B_{\mathrm{cris}}(R)$. So it contains $S$.
+
+(3) Both $\varphi \circ g$ and $g \circ \varphi$ are ring endomorphisms of $B_{\mathrm{cris}}(R)$. They agree on $B_{\mathrm{cris}}^+(R)$ by part 5 of Proposition 2.5.29. A ring homomorphism out of a localization is determined by its restriction to the ring. $\square$
+
+**Definition 2.5.59 (cocycles and the ring $B[u]_c$).** Let a monoid $M$ act on a commutative ring $B$ by ring endomorphisms.
+1. A *cocycle* is a map $c : M \to B$ with $c(1) = 0$ and $c(gh) = g\, c(h) + c(g)$ for all $g, h \in M$.
+2. Let $c$ be a cocycle. Let $g \in M$ act on the polynomial ring $B[u]$ by $g\big(\sum_i b_i u^i\big) = \sum_i g(b_i) \, (u + c(g))^i$. We write $B[u]_c$ for $B[u]$ with this action.
+3. Let $\varphi$ be a ring endomorphism of $B$ and let $q \in B$. The *Frobenius* of $B[u]_c$ is $\varphi\big(\sum_i b_i u^i\big) = \sum_i \varphi(b_i) \, (qu)^i$.
+4. The *monodromy* of $B[u]_c$ is $N = -d/du$, as in Definition 2.5.34.
+
+Lean: `Langlands.Padic.BstCocycle`, `Langlands.Padic.bstMap`, `Langlands.Padic.bstMap_apply`, `Langlands.Padic.BstPoly`, `Langlands.Padic.bstPolyAction`, `Langlands.Padic.bstC`, `Langlands.Padic.bstU`, `Langlands.Padic.bstFrob`, `Langlands.Padic.bstN`
+
+The condition $c(1) = 0$ follows from the relation with $g = h = 1$, since $1$ acts trivially on $B$. The Lean structure lists it as a separate field. The order in the relation, $c(gh) = g\,c(h) + c(g)$, is the one of Corollary 2.5.57, part 3.
+
+**Proposition 2.5.60 (the relations in $B[u]_c$).** In the situation of Definition 2.5.59 the following hold.
+1. Each $g \in M$ acts on $B[u]_c$ by a ring endomorphism that extends its action on $B$ and sends $u$ to $u + c(g)$. The element $1$ acts as the identity, and $(gh)f = g(hf)$. If $B$ is a $K$-algebra and $M$ acts $K$-linearly on $B$, then $M$ acts $K$-linearly on $B[u]_c$.
+2. The Frobenius is a ring endomorphism of $B[u]_c$ that extends $\varphi$ and sends $u$ to $qu$. If $\varphi(gb) = g\varphi(b)$, $gq = q$ and $\varphi(c(g)) = q\, c(g)$ for all $g \in M$ and $b \in B$, then $\varphi(gf) = g\varphi(f)$ for all $f \in B[u]_c$.
+3. $N(u) = -1$, $N(b) = 0$ for $b \in B$, $N(gf) = g N(f)$ and $N(\varphi(f)) = q\, \varphi(N(f))$ for all $g \in M$ and $f \in B[u]_c$.
+
+Lean: `Langlands.Padic.bstMap_C`, `Langlands.Padic.bstMap_X`, `Langlands.Padic.bstMap_one`, `Langlands.Padic.bstMap_mul`, `Langlands.Padic.smul_bstC`, `Langlands.Padic.smul_bstU`, `Langlands.Padic.bstPoly_smulCommClass`, `Langlands.Padic.bstFrob_bstC`, `Langlands.Padic.bstFrob_bstU`, `Langlands.Padic.bstFrob_smul`, `Langlands.Padic.bstN_bstU`, `Langlands.Padic.bstN_bstC`, `Langlands.Padic.monodromy_bstMap`, `Langlands.Padic.bstN_smul`, `Langlands.Padic.monodromy_bstFrob`, `Langlands.Padic.bstN_bstFrob`
+
+*Proof.* (1) The map of $g$ is the composite of the map $g$ on the coefficients and the substitution $u \mapsto u + c(g)$. Both are ring homomorphisms. A ring homomorphism out of $B[u]$ is determined by its values on $B$ and on $u$, so it suffices to check the two action laws there. On $B$ they are the laws of the action on $B$. On $u$ we have $1 \cdot u = u + c(1) = u$ and
+$$g(hu) = g\big(u + c(h)\big) = u + c(g) + g\,c(h) = u + c(gh) = (gh)u.$$
+The $K$-linearity holds because $g$ fixes the image of $K$ in $B$.
+
+(2) The first claim holds by construction. For the second claim, $\varphi \circ g$ and $g \circ \varphi$ are ring homomorphisms, so we compare them on $B$ and on $u$. On $b \in B$ both give $g\varphi(b)$. On $u$,
+$$\varphi(gu) = \varphi\big(u + c(g)\big) = qu + \varphi(c(g)) = qu + q\,c(g), \qquad g\varphi(u) = g(q) \, g(u) = q\big(u + c(g)\big).$$
+
+(3) The first two claims are part 4 of Proposition 2.5.35. Write $f^g$ for $f$ with $g$ applied to the coefficients. Then $gf = f^g(u + c(g))$, and the chain rule gives $\frac{d}{du} f^g(u + c(g)) = (f')^g(u + c(g))$, since $u + c(g)$ has derivative $1$. In the same way $\frac{d}{du} f^\varphi(qu) = q \, (f')^\varphi(qu)$. Multiply by $-1$. $\square$
+
+The relation $N\varphi = q\varphi N$ needs no hypothesis. The commutation of $\varphi$ with $M$ needs $\varphi(c(g)) = q\,c(g)$, which is a property of the cocycle.
+
+**Proposition 2.5.61 (cocycles with values in $A_{\mathrm{cris}}$).** Let $M$, $R$ and $\varepsilon$ be as in Proposition 2.5.58, let $k : M \to A_{\mathrm{cris}}(R)$ be a cocycle, and let $c(g) \in B_{\mathrm{cris}}(R)$ be the image of $k(g)$.
+1. The map $c$ is a cocycle with values in $B_{\mathrm{cris}}(R)$.
+2. Assume that $\varphi(k(g)) = p\, k(g)$ for all $g$. Let $B_{\mathrm{cris}}(R)[u]_c$ have the Frobenius of Definition 2.5.59 for the $\varphi$ of Proposition 2.5.58 and $q = p$. Then $\varphi(c(g)) = p\,c(g)$, $\varphi(gf) = g\varphi(f)$, and $N\varphi = p\varphi N$.
+3. Let $\eta : M \to R^\flat$ with $\eta_g^\sharp = 1$ for all $g$, and assume that $k(g) = \log [\eta_g]$ is a cocycle. Then the assumption of part 2 holds.
+
+Lean: `Langlands.Padic.smul_algebraMap_algebraMap`, `Langlands.Padic.algebraMap_cocycle`, `Langlands.Padic.BstCocycle.ofAcris`, `Langlands.Padic.BstCocycle.frob_ofAcris`, `Langlands.Padic.BstCocycle.frob_ofAcris_logTeich`, `Langlands.Padic.bstFrobBcris`, `Langlands.Padic.bstFrobBcris_bstU`, `Langlands.Padic.bstFrobBcris_bstC`, `Langlands.Padic.bstN_bstFrobBcris`, `Langlands.Padic.bstFrobBcris_smul`, `Langlands.Padic.bstFrobBcris_smul_ofAcris`
+
+*Proof.* (1) The maps $A_{\mathrm{cris}}(R) \to B_{\mathrm{cris}}^+(R) \to B_{\mathrm{cris}}(R)$ are ring homomorphisms that commute with $M$, by Proposition 2.5.29 and Definition 2.5.32.
+
+(2) The Frobenius of $B_{\mathrm{cris}}(R)$ extends the Frobenius of $A_{\mathrm{cris}}(R)$, by part 2 of Proposition 2.5.58 and part 4 of Proposition 2.5.29. So $\varphi(c(g)) = p\,c(g)$. The element $p$ is fixed by $M$, and $\varphi$ commutes with $M$ by part 3 of Proposition 2.5.58. Proposition 2.5.60 gives the rest.
+
+(3) Part 2 of Corollary 2.5.57 with $\varepsilon = \eta_g$. $\square$
+
+**Definition 2.5.62 ($B_{\mathrm{st}}$ and semistable representations).** Let $R = \mathcal{O}_{\mathbb{C}_p}$, $M = G_{\mathbb{Q}_p}$, and let $\varepsilon$ be the element of Lemma 2.5.31.
+1. The *Kummer cocycle* in $B_{\mathrm{cris}}$ is the map $\sigma \mapsto \log [\eta_\sigma]$. It is a cocycle by part 3 of Corollary 2.5.57 and part 1 of Proposition 2.5.61.
+2. The ring $B_{\mathrm{st}}$ is $B_{\mathrm{cris}}[u]_c$ for the Kummer cocycle $c$, with the Frobenius for $q = p$ and the monodromy $N$. So $\sigma(u) = u + \log [\eta_\sigma]$ and $\varphi(u) = pu$.
+3. A representation $V$ of $G_{\mathbb{Q}_p}$ on a $\mathbb{Q}_p$-vector space of finite dimension is *semistable* if it is $B_{\mathrm{st}}$-admissible.
+4. For an intermediate field $\mathbb{Q}_p \subseteq L \subseteq \bar{\mathbb{Q}}_p$ let $G_L \subseteq G_{\mathbb{Q}_p}$ be the subgroup of the elements that fix $L$. It acts on $B_{\mathrm{st}}$ by restriction. The representation $V$ is *potentially semistable* if there is such an $L$ of finite degree over $\mathbb{Q}_p$ for which the restriction of $V$ to $G_L$ is $B_{\mathrm{st}}$-admissible.
+
+Lean: `Langlands.Padic.kummerCocycle`, `Langlands.Padic.BstGal`, `Langlands.Padic.uBst`, `Langlands.Padic.smul_uBst`, `Langlands.Padic.bstFrobCp`, `Langlands.Padic.bstFrobCp_uBst`, `Langlands.Padic.IsSemistableQp`, `Langlands.Padic.galFixing`, `Langlands.Padic.IsPotentiallySemistableQp`
+
+As in Fontaine's theory, the ring $B_{\mathrm{st}}$ is the same for all $L$, and only the group changes. The ring of part 2 is the ring $B_{\mathrm{st}}$ of Definition 2.5.34 with an action. Remark 2.5.65 compares it with Definition 2.5.36.
+
+**Theorem 2.5.63 (Fontaine's relations on $B_{\mathrm{st}}$).** Let $\sigma \in G_{\mathbb{Q}_p}$ and $f \in B_{\mathrm{st}}$.
+1. $\varphi(\log [\eta_\sigma]) = p \log [\eta_\sigma]$ in $A_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$.
+2. $\varphi(\sigma f) = \sigma \varphi(f)$.
+3. $N(\sigma f) = \sigma N(f)$.
+4. $N(\varphi(f)) = p\, \varphi(N(f))$.
+
+Lean: `Langlands.Padic.acrisFrob_kummerLog`, `Langlands.Padic.bstFrobCp_smul`, `Langlands.Padic.bstN_smul_cp`, `Langlands.Padic.bstN_bstFrobCp`
+
+*Proof.* (1) is part 2 of Corollary 2.5.57 with $\varepsilon = \eta_\sigma$. (2) follows from parts 2 and 3 of Proposition 2.5.61. (3) and (4) are part 3 of Proposition 2.5.60 with $q = p$. $\square$
+
+So $\varphi \otimes 1$ and $N \otimes 1$ commute with $G_{\mathbb{Q}_p}$ on $B_{\mathrm{st}} \otimes V$, and they preserve $D_{\mathrm{st}}(V)$. On $D_{\mathrm{st}}(V)$ they satisfy $N\varphi = p\varphi N$. This is the structure of a $(\varphi, N)$-module of Fontaine.
+
+**Lemma 2.5.64 (admissibility along a surjection).** Let $K$ be a field, let $f : H \to G$ be a surjective homomorphism of groups, let $G$ act on a $K$-algebra $B$, and let $H$ act on $B$ by $hb = f(h)b$.
+1. For a representation $\rho$ of $G$ on a $K$-vector space of finite dimension, $\rho \circ f$ is $B$-admissible if and only if $\rho$ is $B$-admissible.
+2. A semistable representation is potentially semistable.
+3. If $B_{\mathrm{cris}} \ne 0$, then the trivial representation $\mathbb{Q}_p$ of $G_{\mathbb{Q}_p}$ is semistable.
+
+Lean: `Langlands.Padic.isAdmissible_comp_iff`, `Langlands.Padic.IsSemistableQp.isPotentiallySemistableQp`, `Langlands.Padic.isSemistableQp_trivial_of_nontrivial`
+
+*Proof.* (1) The element $h$ acts on $B \otimes_K V$ as $f(h)$. Since $f$ is surjective, an element is fixed by $H$ if and only if it is fixed by $G$. So $B^H = B^G$, and $D_B(\rho \circ f) = D_B(\rho)$ as modules over this ring.
+
+(2) Take $L = \mathbb{Q}_p$. Then $G_L = G_{\mathbb{Q}_p}$, and the inclusion $G_L \to G_{\mathbb{Q}_p}$ is surjective. Apply part 1.
+
+(3) The ring $B_{\mathrm{st}} = B_{\mathrm{cris}}[u]$ is not zero. As in part 5 of Proposition 2.5.27, $D_{B_{\mathrm{st}}}(\mathbb{Q}_p) = B_{\mathrm{st}}^{G_{\mathbb{Q}_p}}$ is free of rank $1$ over itself, and this ring contains $1 \ne 0$. $\square$
+
+**Remark 2.5.65 (comparison with Definition 2.5.36, and the Lean status).** Definition 2.5.36 uses $\sigma(u) = u + c(\sigma) t$, and Definition 2.5.62 uses $\sigma(u) = u + \log [\eta_\sigma]$. The two agree by the formula $\log [\eta_\sigma] = c(\sigma) t$, which follows from part 1 of Theorem 2.5.33 for exponents in $\mathbb{Z}_p$. With this formula the two rings are the same, with the same action of $G_{\mathbb{Q}_p}$, the same $\varphi$ and the same $N$. The Lean definition does not need the formula: the cocycle relation of Corollary 2.5.57 suffices for the action, and part 1 of Theorem 2.5.63 suffices for the Frobenius. The two files of the last two subsections update Remark 2.5.38. Item 1 of that remark is now proved for products and for the powers $\varepsilon^n$ with $n \in \mathbb{N}$, and the formula $\varphi(t) = pt$ is proved. Item 3 is now in Lean, apart from Example 2.5.37. The following points are still not in Lean.
+1. *The exponents in $\mathbb{Z}_p$.* The formulas $\log [\varepsilon^c] = ct$ for $c \in \mathbb{Z}_p$, $gt = \chi(g) t$ and $\log [\eta_\sigma] = c(\sigma) t$ are not proved. So $B_{\mathrm{cris}}$ in Lean still inverts all the $gt$.
+2. *Nontriviality.* The claim $t \ne 0$ is not proved. So part 3 of Lemma 2.5.64 has the hypothesis $B_{\mathrm{cris}} \ne 0$.
+3. *The invariants.* Fontaine's theorem $B_{\mathrm{st}}^{G_{\mathbb{Q}_p}} = \mathbb{Q}_p$ and the bound $\dim D_{\mathrm{st}}(V) \le \dim V$ are not proved. So the claim of Definition 2.5.36 that a crystalline representation is semistable is not proved in Lean, and the predicate for semistable representations uses the rank over $B_{\mathrm{st}}^{G}$ as in item 4 of Remark 2.5.38.
+4. *Example 2.5.37.* It needs the formulas of item 1 and the invertibility of $t$, and it is not in Lean.
+
+### Serre weights and the full statement of the conjecture
+
+The file `Langlands/Local/BreuilMezardSym.lean` proves the simplicity of the Serre weights $\sigma_{a,b}$ with $a \le p - 1$, which Exercise 16 asks for and Example 2.5.52 uses. It also defines the multiplicities $n_{a,b}(\lambda, \tau)$ for a representation $\tau$ over an arbitrary field, which resolves item 3 of Remark 2.5.53. The file `Langlands/Statements/BreuilMezardFull.lean` then states Conjecture 2.5.51 with the objects of this section. In Lean, $\mathrm{Sym}^a k^2$ is the space of the homogeneous polynomials $P(X_0, X_1)$ of degree $a$, and $g \in GL_2(k)$ acts by $(gP)(X_0, X_1) = P\big((X_0, X_1) g\big)$, with the row vector $(X_0, X_1)$. Put
+$$u^- = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}, \qquad w = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}.$$
+Then $(X_0, X_1) u^- = (X_0 + X_1, X_1)$ and $(X_0, X_1) w = (-X_1, X_0)$.
+
+**Theorem 2.5.66 (irreducibility of the Serre weights).** Let $k$ be a field of characteristic $p$, let $0 \le a \le p - 1$ and $b \ge 0$, and let $\theta : G \to GL_2(k)$ be a homomorphism whose image contains $u^-$ and $w$. Then the only subspaces of $\sigma_{a,b}$ that are stable under $G$ are $0$ and $\sigma_{a,b}$. So $\sigma_{a,b}$ is a simple $k[G]$-module.
+
+Lean: `Langlands.isIrreducible_serreWeightRep`, `Langlands.isSimpleModule_serreWeightRep`
+
+*Proof.* The matrices $u^-$ and $w$ have determinant $1$, so they act on $\sigma_{a,b}$ as on $\mathrm{Sym}^a k^2$. It suffices to show that a nonzero subspace $W$ that is stable under $u^-$ and $w$ is the whole space. The *dehomogenization* $P \mapsto P(X, 1)$ is a linear bijection from $\mathrm{Sym}^a k^2$ onto the polynomials of degree at most $a$ in $k[X]$, with the inverse $f \mapsto X_1^a f(X_0/X_1)$. It sends $u^- P$ to $f(X + 1)$, where $f = P(X, 1)$. It sends $X_1^a$ to $1$ and $X_0^a$ to $X^a$, and $w X_1^a = X_0^a$.
+
+*Step 1 (the forward difference).* Let $f = \sum_i c_i X^i$ have degree $n + 1$ with $n + 1 < p$, and put $\Delta f = f(X + 1) - f$. The coefficient of $X^m$ in $f(X + 1)$ is $\sum_{i \ge m} \binom{i}{m} c_i$. So the coefficient of $X^{n+1}$ in $\Delta f$ is $0$, the coefficients of higher degree are $0$, and the coefficient of $X^n$ is $(n + 1) c_{n+1}$. This is not zero, because $0 < n + 1 < p$. So $\Delta f$ has degree exactly $n$.
+
+*Step 2 (the fixed line).* Choose a nonzero $P \in W$ for which $f = P(X, 1)$ has the smallest degree. If this degree is $n + 1 \ge 1$, then $n + 1 \le a < p$, and $u^- P - P \in W$ has the dehomogenization $\Delta f$ of degree $n$ by Step 1. It is not zero, so this contradicts the choice of $P$. So $f$ is a nonzero constant $c$, $P = c X_1^a$, and $X_1^a \in W$.
+
+*Step 3.* Since $W$ is stable under $w$, it contains $X_0^a$. Let $U$ be the image of $W$ in $k[X]$. It contains $X^a$ and it is stable under $f \mapsto f(X + 1)$, so it contains the iterated differences $\Delta^j X^a$ for $0 \le j \le a$. By Step 1, $\Delta^j X^a$ has degree exactly $a - j$. These $a + 1$ polynomials form a triangular basis of the polynomials of degree at most $a$. So $U$ is this whole space, and $W = \mathrm{Sym}^a k^2$ since the dehomogenization is injective. $\square$
+
+The proof uses the hypothesis $a < p$ only in Step 1. For $a = p$ we have $\Delta X^p = 1$, and the theorem fails (Exercise 23). Lean proves the simplicity, but not the claims of the paragraph after Definition 2.5.41 that the $\sigma_{a,b}$ are pairwise non-isomorphic and that they are all the simple representations of $GL_2(\mathbb{F}_p)$.
+
+**Corollary 2.5.67 (the Serre weights of $GL_2(\mathbb{F}_p)$).** Let $k$ be a field of characteristic $p$, let $0 \le a \le p - 1$ and $b \ge 0$. Then $\sigma_{a,b}$ is simple as a representation of $SL_2(\mathbb{F}_p)$ and of $GL_2(\mathbb{F}_p)$, through the maps to $GL_2(k)$ that the inclusion $\mathbb{F}_p \subseteq k$ gives. The same holds for $GL_2(\mathbb{Z}_p)$ with the reduction map $\theta$ of Definition 2.5.41.
+
+Lean: `Langlands.slFpTo`, `Langlands.glFpTo`, `Langlands.slFpTo_apply`, `Langlands.exists_slFpTo_eq_lowerUnipotent`, `Langlands.exists_slFpTo_eq_weylElement`, `Langlands.isIrreducible_serreWeightRep_slFpTo`, `Langlands.isIrreducible_serreWeightRep_glFpTo`, `Langlands.isSimpleModule_serreWeightRep_glFpTo`
+
+*Proof.* The matrices $u^-$ and $w$ have entries $0$ and $\pm 1$ and determinant $1$. So they lie in $SL_2(\mathbb{F}_p) \subseteq GL_2(\mathbb{F}_p)$, and they are the reductions of elements of $GL_2(\mathbb{Z}_p)$. Apply Theorem 2.5.66. $\square$
+
+This proves the first claim of Exercise 16, with a proof that avoids the Vandermonde determinant. It also gives the simplicity of $\sigma_{k_0 - 2, 0}$ in part 1 of Example 2.5.52. Lean states the result for $GL_2(\mathbb{F}_p)$, and the case of $GL_2(\mathbb{Z}_p)$ is an application of `Langlands.isIrreducible_serreWeightRep`.
+
+**Proposition 2.5.68 (invariance under isomorphism).** Let $O$ be a discrete valuation ring with the fraction field $C$ and the residue field $k$, and let $G$ be a group.
+1. Let $\sigma_1$ and $\sigma_2$ be representations of $G$ on $O$-modules $L_1$ and $L_2$, and let $f : L_1 \to L_2$ be an isomorphism that commutes with $G$. Then $n_W(\sigma_1) = n_W(\sigma_2)$ for each representation $W$ of $G$ over $k$.
+2. Let $e : V \to V'$ be an isomorphism of representations of $G$ over $C$. Then $e$ maps the stable lattices of $V$ onto the stable lattices of $V'$, $n_{a,b}(\rho, L) = n_{a,b}(\rho', e(L))$, and $n_{a,b}(\rho) = n_{a,b}(\rho')$.
+
+Lean: `Langlands.reductionMultiplicity_congr`, `Langlands.IsStableLattice.map`, `Langlands.latticeSerreMultiplicity_congr`, `Langlands.serreMultiplicity_congr`
+
+*Proof.* (1) The map $f$ induces an isomorphism $L_1 / \mathfrak{m} L_1 \to L_2 / \mathfrak{m} L_2$ that commutes with $G$. Apply part 2 of Lemma 2.5.40.
+
+(2) The image $e(L)$ is a finitely generated $O$-module. It spans $V'$, since $e$ is $C$-linear and bijective, and it is stable, since $e$ commutes with $G$. The same holds for $e^{-1}$. The restriction of $e$ is an isomorphism $L \to e(L)$ that commutes with $G$, and part 1 gives the second claim. If $V$ has a stable lattice, the third claim follows from Theorem 2.5.43. If it has none, then $V'$ has none, and both sides are $0$ by the convention of Remark 2.5.53, item 1. $\square$
+
+**Definition 2.5.69 (type multiplicities over a field).** Let $K$ be a non-archimedean local field with the ring of integers $\mathcal{O}_K$. Let $O$ be a discrete valuation ring with the fraction field $C$ and the residue field $k$, let $\mathcal{O}_K \to C$ be a ring homomorphism, and let $\mathrm{red} : \mathcal{O}_K \to k$ be a ring homomorphism. Let $\lambda$ be a Hodge-Tate type and let $\tau$ be a representation of $GL_2(\mathcal{O}_K)$ on a $C$-vector space of finite dimension.
+1. Put $\sigma(\lambda, \tau) = \mathrm{Sym}^{\lambda_1 - \lambda_2 - 1} C^2 \otimes \det^{\lambda_2} \otimes_C \tau$, where $GL_2(\mathcal{O}_K)$ acts on $C^2$ through $GL_2(\mathcal{O}_K) \to GL_2(C)$.
+2. The *type multiplicity* $n_{a,b}(\lambda, \tau)$ is the multiplicity $n_{a,b}(\sigma(\lambda, \tau))$ of Theorem 2.5.43, with $\theta : GL_2(\mathcal{O}_K) \to GL_2(k)$ induced by $\mathrm{red}$.
+
+Lean: `Langlands.typeRep`, `Langlands.typeMultiplicityOf`
+
+This differs from Definition 2.5.50 only in that $\tau$ is given over $C$, and no map $\iota : \mathbb{C} \to C$ is needed.
+
+**Proposition 2.5.70 (comparison with Definition 2.5.50).** In the situation of Definition 2.5.69 the following hold.
+1. Let $\iota : \mathbb{C} \to C$ be a ring homomorphism and let $\sigma$ be a smooth representation of $GL_2(\mathcal{O}_K)$ over $\mathbb{C}$ of finite dimension. Then $n_{a,b}(\lambda, \sigma)$ of Definition 2.5.50 is $n_{a,b}(\lambda, \tau)$ for $\tau = \iota_* \sigma$, and for each $\tau$ that is isomorphic to $\iota_* \sigma$.
+2. If $\tau \cong \tau'$ over $C$, then $n_{a,b}(\lambda, \tau) = n_{a,b}(\lambda, \tau')$. In particular this holds for $O = \mathcal{O}_E$ and $C = E$.
+
+Lean: `Langlands.typeMultiplicity_eq_typeMultiplicityOf`, `Langlands.typeMultiplicityOf_congr`, `Langlands.typeMultiplicity_eq_of_equiv`, `Langlands.typeMultiplicityOf_integer_congr`
+
+*Proof.* (1) The first claim holds by the definitions, and the second follows from part 2. (2) Let $e : \tau \to \tau'$ be an isomorphism. Then $1 \otimes e$ is an isomorphism $\sigma(\lambda, \tau) \to \sigma(\lambda, \tau')$ that commutes with $GL_2(\mathcal{O}_K)$. Apply part 2 of Proposition 2.5.68. $\square$
+
+By item 3 of Remark 2.5.53, part 1 has no content for $C = E$, because there is no ring homomorphism $\mathbb{C} \to E$. The full statement therefore applies Definition 2.5.69 to a model of $\sigma(\tau)$ over $E$. Part 2 shows that the model matters only up to isomorphism over $E$. The independence of $E$ and of the embedding $E \to \mathbb{C}$, which the comment after Definition 2.5.50 proves, is not in Lean.
+
+**Definition 2.5.71 (potentially semistable lifts and models).** Let $E$ be a field with a ring homomorphism $\mathbb{Z}_p \to E$, and let $\rho : G_{\mathbb{Q}_p} \to GL_2(E)$ be a homomorphism.
+1. If $E$ is a $\mathbb{Q}_p$-algebra, $\rho_{\mathbb{Q}_p}$ is the representation $\rho$ on $E^2$, seen as a representation over $\mathbb{Q}_p$.
+2. An *inertial type map* is a function $\mathrm{wd}$ that assigns to each field $E$ over $\mathbb{Q}_p$ and each $\rho : G_{\mathbb{Q}_p} \to GL_2(E)$ an inertial type $\mathrm{wd}(E, \rho)$ of $\mathbb{Q}_p$ of dimension $2$.
+3. Let $\lambda$ be a Hodge-Tate type, $\tau$ an inertial type of dimension $2$ and $\mathrm{wd}$ an inertial type map. The lift $\rho$ is *potentially semistable of type $(\lambda, \tau)$* if $E$ is a $\mathbb{Q}_p$-algebra of finite dimension whose structure map extends $\mathbb{Z}_p \to E$, $\rho_{\mathbb{Q}_p}$ is continuous and potentially semistable in the sense of Definition 2.5.62, the set of the Hodge-Tate weights of $\rho_{\mathbb{Q}_p}$ is $\{-\lambda_1, -\lambda_2\}$, and $\mathrm{wd}(E, \rho) = \tau$.
+4. Let $H$ be a group, let $j : E \to \mathbb{C}$ be a ring homomorphism, let $\tau_E$ be a representation of $H$ on an $E$-vector space of finite dimension $n$, and let $\sigma$ be a representation of $H$ over $\mathbb{C}$. Then $\tau_E$ is a *model* of $\sigma$ along $j$ if, in a basis of $\tau_E$, the matrices of $\tau_E$ with $j$ applied to the entries give a representation on $\mathbb{C}^n$ that is isomorphic to $\sigma$.
+
+Lean: `Langlands.restrictToQp`, `Langlands.InertialTypeMap`, `Langlands.IsPstLift`, `Langlands.IsModelOf`
+
+The sign in part 3 comes from the conventions. In the project the cyclotomic character has the Hodge-Tate weight $-1$. The representation $\mathrm{Sym}^{\lambda_1 - \lambda_2 - 1} \otimes \det^{\lambda_2}$ fits the weights $\{\lambda_1, \lambda_2\}$ in the convention where the cyclotomic character has the weight $1$. The weights are taken as a set, so the condition does not see multiplicities. The map $\mathrm{wd}$ stands for $\rho \mapsto \mathrm{WD}(\rho)|_{I_{\mathbb{Q}_p}}$, see the comments after Definition 2.5.36 and Lemma 2.5.46. This needs $D_{\mathrm{pst}}$ and an isomorphism $\bar{\mathbb{Q}}_p \cong \mathbb{C}$, which are not in Lean.
+
+**Conjecture 2.5.72 (Breuil and Mezard, the full form).** Let $p$ be a prime and let $\mathrm{wd}$ be an inertial type map. Let $k$ be a finite field of characteristic $p$ with a ring homomorphism $\mathbb{Z}_p \to k$, let $\bar\rho : G_{\mathbb{Q}_p} \to GL_2(k)$ have open kernel, let $\mathrm{art}$ be a local Artin map and let $\mathrm{rec}$ be a bijection with the properties of `Langlands.IsLanglandsMap` for $\mathrm{art}$, see Volume 6, Remark 3.1.9. Let $R$ be a universal framed deformation ring of $\bar\rho$ over $\mathbb{Z}_p$ with the universal lift $\rho^u$. Then there are integers $\mu_{a,b} \ge 0$ with the following property. Let $\lambda$ be a Hodge-Tate type, $\tau$ an inertial type of dimension $2$ and $\sigma$ a type for $\tau$ in the sense of part 1 of Definition 2.5.47, for $\mathrm{rec}$. Let $E$ be a finite extension of $\mathbb{Q}_p$, $j : E \to \mathbb{C}$ a ring homomorphism and $\tau_E$ a model of $\sigma$ along $j$. Then
+$$e\big(R(\lambda, \tau) / p\big) = \sum_{a=0}^{p-1} \sum_{b=0}^{p-2} n_{a,b}(\lambda, \tau_E) \, \mu_{a,b}.$$
+Here $R(\lambda, \tau)$ is the quotient $R^\square(P)$ of Definition 2.5.19 for the condition $P$ of part 3 of Definition 2.5.71, $e$ is the multiplicity of the special fiber of Definition 2.5.21 with $\varpi = p$, and $n_{a,b}(\lambda, \tau_E)$ is the multiplicity of Definition 2.5.69 with $O = \mathcal{O}_E$ and $\mathrm{red} : \mathbb{Z}_p \to k_E$ the reduction.
+
+Lean: `Langlands.BreuilMezardFullFor`, `Langlands.BreuilMezardGL2QpFull`, stated and not proved.
+
+The integers $\mu_{a,b}$ are chosen after $R$ and before $\lambda$, $\tau$, $E$ and the model, as in Conjecture 2.5.51. The proposition `Langlands.BreuilMezardFullFor p k ρbar rec wd` is the statement for one $\bar\rho$, one $\mathrm{rec}$ and one $\mathrm{wd}$, and `Langlands.BreuilMezardGL2QpFull wd` quantifies over $k$, $\bar\rho$, $\mathrm{art}$ and $\mathrm{rec}$. This statement does not replace the shape `Langlands.BreuilMezardGL2Qp` of Conjecture 2.5.51, which other Lean files use. Only the semistable half of Conjecture 2.5.51 is stated: there is no crystalline version with $\sigma^{\mathrm{cr}}(\tau)$.
+
+**Proposition 2.5.73 (checks of the statement).** Let $O$ be a discrete valuation ring with the fraction field $C$ and the residue field $k$, and let $\lambda = (1, 0)$.
+1. The image of $O$ in $C$ is a stable lattice of the trivial representation of each group $G$, and $n_W(C) = [k : W]$ for the trivial representation $C$ and each $W$.
+2. For the trivial representation $\tau = C$ of $GL_2(\mathcal{O}_K)$, $\sigma(\lambda, \tau)$ is the trivial representation. So $n_{0,0}(\lambda, C) = 1$ and $n_{a,b}(\lambda, C) = 0$ for $a \ne 0$. In particular $n_{0,0}(\lambda, E) = 1$ for each finite extension $E$ of $\mathbb{Q}_p$ in the statement.
+3. Assume Conjecture 2.5.72 for $\bar\rho$, $\mathrm{rec}$ and $\mathrm{wd}$. Let $\lambda$, $\tau$, $\sigma$, $E$ and $\tau_E$ be as in the conjecture, and assume that there are $a_0 \le p - 1$ and $b_0 \le p - 2$ with $n_{a,b}(\lambda, \tau_E) = 1$ for $(a, b) = (a_0, b_0)$ and $n_{a,b}(\lambda, \tau_E) = 0$ for the other $(a, b)$ in the sum. Then $e(R(\lambda, \tau) / p) = \mu_{a_0, b_0}$.
+
+Lean: `Langlands.isStableLattice_range_trivial`, `Langlands.serreMultiplicity_trivial`, `Langlands.typeRep_one_zero_trivial`, `Langlands.typeMultiplicityOf_one_zero_trivial`, `Langlands.typeMultiplicityOf_one_zero_trivial_zero_zero`, `Langlands.typeMultiplicityOf_one_zero_trivial_of_ne_zero`, `Langlands.typeMultiplicityOf_coeffRed_trivial`, `Langlands.BreuilMezardFullFor.exists_mu`
+
+*Proof.* (1) The image $O \cdot 1$ is finitely generated, spans $C$ and is stable. Its reduction is the trivial representation $k$. (2) For $\lambda = (1, 0)$ we have $\lambda_1 - \lambda_2 - 1 = 0$ and $\lambda_2 = 0$, so $\sigma(\lambda, \tau) = \mathrm{Sym}^0 C^2 \otimes \det^0 \otimes C$, which is the trivial representation. Part 1 and Example 2.5.44 give the values. (3) In the sum only the term $(a_0, b_0)$ is not zero, and it is $\mu_{a_0, b_0}$. $\square$
+
+The trivial representation of $GL_2(\mathbb{Z}_p)$ is $\sigma^{\mathrm{cr}}(1 \oplus 1)$ and not $\sigma(1 \oplus 1)$, by Example 2.5.49. So part 2 does not give an input of the semistable statement. It shows only that the function $n_{a,b}$ of the statement is not identically zero, so that the right side of the conjecture is not forced to be $0$. Exercise 24 computes the input $\sigma(1 \oplus 1) = \mathrm{st}$ with $\lambda = (1, 0)$, for which part 3 applies.
+
+**Remark 2.5.74 (the Lean status of the full statement).** The statement of Conjecture 2.5.72 resolves item 4 of Remark 2.5.53, with the following reservations. They are listed in the documentation of `Langlands/Statements/BreuilMezardFull.lean`.
+1. *The inertial type of a lift.* It is the parameter $\mathrm{wd}$. The statement is the conjecture only when $\mathrm{wd}$ sends a potentially semistable lift to the restriction to inertia of $\mathrm{WD}(\rho)$, moved to $\mathbb{C}$. For other maps it is a different claim. The values of $\mathrm{wd}$ on lifts that are not potentially semistable have no effect.
+2. *The correspondence.* The predicate `Langlands.IsLanglandsMap` does not fix $\mathrm{rec}$ on the supercuspidal representations, by item 3 of Volume 6, Remark 3.1.9. So for supercuspidal types the statement asks for the formula for each such $\mathrm{rec}$. If $\mathrm{rec}$ is not unique, this is a stronger claim than the conjecture.
+3. *Existence.* Lean does not prove that a universal framed deformation ring exists, that Henniart types exist (Theorem 2.5.48), or that models over $E$ exist. If one of them does not exist, the statement is empty for that input.
+4. *The ring $R(\lambda, \tau)$.* It is the quotient by the ideal of the points, which is Kisin's ring when the points are dense. Lean does not prove that it is Kisin's ring, or that it is local and nonzero when it has a point. If it is not local, its multiplicity is $0$ by the Lean convention.
+5. *Facts used by the mathematics.* Lean does not prove that a potentially semistable representation is de Rham, that $B_{\mathrm{st}}^{G_L}$ is a field, or that $n_{a,b}(\lambda, \tau_E)$ does not depend on $E$ and the model.
+6. *The prime $2$.* The statement includes $p = 2$. The results of Kisin, Paškūnas, and Hu and Tan cited after Conjecture 2.5.51 assume $p > 2$, so for $p = 2$ the statement is still a conjecture.
