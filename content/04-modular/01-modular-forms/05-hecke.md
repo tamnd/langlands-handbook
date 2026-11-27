@@ -2,8 +2,9 @@
 title: Hecke operators
 nodes: []
 sources: []
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Hecke operators
@@ -353,4 +354,4 @@ The condition $dM \mid N$ with $M < N$ says that $M$ is a proper divisor of $N$ 
 $$B_2f_{11} = q^2 - 2q^4 - q^6 + 2q^8 + q^{10} + 2q^{12} + \cdots,$$
 by Proposition 1.5.35 and Example 1.2.14. The two forms are linearly independent, because $a_1(f_{11}) = 1$ and $a_1(B_2f_{11}) = 0$. So $S_2(\Gamma_0(22))$ is equal to its oldspace, and there is no newform of level 22 and weight 2. This agrees with the fact that no elliptic curve over $\mathbb{Q}$ has conductor 22. Exercise 19 computes $U_2$ on this space.
 
-**Remark 1.5.38 (what the Lean file does not prove about the oldspace).** The file defines the oldspace, but it does not prove that the oldspace is stable under the operators $T_n$, which is part 1 of Theorem 2.1.8 for $\Gamma_0(N)$. For $p \nmid N$ the stability follows from the identity $T_pB_d = B_dT_p$, which Exercise 18 derives from Theorem 1.5.18 and Proposition 1.5.35; for $p \mid N$ it needs the relation between $U_p$, $T_p$ and $B_p$ of the same exercise. The file defines neither the Petersson inner product on $S_k(\Gamma_0(N))$ nor the newspace, and it does not prove the decomposition of part 4 of Theorem 2.1.8.
+**Remark 1.5.38 (what the Lean files prove about the oldspace).** The file `Langlands/Modular/HeckeTn.lean` defines the oldspace. The file `Langlands/Modular/OldSpace.lean` proves that the oldspace is stable under $T_n$ for $\gcd(n, N) = 1$, in `Langlands.Modular.oldSpace_le_comap_heckeTn`, `Langlands.Modular.heckeTn_mem_oldSpace` and `Langlands.Modular.cuspHeckeT_mem_oldSpace`. This is part 1 of Theorem 2.1.8 for these $n$. On paper it follows from the identity $T_pB_d = B_dT_p$ for $p \nmid N$, which Exercise 18 derives from Theorem 1.5.18 and Proposition 1.5.35. The Lean files do not treat $U_p$ for $p \mid N$, which needs the relation between $U_p$, $T_p$ and $B_p$ of the same exercise. The same file defines `Langlands.Modular.newSpace` as a joint kernel of trace maps. It does not prove that this space is the orthogonal complement of the oldspace, and it does not prove the decomposition of part 4 of Theorem 2.1.8. The Lean project has no Petersson inner product on $S_k(\Gamma_0(N))$.

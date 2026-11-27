@@ -2,8 +2,9 @@
 title: The upper half plane and the modular group
 nodes: []
 sources: []
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The upper half plane and the modular group
