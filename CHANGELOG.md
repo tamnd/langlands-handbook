@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Backfill the pinned L-group, the L-group of U(n), the factors of pairs, LocalLanglandsGLFull and its fidelity checks (Sections 2.5.4 and 6.3.1).
+
 - Volume 2, Section 3.6: add Chevalley's construction of the adjoint group (Chevalley basis, divided powers, root, Weyl and torus elements, the examples sl2 and A2, Chevalley's theorem) with the Lean status and Exercises 12 to 14.
 
 ## v0.1.26 (2026-11-27)
