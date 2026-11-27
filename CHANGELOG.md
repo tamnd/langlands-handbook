@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.1.25 (2026-11-27)
+
 ### Added
 
 - Section 5.5 proves Hecke's theorem for all Hecke characters, and Section 4.2.5 adds framed deformation rings.
