@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 4: Sections 1.5 and 2.4 follow HeckeTn.lean and AnthropicES.lean: the operators T_n and their q-expansion, the level raising maps B_d and the oldspace on S_k(Gamma0(N)), Remark 2.4.7 on the proved-mod weight 2 Eichler-Shimura bridge; Exercises 1.17 to 1.20.
+
 - Volume 4, Section 2.5: items 2.5.54 to 2.5.74 follow LogTeich.lean, Semistable2.lean, BreuilMezardSym.lean and BreuilMezardFull.lean: the functional equation of the logarithm, the Frobenius and monodromy of B_st, the simplicity of the Serre weights and the full Breuil-Mezard statement; Exercises 21 to 24.
 
 - Volume 4, Sections 1.5 and 2.1: follow the Lean files Langlands/Modular/Hecke.lean and HeckeMul.lean: T_p and U_p on Gamma0(N) as the trace of a translate, the coset formulas, the q-expansion and commutation proofs, multiplicativity of eigenform coefficients from the T_p relations, T_n on q-expansions; updated Lean lines and Remarks 1.5.13, 2.1.5, 2.3.5; Exercises 1.13 to 1.16 and 2.17 to 2.20.
