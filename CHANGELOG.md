@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6, Chapters 2 and 3 checked: a missing step in Proposition 2.2.6, Examples 2.4.12 and 3.6.6, and the two meanings of Sp(a) corrected.
+
 - Volume 6, Chapter 1 checked: Theorem 1.7.3, a missing step in Section 1.4 and a citation in Section 1.5 corrected.
 
 ## v0.4.1 (2026-11-27)
