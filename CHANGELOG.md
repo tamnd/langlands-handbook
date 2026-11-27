@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 5, Chapter 2 (automorphic forms and cusp forms): automorphic forms on GL_2(A), cusp forms and the cuspidal spectrum, the Fourier-Whittaker expansion, multiplicity one and the representations of GL_2(R); 10 exercises.
+
 - Volume 5, Chapter 3 (local representations of GL(2)): principal series and the Jacquet module, Steinberg and special representations, supercuspidals and the classification, the Satake isomorphism, the Kirillov model, conductors and Casselman's newforms; 10 exercises.
 
 - Volume 5, Automorphic representations of GL(2): the volume file and the introduction.
