@@ -92,7 +92,7 @@ For $n = 1$ the same proof is Tate's thesis, and the rank $0$ term gives the pol
 
 Node: LG6NN4B43V · Lean: `Langlands.HeckeFunctionalEquation`
 
-This is the theorem of Volume 3, Chapter 5. The project states it and does not prove it. In the Lean statement the archimedean parameters of $\chi$ are hypotheses. Their existence is the separate statement `Langlands.ArchimedeanParametersExist`.
+This is the theorem of Volume 3, Chapter 5. The project proves it as `Langlands.heckeFunctionalEquation`, see Theorem 5.5.83 of that chapter. The Lean statement does not identify the root number $W$ with the product of the local root numbers. In the Lean statement the archimedean parameters of $\chi$ are hypotheses. Their existence is the separate statement `Langlands.ArchimedeanParametersExist`.
 
 **Example 1.6.10 (modular forms).** For a newform $f \in S_k(\Gamma_0(N))$ and $\pi = \pi_f$, the finite part is $L(s, \pi_f) = L(f, s + (k-1)/2) = \sum_m a_m(f) m^{-(k-1)/2} m^{-s}$, by Example 1.4.9 at the primes $p \nmid N$ and by the Steinberg factor of Example 1.6.7 at $p \| N$. The archimedean factor is $\Gamma_\mathbb{C}(s + (k-1)/2)$, and the theorem gives Hecke's functional equation of Volume 4 with the center at $s = 1/2$. For $\Delta$ this is $\Lambda(s, \pi_\Delta) = \Lambda(1 - s, \pi_\Delta)$, the sign is $\varepsilon = (-1)^{k/2} = 1$ for $k = 12$.
 
