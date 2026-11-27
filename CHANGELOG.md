@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.4.1 (2026-11-27)
+
 ### Added
 
 - Volume 4, Chapter 2 checked: a summation bound in Proposition 2.2.3 and three citations corrected.
