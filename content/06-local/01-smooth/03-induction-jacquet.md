@@ -144,7 +144,7 @@ The groups $K_r$ with $r \ge 1$ have such a decomposition for each standard para
 1. The projection $p : V^J \to (V_N)^{J \cap M}$ is surjective.
 2. The Jacquet module $V_N$ is admissible.
 
-Lean: not stated yet
+Lean: not stated in this generality. The case of the Borel subgroup of $GL_2$ and the groups $K_r$ is Theorem 1.5.8, whose Lean line gives the names.
 
 *Proof.* Put $J_- = J \cap \bar N$, $J_0 = J \cap M$ and $J_+ = J \cap N$. Then $J = J_+ J_0 J_-$, and $e_J = e_{J_+} * e_{J_0} * e_{J_-}$. The group $J_0$ acts trivially on $(V_N)^{J_0}$, and $\delta_P$ is trivial on $J_0$. Two facts are used. First, $e_{J_+} x$ and $x$ have the same image in $V_N$ for each $x$, since $\pi(n) x - x \in V(N)$. Second, if $x$ is fixed by $J_-$ and its image is fixed by $J_0$, then $e_J x = e_{J_+} e_{J_0} x$ has the same image as $x$.
 

@@ -34,7 +34,7 @@ Lean: not stated yet (the structure has the field `isNilpotent`)
 4. The *twist* by a character $\chi$ of $W_K$ is $(\chi r, N)$. We write it $(r, N) \otimes \chi$.
 5. The *determinant* is the character $\det r$ of $W_K$.
 
-Lean: `Langlands.WDIso.IsDual`, `Langlands.WDIso.IsTwist`, `Langlands.WeilDeligneRep.det`
+Lean: `Langlands.WeilDeligneRep.directSum`, `Langlands.WeilDeligneRep.tensor`, `Langlands.WDIso.IsDual`, `Langlands.WDIso.IsTwist`, `Langlands.WeilDeligneRep.det`. The direct sum is in the file `Langlands/Local/LanglandsFamilyPairsEps.lean`, on $\mathbb{C}^{m + m'}$ with the block diagonal matrices of `Langlands.blockMat`. The tensor product is in the file `Langlands/Local/LanglandsFamilyPairs.lean`, on $\mathbb{C}^{m m'}$ with the Kronecker products of `Langlands.kronMat`, see Definition 3.1.15. The dual and the twist are relations between isomorphism classes, not constructions.
 
 One checks the relation in each case. For the dual, ${}^t r(w)^{-1} \, {}^t N \, {}^t r(w) = {}^t (r(w) N r(w)^{-1}) = \|w\| \, {}^t N$. The minus sign in $N^\vee$ makes the natural pairing $V \otimes V^\vee \to \mathbb{C}$ a morphism to the trivial Weil-Deligne representation $(1, 0)$: for $v \in V$ and $\lambda \in V^\vee$ one has $\lambda(Nv) + (N^\vee \lambda)(v) = 0$. The determinant does not see $N$. It is an invariant of the isomorphism class (`Langlands.WeilDeligneRep.det_eq_of_iso`).
 
