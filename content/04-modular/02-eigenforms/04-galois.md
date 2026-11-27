@@ -41,7 +41,7 @@ $$\rho_{f,\iota} : G_\mathbb{Q} \to GL_2(\bar{\mathbb{Q}}_\ell)$$
 such that for each prime $p \nmid N\ell$, $\rho_{f,\iota}$ is unramified at $p$ and
 $$\iota\bigl(\mathrm{tr}\,\rho_{f,\iota}(\mathrm{Frob}_p)\bigr) = a_p(f), \qquad \iota\bigl(\det\rho_{f,\iota}(\mathrm{Frob}_p)\bigr) = \chi(p) p^{k-1}.$$
 
-Node: LGG3ZW59RX · Lean: `Langlands.EichlerShimuraDeligne`
+Node: LGG3ZW59RX · Lean: `Langlands.EichlerShimuraDeligne`; the case k = 2 is proved in Lean modulo the statement of the anthropics port and four named hypotheses, see Remark 2.4.7
 
 The case $k = 2$ is due to Eichler and Shimura, and the case $k \ge 3$ to Deligne, [Del69, Theorem 6.1]. The outline of the proof for $k = 2$ is below. By Chebotarev and Brauer-Nesbitt the semisimplification of $\rho_{f,\iota}$ is unique up to isomorphism. Ribet proved that $\rho_{f,\iota}$ is irreducible when $f$ is a newform.
 
@@ -67,11 +67,25 @@ We outline the construction of Eichler and Shimura, following Diamond and Shurma
 
 For $k \ge 3$, Deligne replaces $J$ by the étale cohomology $H^1$ of $X_1(N)$ with coefficients in the sheaf $\mathrm{Sym}^{k-2}$ of the Tate module of the universal elliptic curve, or $H^{k-1}$ of the Kuga-Sato variety, and he proves the analogue of the Eichler-Shimura relation. For $k = 1$, Deligne and Serre construct $\rho$ by congruences with forms of higher weight, and its image is finite; Section 2.5 returns to this case.
 
+**Remark 2.4.7 (the Lean bridge in weight 2).** The file `Langlands/Bridge/AnthropicES.lean` of the Lean project proves the case $k = 2$ of Theorem 2.4.4 in the form proved-mod. The source is the repository anthropics/fermats-last-theorem, which proves a theorem that attaches an $\ell$-adic representation to a normalized eigenform of weight 2 on $\Gamma_1(M)$ with a character. The file copies its statement as the proposition `Langlands.Ported.AnthropicES.EigenformGaloisRep`, together with the definitions that it uses. The proof of the source is not ported, so this statement enters as a hypothesis. The file then proves
+$$\texttt{EigenformGaloisRep} \wedge H_1 \wedge H_2 \wedge H_3 \wedge H_4 \Longrightarrow \texttt{EichlerShimuraWeightTwo},$$
+where `Langlands.Bridge.EichlerShimuraWeightTwo` is the statement of Remark 2.4.5 with $k = 2$, and $H_1, \dots, H_4$ are four named hypotheses. Each of them is a standard fact that is not yet in Mathlib.
+1. `Langlands.Bridge.IntegralCoefficientModel`. The numbers $a_n(f)$ and $\chi(n)$ are algebraic integers that generate a number field, so $\iota^{-1}$ maps them into the ring of integers $O$ of a finite extension of $\mathbb{Q}_\ell$; the hypothesis gives $O$, a ring map $\varphi$ from $\mathbb{Z}[a_n(f), \chi(n)]$ to $O$ and a continuous injective map $j : O \to \bar{\mathbb{Q}}_\ell$ with $\iota(j(\varphi(x))) = x$, see Shimura, Chapter 3, and Diamond and Shurman, Section 6.5.
+2. `Langlands.Bridge.PadicAlgClBaseChange`. A representation on a free module of rank 2 over a finite extension $O''$ of $O$ becomes a continuous representation into $GL_2(\bar{\mathbb{Q}}_\ell)$ with the same characteristic polynomials, after one extends $j$ to $O''$ and applies it to the entries of the matrices; the extension is continuous because a norm on a finite extension of a complete field is unique up to equivalence, see Neukirch, Chapter II.
+3. `Langlands.Bridge.FrobeniusComparison`. An arithmetic Frobenius at a maximal ideal $\mathfrak{P}$ of $\bar{\mathbb{Z}}$ over $p$, in the sense of Definition 2.4.1, is a Frobenius in the sense of the source for the valuation subring $\bar{\mathbb{Z}}_\mathfrak{P}$ of $\bar{\mathbb{Q}}$; this ring is a valuation ring because $\bar{\mathbb{Z}}$ is a Prüfer domain, and its residue field is $\bar{\mathbb{Z}}/\mathfrak{P}$.
+4. `Langlands.Bridge.InertiaComparison`. Each element of the inertia group $I_\mathfrak{P}$ of Definition 2.4.2 is in the inertia group of the same valuation subring $\bar{\mathbb{Z}}_\mathfrak{P}$.
+
+Lean: `Langlands.Bridge.eichlerShimuraWeightTwo_of_anthropic`, with `Langlands.Bridge.EichlerShimuraWeightTwo`, `Langlands.Ported.AnthropicES.EigenformGaloisRep`, `Langlands.Bridge.isEigenformWith_of_isNormalizedEigenformWithCharacter` and `Langlands.Bridge.eichlerShimuraWeightTwo_of_eichlerShimuraDeligne`
+
+The proof follows the passage from the source to Theorem 2.4.4. Let $f$, $\chi$, $\ell$ and $\iota$ be given. First, $H_1$ gives $O$, $\varphi$ and $j$. Second, the theorem `isEigenformWith_of_isNormalizedEigenformWithCharacter` shows that $f$ is an eigenform in the sense of the source. The source asks for $a_{pn} + \chi(p)p^{k-1}a_{n/p} = a_pa_n$ for all $n$ and all $p \nmid N$, and for $a_{\ell n} = a_\ell a_n$ for $\ell \mid N$, while Definition 2.1.4 asks for multiplicativity and the recursion at prime powers. The passage is Exercise 20 of Chapter 1, the lemma `Langlands.Bridge.hecke_relation_of_recursion`, with $a_0 = 0$ for a cusp form and $\chi(\ell) = 0$ for $\ell \mid N$; the two forms of the nebentypus agree by Definition 1.2.1. Third, the source applied with the prime $\ell$, the set $S = \{\ell\}$, the ring $O$ and the map $\varphi$ gives a finite extension $O''$ of $O$ and a representation $\rho$ over $O''$ that is unramified at each $p \nmid N\ell$, with characteristic polynomial $X^2 - \varphi(a_p)X + \varphi(\chi(p))p$ at each Frobenius at $p \nmid N\ell$. Fourth, $H_2$ gives $\rho'$ with values in $GL_2(\bar{\mathbb{Q}}_\ell)$. For $p \nmid N\ell$, $H_4$ shows that $\rho'$ is trivial on $I_\mathfrak{P}$, and $H_3$ gives the characteristic polynomial of $\rho'(\sigma)$ at each arithmetic Frobenius $\sigma$. The trace and the determinant of a $2 \times 2$ matrix are read off from its characteristic polynomial, and $\iota \circ j \circ \varphi$ is the identity, so $\iota(\mathrm{tr}\,\rho'(\sigma)) = a_p(f)$ and $\iota(\det\rho'(\sigma)) = \chi(p)p$. The converse direction, that `Langlands.EichlerShimuraDeligne` implies its case $k = 2$, is immediate.
+
+The case $k > 2$ is still open in Lean. The source has no theorem for weights other than 2, because its construction uses the Tate module of the Jacobian $J_1(M)$, as in the steps above. For $k \ge 3$ one needs the étale cohomology of the local system $\mathrm{Sym}^{k-2}$ on the modular curve, or of the Kuga-Sato variety, and the Eichler-Shimura relation in that cohomology. Mathlib has no étale cohomology, so the construction of Deligne cannot be formalized yet. The node of Theorem 2.4.4 keeps the full statement for all $k \ge 2$, and the bridge proves only its case $k = 2$.
+
 ### Arithmetic and geometric normalizations
 
 For a representation $\rho : G \to GL_n(F)$, the *dual* (or contragredient) representation is $\rho^\vee(g) = {}^t\rho(g)^{-1}$, the action on the dual space.
 
-**Proposition 2.4.7 (duals and the two normalizations).** Let $\rho : G_\mathbb{Q} \to GL_n(F)$ be a representation over a field $F$, unramified at $p$.
+**Proposition 2.4.8 (duals and the two normalizations).** Let $\rho : G_\mathbb{Q} \to GL_n(F)$ be a representation over a field $F$, unramified at $p$.
 1. The characteristic polynomial of $\rho^\vee(\Phi_p)$ is that of $\rho(\mathrm{Frob}_p)$. So $\rho$ has trace $a$ and determinant $d$ at the arithmetic Frobenius elements at $p$ if and only if $\rho^\vee$ has trace $a$ and determinant $d$ at the geometric Frobenius elements at $p$.
 2. If $n = 2$, then $\rho^\vee \cong \rho \otimes (\det\rho)^{-1}$.
 
@@ -81,7 +95,7 @@ Lean: not stated yet
 $$J A J^{-1} = \begin{pmatrix} d & -c \\ -b & a \end{pmatrix} = \det(A)\, {}^tA^{-1}.$$
 So $\rho^\vee(g) = \det\rho(g)^{-1}\, J\rho(g)J^{-1}$ for all $g$, and $J$ is an isomorphism from $\rho \otimes (\det\rho)^{-1}$ to $\rho^\vee$. $\square$
 
-Let $\rho = \rho_{f,\iota}$ be as in Theorem 2.4.4. By Proposition 2.4.7 and Proposition 2.4.6, the representation
+Let $\rho = \rho_{f,\iota}$ be as in Theorem 2.4.4. By Proposition 2.4.8 and Proposition 2.4.6, the representation
 $$\rho' = \rho^\vee \cong \rho \otimes \chi^{-1}\varepsilon_\ell^{1-k}$$
 is continuous, unramified outside $N\ell$, and has $\iota(\mathrm{tr}\,\rho'(\Phi_p)) = a_p(f)$ and $\iota(\det\rho'(\Phi_p)) = \chi(p)p^{k-1}$ at the geometric Frobenius elements. Conversely, a representation with these properties at the geometric Frobenius elements has a dual with the properties of Theorem 2.4.4. So the theorem with arithmetic Frobenius and the theorem with geometric Frobenius are equivalent statements, and in dimension 2 the two representations differ only by the twist by the character $\chi^{-1}\varepsilon_\ell^{1-k}$. They have the same image in $PGL_2(\bar{\mathbb{Q}}_\ell)$, and one is irreducible if and only if the other is. Constructions in étale cohomology, as in [Del69], give the geometric normalization in a natural way, since $\Phi_p$ acts on $H^1$ with trace $a_p$. The Tate module of item 7 above is dual to $H^1$, and on it the arithmetic normalization is natural.
 
