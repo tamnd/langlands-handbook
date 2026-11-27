@@ -1,14 +1,14 @@
 ---
 title: Serre's conjecture and the Artin conjecture
 nodes: [LGKH3WKEVV, LGEHB4MGJK, LGX6BXWH0J]
-sources: [KW09, Kis09, Kis09b, DS74, Neu99]
+sources: [KW09, Kis09, Kis09b, DS74, Neu99, BH06]
 status: drafted
 drafted_by: writer
 reviewed_by: []
 ---
 ## Serre's conjecture and the Artin conjecture
 
-Section 2.4 goes from eigenforms to Galois representations. This section states two theorems that go in the other direction. Serre's conjecture, proved by Khare and Wintenberger, says that every odd irreducible representation of $G_\mathbb{Q}$ of dimension 2 over $\bar{\mathbb{F}}_p$ comes from an eigenform. The Artin conjecture for odd representations of dimension 2 over $\mathbb{C}$ follows, and it identifies their Artin $L$-functions with $L$-functions of forms of weight 1. The last subsection sets up the framed deformation rings of Mazur and Kisin. The modularity lifting theorems in the proofs of these results use them, and the Breuil-Mezard conjecture is a statement about their multiplicities.
+Section 2.4 goes from eigenforms to Galois representations. This section states two theorems that go in the other direction. Serre's conjecture, proved by Khare and Wintenberger, says that every odd irreducible representation of $G_\mathbb{Q}$ of dimension 2 over $\bar{\mathbb{F}}_p$ comes from an eigenform. The Artin conjecture for odd representations of dimension 2 over $\mathbb{C}$ follows, and it identifies their Artin $L$-functions with $L$-functions of forms of weight 1. The next subsection sets up the framed deformation rings of Mazur and Kisin. The modularity lifting theorems in the proofs of these results use them, and the Breuil-Mezard conjecture is a statement about their multiplicities. The last two subsections construct the two inputs of that conjecture: the crystalline and semistable period rings of Fontaine, which define the $p$-adic Hodge conditions on the lifts, and the inertial types of Henniart with the Serre weight multiplicities $n_{a,b}(\lambda, \tau)$.
 
 ### Residual representations
 
@@ -221,6 +221,315 @@ This ring is reduced and has no $p$-torsion, as part 2 and part 3 of Proposition
 **Remark 2.5.25 (the Lean status).** The file `Langlands/Deformation/Framed.lean` contains Definitions 2.5.11, 2.5.12, 2.5.14, 2.5.19 and the last part of 2.5.21, Lemma 2.5.13, Theorem 2.5.15, Corollary 2.5.16 and Proposition 2.5.20. The file `Langlands/Ring/HilbertSamuel.lean` defines the Hilbert-Samuel function and the multiplicity and proves Proposition 2.5.23. It defines $e(S)$ as the limit when the limit is a natural number and as $0$ otherwise, and the file `Langlands/Ring/HilbertSamuelPoly.lean` proves Theorem 2.5.22, so the limit always exists. The universal property of `Langlands.IsUniversalFramedDeformationRing` is asked only for the artinian algebras, and Theorem 2.5.15 extends it with `IsAdicComplete.liftAlgHom` of Mathlib. In Lean a morphism in $\mathcal{C}_\Lambda$ is a structure `Langlands.CoeffAlg.Hom` with a homomorphism of $\Lambda$-algebras and the compatibility with the residue maps, and $\mathcal{C}_\Lambda$ is a category of Mathlib. The following points are not in Lean.
 1. *Existence.* Theorem 2.5.17 is not proved. It needs the condition $\Phi_p$, Schlessinger's criterion or a construction as a quotient of a power series ring, and the fact that a quotient of a complete noetherian local ring is complete. Mathlib does not have these results. So each result in Lean about $R^\square$ has the universal pair as a hypothesis.
 2. *Completeness of $R^\square(P)$.* The quotient $R^\square(P)$ is not shown to be complete, so it is not shown to be an object of `Langlands.CoeffAlg`. The definition `Langlands.localMultiplicity` gives $e$ for a ring that is local and $0$ for the other rings, so that `Langlands.specialFiberMultiplicity` is defined for each $P$.
-3. *The conditions.* The condition $P$ is arbitrary. The conditions of $p$-adic Hodge theory, such as potentially semistable of type $(\lambda, \tau)$, are not in Lean, because Mathlib does not have the Galois action on the period rings of Fontaine.
+3. *The conditions.* The condition $P$ is arbitrary. The conditions of $p$-adic Hodge theory, such as potentially semistable of type $(\lambda, \tau)$, are not in Lean. The period rings $B_{\mathrm{dR}}$, $B_{\mathrm{cris}}$ and $B_{\mathrm{st}}$ and the Galois action on $B_{\mathrm{cris}}$ are now in Lean, see the next subsection, but the Galois action on $B_{\mathrm{st}}$ and the Hodge-Tate type are not, see Remark 2.5.38.
 
 The Breuil-Mezard conjecture for $GL_2(\mathbb{Q}_p)$ is the node LGRMD7S8EV of the map. Its Lean form `Langlands.BreuilMezardGL2Qp`, in `Langlands/Statements/BreuilMezard.lean`, is a shape and not a statement: the structure `Langlands.BreuilMezardData` has the multiplicities $e(R^\square(\lambda, \tau, \bar\rho) \otimes k)$ as a field, and it does not use the definitions of this subsection. With a proof of Theorem 2.5.17 and the conditions of item 3, the field `deformationMultiplicity` could be defined as `Langlands.specialFiberMultiplicity` with $\varpi = p$ for Kisin's condition $P$.
+
+### Crystalline and semistable period rings
+
+Kisin's condition $P$ asks that a lift is potentially semistable of a given type. The definition of this condition needs the period rings of Fontaine. Volume 12 will treat $p$-adic Hodge theory in full. This subsection constructs the rings $A_{\mathrm{cris}}$, $B_{\mathrm{cris}}^+$, $B_{\mathrm{cris}}$ and $B_{\mathrm{st}}$, the element $t$ and the Kummer cocycle, and it proves the properties that follow from the constructions. These are the parts that the Lean files prove. For the deeper properties we give the statements and an outline, and we mark them as such. The references are Fontaine, "Le corps des périodes $p$-adiques", Astérisque 223 (1994), the book of Fontaine and Ouyang, "Theory of $p$-adic Galois representations", and the notes of Brinon and Conrad, "CMI summer school notes on $p$-adic Hodge theory".
+
+In this subsection $p$ is a prime and $R$ is a commutative ring that is complete for the $p$-adic topology, in which $p$ is not a unit. The main case is $R = \mathcal{O}_{\mathbb{C}_p}$, the ring of integers of the completion $\mathbb{C}_p$ of $\bar{\mathbb{Q}}_p$. Each $\sigma \in G_{\mathbb{Q}_p}$ preserves the absolute value of $\bar{\mathbb{Q}}_p$, so it extends by continuity to $\mathbb{C}_p$, and the extension preserves $\mathcal{O}_{\mathbb{C}_p}$. So $G_{\mathbb{Q}_p}$ acts on $\mathcal{O}_{\mathbb{C}_p}$ by ring automorphisms.
+
+**Definition 2.5.26 (the tilt, the map $\theta$ and admissible representations).**
+1. The *tilt* $R^\flat$ is the set of the sequences $(x_0, x_1, \dots)$ of elements of $R/pR$ with $x_{n+1}^p = x_n$ for all $n$, with the operations term by term. It is a perfect ring of characteristic $p$. For $x \in R^\flat$ and lifts $\hat x_n \in R$ of the $x_n$, the limit $x^\sharp = \lim_n \hat x_n^{p^n}$ exists in $R$ and does not depend on the lifts. The map $x \mapsto x^\sharp$ is multiplicative, and it is the *untilt*.
+2. Let $W(R^\flat)$ be the ring of Witt vectors of $R^\flat$, with the Teichmüller map $x \mapsto [x]$ and the Frobenius $\varphi$. Each element of $W(R^\flat)$ is $\sum_{n \ge 0} p^n [x_n]$ for a unique sequence $(x_n)$ in $R^\flat$. *Fontaine's map* is the ring homomorphism $\theta : W(R^\flat) \to R$ with $\theta(\sum_n p^n [x_n]) = \sum_n p^n x_n^\sharp$. We write $\theta$ also for its extension $W(R^\flat)[1/p] \to R[1/p]$.
+3. The ring $B_{\mathrm{dR}}^+(R)$ is the completion $\varprojlim_n W(R^\flat)[1/p] / I^n$ of $W(R^\flat)[1/p]$ at the ideal $I = \ker \theta$. The ring $B_{\mathrm{dR}}(R)$ is the localization of $B_{\mathrm{dR}}^+(R)$ at the submonoid generated by the images of the elements $a$ with $I = a W(R^\flat)[1/p]$.
+4. Let $K$ be a field, $G$ a group and $B$ a $K$-algebra on which $G$ acts by $K$-algebra homomorphisms. For a representation $V$ of $G$ on a $K$-vector space of finite dimension, put $D_B(V) = (B \otimes_K V)^G$, with $G$ acting on both factors. It is a module over $B^G$. The representation $V$ is *$B$-admissible* if the rank of $D_B(V)$ over $B^G$ is $\dim_K V$. A representation of $G_{\mathbb{Q}_p}$ on a $\mathbb{Q}_p$-vector space of finite dimension is *de Rham* if it is $B_{\mathrm{dR}}(\mathcal{O}_{\mathbb{C}_p})$-admissible.
+
+Lean: Mathlib's `PreTilt`, `PreTilt.untilt`, `fontaineTheta`, `BDeRhamPlus`, `BDeRham`, and `Langlands.Padic.deRhamInvariants`, `Langlands.Padic.IsAdmissible`, `Langlands.Padic.IsDeRhamQp`
+
+A ring homomorphism $f : R \to S$ acts term by term on the sequences, so it gives a homomorphism $f^\flat : R^\flat \to S^\flat$ with $f^\flat(x)^\sharp = f(x^\sharp)$. Then $W(f^\flat)$ satisfies $\theta_S \circ W(f^\flat) = f \circ \theta_R$, so it maps $\ker \theta_R$ into $\ker \theta_S$, and it induces a homomorphism $B_{\mathrm{dR}}^+(R) \to B_{\mathrm{dR}}^+(S)$. If a group acts on $R$ by ring automorphisms, it acts on all these rings. This is how $G_{\mathbb{Q}_p}$ acts on $B_{\mathrm{dR}}(\mathcal{O}_{\mathbb{C}_p})$. In the cases of interest $B^G$ is a field. Fontaine proved that then $\dim_{B^G} D_B(V) \le \dim_K V$ for the rings of this subsection, so admissibility says that $D_B(V)$ is as large as possible. The definition of a de Rham representation makes sense only if $B_{\mathrm{dR}}(\mathcal{O}_{\mathbb{C}_p})$ is not the zero ring. The next proposition proves this.
+
+**Proposition 2.5.27 ($B_{\mathrm{dR}}(\mathcal{O}_{\mathbb{C}_p})$ is not zero).** Choose $y_n \in \mathcal{O}_{\mathbb{C}_p}$ with $y_0 = p$ and $y_{n+1}^p = y_n$. Let $p^\flat \in \mathcal{O}_{\mathbb{C}_p}^\flat$ be the sequence of the classes of the $y_n$, and put $\xi = p - [p^\flat] \in W(\mathcal{O}_{\mathbb{C}_p}^\flat)$.
+1. $(p^\flat)^\sharp = p$, and $p^\flat \ne 0$.
+2. $\theta(\xi) = 0$, and $\xi \ne 0$.
+3. The rings $\mathcal{O}_{\mathbb{C}_p}^\flat$, $W(\mathcal{O}_{\mathbb{C}_p}^\flat)$ and $W(\mathcal{O}_{\mathbb{C}_p}^\flat)[1/p]$ are domains, and $I = \ker \theta$ is a nonzero proper ideal of $W(\mathcal{O}_{\mathbb{C}_p}^\flat)[1/p]$.
+4. Let $R$ be such that $R[1/p] \ne 0$ and $W(R^\flat)[1/p]$ is a domain, and assume that $\ker \theta \ne 0$ in $W(R^\flat)[1/p]$. Then $B_{\mathrm{dR}}(R)$ is not the zero ring.
+5. $B_{\mathrm{dR}}(\mathcal{O}_{\mathbb{C}_p}) \ne 0$, and the trivial representation $\mathbb{Q}_p$ of $G_{\mathbb{Q}_p}$ is de Rham.
+
+Lean: `Langlands.Padic.untilt_pFlat`, `Langlands.Padic.pFlat_ne_zero`, `Langlands.Padic.fontaineTheta_xiCp`, `Langlands.Padic.xiCp_ne_zero`, `Langlands.Padic.isDomain_locWitt`, `Langlands.Padic.ker_fontaineThetaInvertP_ne_bot`, `Langlands.Padic.nontrivial_bdr`, `Langlands.Padic.nontrivial_bdr_padicComplexInt`, `Langlands.Padic.isDeRhamQp_trivial`
+
+*Proof.* (1) The $y_n$ are lifts of the terms of $p^\flat$, so $(p^\flat)^\sharp = \lim_n y_n^{p^n} = \lim_n p = p$. If $p^\flat = 0$, then $y_1 \in p\mathcal{O}_{\mathbb{C}_p}$, so $|y_1| \le p^{-1}$. But $|y_1| = p^{-1/p} > p^{-1}$.
+
+(2) We have $\theta(p) = p$ and $\theta([p^\flat]) = (p^\flat)^\sharp = p$, so $\theta(\xi) = 0$. For a ring $A$ of characteristic $p$, the map $W(A) \to A$ that takes the first Witt coordinate is a ring homomorphism. It sends $p$ to $0$ and $[x]$ to $x$. So it sends $\xi$ to $-p^\flat \ne 0$, and $\xi \ne 0$.
+
+(3) Let $x = (x_n) \in \mathcal{O}_{\mathbb{C}_p}^\flat$, and let $x^{(n)} = \lim_m \hat x_{n+m}^{p^m}$, so that $x^{(0)} = x^\sharp$, $(x^{(n+1)})^p = x^{(n)}$ and $x^{(n)}$ lifts $x_n$. If $x^\sharp = 0$, then each $x^{(n)}$ is $0$, because $\mathcal{O}_{\mathbb{C}_p}$ is a domain, and so $x = 0$. Since $x \mapsto x^\sharp$ is multiplicative and $\mathcal{O}_{\mathbb{C}_p}$ is a domain, $\mathcal{O}_{\mathbb{C}_p}^\flat$ is a domain. Let $A$ be a perfect domain of characteristic $p$. In $W(A)$ we have $p \cdot (a_0, a_1, \dots) = (0, a_0^p, a_1^p, \dots)$. So each nonzero $x \in W(A)$ is $p^a x'$ with $x'_0 \ne 0$, where $a$ is the first index with $x_a \ne 0$, and $p^a z = 0$ only for $z = 0$. If $x = p^a x'$ and $y = p^b y'$ are nonzero, then the first coordinate of $x'y'$ is $x'_0 y'_0 \ne 0$, so $xy = p^{a+b} x'y' \ne 0$. So $W(A)$ is a domain, $p \ne 0$ in it, and the localization $W(A)[1/p]$ is a domain that contains $W(A)$. The element $\xi$ is a nonzero element of $I$ by part 2. The ideal $I$ is proper, because it is the kernel of a homomorphism to the nonzero ring $\mathbb{C}_p$.
+
+(4) Put $A = W(R^\flat)[1/p]$. The ideal $I$ is proper, since $R[1/p] \ne 0$. Let $S$ be the submonoid of Definition 2.5.26, part 3. A localization is the zero ring if and only if the submonoid contains $0$. Each $s \in S$ is the image of a product $b = a_1 \cdots a_k$ of generators of $I$, so $bA = I^k$, and $b \ne 0$ since $A$ is a domain and $I \ne 0$. Suppose that the image of $b$ in $B_{\mathrm{dR}}^+(R)$ is $0$. Then $b \in I^{k+1} = bI$, so $b = bc$ with $c \in I$. Then $b(1 - c) = 0$, so $c = 1$ and $I = A$, a contradiction. So $0 \notin S$. If $I$ is not principal, $S = \{1\}$, and $B_{\mathrm{dR}}(R) = B_{\mathrm{dR}}^+(R)$ maps onto $A/I \ne 0$.
+
+(5) The first claim follows from parts 3 and 4, with $\mathcal{O}_{\mathbb{C}_p}[1/p] = \mathbb{C}_p$. For the trivial representation $D_B(\mathbb{Q}_p) = B^G$, which is free of rank $1$ over $B^G$ when $B^G \ne 0$. Here $B^G$ contains $1 \ne 0$. $\square$
+
+We now turn to the crystalline rings. For $n \ge 0$ write $n! = p^v m$ with $p \nmid m$. The integer $m$ is a unit in $\mathbb{Z}_p$, so it is a unit in each $\mathbb{Z}_p$-algebra, for example in $W(R^\flat)$, which is a $W(\mathbb{F}_p) = \mathbb{Z}_p$-algebra. So $n!$ is a unit in $W(R^\flat)[1/p]$.
+
+**Definition 2.5.28 (the rings $A_{\mathrm{cris}}$ and $B_{\mathrm{cris}}^+$).**
+1. For $x \in \ker \theta \subseteq W(R^\flat)$ and $n \ge 0$ the *divided power* $x^{[n]} = x^n / n!$ is the unique $y \in W(R^\flat)[1/p]$ with $n! \, y = x^n$.
+2. The ring $A_{\mathrm{cris}}^0(R)$ is the $W(R^\flat)$-subalgebra of $W(R^\flat)[1/p]$ generated by the divided powers $x^{[n]}$, for $x \in \ker \theta$ and $n \ge 0$.
+3. The ring $A_{\mathrm{cris}}(R)$ is the $p$-adic completion $\varprojlim_m A_{\mathrm{cris}}^0(R) / p^m A_{\mathrm{cris}}^0(R)$.
+4. The ring $B_{\mathrm{cris}}^+(R)$ is $A_{\mathrm{cris}}(R)[1/p]$.
+
+Lean: `Langlands.Padic.dividedPowers`, `Langlands.Padic.acrisZero`, `Langlands.Padic.Acris`, `Langlands.Padic.BcrisPlus`
+
+Fontaine defines $A_{\mathrm{cris}}$ as the $p$-adic completion of the divided power envelope of $W(R^\flat)$ at $\ker \theta$. The ring $A_{\mathrm{cris}}^0(R)$ is the image of this envelope in $W(R^\flat)[1/p]$. For $R = \mathcal{O}_{\mathbb{C}_p}$ the kernel of $\theta$ on $W(\mathcal{O}_{\mathbb{C}_p}^\flat)$ is generated by $\xi$, and the envelope is the subring $W(\mathcal{O}_{\mathbb{C}_p}^\flat)[\xi^n / n! : n \ge 0]$ of $W(\mathcal{O}_{\mathbb{C}_p}^\flat)[1/p]$, see the paper of Fontaine cited above. So for the main case the two definitions agree. The definition by the image avoids divided power envelopes, which Mathlib does not have.
+
+**Proposition 2.5.29 (functoriality and Frobenius).** Let $f : R \to S$ be a ring homomorphism between two rings of the kind above.
+1. The map $W(f^\flat)[1/p]$ sends $A_{\mathrm{cris}}^0(R)$ into $A_{\mathrm{cris}}^0(S)$. It induces ring homomorphisms $A_{\mathrm{cris}}(R) \to A_{\mathrm{cris}}(S)$ and $B_{\mathrm{cris}}^+(R) \to B_{\mathrm{cris}}^+(S)$, and these are compatible with identities and composites.
+2. For each $x \in W(R^\flat)$ there is $z \in W(R^\flat)$ with $\varphi(x) = x^p + pz$.
+3. For each $m \ge 0$ the element $p^m / m!$ of $W(R^\flat)[1/p]$ is the image of an element of $W(R^\flat)$.
+4. The Frobenius $\varphi$ of $W(R^\flat)[1/p]$ sends $A_{\mathrm{cris}}^0(R)$ into itself. So it induces ring endomorphisms $\varphi$ of $A_{\mathrm{cris}}(R)$ and $B_{\mathrm{cris}}^+(R)$, and these commute with the maps of part 1.
+5. Let a monoid $M$ act on $R$ by ring endomorphisms. Then $M$ acts on $A_{\mathrm{cris}}(R)$ and on $B_{\mathrm{cris}}^+(R)$ by ring endomorphisms, and $\varphi(gx) = g\varphi(x)$ for $g \in M$. Each nonzero $a \in \mathbb{Z}_p$ is a unit in $B_{\mathrm{cris}}^+(R)$. So $B_{\mathrm{cris}}^+(R)$ is a $\mathbb{Q}_p$-algebra, and $M$ acts by $\mathbb{Q}_p$-algebra homomorphisms.
+
+Lean: `Langlands.Padic.locMap_mem_acrisZero`, `Langlands.Padic.acrisMap`, `Langlands.Padic.acrisMap_id`, `Langlands.Padic.acrisMap_comp`, `Langlands.Padic.bcrisPlusMap_comp`, `Langlands.Padic.exists_frobenius_eq_pow_add`, `Langlands.Padic.exists_factorial_mul_eq_p_pow`, `Langlands.Padic.locFrob_mem_acrisZero`, `Langlands.Padic.acrisFrob`, `Langlands.Padic.bcrisPlusFrob`, `Langlands.Padic.acrisMap_comp_acrisFrob`, `Langlands.Padic.bcrisPlusMap_comp_bcrisPlusFrob`, `Langlands.Padic.acrisFrob_smul`, `Langlands.Padic.bcrisPlusFrob_smul`, `Langlands.Padic.isUnit_zpToBcrisPlus`, `Langlands.Padic.bcrisPlusQpAlgebra`, `Langlands.Padic.bcris_smulCommClass`
+
+*Proof.* (1) The identity $\theta_S \circ W(f^\flat) = f \circ \theta_R$ shows that $W(f^\flat)$ maps $\ker \theta_R$ into $\ker \theta_S$. If $n! \, y = x^n$, then $n! \, W(f^\flat)(y) = W(f^\flat)(x)^n$, so $W(f^\flat)$ sends $x^{[n]}$ to $W(f^\flat)(x)^{[n]}$. It sends $W(R^\flat)$ into $W(S^\flat)$ and the generators of $A_{\mathrm{cris}}^0(R)$ into $A_{\mathrm{cris}}^0(S)$, so it sends $A_{\mathrm{cris}}^0(R)$ into $A_{\mathrm{cris}}^0(S)$. It maps $p A_{\mathrm{cris}}^0(R)$ into $p A_{\mathrm{cris}}^0(S)$, so it induces a map of the $p$-adic completions, and then a map after $p$ is inverted. The compatibility with identities and composites holds for $W(\cdot^\flat)$, and it passes to the completions by the uniqueness of the induced maps.
+
+(2) For a perfect ring $A$ of characteristic $p$ the map $x \mapsto x_0$ identifies $W(A)/pW(A)$ with $A$, since $p \cdot (a_0, a_1, \dots) = (0, a_0^p, a_1^p, \dots)$ and $a \mapsto a^p$ is bijective. The Frobenius $\varphi = W(a \mapsto a^p)$ induces $a \mapsto a^p$ on $A$. So $\varphi(x) - x^p$ maps to $0$ in $A$, and it lies in $pW(A)$.
+
+(3) By Legendre's formula $v_p(m!) = \sum_{i \ge 1} \lfloor m / p^i \rfloor \le m/(p-1) \le m$. So $m! = p^v u$ with $v \le m$ and $p \nmid u$, and $p^m / m! = p^{m - v} u^{-1}$ with $u^{-1} \in \mathbb{Z}_p$.
+
+(4) Let $x \in \ker \theta$ and $n \ge 0$, and write $\varphi(x) = x^p + pz$ by part 2. Since $\varphi(n!) = n!$, we have $\varphi(x^{[n]}) = \varphi(x)^n / n!$, and the binomial formula gives
+$$\varphi(x)^n / n! = \sum_{k=0}^{n} \frac{x^{pk}}{k!} \cdot \frac{p^{n-k}}{(n-k)!} \, z^{n-k} = \sum_{k=0}^{n} \frac{(pk)!}{k!} \cdot x^{[pk]} \cdot \frac{p^{n-k}}{(n-k)!} \, z^{n-k}.$$
+In each term $(pk)!/k!$ is an integer, $x^{[pk]} \in A_{\mathrm{cris}}^0(R)$, the element $p^{n-k}/(n-k)!$ comes from $W(R^\flat)$ by part 3, and $z \in W(R^\flat)$. So $\varphi(x^{[n]}) \in A_{\mathrm{cris}}^0(R)$. Since $\varphi$ also maps $W(R^\flat)$ into itself, it maps $A_{\mathrm{cris}}^0(R)$ into itself. It maps $p A_{\mathrm{cris}}^0(R)$ into itself, so it induces maps of the completions. The Frobenius of Witt vectors is natural, $W(f^\flat) \circ \varphi = \varphi \circ W(f^\flat)$, because $f^\flat$ commutes with $a \mapsto a^p$. This identity passes to $A_{\mathrm{cris}}^0$ and then to the completions.
+
+(5) The element $g \in M$ acts by the map of part 1 for the homomorphism $x \mapsto gx$ of $R$. The action laws follow from the compatibility with composites, and $\varphi(gx) = g\varphi(x)$ is part 4. The map $\mathbb{Z}_p = W(\mathbb{F}_p) \to W(R^\flat)$ comes from the unique homomorphism $\mathbb{F}_p \to R^\flat$. A nonzero $a \in \mathbb{Z}_p$ is $p^v u$ with $u \in \mathbb{Z}_p^\times$, and $p$ is a unit in $B_{\mathrm{cris}}^+(R)$, so $a$ is a unit there. The maps of part 1 commute with the maps from $\mathbb{Z}_p$, by the uniqueness of $\mathbb{F}_p \to S^\flat$. So the action is $\mathbb{Q}_p$-linear. $\square$
+
+**Proposition 2.5.30 (the element $\log [\varepsilon]$).** Let $\varepsilon \in R^\flat$ with $\varepsilon^\sharp = 1$.
+1. $[\varepsilon] - 1 \in \ker \theta$, so $([\varepsilon] - 1)^{[j]} \in A_{\mathrm{cris}}^0(R)$ for all $j \ge 0$.
+2. For $j \ge 0$ put $\ell_j = (-1)^j ([\varepsilon] - 1)^{j+1} / (j+1) = (-1)^j \, j! \, ([\varepsilon] - 1)^{[j+1]}$. Then $\ell_j \in A_{\mathrm{cris}}^0(R)$, and $\ell_j \in p^m A_{\mathrm{cris}}^0(R)$ when $pm \le j$.
+3. Let $s_N = \sum_{j < N} \ell_j$. For $m \le n$ we have $s_{pn} \equiv s_{pm}$ modulo $p^m A_{\mathrm{cris}}^0(R)$. So the sequence $(s_N)$ converges in $A_{\mathrm{cris}}(R)$. Its limit is
+$$\log [\varepsilon] = \sum_{j \ge 1} (-1)^{j-1} \frac{([\varepsilon] - 1)^j}{j} \in A_{\mathrm{cris}}(R).$$
+4. For a ring homomorphism $f : R \to S$ we have $f^\flat(\varepsilon)^\sharp = 1$, and the map of $A_{\mathrm{cris}}$ sends $\log [\varepsilon]$ to $\log [f^\flat(\varepsilon)]$. If $M$ acts on $R$, then $g \log [\varepsilon] = \log [g\varepsilon]$ for $g \in M$.
+5. $(\varepsilon^p)^\sharp = 1$ and $\varphi(\log [\varepsilon]) = \log [\varepsilon^p]$.
+
+Lean: `Langlands.Padic.teichmuller_sub_one_mem_ker`, `Langlands.Padic.logDiv_mem`, `Langlands.Padic.logTerm`, `Langlands.Padic.logTerm_mem`, `Langlands.Padic.isAdicCauchy_logPartial`, `Langlands.Padic.logTeich`, `Langlands.Padic.acrisMap_logTeich`, `Langlands.Padic.smul_logTeich`, `Langlands.Padic.acrisFrob_logTeich`
+
+*Proof.* (1) $\theta([\varepsilon]) = \varepsilon^\sharp = 1$.
+
+(2) The two forms of $\ell_j$ agree, since $(j+1)! = (j+1) \, j!$. The second form is in $A_{\mathrm{cris}}^0(R)$ by part 1. If $pm \le j$, then $v_p(j!) \ge \lfloor j/p \rfloor \ge m$, so $j! = p^m c$ with $c \in \mathbb{Z}$, and $\ell_j = p^m \cdot (-1)^j c \, ([\varepsilon] - 1)^{[j+1]}$.
+
+(3) The difference $s_{pn} - s_{pm}$ is the sum of the $\ell_j$ with $pm \le j < pn$, and each of them is in $p^m A_{\mathrm{cris}}^0(R)$ by part 2. In the same way $s_N - s_{pm} \in p^m A_{\mathrm{cris}}^0(R)$ for $N \ge pm$. So the sequence is Cauchy for the $p$-adic topology, and it has a limit in the completion.
+
+(4) The untilt is natural, so $f^\flat(\varepsilon)^\sharp = f(\varepsilon^\sharp) = 1$. The map $W(f^\flat)$ sends $[\varepsilon]$ to $[f^\flat(\varepsilon)]$, and divided powers to divided powers by the proof of Proposition 2.5.29. So it sends the partial sums $s_N$ for $\varepsilon$ to the partial sums for $f^\flat(\varepsilon)$. The map of completions sends the limit of a Cauchy sequence to the limit of its image. The second claim is the case of the homomorphism $x \mapsto gx$.
+
+(5) $(\varepsilon^p)^\sharp = (\varepsilon^\sharp)^p = 1$. In the Witt vectors of a perfect ring $\varphi([\varepsilon]) = [\varepsilon^p]$. Since $\varphi(j!) = j!$, the Frobenius sends $([\varepsilon] - 1)^{[j]}$ to $([\varepsilon^p] - 1)^{[j]}$, and we conclude as in part 4. $\square$
+
+**Lemma 2.5.31 (the element $\varepsilon$).** Choose $z_n \in \mathbb{C}_p$ with $z_0 = 1$, $z_1$ a primitive $p$-th root of unity and $z_{n+1}^p = z_n$. Each $z_n$ lies in $\mathcal{O}_{\mathbb{C}_p}$. Let $\varepsilon \in \mathcal{O}_{\mathbb{C}_p}^\flat$ be the sequence of the classes of the $z_n$. Then $\varepsilon^\sharp = 1$ and $\varepsilon \ne 1$.
+
+Lean: `Langlands.Padic.epsCp`, `Langlands.Padic.untilt_epsCp`, `Langlands.Padic.pow_p_sub_one_mem`, `Langlands.Padic.epsCp_ne_one`
+
+*Proof.* We have $z_n^{p^n} = z_0 = 1$, so $|z_n| = 1$ and $\varepsilon^\sharp = \lim_n z_n^{p^n} = 1$. Let $x \in \mathcal{O}_{\mathbb{C}_p}$ with $x \equiv 1$ modulo $p$, and write $x = 1 + y$ with $y \in p\mathcal{O}_{\mathbb{C}_p}$. Then $x^p - 1 = \sum_{0 < i < p} \binom{p}{i} y^i + y^p$. Each $\binom{p}{i}$ with $0 < i < p$ is divisible by $p$, and $y^p \in p^2 \mathcal{O}_{\mathbb{C}_p}$, so $x^p \equiv 1$ modulo $p^2$. Suppose now that $\varepsilon = 1$. Then $z_2 \equiv 1$ modulo $p$, so $z_1 = z_2^p \equiv 1$ modulo $p^2$. But $z_1 - 1$ is a root of the Eisenstein polynomial $\Phi_p(1 + X)$ of degree $p - 1$, so $|z_1 - 1| = p^{-1/(p-1)} \ge p^{-1} > p^{-2}$. This is a contradiction. $\square$
+
+The proof uses $z_2$ and not $z_1$, because for $p = 2$ we have $z_1 = -1 \equiv 1$ modulo $2$. From now on $\varepsilon$ is the element of Lemma 2.5.31 and $t = \log [\varepsilon] \in A_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$. This is Fontaine's $2\pi i$ of $p$-adic Hodge theory.
+
+**Definition 2.5.32 ($B_{\mathrm{cris}}$ and crystalline representations).** Let $M$ act on $R$, let $\varepsilon \in R^\flat$ with $\varepsilon^\sharp = 1$, and let $t = \log [\varepsilon]$.
+1. The ring $B_{\mathrm{cris}}(R)$ is the localization of $B_{\mathrm{cris}}^+(R)$ at the submonoid generated by the elements $gt$ for $g \in M$. Each $h \in M$ maps this submonoid into itself, since $h(gt) = (hg)t$, so $M$ acts on $B_{\mathrm{cris}}(R)$ by $\mathbb{Q}_p$-algebra homomorphisms.
+2. We write $B_{\mathrm{cris}}$ for $B_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$ with $M = G_{\mathbb{Q}_p}$ and the $\varepsilon$ of Lemma 2.5.31.
+3. A representation $V$ of $G_{\mathbb{Q}_p}$ on a $\mathbb{Q}_p$-vector space of finite dimension is *crystalline* if it is $B_{\mathrm{cris}}$-admissible. We write $D_{\mathrm{cris}}(V) = D_{B_{\mathrm{cris}}}(V)$.
+
+Lean: `Langlands.Padic.bcrisSubmonoid`, `Langlands.Padic.Bcris`, `Langlands.Padic.bcrisMap`, `Langlands.Padic.smul_algebraMap_bcris`, `Langlands.Padic.BcrisCp`, `Langlands.Padic.IsCrystallineQp`, `Langlands.Padic.isCrystallineQp_trivial_of_nontrivial`
+
+Fontaine defines $B_{\mathrm{cris}} = B_{\mathrm{cris}}^+[1/t]$. Part 2 of the next theorem gives $gt = \chi(g) t$ with $\chi(g) \in \mathbb{Z}_p^\times$, which is a unit in $B_{\mathrm{cris}}^+$. So inverting all the $gt$ is the same as inverting $t$, and the two definitions agree. Definition 2.5.32 does not need this formula to define the action. As in part 5 of Proposition 2.5.27, the trivial representation is crystalline as soon as $B_{\mathrm{cris}} \ne 0$.
+
+**Theorem 2.5.33 (Fontaine).** Let $\chi : G_{\mathbb{Q}_p} \to \mathbb{Z}_p^\times$ be the cyclotomic character, with $g(z_n) = z_n^{\chi(g)}$ for all $n$.
+1. For $a, b \in \mathcal{O}_{\mathbb{C}_p}^\flat$ with $a^\sharp = b^\sharp = 1$ we have $\log [ab] = \log [a] + \log [b]$. For $c \in \mathbb{Z}_p$ the power $\varepsilon^c$ is defined, and $\log [\varepsilon^c] = ct$.
+2. $\varphi(t) = pt$, and $gt = \chi(g) t$ for $g \in G_{\mathbb{Q}_p}$.
+3. The ring $A_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$ has no $p$-torsion, and $B_{\mathrm{cris}}^+$ embeds into $B_{\mathrm{dR}}^+(\mathcal{O}_{\mathbb{C}_p})$ compatibly with $G_{\mathbb{Q}_p}$. The image of $t$ generates the maximal ideal of $B_{\mathrm{dR}}^+$. In particular $t \ne 0$ and $B_{\mathrm{cris}} \ne 0$.
+4. $B_{\mathrm{cris}}^{G_{\mathbb{Q}_p}} = \mathbb{Q}_p$, and $\dim_{\mathbb{Q}_p} D_{\mathrm{cris}}(V) \le \dim_{\mathbb{Q}_p} V$ for each $V$.
+
+Lean: not proved, see Remark 2.5.38.
+
+*Outline of the proof.* (1) In $\mathbb{Q}[[X, Y]]$ we have $\log((1 + X)(1 + Y)) = \log(1 + X) + \log(1 + Y)$. Put $X = [a] - 1$ and $Y = [b] - 1$, so that $[ab] - 1 = X + Y + XY$. Both sides are $p$-adically convergent series in the divided powers $X^{[i]} Y^{[j]}$, because $(X + Y)^{[n]} = \sum_i X^{[i]} Y^{[n-i]}$ and $(XY)^{[n]} = n! \, X^{[n]} Y^{[n]}$. A rearrangement of the series then gives the identity in $A_{\mathrm{cris}}$. The element $\varepsilon - 1$ is topologically nilpotent in $\mathcal{O}_{\mathbb{C}_p}^\flat$, so $\varepsilon^c = \lim \varepsilon^{c_n}$ for integers $c_n \to c$, and the formula for $\log [\varepsilon^c]$ follows by continuity. (2) Part 5 of Proposition 2.5.30 and part 1 give $\varphi(t) = \log [\varepsilon^p] = pt$. The element $g$ acts on $\varepsilon$ term by term, so $g\varepsilon = \varepsilon^{\chi(g)}$, and part 4 of Proposition 2.5.30 gives $gt = \log [\varepsilon^{\chi(g)}] = \chi(g) t$. (3) and (4) are in the paper of Fontaine cited above, and in the book of Fontaine and Ouyang. The embedding comes from the fact that the divided powers of $\xi$ converge in $B_{\mathrm{dR}}^+$. Then $\theta(t) = \log(\varepsilon^\sharp) = 0$, and the image of $t$ is $\xi$ times a unit. $\square$
+
+So $\mathbb{Q}_p(1)$, the line on which $G_{\mathbb{Q}_p}$ acts by $\chi$, is crystalline: the vector $t^{-1} \otimes e$ is invariant, since $g(t^{-1}) = \chi(g)^{-1} t^{-1}$. By a theorem of Faltings, the conjecture $C_{\mathrm{cris}}$ of Fontaine, the representation $V_p E = T_p E \otimes \mathbb{Q}_p$ of an elliptic curve $E$ over $\mathbb{Q}_p$ with good reduction is crystalline. For bad semistable reduction one needs a larger ring.
+
+**Definition 2.5.34 (the Kummer elements and $B_{\mathrm{st}}$).**
+1. Let $y_n$ and $p^\flat$ be as in Proposition 2.5.27. For $\sigma \in G_{\mathbb{Q}_p}$ put $w_n(\sigma) = \sigma(y_n) / y_n \in \mathbb{C}_p$. Let $\eta_\sigma \in \mathcal{O}_{\mathbb{C}_p}^\flat$ be the sequence of the classes of the $w_n(\sigma)$. The *Kummer element* of $\sigma$ is $\eta_\sigma$, and its logarithm is $\log [\eta_\sigma] \in A_{\mathrm{cris}}(\mathcal{O}_{\mathbb{C}_p})$.
+2. For a commutative ring $A$ the *monodromy operator* on the polynomial ring $A[u]$ is $N = -d/du$.
+3. The ring $B_{\mathrm{st}}(R)$ is the polynomial ring $B_{\mathrm{cris}}(R)[u]$ with the operator $N$. We write $B_{\mathrm{st}} = B_{\mathrm{st}}(\mathcal{O}_{\mathbb{C}_p})$.
+
+Lean: `Langlands.Padic.kummerRoots`, `Langlands.Padic.kummerFlat`, `Langlands.Padic.kummerLog`, `Langlands.Padic.monodromy`, `Langlands.Padic.Bst`, `Langlands.Padic.BstCp`
+
+The variable $u$ stands for $\log [p^\flat]$. This logarithm does not converge in $B_{\mathrm{cris}}^+$, because $\theta([p^\flat]) = p$ is not $1$, so Fontaine adds it as a new variable. Part 1 of Definition 2.5.34 needs part 1 of the next proposition.
+
+**Proposition 2.5.35 (the Kummer cocycle and the monodromy).** Let $\sigma, \tau \in G_{\mathbb{Q}_p}$.
+1. Each $w_n(\sigma)$ is a $p^n$-th root of unity, $w_{n+1}(\sigma)^p = w_n(\sigma)$, $|w_n(\sigma)| = 1$, and $\eta_\sigma^\sharp = 1$. So $\log [\eta_\sigma]$ is defined.
+2. $\sigma(p^\flat) = \eta_\sigma \, p^\flat$ in $\mathcal{O}_{\mathbb{C}_p}^\flat$.
+3. $\eta_{\sigma\tau} = \sigma(\eta_\tau) \, \eta_\sigma$.
+4. On $A[u]$ we have $N(u) = -1$, $N(b) = 0$ for $b \in A$ and $N(xy) = x N(y) + y N(x)$. If $A$ contains $\mathbb{Q}$, then the kernel of $N$ is $A$. In particular $B_{\mathrm{st}}^{N = 0} = B_{\mathrm{cris}}$.
+
+Lean: `Langlands.Padic.kummerRoots_pow`, `Langlands.Padic.kummerRoots_succ_pow`, `Langlands.Padic.norm_kummerRoots`, `Langlands.Padic.untilt_kummerFlat`, `Langlands.Padic.preTiltMap_pFlat`, `Langlands.Padic.kummerFlat_mul`, `Langlands.Padic.monodromy_X`, `Langlands.Padic.monodromy_C`, `Langlands.Padic.monodromy_mul`
+
+*Proof.* (1) The $y_n$ are nonzero, and $\sigma(y_n)^{p^n} = \sigma(p) = p = y_n^{p^n}$, so $w_n(\sigma)^{p^n} = 1$. Next $w_{n+1}(\sigma)^p = \sigma(y_{n+1}^p) / y_{n+1}^p = w_n(\sigma)$. A root of unity has absolute value $1$, so $w_n(\sigma) \in \mathcal{O}_{\mathbb{C}_p}$, and the sequence of its classes lies in the tilt. Its untilt is $\lim_n w_n(\sigma)^{p^n} = 1$.
+
+(2) The element $\sigma$ acts on the tilt term by term. The $n$-th term of $\sigma(p^\flat)$ is the class of $\sigma(y_n) = w_n(\sigma) y_n$, which is the $n$-th term of $\eta_\sigma p^\flat$.
+
+(3) By part 2, $(\sigma\tau)(p^\flat) = \sigma(\eta_\tau p^\flat) = \sigma(\eta_\tau) \, \eta_\sigma \, p^\flat$, and also $(\sigma\tau)(p^\flat) = \eta_{\sigma\tau} p^\flat$. The tilt is a domain and $p^\flat \ne 0$, by Proposition 2.5.27, so we may cancel $p^\flat$.
+
+(4) The first three claims are the rules for the derivative of polynomials. If $N(\sum_i b_i u^i) = -\sum_{i \ge 1} i \, b_i u^{i-1} = 0$, then $i \, b_i = 0$ for $i \ge 1$, and $b_i = 0$ since $i$ is a unit in $A$. The ring $B_{\mathrm{cris}}$ is a $\mathbb{Q}_p$-algebra by part 5 of Proposition 2.5.29. $\square$
+
+Define $c(\sigma) \in \mathbb{Z}_p$ by $\sigma(y_n) = z_n^{c(\sigma)} y_n$ for all $n$. Then $w_n(\sigma) = z_n^{c(\sigma)}$, so $\eta_\sigma = \varepsilon^{c(\sigma)}$. The function $c : G_{\mathbb{Q}_p} \to \mathbb{Z}_p$ is the *Kummer cocycle* of $p$. Since $\sigma(\varepsilon^a) = \varepsilon^{\chi(\sigma) a}$, part 3 of Proposition 2.5.35 says that
+$$c(\sigma\tau) = c(\sigma) + \chi(\sigma) c(\tau),$$
+so $c$ is a $1$-cocycle with values in $\mathbb{Z}_p(1)$. By part 1 of Theorem 2.5.33, $\log [\eta_\sigma] = c(\sigma) t$. This is the formula that defines the action of $G_{\mathbb{Q}_p}$ on $B_{\mathrm{st}}$.
+
+**Definition 2.5.36 (semistable representations).** Let $G_{\mathbb{Q}_p}$ act on $B_{\mathrm{st}} = B_{\mathrm{cris}}[u]$ by its action on the coefficients and by $g(u) = u + c(g) t$, and let $\varphi$ act by its action on $B_{\mathrm{cris}}$ and by $\varphi(u) = pu$. A representation $V$ of $G_{\mathbb{Q}_p}$ on a $\mathbb{Q}_p$-vector space of finite dimension is *semistable* if it is $B_{\mathrm{st}}$-admissible. We write $D_{\mathrm{st}}(V) = D_{B_{\mathrm{st}}}(V)$, with the operators $\varphi \otimes 1$ and $N \otimes 1$. A representation is *potentially semistable* if its restriction to $G_L$ is semistable for a finite extension $L$ of $\mathbb{Q}_p$, where one uses the same rings with $G_L$ in place of $G_{\mathbb{Q}_p}$.
+
+Lean: not formalized, see Remark 2.5.38.
+
+The formula is an action: $g(h(u)) = g(u + c(h)t) = u + c(g)t + c(h)\chi(g)t = u + c(gh)t$ by the cocycle relation and part 2 of Theorem 2.5.33. The operator $N$ commutes with $G_{\mathbb{Q}_p}$, since $N(g(u)) = -1 = g(N(u))$, and $N\varphi = p\varphi N$, since $N(\varphi(u)) = -p = p\varphi(N(u))$. Fontaine proved that $B_{\mathrm{st}}^{G_{\mathbb{Q}_p}} = \mathbb{Q}_p$ and that $\dim_{\mathbb{Q}_p} D_{\mathrm{st}}(V) \le \dim_{\mathbb{Q}_p} V$. By part 4 of Proposition 2.5.35, $D_{\mathrm{cris}}(V) = D_{\mathrm{st}}(V)^{N = 0}$. So a crystalline representation is semistable, and a semistable representation $V$ is crystalline if and only if $N = 0$ on $D_{\mathrm{st}}(V)$. Fontaine attached to each potentially semistable $V$ a Weil-Deligne representation $\mathrm{WD}(V)$, whose monodromy comes from $N$ and whose restriction to inertia records the extension $L$. This is the $p$-adic replacement for Grothendieck's monodromy theorem, see Volume 6, Remark 2.3.9. Each de Rham representation is potentially semistable, by the $p$-adic monodromy theorem of Berger.
+
+**Example 2.5.37 (the Kummer extension is semistable and not crystalline).** Let $V$ have the basis $e_1, e_2$, and let $G_{\mathbb{Q}_p}$ act by
+$$g e_1 = \chi(g) e_1, \qquad g e_2 = e_2 + c(g) e_1.$$
+This is a representation by the cocycle relation: $g(h e_2) = e_2 + c(g)e_1 + c(h)\chi(g)e_1 = e_2 + c(gh)e_1$. It is the extension of $\mathbb{Q}_p$ by $\mathbb{Q}_p(1)$ with the Kummer class of $p$, and by Tate's uniformization it is $V_p E$ for the Tate curve $E = \mathbb{G}_m / p^\mathbb{Z}$, which has split multiplicative reduction. We use Theorem 2.5.33 and Definition 2.5.36. In $B_{\mathrm{st}} \otimes V$ put
+$$f_1 = t^{-1} \otimes e_1, \qquad f_2 = 1 \otimes e_2 - u t^{-1} \otimes e_1.$$
+Then $g f_1 = \chi(g)^{-1} t^{-1} \otimes \chi(g) e_1 = f_1$, and
+$$g f_2 = 1 \otimes (e_2 + c(g) e_1) - \frac{u + c(g)t}{\chi(g) t} \otimes \chi(g) e_1 = 1 \otimes e_2 - ut^{-1} \otimes e_1 = f_2.$$
+The vectors $f_1, f_2$ are linearly independent over $B_{\mathrm{st}}$, since the matrix of their coordinates is triangular with the units $t^{-1}$ and $1$ on the diagonal. So $\dim D_{\mathrm{st}}(V) \ge 2$, and by the bound of Definition 2.5.36 $D_{\mathrm{st}}(V) = \mathbb{Q}_p f_1 \oplus \mathbb{Q}_p f_2$. So $V$ is semistable. The operator $N$ gives $N f_1 = 0$ and $N f_2 = -N(u) t^{-1} \otimes e_1 = f_1$. So $N \ne 0$ on $D_{\mathrm{st}}(V)$, and $D_{\mathrm{cris}}(V) = \ker N = \mathbb{Q}_p f_1$ has dimension $1$. So $V$ is not crystalline. Its Weil-Deligne representation has trivial restriction to inertia and $N \ne 0$, which is the Galois side of a twist of the Steinberg representation.
+
+**Remark 2.5.38 (the Lean status).** The file `Langlands/Padic/DeRhamNonzero.lean` proves Proposition 2.5.27, and so the predicate `Langlands.Padic.IsDeRhamQp` of `Langlands/Padic/DeRhamQp.lean` has no open hypothesis for the trivial representation. The file `Langlands/Padic/Crystalline.lean` contains Definitions 2.5.28 and 2.5.32, parts 2 and 3 of Definition 2.5.34, Proposition 2.5.29, parts 1 to 3 of Proposition 2.5.30, Lemma 2.5.31 without the claim $\varepsilon \ne 1$, and part 4 of Proposition 2.5.35. The file `Langlands/Padic/Semistable.lean` contains the claim $\varepsilon \ne 1$, parts 4 and 5 of Proposition 2.5.30, part 1 of Definition 2.5.34 and parts 1 to 3 of Proposition 2.5.35. In Lean the series of $\log [\varepsilon]$ is the limit of the subsequence $(s_{pk})$ of Proposition 2.5.30, and the definitions take an arbitrary monoid $M$ that acts on $R$. The following points are not in Lean.
+1. *The functional equation.* Part 1 of Theorem 2.5.33 is not proved. So the formulas $\varphi(t) = pt$, $gt = \chi(g)t$ and $\log [\eta_\sigma] = c(\sigma)t$ are not proved, and $B_{\mathrm{cris}}$ in Lean inverts all the $gt$ and not only $t$.
+2. *Nontriviality.* The claim $t \ne 0$ is not proved. So `Langlands.Padic.isCrystallineQp_trivial_of_nontrivial` has the hypothesis that $B_{\mathrm{cris}}$ is not the zero ring.
+3. *The semistable side.* The Frobenius and the Galois action on $B_{\mathrm{st}}$, and so Definition 2.5.36 and the predicates for semistable and potentially semistable representations, are not in Lean. Example 2.5.37 is not in Lean.
+4. *The invariants.* Part 4 of Theorem 2.5.33 and the bound $\dim D_B(V) \le \dim V$ are not proved. The predicate `Langlands.Padic.IsAdmissible` uses the rank `Module.finrank` over $B^G$, which is the dimension when $B^G$ is a field.
+
+### Inertial types and Serre weight multiplicities
+
+The other side of the Breuil-Mezard conjecture is a computation in the representation theory of $GL_2(\mathbb{Z}_p)$. An inertial type $\tau$ gives, by a theorem of Henniart, a representation $\sigma(\tau)$ of $GL_2(\mathbb{Z}_p)$. A Hodge-Tate type $\lambda$ gives an algebraic representation. The tensor product $\sigma(\lambda, \tau)$ has a stable lattice, and the numbers $n_{a,b}(\lambda, \tau)$ count the Serre weights in the reduction of this lattice. This subsection defines these numbers and proves that they do not depend on the lattice. The reference is the paper of Breuil and Mezard, "Multiplicités modulaires et représentations de $GL_2(\mathbb{Z}_p)$ et de $\mathrm{Gal}(\bar{\mathbb{Q}}_p/\mathbb{Q}_p)$ en $\ell = p$", Duke Math. J. 115 (2002), with the appendix of Henniart. For the Brauer-Nesbitt theorem see Serre, "Linear representations of finite groups", Chapter 15.
+
+We first count composition factors. Let $A$ be a ring and $M$ an $A$-module of finite length. By the Jordan-Hölder theorem, two composition series $0 = M_0 \subset M_1 \subset \dots \subset M_r = M$ have the same factors $M_i / M_{i-1}$ up to order and isomorphism.
+
+**Definition 2.5.39 (Jordan-Hölder multiplicity).** Let $S$ be an $A$-module. The *multiplicity* $[M : S]$ of $S$ in $M$ is the number of indices $i$ with $M_i / M_{i-1} \cong S$, for a composition series $(M_i)$ of $M$. If $M$ does not have finite length, we put $[M : S] = 0$.
+
+Lean: `Langlands.compositionCount`, `Langlands.compositionCount_eq_of_equivalent`, `Langlands.jhMultiplicity`, `Langlands.jhMultiplicity_eq`
+
+The Jordan-Hölder theorem says that the count does not depend on the series. When $S$ is simple, $[M : S]$ is the usual multiplicity. A representation of a group $G$ on a vector space $V$ over a field $k$ is a module over the group algebra $k[G]$, and we write $[V : W]$ for the multiplicity of $W$ in $V$ as $k[G]$-modules. If $\dim_k V$ is finite, then $V$ has finite length, since a chain of subrepresentations has at most $\dim_k V + 1$ terms.
+
+**Lemma 2.5.40 (properties of the multiplicity).** Let $S$ be an $A$-module.
+1. If $M$ is simple, then $[M : S] = 1$ if $M \cong S$ and $[M : S] = 0$ otherwise. If $M = 0$, then $[M : S] = 0$.
+2. If $M \cong M'$, then $[M : S] = [M' : S]$.
+3. Let $0 \to N \to M \to P \to 0$ be an exact sequence, with $M$ of finite length. Then $[M : S] = [N : S] + [P : S]$.
+4. For a linear map $f : M \to N$, with $M$ of finite length, $[M : S] = [\ker f : S] + [\operatorname{im} f : S]$.
+5. Let $f : M \to N$ and $g : N \to M$ be linear maps, with $M$ and $N$ of finite length, $\operatorname{im} f = \ker g$ and $\operatorname{im} g = \ker f$. Then $[M : S] = [N : S]$.
+
+Lean: `Langlands.jhMultiplicity_of_isSimpleModule`, `Langlands.jhMultiplicity_of_subsingleton`, `Langlands.jhMultiplicity_congr`, `Langlands.jhMultiplicity_eq_add_of_exact`, `Langlands.jhMultiplicity_eq_ker_add_range`, `Langlands.jhMultiplicity_eq_of_range_eq_ker`
+
+*Proof.* (1) A simple module has the composition series $0 \subset M$ with the single factor $M$. The zero module has the series $0$ with no factors.
+
+(2) An isomorphism $e : M \to M'$ sends a composition series of $M$ to a composition series of $M'$, and it induces isomorphisms of the factors.
+
+(3) We identify $N$ with a submodule of $M$ and $P$ with $M/N$. Submodules and quotients of a module of finite length have finite length. Take composition series $(N_i)_{i \le r}$ of $N$ and $(P_j)_{j \le s}$ of $P$, and let $M_j$ be the inverse image of $P_j$ in $M$. Then
+$$0 = N_0 \subset \dots \subset N_r = N = M_0 \subset M_1 \subset \dots \subset M_s = M$$
+is a composition series of $M$, because $M_j / M_{j-1} \cong P_j / P_{j-1}$. Its factors are the factors of $(N_i)$ and the factors of $(P_j)$.
+
+(4) Apply part 3 to $0 \to \ker f \to M \to \operatorname{im} f \to 0$.
+
+(5) By part 4 and part 2,
+$$[M : S] = [\ker f : S] + [\operatorname{im} f : S] = [\operatorname{im} g : S] + [\ker g : S] = [N : S]. \qquad \square$$
+
+Now let $O$ be a local ring with maximal ideal $\mathfrak{m}$ and residue field $k = O / \mathfrak{m}$. For the main results $O$ is a discrete valuation ring with a uniformizer $\varpi$ and the fraction field $C$, for example the ring of integers $\mathcal{O}_E$ of a finite extension $E$ of $\mathbb{Q}_p$.
+
+**Definition 2.5.41 (reductions, stable lattices and Serre weights).** Let $G$ be a group.
+1. Let $\sigma$ be a representation of $G$ on an $O$-module $L$. The *reduction* of $\sigma$ is the representation $\bar\sigma$ of $G$ on the $k$-vector space $L / \mathfrak{m} L$. For a representation $W$ of $G$ over $k$ put $n_W(\sigma) = [L / \mathfrak{m}L : W]$.
+2. Let $\rho$ be a representation of $G$ on a $C$-vector space $V$ of finite dimension. A *lattice* in $V$ is a finitely generated $O$-submodule $L$ that spans $V$ over $C$. The lattice $L$ is *stable* if $\rho(g) L \subseteq L$ for all $g \in G$. Then $\rho$ restricts to a representation $\rho_L$ of $G$ on $L$, and we put $n_W(\rho, L) = n_W(\rho_L)$.
+3. Let $\theta : G \to GL_2(k)$ be a homomorphism, and let $a, b \ge 0$ be integers. Let $\mathrm{Sym}^a k^2$ be the space of the homogeneous polynomials of degree $a$ in $x, y$ over $k$, with $GL_2(k)$ acting by the linear substitution of the variables. The *Serre weight* $\sigma_{a,b}$ is the representation $\mathrm{Sym}^a k^2 \otimes \det^b$ of $G$ through $\theta$. We write $n_{a,b}(\rho, L) = n_{\sigma_{a,b}}(\rho, L)$.
+
+Lean: `Langlands.Reduction`, `Langlands.reduceEnd`, `Langlands.reduction`, `Langlands.reductionMultiplicity`, `Langlands.IsStable`, `Langlands.IsStableLattice`, `Langlands.latticeRep`, `Langlands.latticeMultiplicity`, `Langlands.serreWeightRep`, `Langlands.latticeSerreMultiplicity`
+
+For the Breuil-Mezard conjecture $G = GL_2(\mathbb{Z}_p)$ and $\theta$ is the reduction $GL_2(\mathbb{Z}_p) \to GL_2(\mathbb{F}_p) \subseteq GL_2(k)$. Then the $\sigma_{a,b}$ with $0 \le a \le p - 1$ and $0 \le b \le p - 2$ are simple (Exercise 16) and pairwise non-isomorphic, and they are all the simple representations of $GL_2(\mathbb{F}_p)$ over $k$, up to isomorphism. This is a classical result in the modular representation theory of $GL_2(\mathbb{F}_p)$.
+
+**Lemma 2.5.42 (existence of stable lattices).** Let $O$ be a complete discrete valuation ring, let $G$ be a compact group and let $\rho : G \to GL(V)$ be continuous, for the topology of $GL(V)$ that a basis of $V$ gives. Then $V$ has a stable lattice.
+
+Lean: not proved, see Remark 2.5.53.
+
+*Proof.* Let $L_0$ be the $O$-span of a basis of $V$. The set $H = \{g \in G : \rho(g) L_0 = L_0\}$ is a subgroup. It contains the inverse image under $\rho$ of the open subgroup $GL(L_0) = GL_n(O)$ of $GL_n(C)$, so it is open. Since $G$ is compact, $H$ has finite index. Let $g_1, \dots, g_r$ be representatives of $G/H$, and put $L = \sum_i \rho(g_i) L_0$. This is a finitely generated $O$-module that contains $L_0$, so it is a lattice. For $g \in G$, the elements $g g_i$ are $g_{j(i)} h_i$ with $h_i \in H$, and $j$ is a permutation, so $\rho(g) L = \sum_i \rho(g_{j(i)}) L_0 = L$. $\square$
+
+**Theorem 2.5.43 (Brauer-Nesbitt for lattices).** Let $O$ be a discrete valuation ring with the uniformizer $\varpi$ and the fraction field $C$. Let $\rho$ be a representation of a group $G$ on a $C$-vector space $V$ of finite dimension, and let $L$ and $L'$ be stable lattices. Then $n_W(\rho, L) = n_W(\rho, L')$ for each representation $W$ of $G$ over $k$. In particular $n_{a,b}(\rho, L)$ does not depend on $L$, and we write it $n_{a,b}(\rho)$.
+
+Lean: `Langlands.reductionMultiplicity_eq_of_comp`, `Langlands.latticeMultiplicity_eq_of_smul_le`, `Langlands.latticeMultiplicity_eq_of_pow_smul_le`, `Langlands.exists_pow_smul_le`, `Langlands.latticeMultiplicity_eq_of_isStableLattice`, `Langlands.serreMultiplicityIndependent`, `Langlands.serreMultiplicity`, `Langlands.serreMultiplicity_eq_latticeSerreMultiplicity`, `Langlands.serreMultiplicityIndependent_integer`
+
+*Proof.* All the $O$-submodules of $V$ have no $\varpi$-torsion, since $\varpi$ is a unit in $C$. A finitely generated $O$-module $L$ has a reduction $L/\varpi L$ of finite dimension over $k$, so the reductions have finite length as representations. The proof has three steps.
+
+*Step 1.* Let $L' \subseteq L$ be stable finitely generated submodules with $\varpi L \subseteq L'$. Then $n_W(\rho_L) = n_W(\rho_{L'})$. Let $i : L' \to L$ be the inclusion and $j : L \to L'$ the map $x \mapsto \varpi x$. Both commute with $G$, and $i \circ j$ and $j \circ i$ are the multiplication by $\varpi$. Let $\bar\imath : L'/\varpi L' \to L/\varpi L$ and $\bar\jmath : L/\varpi L \to L'/\varpi L'$ be the induced maps. Then
+$$\operatorname{im} \bar\imath = (L' + \varpi L)/\varpi L = L'/\varpi L, \qquad \ker \bar\jmath = \{x \in L : \varpi x \in \varpi L'\}/\varpi L = L'/\varpi L,$$
+where we use that $\varpi x \in \varpi L'$ implies $x \in L'$, since there is no $\varpi$-torsion. In the same way
+$$\operatorname{im} \bar\jmath = \varpi L/\varpi L', \qquad \ker \bar\imath = (L' \cap \varpi L)/\varpi L' = \varpi L/\varpi L'.$$
+So $\operatorname{im} \bar\imath = \ker \bar\jmath$ and $\operatorname{im} \bar\jmath = \ker \bar\imath$. These are maps of $k[G]$-modules, and part 5 of Lemma 2.5.40 gives the claim.
+
+*Step 2.* Let $L' \subseteq L$ be stable submodules with $L$ finitely generated and $\varpi^m L \subseteq L'$ for some $m \ge 0$. Then $n_W(\rho_L) = n_W(\rho_{L'})$. Put $\Lambda_n = L' + \varpi^n L$ for $0 \le n \le m$. These are stable, $\Lambda_0 = L$ and $\Lambda_m = L'$. They are finitely generated, because $O$ is noetherian and they are submodules of $L$. We have $\Lambda_{n+1} \subseteq \Lambda_n$ and $\varpi \Lambda_n = \varpi L' + \varpi^{n+1} L \subseteq \Lambda_{n+1}$. Step 1 applies to each pair $\Lambda_{n+1} \subseteq \Lambda_n$.
+
+*Step 3.* Let $L$ and $L'$ be stable lattices. Let $v_1, \dots, v_r$ generate $L$. Each $v_i$ is a $C$-linear combination of elements of $L'$, since $L'$ spans $V$. Each element of $C$ is $\varpi^{-e} u$ with $u \in O$, so there is $m$ with $\varpi^m v_i \in L'$ for all $i$, and then $\varpi^m L \subseteq L'$. The intersection $L \cap L'$ is stable, and $\varpi^m L \subseteq L \cap L' \subseteq L$. By Step 2, $n_W(\rho_L) = n_W(\rho_{L \cap L'})$. In the same way $n_W(\rho_{L'}) = n_W(\rho_{L \cap L'})$. $\square$
+
+The reductions of two stable lattices need not be isomorphic. Only their composition factors agree (Exercise 15). This is why the Breuil-Mezard conjecture uses the multiplicities and not the reductions.
+
+**Example 2.5.44 (the trivial representation).** Let $\rho$ be the trivial representation of $G$ on $C$, with the stable lattice $O$. The reduction $O/\mathfrak{m}$ is the trivial representation $k$, which is simple. A Serre weight $\sigma_{a,b}$ with $a \ge 1$ has dimension $a + 1 \ge 2$, so it is not isomorphic to $k$, and $n_{a,b}(\rho) = 0$. The weight $\sigma_{0,b}$ is the character $\det^b \circ \theta$, so $n_{0,b}(\rho) = 1$ if $\det(\theta(g))^b = 1$ for all $g$, and $n_{0,b}(\rho) = 0$ otherwise. In particular $n_{0,0}(\rho) = 1$. For $G = GL_2(\mathbb{Z}_p)$ and the reduction map $\theta$, the determinant maps $G$ onto $\mathbb{F}_p^\times$, which is cyclic of order $p - 1$. So $n_{0,b}(\rho) = 1$ if and only if $p - 1$ divides $b$.
+
+Lean: `Langlands.reductionTrivialEquiv`, `Langlands.reductionMultiplicity_trivial`, `Langlands.reductionMultiplicity_trivial_of_ne_zero`, `Langlands.reductionMultiplicity_trivial_zero`
+
+We now come to the types. Let $K$ be a non-archimedean local field with the ring of integers $\mathcal{O}_K$, the Weil group $W_K$ and the inertia group $I_K \subseteq W_K$, see Volume 6, Definition 2.1.1. Recall that $I_K$ is an open compact subgroup of $W_K$.
+
+**Definition 2.5.45 (inertial types).** Let $m \ge 1$.
+1. An *inertial representation* of dimension $m$ is a homomorphism $\tau : I_K \to GL_m(\mathbb{C})$ for which there is a homomorphism $r : W_K \to GL_m(\mathbb{C})$ with open kernel and with $r|_{I_K} = \tau$.
+2. Two inertial representations $\tau$ and $\tau'$ are *isomorphic* if there is $g \in GL_m(\mathbb{C})$ with $\tau'(i) = g \tau(i) g^{-1}$ for all $i \in I_K$. This is an equivalence relation. An *inertial type* is an equivalence class.
+3. Let $(r, N)$ be a Weil-Deligne representation of dimension $m$, see Volume 6, Definition 2.2.1. Its *inertial type* is the class of $r|_{I_K}$. Isomorphic Weil-Deligne representations have the same inertial type.
+
+Lean: `Langlands.InertialRep`, `Langlands.InertialRep.Iso`, `Langlands.InertialRep.setoid`, `Langlands.InertialType`, `Langlands.InertialType.mk`, `Langlands.WeilDeligneRep.inertialRep`, `Langlands.WDIso.inertialType`, `Langlands.WDIso.inertialType_mk`, `Langlands.WDIso.HasZeroMonodromy`
+
+**Lemma 2.5.46 (inertial representations have finite image).** Let $\tau$ be an inertial representation. Then $\ker \tau$ is open in $I_K$, and the image of $\tau$ is finite.
+
+Lean: `Langlands.InertialRep.isOpen_ker`
+
+*Proof.* Let $r$ extend $\tau$. Then $\ker \tau = I_K \cap \ker r$, which is open in $I_K$ because $\ker r$ is open in $W_K$. The group $I_K$ is compact, so its open subgroup $\ker \tau$ has finite index, and the image $I_K / \ker \tau$ is finite. $\square$
+
+The Lean file proves only the first claim. By Grothendieck's monodromy theorem, each $\ell$-adic representation of $G_K$ with $\ell \ne p$ gives a Weil-Deligne representation, and so an inertial type. For $\ell = p$ the same holds for a potentially semistable representation, through Fontaine's functor $\mathrm{WD}$ of the previous subsection, after a choice of an isomorphism $\bar{\mathbb{Q}}_p \cong \mathbb{C}$.
+
+Let $\mathrm{rec}$ be a bijection from the isomorphism classes of the irreducible smooth representations of $GL_2(K)$ over $\mathbb{C}$ to the isomorphism classes of the Weil-Deligne representations of dimension $2$. The main example is the local Langlands correspondence of Volume 6, Theorem 3.3.1. A smooth representation $\sigma$ of $GL_2(\mathcal{O}_K)$ *occurs in* a smooth representation $\pi$ of $GL_2(K)$ if there is a nonzero linear map $f : \sigma \to \pi$ with $f(\sigma(g) v) = \pi(g) f(v)$ for all $g \in GL_2(\mathcal{O}_K)$.
+
+**Definition 2.5.47 (Henniart types).** Let $\tau$ be an inertial type of dimension $2$, and let $\sigma$ be an irreducible smooth representation of $GL_2(\mathcal{O}_K)$ of finite dimension.
+1. $\sigma$ is a *type* for $\tau$ if, for each irreducible smooth representation $\pi$ of $GL_2(K)$ of infinite dimension, $\sigma$ occurs in $\pi$ if and only if $\mathrm{rec}(\pi)$ has the inertial type $\tau$.
+2. $\sigma$ is a *crystalline type* for $\tau$ if, for each such $\pi$, $\sigma$ occurs in $\pi$ if and only if $\mathrm{rec}(\pi) = (r, N)$ has the inertial type $\tau$ and $N = 0$.
+
+These properties depend only on the isomorphism class of $\sigma$.
+
+Lean: `Langlands.HasTypeHom`, `Langlands.IsHenniartType`, `Langlands.IsHenniartCrysType`, `Langlands.HasTypeHom.of_iso`, `Langlands.IsHenniartType.of_iso`, `Langlands.IsHenniartCrysType.of_iso`, `Langlands.SmoothRep.IsIrreducible.of_iso`
+
+The last claim holds because an isomorphism $\sigma \cong \sigma'$ composed with a nonzero map $\sigma' \to \pi$ is a nonzero map $\sigma \to \pi$. The condition is only on the representations of infinite dimension. The characters $\chi \circ \det$ of $GL_2(K)$ must be excluded. For example, for an unramified $\chi$ the Weil-Deligne representation $\mathrm{rec}(\chi \circ \det)$ has the trivial inertial type and $N = 0$, but $\chi \circ \det$ contains only the trivial representation of $GL_2(\mathcal{O}_K)$, and not the representation $\mathrm{st}$ of Example 2.5.49.
+
+**Theorem 2.5.48 (Henniart).** Let $\mathrm{rec}$ be the local Langlands correspondence for $GL_2(K)$. Each inertial type $\tau$ of dimension $2$ has a type $\sigma(\tau)$ and a crystalline type $\sigma^{\mathrm{cr}}(\tau)$, and they are unique up to isomorphism.
+
+Lean: `Langlands.HasHenniartTypes`, not proved.
+
+*Outline of the proof.* The existence comes from the theory of types of Bushnell and Kutzko, see [BH06]. One sorts the representations $\pi$ by their restriction to inertia, through Volume 6, Proposition 3.3.3: the principal series with a given restriction of the characters to $\mathcal{O}_K^\times$, the twists of the Steinberg representation, and the supercuspidal representations. For each class one writes down a representation of $GL_2(\mathcal{O}_K)$ that is induced from an open compact subgroup and checks that it detects the class. The uniqueness is the main result of Henniart's appendix to the paper of Breuil and Mezard. $\square$
+
+**Example 2.5.49 (the trivial type).** Let $\tau = 1 \oplus 1$ be the trivial inertial type of dimension $2$, and let $\bar G = GL_2(k_K)$, where $k_K$ is the residue field of $K$ with $q$ elements. The space of the functions $\bar B \backslash \bar G \to \mathbb{C}$, for the upper triangular subgroup $\bar B$, is the trivial representation $1$ plus the Steinberg representation $\mathrm{st}$ of dimension $q$, see Volume 6, Definition 1.5.3. We inflate both to $GL_2(\mathcal{O}_K)$. The $\pi$ of infinite dimension with $\mathrm{rec}(\pi)|_{I_K}$ trivial are the unramified principal series, with $N = 0$, and the unramified twists of the Steinberg representation of $GL_2(K)$, with $N \ne 0$. An unramified principal series has a nonzero vector fixed by $GL_2(\mathcal{O}_K)$, see Volume 6, Section 1.2, and its vectors fixed by the Iwahori subgroup generate a copy of $1 \oplus \mathrm{st}$. A twist of the Steinberg representation contains $\mathrm{st}$ and does not contain $1$. So
+$$\sigma(1 \oplus 1) = \mathrm{st}, \qquad \sigma^{\mathrm{cr}}(1 \oplus 1) = 1.$$
+
+Now let $K = \mathbb{Q}_p$, let $E$ be a finite extension of $\mathbb{Q}_p$ with the ring of integers $\mathcal{O}_E$ and the residue field $k$, and let $\bar{\mathbb{Q}}_p$ be an algebraic closure of $E$. A *Hodge-Tate type* is a pair $\lambda = (\lambda_1, \lambda_2)$ of integers with $\lambda_1 > \lambda_2$.
+
+**Definition 2.5.50 (the representations $\sigma(\lambda, \tau)$).** Let $C$ be a field that contains $\mathbb{Q}_p$, and let $\iota : \mathbb{C} \to C$ be a ring homomorphism. Let $\lambda$ be a Hodge-Tate type and let $\sigma$ be a smooth representation of $GL_2(\mathbb{Z}_p)$ over $\mathbb{C}$ of finite dimension.
+1. For $a \ge 0$ and $b \in \mathbb{Z}$, the representation $\mathrm{Sym}^a C^2 \otimes \det^b$ of $GL_2(\mathbb{Z}_p)$ is the action on the homogeneous polynomials of degree $a$ over $C$, through $GL_2(\mathbb{Z}_p) \subseteq GL_2(C)$, multiplied by $\det^b$.
+2. The representation $\iota_* \sigma$ over $C$ has the matrices $\iota(\sigma(g))$ in a fixed basis of $\sigma$.
+3. Put
+$$\sigma(\lambda, \sigma) = \mathrm{Sym}^{\lambda_1 - \lambda_2 - 1} C^2 \otimes \det^{\lambda_2} \otimes_C \iota_* \sigma.$$
+For $\sigma = \sigma(\tau)$ we write $\sigma(\lambda, \tau)$, and for $\sigma = \sigma^{\mathrm{cr}}(\tau)$ we write $\sigma^{\mathrm{cr}}(\lambda, \tau)$.
+4. For $C = E$, the integers $n_{a,b}(\lambda, \tau)$ and $n^{\mathrm{cr}}_{a,b}(\lambda, \tau)$ are the multiplicities $n_{a,b}$ of Theorem 2.5.43 for $\sigma(\lambda, \tau)$ and $\sigma^{\mathrm{cr}}(\lambda, \tau)$, with $O = \mathcal{O}_E$ and $\theta$ the reduction $GL_2(\mathbb{Z}_p) \to GL_2(k)$.
+
+Lean: `Langlands.symDetRep`, `Langlands.symDetRep_natCast`, `Langlands.baseChangeRep`, `Langlands.glIntegersTo`, `Langlands.sigmaLambdaTau`, `Langlands.typeMultiplicity`, `Langlands.coeffEmbedding`, `Langlands.coeffRed`, `Langlands.charP_residueField`
+
+Part 4 needs a comment. The representation $\sigma(\tau)$ is smooth and of finite dimension, so its kernel is open and its image is finite. A representation of a finite group over $\mathbb{C}$ can be written with matrices over a number field, so $\sigma(\tau)$ is defined over $\bar{\mathbb{Q}}$, and so over $\bar{\mathbb{Q}}_p$ after a choice of an embedding $\bar{\mathbb{Q}} \to \bar{\mathbb{Q}}_p$. We take $E$ so large that $\sigma(\tau)$ is defined over $E$. Then $\sigma(\lambda, \tau)$ is a representation of the compact group $GL_2(\mathbb{Z}_p)$ over $E$. It is continuous, so it has a stable lattice by Lemma 2.5.42, and $n_{a,b}(\lambda, \tau)$ does not depend on the lattice by Theorem 2.5.43. It does not depend on $E$ either, because a lattice over $\mathcal{O}_E$ gives a lattice over $\mathcal{O}_{E'}$ for $E' \supseteq E$, with the reduction extended from $k$ to $k'$.
+
+**Conjecture 2.5.51 (Breuil and Mezard).** Let $p$ be a prime and $\bar\rho : G_{\mathbb{Q}_p} \to GL_2(k)$ continuous. There are integers $\mu_{a,b}(\bar\rho) \ge 0$, for $0 \le a \le p - 1$ and $0 \le b \le p - 2$, such that for each Hodge-Tate type $\lambda$ and each inertial type $\tau$
+$$e\big(R^\square(\lambda, \tau, \bar\rho) \otimes_{\mathcal{O}_E} k\big) = \sum_{a,b} n_{a,b}(\lambda, \tau) \, \mu_{a,b}(\bar\rho).$$
+The same integers give the multiplicities of the potentially crystalline rings $R^{\square, \mathrm{cr}}(\lambda, \tau, \bar\rho)$, with $n^{\mathrm{cr}}_{a,b}(\lambda, \tau)$ in place of $n_{a,b}(\lambda, \tau)$.
+
+Lean: `Langlands.BreuilMezardGL2Qp`, a shape only, see Remark 2.5.53.
+
+Kisin proved the conjecture for most $\bar\rho$ with $p > 2$, with the $p$-adic local Langlands correspondence of Colmez and with global arguments. Paškūnas gave a local proof, and Hu and Tan completed the remaining cases with $p > 2$. The integers $\mu_{a,b}(\bar\rho)$ are not arbitrary: they are the multiplicities of the special fibers of the crystalline rings of small weight, as the next example shows.
+
+**Example 2.5.52 (crystalline lifts of small weight).** Let $\tau$ be the trivial type and $\lambda = (k_0 - 1, 0)$ with $k_0 \ge 2$. By Example 2.5.49, $\sigma^{\mathrm{cr}}(\tau) = 1$, so $\sigma^{\mathrm{cr}}(\lambda, \tau) = \mathrm{Sym}^{k_0 - 2} E^2$. The lattice $\mathrm{Sym}^{k_0 - 2} \mathcal{O}_E^2$ is stable, and its reduction is $\mathrm{Sym}^{k_0 - 2} k^2 = \sigma_{k_0 - 2, 0}$.
+1. If $2 \le k_0 \le p + 1$, then $\sigma_{k_0 - 2, 0}$ is simple by Exercise 16. So $n^{\mathrm{cr}}_{a,b}(\lambda, \tau)$ is $1$ for $(a, b) = (k_0 - 2, 0)$ and $0$ otherwise, and the conjecture says that the multiplicity of the special fiber of $R^{\square, \mathrm{cr}}(\lambda, 1, \bar\rho)$ is $\mu_{k_0 - 2, 0}(\bar\rho)$. This is the way to compute $\mu_{a,0}(\bar\rho)$. For $k_0 \le p$ the theory of Fontaine and Laffaille shows that this ring is zero or formally smooth over $\mathcal{O}_E$, so $\mu_{k_0 - 2, 0}(\bar\rho)$ is $0$ or $1$.
+2. If $k_0 = p + 2$, then the reduction is $\mathrm{Sym}^p k^2$. The span of $x^p$ and $y^p$ is a subrepresentation, since $(\alpha x + \gamma y)^p = \alpha x^p + \gamma y^p$ for $\alpha, \gamma \in \mathbb{F}_p$. The map $\ell \mapsto \ell^p$ on the linear forms is an isomorphism of $\sigma_{1,0}$ onto it. The quotient $Q$ has the basis of the classes of $x^i y^{p-i}$ for $0 < i < p$. An element of $GL_2(\mathbb{F}_p)$ with the eigenvalues $\alpha, \beta$ in $\bar{\mathbb{F}}_p$ acts on $Q$ with the eigenvalues $\alpha^i \beta^{p-i} = \alpha\beta \cdot \alpha^{i-1}\beta^{p-1-i}$ for $0 < i < p$, which are the eigenvalues on $\sigma_{p-2,1}$. By the theory of Brauer characters, see Serre, "Linear representations of finite groups", Chapter 18, $Q$ and $\sigma_{p-2,1}$ have the same composition factors, and $\sigma_{p-2,1}$ is simple. The two weights are not isomorphic. For $p \ne 3$ their dimensions $2$ and $p - 1$ differ, and for $p = 3$ an element of order $8$ with the eigenvalues $\alpha, \alpha^3$ acts on $\sigma_{1,1}$ with the eigenvalues $\alpha^5, \alpha^7$. So $n^{\mathrm{cr}}_{1,0} = n^{\mathrm{cr}}_{p-2,1} = 1$, where for $p = 2$ we read $\sigma_{0,1}$ as $\sigma_{0,0}$, and the other multiplicities are $0$. The conjecture predicts $e = \mu_{1,0}(\bar\rho) + \mu_{p-2,1}(\bar\rho)$.
+
+**Remark 2.5.53 (the Lean status).** The file `Langlands/Local/BreuilMezardTypes.lean` contains Definitions 2.5.39, 2.5.41, 2.5.45, 2.5.47 and 2.5.50, part 1 of Lemma 2.5.40, Lemma 2.5.46 without the claim on the image, the statement of Theorem 2.5.48 and the claim $n_{0,0} = 1$ of Example 2.5.44. The file `Langlands/Local/BreuilMezardLattices.lean` proves parts 2 to 5 of Lemma 2.5.40, Theorem 2.5.43 and the rest of Example 2.5.44. In Lean the multiplicity $[M : S]$ is defined for an arbitrary module $S$, and it is $0$ when $M$ has no composition series. The function `Langlands.serreMultiplicity` uses a chosen stable lattice, and `Langlands.serreMultiplicity_eq_latticeSerreMultiplicity` says that the choice does not matter. The following points are not in Lean.
+1. *Existence of lattices.* Lemma 2.5.42 is not proved. The representations in Lean have no topology, and a representation with no stable lattice has $n_{a,b} = 0$ by definition.
+2. *Henniart's theorem.* `Langlands.HasHenniartTypes` is a statement for an arbitrary bijection $\mathrm{rec}$. It is not proved, and it has content only for the local Langlands correspondence, which is not in Lean. Example 2.5.49 is not in Lean.
+3. *The coefficients.* `Langlands.typeMultiplicity` moves $\sigma$ to $C$ with a ring homomorphism $\iota : \mathbb{C} \to C$. There is no such homomorphism to a finite extension $E$ of $\mathbb{Q}_p$: its image would be an algebraically closed subfield of $E$, and so $E$ would contain all the roots $p^{1/n}$, which is false since the valuation of $E$ is discrete. A homomorphism to $\bar{\mathbb{Q}}_p$ exists, by a choice of an isomorphism of fields $\mathbb{C} \cong \bar{\mathbb{Q}}_p$. But the ring of integers of $\bar{\mathbb{Q}}_p$ is not a discrete valuation ring, so Theorem 2.5.43 does not apply to it. The Lean files prove Theorem 2.5.43 over $\mathcal{O}_E$ as `Langlands.serreMultiplicityIndependent_integer`, with the maps `Langlands.coeffEmbedding` of $E$ into $\bar{\mathbb{Q}}_p$ and `Langlands.coeffRed` of $\mathbb{Z}_p$ to the residue field $k$, but they do not yet descend $\sigma(\tau)$ to $E$.
+4. *The conjecture.* Conjecture 2.5.51 is not stated with these definitions. The field `typeMultiplicity` of `Langlands.BreuilMezardData` could be defined with `Langlands.typeMultiplicity` once item 3 is resolved, and the field `deformationMultiplicity` needs the semistable conditions of Remark 2.5.38, item 3. Example 2.5.52 is not in Lean.
