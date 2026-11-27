@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 5, Chapter 4 (the global theory of GL(2)): Flath's theorem, newforms and cuspidal representations, strong multiplicity one, the L-function and its functional equation, converse theorems and the Ramanujan conjecture; 10 exercises.
+
 ## v0.4.0 (2026-11-27)
 
 ### Changed
