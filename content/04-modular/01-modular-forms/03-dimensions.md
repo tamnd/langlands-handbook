@@ -2,8 +2,9 @@
 title: The valence formula and dimensions
 nodes: []
 sources: []
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## The valence formula and dimensions
@@ -92,7 +93,7 @@ Lean: not stated yet
 
 At a general level we do not compute the dimensions here. We prove only that they are finite. The proof reduces the question to level one by a norm.
 
-**Proposition 1.3.10 (finite dimension).** Let $\Gamma$ be a congruence subgroup with $m = [SL_2(\mathbb{Z}) : \Gamma]$, and let $h$ be the width of the cusp $\infty$ for $\Gamma$. Then $M_k(\Gamma) = 0$ for $k < 0$, and
+**Proposition 1.3.10 (finite dimension).** Let $\Gamma$ be a congruence subgroup with $m = [SL_2(\mathbb{Z}) : \Gamma]$, and let $h$ be the least integer $h \ge 1$ with $T^h \in \Gamma$. This $h$ is the width of $\infty$ or twice the width, because the width uses $\pm\Gamma$. Then $M_k(\Gamma) = 0$ for $k < 0$, and
 $$\dim M_k(\Gamma) \le 1 + \frac{hkm}{12}$$
 for $k \ge 0$.
 

@@ -2,8 +2,9 @@
 title: Modular forms and q-expansions
 nodes: []
 sources: []
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Modular forms and q-expansions
