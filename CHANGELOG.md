@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 4, Sections 1.5 and 2.1: follow the Lean files Langlands/Modular/Hecke.lean and HeckeMul.lean: T_p and U_p on Gamma0(N) as the trace of a translate, the coset formulas, the q-expansion and commutation proofs, multiplicativity of eigenform coefficients from the T_p relations, T_n on q-expansions; updated Lean lines and Remarks 1.5.13, 2.1.5, 2.3.5; Exercises 1.13 to 1.16 and 2.17 to 2.20.
+
 - Update the Lean lines of the local volume for the Whittaker models, the tensor product of Weil-Deligne representations, the monodromy condition of the epsilon factor, Theorem 1.4.3 for GL2, Theorem 1.3.6 and Corollary 3.1.5.
 
 - Backfill the pinned L-group, the L-group of U(n), the factors of pairs, LocalLanglandsGLFull and its fidelity checks (Sections 2.5.4 and 6.3.1).
