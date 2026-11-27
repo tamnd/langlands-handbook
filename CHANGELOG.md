@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 5, Automorphic representations of GL(2): the volume file and the introduction.
+
 - Volume 4: Sections 1.5 and 2.4 follow HeckeTn.lean and AnthropicES.lean: the operators T_n and their q-expansion, the level raising maps B_d and the oldspace on S_k(Gamma0(N)), Remark 2.4.7 on the proved-mod weight 2 Eichler-Shimura bridge; Exercises 1.17 to 1.20.
 
 - Volume 4, Section 2.5: items 2.5.54 to 2.5.74 follow LogTeich.lean, Semistable2.lean, BreuilMezardSym.lean and BreuilMezardFull.lean: the functional equation of the logarithm, the Frobenius and monodromy of B_st, the simplicity of the Serre weights and the full Breuil-Mezard statement; Exercises 21 to 24.
