@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 5, Chapter 3 (local representations of GL(2)): principal series and the Jacquet module, Steinberg and special representations, supercuspidals and the classification, the Satake isomorphism, the Kirillov model, conductors and Casselman's newforms; 10 exercises.
+
 - Volume 5, Automorphic representations of GL(2): the volume file and the introduction.
 
 - Volume 4: Sections 1.5 and 2.4 follow HeckeTn.lean and AnthropicES.lean: the operators T_n and their q-expansion, the level raising maps B_d and the oldspace on S_k(Gamma0(N)), Remark 2.4.7 on the proved-mod weight 2 Eichler-Shimura bridge; Exercises 1.17 to 1.20.
