@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 6 Section 3.3: second-pass check of the admissible pairs text and its Lean remarks.
+
 ## v0.5.1 (2026-11-27)
 
 ### Added
