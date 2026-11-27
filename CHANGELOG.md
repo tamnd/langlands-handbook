@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Section 5.5 now says that each Hecke character with one shift is proved in Lean.
+
 ## v0.1.24 (2026-11-27)
 
 ### Added
