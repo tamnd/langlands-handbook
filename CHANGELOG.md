@@ -4,6 +4,12 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.3.0 (2026-11-27)
+
+### Changed
+
+- This release closes milestone S2, Global CFT and Tate's thesis. It has no other change since v0.2.0.
+
 ## v0.2.0 (2026-11-27)
 
 ### Added
