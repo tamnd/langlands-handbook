@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 4, Section 2.5: add Fontaine's period rings A_cris, B_cris and B_st with t and the Kummer cocycle, and the Breuil-Mezard side (Jordan-Hölder multiplicities, Brauer-Nesbitt for lattices, inertial types, Henniart types, σ(λ,τ)), with the Lean status and Exercises 13 to 16.
+
 ## v0.1.25 (2026-11-27)
 
 ### Added
