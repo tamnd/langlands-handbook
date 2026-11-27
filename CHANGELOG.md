@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.2.0 (2026-11-27)
+
 ### Added
 
 - Volume 5, Chapter 1 (modular forms as adelic forms): strong approximation, the lift of a modular form to GL_2(A), the Casimir operator and moderate growth, cuspidality, the converse, the adelic Hecke operators and the adelic dictionary; 11 exercises.
