@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Update the Lean lines of the local volume for the Whittaker models, the tensor product of Weil-Deligne representations, the monodromy condition of the epsilon factor, Theorem 1.4.3 for GL2, Theorem 1.3.6 and Corollary 3.1.5.
+
 - Backfill the pinned L-group, the L-group of U(n), the factors of pairs, LocalLanglandsGLFull and its fidelity checks (Sections 2.5.4 and 6.3.1).
 
 - Volume 2, Section 3.6: add Chevalley's construction of the adjoint group (Chevalley basis, divided powers, root, Weyl and torus elements, the examples sl2 and A2, Chevalley's theorem) with the Lean status and Exercises 12 to 14.

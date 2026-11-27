@@ -50,7 +50,7 @@ The proof is in Henniart's paper "Caractérisation de la correspondance de Langl
 
 **Corollary 3.1.5 (uniqueness).** Let $(\mathrm{rec}_n)$ and $(\mathrm{rec}'_n)$ be two families of bijections that satisfy conditions 1 to 5 of Theorem 3.1.2. Then $\mathrm{rec}_n = \mathrm{rec}'_n$ for each $n$.
 
-Lean: not stated yet
+Lean: not stated for $n \ge 2$. The case of the families $(\mathrm{rec}_0, \mathrm{rec}_1)$ is `Langlands.Fidelity.recFamily_unique`, see Proposition 3.1.29.
 
 *Proof.* We argue by induction on $n$. For $n = 1$ both families are given by condition 1. Let $n \ge 2$ and suppose that $\mathrm{rec}_m = \mathrm{rec}'_m$ for $m < n$. Let $\sigma \in \mathcal{G}_n(K)$, and let $\pi = \mathrm{rec}_n^{-1}(\sigma)$ and $\pi' = \mathrm{rec}_n'^{-1}(\sigma)$. By condition 2 both have the central character $\det \sigma \circ \mathrm{art}_K$. For each $r < n$ and each $\tau \in \mathcal{A}_r(K)$, condition 5 and the induction hypothesis give
 $$\varepsilon(s, \pi \times \tau, \psi) = \varepsilon(s, \sigma \otimes \mathrm{rec}_r(\tau), \psi) = \varepsilon(s, \sigma \otimes \mathrm{rec}'_r(\tau), \psi) = \varepsilon(s, \pi' \times \tau, \psi),$$

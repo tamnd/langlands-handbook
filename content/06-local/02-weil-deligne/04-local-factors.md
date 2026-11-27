@@ -80,7 +80,7 @@ Lean: not stated yet
 2. For $\dim r = 1$, $\varepsilon(s, r, \psi)$ is Tate's local constant of the corresponding character of $K^\times$.
 3. For a finite separable extension $L / K$ and a virtual representation $r'$ of $W_L$ of dimension $0$, $\varepsilon(s, \mathrm{Ind}_{W_L}^{W_K} r', \psi) = \varepsilon(s, r', \psi \circ \mathrm{Tr}_{L/K})$.
 
-Lean: not stated yet
+Lean: not stated. The Lean project takes the $\varepsilon$-factor as a parameter with the conditions of `Langlands.IsWDEpsilon`, which contain the case of dimension $1$ but not the additivity or the inductivity. The structure `Langlands.IsWDEpsilonAdditive` adds the additivity on direct sums. See Definition 3.1.17 and Remark 3.1.19. The existence and the uniqueness are open.
 
 This is Theorem 4.3.8 of Volume 3. By part 1, $\varepsilon$ extends to virtual representations. *Uniqueness.* Let $r$ be irreducible. By Proposition 2.1.12, $r = r_0 \otimes \omega_t$ with $r_0$ trivial on $W_M$ for a finite Galois extension $M / K$. Lemma 2.4.8, applied to $G = \mathrm{Gal}(M / K)$, writes $r_0 - \dim r_0 \cdot 1$ as a combination of virtual representations $\mathrm{Ind}_{W_{L}}^{W_K}(\chi - 1)$. Since $\mathrm{Ind}(y) \otimes \omega_t = \mathrm{Ind}(y \otimes \omega_t|_{W_L})$, and $\omega_t|_{W_L}$ is the character $\omega_t$ of $W_L$ by Proposition 2.1.5, parts 1 to 3 express $\varepsilon(s, r, \psi)$ through the constants of characters. *Existence.* This is the hard part, since the expression of $r$ through induced characters is far from unique, and one must show that all choices give the same value. Langlands proved it by a long local argument, which he did not publish. Deligne gave a global proof in "Les constantes des équations fonctionnelles des fonctions L" (1973). He embeds the local situation in a global one, and he uses the functional equations of Hecke $L$-functions together with Brauer's theorem to show that the local constants are well defined. A summary is in [Tat79, Section 3]. The constant $\lambda(L / K, \psi) = \varepsilon(s, \mathrm{Ind}\, 1_L, \psi) / \varepsilon(s, 1_L, \psi \circ \mathrm{Tr})$ is called the *Langlands constant*. It does not depend on $s$.
 
@@ -88,7 +88,7 @@ This is Theorem 4.3.8 of Volume 3. By part 1, $\varepsilon$ extends to virtual r
 $$\varepsilon(s, V, \psi) = \varepsilon(s, r, \psi) \, \det\big(-q^{-s} r(\Phi) \mid V^{I} / V^{I}_N\big), \qquad \gamma(s, V, \psi) = \varepsilon(s, V, \psi) \frac{L(1 - s, V^\vee)}{L(s, V)}.$$
 Here $\varepsilon(s, r, \psi)$ is extended to nonsemisimple $r$ through the semisimplification.
 
-Lean: not stated yet
+Lean: the condition `monodromy` of `Langlands.IsWDEpsilon`, with `Langlands.WeilDeligneRep.forgetN` for $(r, 0)$ and `Langlands.WeilDeligneRep.frobOnLSpace` for $r(\Phi)$ on $V^I_N$. It states the formula as $\varepsilon(s, V, \psi) \det(-q^{-s} r(\Phi) \mid V^I_N) = \varepsilon(s, (r, 0), \psi) \det(-q^{-s} r(\Phi) \mid V^I)$, which is the definition multiplied by $\det(-q^{-s} r(\Phi) \mid V^I_N)$. In Lean $\varepsilon$ is a parameter and not a defined function, see Definition 3.1.17 and Proposition 3.1.18. The $\gamma$-factor is not defined in Lean.
 
 **Proposition 2.4.11 (properties of the $\varepsilon$-factor).** Let $V = (r, N)$ be a Weil-Deligne representation, and let $\psi_b(x) = \psi(bx)$ for $b \in K^\times$.
 1. If $\psi$ has conductor $\mathcal{O}_K$, then $\varepsilon(s, V, \psi) = \varepsilon(0, V, \psi) \, q^{-a(V) s}$.
