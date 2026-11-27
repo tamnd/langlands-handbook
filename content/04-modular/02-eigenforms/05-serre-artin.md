@@ -2,8 +2,9 @@
 title: Serre's conjecture and the Artin conjecture
 nodes: [LGKH3WKEVV, LGEHB4MGJK, LGX6BXWH0J]
 sources: [KW09, Kis09, Kis09b, DS74, Neu99, BH06]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Serre's conjecture and the Artin conjecture
@@ -53,7 +54,7 @@ the product over all finite primes $v$ of $K$. It converges absolutely for $\mat
 
 Lean: `Langlands.artinLFunction`
 
-For the trivial representation, $L(\mathbf{1}, s)$ is the Dedekind zeta function $\zeta_K(s)$. For $n = 1$, $\rho$ is a character of $\mathrm{Gal}(L/K)^{ab}$, and by class field theory, Volume 3, $L(\rho, s)$ is the $L$-function of a Hecke character of finite order. The function $L(\rho, s)$ is additive in $\rho$ and compatible with induction. Artin proved these facts, and Brauer proved with his induction theorem that $L(\rho, s)$ has a meromorphic continuation to $\mathbb{C}$ and a functional equation. This is in [Neu99, Chapter VII, Section 10]. The Lean definition `Langlands.artinLFunction` is the product over all the primes $v$ of the local factors `Langlands.artinLocalFactor`, which use the projector $e_I = |I|^{-1}\sum_{\tau \in I}\rho(\tau)$ onto $V^{I_P}$ and an arithmetic Frobenius `Langlands.frobeniusAbove`. The fidelity theorem `Langlands.Fidelity.artinLFunction_one` proves that for the trivial character it is the Euler product of $\zeta_K$, with a factor at each prime.
+For the trivial representation, $L(\mathbf{1}, s)$ is the Dedekind zeta function $\zeta_K(s)$. For $n = 1$, $\rho$ is a character of $\mathrm{Gal}(L/K)^{ab}$, and by class field theory, Volume 3, $L(\rho, s)$ is the $L$-function of a Hecke character of finite order. The function $L(\rho, s)$ is additive in $\rho$ and compatible with induction. Artin proved these facts, and Brauer proved with his induction theorem that $L(\rho, s)$ has a meromorphic continuation to $\mathbb{C}$ and a functional equation. This is in [Neu99, Chapter VII, Sections 10 and 12]. The Lean definition `Langlands.artinLFunction` is the product over all the primes $v$ of the local factors `Langlands.artinLocalFactor`, which use the projector $e_I = |I|^{-1}\sum_{\tau \in I}\rho(\tau)$ onto $V^{I_P}$ and an arithmetic Frobenius `Langlands.frobeniusAbove`. The fidelity theorem `Langlands.Fidelity.artinLFunction_one` proves that for the trivial character it is the Euler product of $\zeta_K$, with a factor at each prime.
 
 **Conjecture 2.5.7 (Artin).** Let $L/K$ be a finite Galois extension of number fields and $\rho : \mathrm{Gal}(L/K) \to GL_n(\mathbb{C})$ an irreducible representation with $\rho \ne \mathbf{1}$. Then $L(\rho, s)$ extends to an entire function.
 
@@ -199,7 +200,7 @@ Lean: `Langlands.hilbertSamuelFunction`, `Langlands.hilbertSamuelMultiplicity`, 
 
 Lean: `Langlands.exists_hilbertSamuelPoly`, `Langlands.hasHilbertSamuelMultiplicity_hilbertSamuelMultiplicity`
 
-*Outline of the proof.* This is classical, see for example Matsumura, "Commutative Ring Theory", Section 13. The graded ring $\mathrm{gr}(S) = \bigoplus_m \mathfrak{m}^m / \mathfrak{m}^{m+1}$ is generated over the field $S / \mathfrak{m}$ by the images of finitely many generators of $\mathfrak{m}$. By Hilbert's theorem on graded modules over a polynomial ring, $m \mapsto \dim \mathfrak{m}^m / \mathfrak{m}^{m+1}$ is a polynomial for large $m$. The sum of its values, which is $\ell(S / \mathfrak{m}^m)$, is a polynomial $Q$ for large $m$. The values of $Q$ at large integers are integers, so $Q$ is an integer combination of the binomial polynomials $\binom{T}{j}$, and its leading coefficient is $e / \deg Q!$ with an integer $e \ge 1$. The main theorem of dimension theory says that $\deg Q$ is the Krull dimension $d$. Then $d! \, Q(m) / m^d \to e$. $\square$
+*Outline of the proof.* This is classical, see for example Matsumura, "Commutative Ring Theory", Sections 13 and 14. The graded ring $\mathrm{gr}(S) = \bigoplus_m \mathfrak{m}^m / \mathfrak{m}^{m+1}$ is generated over the field $S / \mathfrak{m}$ by the images of finitely many generators of $\mathfrak{m}$. By Hilbert's theorem on graded modules over a polynomial ring, $m \mapsto \dim \mathfrak{m}^m / \mathfrak{m}^{m+1}$ is a polynomial for large $m$. The sum of its values, which is $\ell(S / \mathfrak{m}^m)$, is a polynomial $Q$ for large $m$. The values of $Q$ at large integers are integers, so $Q$ is an integer combination of the binomial polynomials $\binom{T}{j}$, and its leading coefficient is $e / \deg Q!$ with an integer $e \ge 1$. The main theorem of dimension theory says that $\deg Q$ is the Krull dimension $d$. Then $d! \, Q(m) / m^d \to e$. $\square$
 
 **Proposition 2.5.23 (examples of multiplicities).**
 1. If $S$ is an artinian local ring, then $e(S) = \ell(S)$.

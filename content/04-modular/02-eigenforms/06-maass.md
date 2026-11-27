@@ -2,8 +2,9 @@
 title: Maass forms
 nodes: [LG0S1WN9ND, LG75ERTV5K]
 sources: [Sel65, Kim03]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Maass forms
