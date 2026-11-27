@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Section 5.5 proves Hecke's theorem for all Hecke characters, and Section 4.2.5 adds framed deformation rings.
+
 - Section 5.5 now says that each Hecke character with one shift is proved in Lean.
 
 ## v0.1.24 (2026-11-27)
