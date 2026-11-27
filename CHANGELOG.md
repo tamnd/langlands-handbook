@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6 Section 3.3: admissible pairs, minimal pairs, the tame parameter sigma(E, xi), two examples, the Lean remarks and Exercises 19 to 22.
+
 - Volume 4: Eichler-Shimura in higher weight by congruences and pseudo-characters, and the semistable curves of lab experiment E5. Volume 5: the Lean form of the adelic lift.
 
 ## v0.5.0 (2026-11-27)
