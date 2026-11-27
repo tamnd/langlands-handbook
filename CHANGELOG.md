@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 6, Chapter 1 checked: Theorem 1.7.3, a missing step in Section 1.4 and a citation in Section 1.5 corrected.
+
 ## v0.4.1 (2026-11-27)
 
 ### Added

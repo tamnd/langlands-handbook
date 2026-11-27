@@ -43,7 +43,7 @@ Let $n = 2$, $N = N_2$, and identify $N$ with $K$ by $x \mapsto \left(\begin{sma
 
 **Theorem 1.7.3 (the structure of representations of the mirabolic group).** Let $(\tau, V)$ be a smooth representation of $P_2$, and let $V(N)$ be the kernel of $V \to V_N$. There is an isomorphism of representations of $P_2$
 $$V(N) \cong \mathrm{c\text{-}Ind}_N^{P_2} (\psi) \otimes V_{N, \psi},$$
-where $N$ acts on $V_{N, \psi}$ by $\psi$ and $P_2$ acts on the space $\mathrm{c\text{-}Ind}_N^{P_2} \psi \cong C_c^\infty(K^\times)$ by $(\tau(a, x) \xi)(y) = \psi(xy) \xi(ay)$. In particular $V(N) = 0$ if and only if $V_{N, \psi} = 0$.
+where $P_2$ acts trivially on the vector space $V_{N, \psi}$ and acts on the space $\mathrm{c\text{-}Ind}_N^{P_2} \psi \cong C_c^\infty(K^\times)$ by $(\tau(a, x) \xi)(y) = \psi(xy) \xi(ay)$. In particular $V(N) = 0$ if and only if $V_{N, \psi} = 0$.
 
 Lean: not stated yet
 

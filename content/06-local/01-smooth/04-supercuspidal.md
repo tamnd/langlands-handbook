@@ -65,7 +65,7 @@ The conjugacy class of the pair $(M, \sigma)$ is the *supercuspidal support* of 
 
 ### Compact induction
 
-The supercuspidal representations are constructed by inducing from subgroups that are compact modulo the center. Let $J$ be an open subgroup of $G$ that contains $Z$ and is compact modulo $Z$. Let $(\Lambda, W)$ be an irreducible smooth representation of $J$. It has finite dimension, since $J / Z$ is compact and an open subgroup of $J$ acts trivially on a nonzero vector, so on a subspace of finite dimension that is stable under the finitely many cosets.
+The supercuspidal representations are constructed by inducing from subgroups that are compact modulo the center. Let $J$ be an open subgroup of $G$ that contains $Z$ and is compact modulo $Z$. Let $(\Lambda, W)$ be an irreducible smooth representation of $J$. It has finite dimension. Indeed, $Z$ is central in $J$, so $Z$ acts on $W$ by scalars, by Theorem 1.1.7 applied to $J$. Let $v \in W$ with $v \ne 0$, and let $J_v$ be the stabilizer of $v$. It is open, so $J_v Z$ is an open subgroup of $J$, and it has finite index since $J / Z$ is compact. The vector $\Lambda(j) v$ depends, up to a scalar, only on the coset $j J_v Z$. So the vectors $\Lambda(j) v$ span a stable subspace of finite dimension, and this subspace is $W$.
 
 **Definition 1.4.7 (compact induction).** The *compactly induced representation* $\mathrm{c\text{-}Ind}_J^G \Lambda$ is the space of the functions $f : G \to W$ with $f(j g) = \Lambda(j) f(g)$ for $j \in J$, whose support is a finite union of cosets $J g$, with $G$ acting by right translation.
 
