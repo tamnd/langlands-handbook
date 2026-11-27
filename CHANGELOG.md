@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Volume 4: Eichler-Shimura in higher weight by congruences and pseudo-characters, and the semistable curves of lab experiment E5. Volume 5: the Lean form of the adelic lift.
+
 ## v0.5.0 (2026-11-27)
 
 ### Added

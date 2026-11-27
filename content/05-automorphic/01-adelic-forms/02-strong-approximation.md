@@ -38,7 +38,7 @@ Lean: not formalized
 $$g = \gamma \cdot (\gamma^{-1} g_\infty, \gamma^{-1} g_f) = \gamma \cdot (\gamma^{-1} g_\infty, 1) \cdot (1, u).$$
 For the last claim let $k \in SL_2(\hat{\mathbb{Z}})$ and let $U \subset SL_2(\hat{\mathbb{Z}})$ be an open subgroup. By Theorem 1.2.2 the open set $kU$ contains some $\gamma \in SL_2(\mathbb{Q})$. Then $\gamma \in SL_2(\hat{\mathbb{Z}})$, so $\gamma \in SL_2(\mathbb{Z})$ by the argument of Lemma 1.1.2. $\square$
 
-The last claim of the corollary, applied to $U = K(N) \cap SL_2(\hat{\mathbb{Z}})$, says that $SL_2(\mathbb{Z}) \to SL_2(\mathbb{Z}/N\mathbb{Z})$ is surjective. This is part 2 of Volume 4, Lemma 1.1.7. Exercise 2 asks for the details.
+The last claim of the corollary, applied to $U = K(N) \cap SL_2(\hat{\mathbb{Z}})$, says that $SL_2(\mathbb{Z}) \to SL_2(\mathbb{Z}/N\mathbb{Z})$ is surjective. This is part 2 of Volume 4, Lemma 1.1.7. Exercise 2 asks for the details. In the Lean project the case of the corollary that the lift of Section 1.3 needs is the statement `Langlands.Modular.SL2StrongApprox`: each $g \in SL_2(\mathbb{A}_f)$ is $\gamma\kappa$ with $\gamma \in SL_2(\mathbb{Q})$ and $\kappa \in K_0(N)$. The file `Langlands/Modular/StrongApprox.lean` proves it as `Langlands.Modular.sl2StrongApprox`. The proof follows the elementary route: $\mathbb{A}_f = \mathbb{Q} + \hat{\mathbb{Z}}$, then $SL_2(\mathbb{A}_f) = SL_2(\mathbb{Q}) SL_2(\hat{\mathbb{Z}})$ by row operations at each place, then the surjectivity of $SL_2(\mathbb{Z}) \to SL_2(\mathbb{Z}/N\mathbb{Z})$.
 
 **Remark 1.2.4 (strong approximation in general).** Let $G$ be a simply connected semisimple group over a number field $F$, and let $S$ be a finite set of places such that $\prod_{v \in S} G(F_v)$ is not compact. The theorem of Kneser and Platonov says that $G(F)$ is dense in the restricted product of the $G(F_v)$ for $v \notin S$. See Platonov and Rapinchuk, *Algebraic groups and number theory*, Chapter 7. Theorem 1.2.2 is the case $G = SL_2$, $F = \mathbb{Q}$ and $S = \{\infty\}$. Volume 7, Theorem 1.1.4, proves the case $G = SL_n$ over a number field with the same method as here. The hypotheses are needed. For the multiplicative group $GL_1$, which is not semisimple, $\mathbb{Q}^\times$ is not dense in the finite ideles; this is Volume 1, Chapter 3, Exercise 12. For $GL_2$ the determinant gives the same obstruction, see Exercise 3. If $D$ is a definite quaternion algebra over $\mathbb{Q}$, then the group of the elements of reduced norm 1 is compact at $\infty$, and strong approximation with $S = \{\infty\}$ fails for it.
 
@@ -48,7 +48,7 @@ The last claim of the corollary, applied to $U = K(N) \cap SL_2(\hat{\mathbb{Z}}
 $$GL_2(\mathbb{A}) = GL_2(\mathbb{Q}) \, GL_2^+(\mathbb{R}) \, U.$$
 This applies to $U = K_0(N)$ and to $U = K_1(N)$ for each $N \ge 1$.
 
-Lean: not formalized
+Lean: for $U = K_0(N)$, `Langlands.Modular.exists_isDecomp'`, with no hypothesis
 
 *Proof.* Let $g \in GL_2(\mathbb{A})$. By the factorization of Section 1.1, $\det g = q r u$ with $q \in \mathbb{Q}^\times$, $r \in \mathbb{R}_{>0}$ and $u \in \hat{\mathbb{Z}}^\times$. Choose $k \in U$ with $\det k = u$, and let $\delta = \mathrm{diag}(q, 1) \in GL_2(\mathbb{Q})$. The element $g_1 = \delta^{-1} g k^{-1}$ has determinant $r$, an idele with component $r > 0$ at $\infty$ and 1 at each prime. Let $h = \mathrm{diag}(r, 1) \in GL_2^+(\mathbb{R})$ at the infinite place. Then $g_2 = g_1 h^{-1}$ is in $SL_2(\mathbb{A})$. Since $U_1 = U \cap SL_2(\mathbb{A}_f)$ is an open subgroup of $SL_2(\mathbb{A}_f)$, Corollary 1.2.3 gives $g_2 = \gamma s u_1$ with $\gamma \in SL_2(\mathbb{Q})$, $s \in SL_2(\mathbb{R})$ and $u_1 \in U_1$. The elements of $GL_2(\mathbb{R})$ and of $GL_2(\mathbb{A}_f)$ commute in $GL_2(\mathbb{A})$. So
 $$g = \delta g_1 k = \delta g_2 h k = (\delta\gamma) \, (s h) \, (u_1 k),$$
@@ -57,7 +57,7 @@ with $\delta\gamma \in GL_2(\mathbb{Q})$, $sh \in GL_2^+(\mathbb{R})$ and $u_1 k
 **Lemma 1.2.6 (the rational points of $GL_2^+(\mathbb{R}) K_0(N)$).** Inside $GL_2(\mathbb{A})$,
 $$GL_2(\mathbb{Q}) \cap GL_2^+(\mathbb{R}) K_0(N) = \Gamma_0(N), \qquad GL_2(\mathbb{Q}) \cap GL_2^+(\mathbb{R}) K_1(N) = \Gamma_1(N), \qquad GL_2(\mathbb{Q}) \cap GL_2^+(\mathbb{R}) K(N) = \Gamma(N).$$
 
-Lean: not formalized
+Lean: the case of $K_0(N)$ is `Langlands.Modular.toFinGL_mem_K0_iff`
 
 *Proof.* Let $\gamma = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in GL_2(\mathbb{Q})$ with $\gamma \in GL_2^+(\mathbb{R})$ at $\infty$ and $\gamma \in K_0(N)_p$ for each $p$. By Lemma 1.1.2, $\gamma \in GL_2(\mathbb{Z})$. Its determinant is $\pm 1$ and positive, so it is 1. Its entry $c$ is in $N\mathbb{Z}_p$ for each $p$, so $N \mid c$. Hence $\gamma \in \Gamma_0(N)$. If also $\gamma \in K_1(N)_p$ for all $p$, then $d - 1 \in N\mathbb{Z}_p$ for each $p$, so $d \equiv 1 \bmod N$ and $\gamma \in \Gamma_1(N)$. The case of $K(N)$ is the same. The reverse inclusions are clear. $\square$
 
@@ -65,7 +65,7 @@ Lean: not formalized
 $$\Gamma_0(N) \backslash GL_2^+(\mathbb{R}) \to GL_2(\mathbb{Q}) \backslash GL_2(\mathbb{A}) / K_0(N), \qquad \Gamma_0(N) \backslash \mathbb{H} \to GL_2(\mathbb{Q}) \backslash GL_2(\mathbb{A}) / \mathbb{R}_{>0} SO(2) K_0(N),$$
 where the second map sends $g_\infty i$ to the class of $\iota_\infty(g_\infty)$, and $\mathbb{R}_{>0}$ is the group of the positive scalar matrices at $\infty$. The same holds with $K_1(N)$ and $\Gamma_1(N)$ in place of $K_0(N)$ and $\Gamma_0(N)$.
 
-Lean: not formalized
+Lean: the injectivity of the first map for $K_0(N)$ is `Langlands.Modular.principal_mul_mul_K0_iff`
 
 *Proof.* The first map is well defined because $\Gamma_0(N) \subset GL_2(\mathbb{Q})$ and $\gamma \cdot \iota_\infty(g_\infty) = \iota_\infty(\gamma g_\infty) \cdot \gamma_f$ with $\gamma_f \in K_0(N)$ for $\gamma \in \Gamma_0(N)$, where $\gamma_f$ is the finite part of $\gamma$. It is surjective by Theorem 1.2.5. Let $g_\infty, g'_\infty \in GL_2^+(\mathbb{R})$ with $\iota_\infty(g'_\infty) = \gamma \, \iota_\infty(g_\infty) \, k$ for some $\gamma \in GL_2(\mathbb{Q})$ and $k \in K_0(N)$. At the infinite place, $g'_\infty = \gamma g_\infty$, so $\gamma \in GL_2^+(\mathbb{R})$. At the finite places, $1 = \gamma k$, so $\gamma_f = k^{-1} \in K_0(N)$. By Lemma 1.2.6, $\gamma \in \Gamma_0(N)$. This is injectivity. The group $\mathbb{R}_{>0}SO(2)$ at $\infty$ commutes with $K_0(N)$, so the second bijection follows from the first and from $\mathbb{H} = GL_2^+(\mathbb{R}) / \mathbb{R}_{>0} SO(2)$, see Lemma 1.1.7. The proof for $K_1(N)$ is the same. $\square$
 
