@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.5.0 (2026-11-27)
+
 ### Added
 
 - Volume 6, Chapters 2 and 3 checked: a missing step in Proposition 2.2.6, Examples 2.4.12 and 3.6.6, and the two meanings of Sp(a) corrected.
