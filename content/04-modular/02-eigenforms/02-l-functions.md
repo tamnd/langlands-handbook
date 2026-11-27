@@ -2,8 +2,9 @@
 title: L-functions and modularity
 nodes: [LGZ55EK0PA, LGPNZWXVH5, LG5W3CRDEA]
 sources: [Wil95, BCDT01]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## L-functions and modularity
@@ -32,7 +33,7 @@ and the product converges absolutely. Conversely, if $f \in S_k(N, \chi)$ and $L
 
 Lean: not stated yet
 
-*Proof.* Let $\sigma = \mathrm{Re}(s)$. By the identity of power series after Theorem 2.1.3, with $X = p^{-s}$, the factor at $p$ is $\sum_{r \ge 0} a_{p^r} p^{-rs}$. Let $P$ be a finite set of primes. By condition 2 of Theorem 2.1.3, the product of the factors at $p \in P$ is $\sum a_n n^{-s}$ over the $n$ whose prime factors are in $P$; the product of finitely many absolutely convergent series may be expanded. The difference with $L(f, s)$ is at most $\sum_{n > m} |a_n| n^{-\sigma}$, where $m$ is the smallest prime not in $P$. It tends to 0 as $P$ grows, by Proposition 2.2.1. The absolute convergence of the product follows in the same way from $\sum_p |a_p p^{-s} - \chi(p)p^{k-1-2s}| < \infty$. For the converse, the Dirichlet coefficients of a series that converges absolutely in a half plane are determined by the series, so the coefficients of $f$ are those of the expanded product, and they satisfy the three conditions of Theorem 2.1.3. $\square$
+*Proof.* Let $\sigma = \mathrm{Re}(s)$. By the identity of power series after Theorem 2.1.3, with $X = p^{-s}$, the factor at $p$ is $\sum_{r \ge 0} a_{p^r} p^{-rs}$. Let $P$ be a finite set of primes. By condition 2 of Theorem 2.1.3, the product of the factors at $p \in P$ is $\sum a_n n^{-s}$ over the $n$ whose prime factors are in $P$; the product of finitely many absolutely convergent series may be expanded. The difference with $L(f, s)$ is at most $\sum_{n \ge m} |a_n| n^{-\sigma}$, where $m$ is the smallest prime not in $P$. It tends to 0 as $P$ grows, by Proposition 2.2.1. The absolute convergence of the product follows in the same way from $\sum_p |a_p p^{-s} - \chi(p)p^{k-1-2s}| < \infty$. For the converse, the Dirichlet coefficients of a series that converges absolutely in a half plane are determined by the series, so the coefficients of $f$ are those of the expanded product, and they satisfy the three conditions of Theorem 2.1.3. $\square$
 
 For $f = \Delta$, the proposition is
 $$\sum_{n \ge 1} \tau(n) n^{-s} = \prod_p (1 - \tau(p) p^{-s} + p^{11 - 2s})^{-1},$$

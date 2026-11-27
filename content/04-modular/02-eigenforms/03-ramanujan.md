@@ -2,8 +2,9 @@
 title: Ramanujan-Petersson and Sato-Tate
 nodes: [LGV8B6TVWZ, LG1DP2ZDPA, LGVZHDXVTZ]
 sources: [Del74, BLGHT11]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Ramanujan-Petersson and Sato-Tate

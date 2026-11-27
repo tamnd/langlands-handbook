@@ -2,8 +2,9 @@
 title: Galois representations of eigenforms
 nodes: [LGG3ZW59RX]
 sources: [Del69]
-status: drafted
+status: checked
 drafted_by: writer
+checked_by: checker@claude-opus-5-5
 reviewed_by: []
 ---
 ## Galois representations of eigenforms

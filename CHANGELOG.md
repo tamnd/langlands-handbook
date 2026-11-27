@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 4, Chapter 2 checked: a summation bound in Proposition 2.2.3 and three citations corrected.
+
 - Volume 4, Chapter 1 checked: the expansion at irregular cusps in Proposition 1.3.10, the Lean status in Remark 1.5.38, a citation in Section 1.6, and Exercises 3 and 8 corrected.
 
 - Volume 5, Chapter 4 (the global theory of GL(2)): Flath's theorem, newforms and cuspidal representations, strong multiplicity one, the L-function and its functional equation, converse theorems and the Ramanujan conjecture; 10 exercises.
