@@ -60,7 +60,7 @@ The proof shows what the $\varepsilon$-factors do. Let $n \ge 2$. The standard $
 
 ### The reduction to the supercuspidal representations
 
-The correspondence respects the classification of Bernstein and Zelevinsky of Section 1.6. On the Galois side the classification is elementary. For a character $\chi$ of $W_K$ and $a \ge 1$ let $\mathrm{Sp}(a)$ be the Weil-Deligne representation on $\mathbb{C}^a$ with basis $e_0, \ldots, e_{a-1}$, with $r(w) e_i = |w|^{(a-1)/2 - i} e_i$ and $N e_i = e_{i-1}$, $N e_0 = 0$. The relation $r(w) N r(w)^{-1} = |w| N$ holds, because $N$ lowers the index by one and raises the exponent by one.
+The correspondence respects the classification of Bernstein and Zelevinsky of Section 1.6. On the Galois side the classification is elementary. For $a \ge 1$ let $\mathrm{Sp}(a)$ be the Weil-Deligne representation on $\mathbb{C}^a$ with basis $e_0, \ldots, e_{a-1}$, with $r(w) e_i = |w|^{(a-1)/2 - i} e_i$ and $N e_i = e_{i-1}$, $N e_0 = 0$. The relation $r(w) N r(w)^{-1} = |w| N$ holds, because $N$ lowers the index by one and raises the exponent by one. This is the twist $\mathrm{Sp}(a) \otimes \|\cdot\|^{(1-a)/2}$ of the representation of Example 2.2.4, with the basis in the opposite order. In this chapter $\mathrm{Sp}(a)$ always means the representation just defined.
 
 **Proposition 3.1.6 (the Galois side).** Each element of $\mathcal{G}_n(K)$ is a direct sum of indecomposable ones, unique up to order. Each indecomposable element is $\mathrm{Sp}(a) \otimes \rho$ for a unique $a \ge 1$ and a unique irreducible representation $\rho$ of $W_K$, and the dimension is $a \dim \rho$.
 
