@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Add Volume 6 section 3.14 on intertwining of types and the L-factor of a character, with Exercises 48 to 52.
+
 - Volume 6 Section 3.13 on the independence of the type representation and the contragredient of the principal series, with Exercises 43 to 47.
 
 - Volume 6 Section 3.12 on the contragredient of a type representation and the Galois side of the tame parametrization, with Exercises 38 to 42.
