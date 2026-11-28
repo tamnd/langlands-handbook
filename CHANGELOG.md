@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6 Section 3.11 on admissibility, the supercuspidal L-factor and the principal series, with Exercises 33 to 37.
+
 - Volume 6 Section 3.10 uses the new Lean names nsUpperGL and nsSwapGL.
 
 - Volume 6 Section 3.10: reducible Weil-Deligne representations, the principal-series inputs, tame data and the supercuspidality of compact induction.
