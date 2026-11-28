@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6 Section 3.13 on the independence of the type representation and the contragredient of the principal series, with Exercises 43 to 47.
+
 - Volume 6 Section 3.12 on the contragredient of a type representation and the Galois side of the tame parametrization, with Exercises 38 to 42.
 
 - Volume 6 Section 3.11 on admissibility, the supercuspidal L-factor and the principal series, with Exercises 33 to 37.
