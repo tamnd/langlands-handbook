@@ -4,6 +4,8 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+## v0.5.2 (2026-11-28)
+
 ### Added
 
 - Add Volume 6 section 3.14 on intertwining of types and the L-factor of a character, with Exercises 48 to 52.
