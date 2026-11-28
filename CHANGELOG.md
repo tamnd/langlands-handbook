@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Fix the format of EDITION, so the build workflow reads the version and checks out the map.
+
 ## v0.5.3 (2026-11-29)
 
 ### Added
