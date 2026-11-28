@@ -6,6 +6,8 @@ Each release has a section. The newest release is first.
 
 ### Added
 
+- Volume 6 Section 3.10: reducible Weil-Deligne representations, the principal-series inputs, tame data and the supercuspidality of compact induction.
+
 - Volume 6 Section 3.9: cuspidal types, compact induction, the intertwining of a cuspidal type and the reduction of the local Langlands correspondence for GL(2), p odd, to six inputs.
 
 - Volume 6 Section 3.3: second-pass check of the admissible pairs text and its Lean remarks.
