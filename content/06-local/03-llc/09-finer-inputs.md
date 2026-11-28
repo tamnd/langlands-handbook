@@ -62,7 +62,7 @@ Lean: `Langlands.LocalGL2.commute_of_upper`
 
 **Lemma 3.10.7 (diagonal form).** Let $(r, N)$ be as in Lemma 3.10.5, with $r$ upper triangular and $N = c E_{12}$. Then $(r, N)$ is isomorphic to a representation $(r', N)$ with the same $N$ and with $r'(w) = \mathrm{diag}(\alpha(w), \delta(w))$ for each $w$.
 
-Lean: `Langlands.LocalGL2.exists_iso_diag`, `Langlands.LocalGL2.upperGL`, `Langlands.LocalGL2.conj_upperGL_apply`
+Lean: `Langlands.LocalGL2.exists_iso_diag`, `Langlands.LocalGL2.nsUpperGL`, `Langlands.LocalGL2.conj_upperGL_apply`
 
 *Proof.* Suppose first that $\alpha = \delta$. Then each $r(w)$ is upper triangular and semisimple with equal diagonal entries, so it is the scalar $\alpha(w)$ by part 1 of Lemma 3.10.4, and $r$ is already diagonal. Suppose next that $\alpha(w_0) \ne \delta(w_0)$ for some $w_0$. Write $r(w_0) = \begin{pmatrix} a & b \\ 0 & d \end{pmatrix}$ with $a \ne d$, and put $t = b / (d - a)$ and $u = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$. A direct computation gives
 $$u^{-1} r(w_0) u = \begin{pmatrix} a & b + t(a - d) \\ 0 & d \end{pmatrix} = \mathrm{diag}(a, d).$$
@@ -70,7 +70,7 @@ Conjugation by $u$ keeps each $r(w)$ upper triangular with the same diagonal, an
 
 **Theorem 3.10.8 (classification).** Each Weil-Deligne representation of dimension 2 that is not irreducible is isomorphic to a model $M(\varphi_1, \varphi_2)$.
 
-Lean: `Langlands.LocalGL2.exists_iso_wdModel_of_diag`, `Langlands.LocalGL2.exists_iso_wdModel`, `Langlands.LocalGL2.swapGL`
+Lean: `Langlands.LocalGL2.exists_iso_wdModel_of_diag`, `Langlands.LocalGL2.exists_iso_wdModel`, `Langlands.LocalGL2.nsSwapGL`
 
 *Proof.* By Lemmas 3.10.5 and 3.10.7 we can assume that $r = \mathrm{diag}(\alpha, \delta)$ and $N = c E_{12}$. There are three cases.
 1. If $c \ne 0$, then the relation $r(w) N r(w)^{-1} = |w| N$ reads $\alpha(w) \delta(w)^{-1} c = |w| c$, so $(\alpha, \delta)$ is a Steinberg pair. Conjugation by $\mathrm{diag}(1, c^{-1})$ does not change $r$ and sends $c E_{12}$ to $E_{12}$. The result is $M(\alpha, \delta)$.
