@@ -4,6 +4,10 @@ Each release has a section. The newest release is first.
 
 ## Unreleased
 
+### Added
+
+- Add Volume 6 section 3.15 on the normalizer step, the zeta integrals of the principal series and wild inertia, with Exercises 53 to 57.
+
 ## v0.5.2 (2026-11-28)
 
 ### Added
